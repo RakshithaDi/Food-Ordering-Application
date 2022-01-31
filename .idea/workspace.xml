@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/get_otp.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/complaint.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/notifications.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/user.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/account_information/profile_details.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/cart.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/item.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/items_list.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/payment.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/orders/order_history.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/account_settings.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/edit_profile.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/feedbacks.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/notification_settings.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/images/foodx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,15 +37,28 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\images" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib\" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -72,5 +72,31 @@
       <updated>1643646777019</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="93" y="100" width="774" height="857" key="AVDManager" timestamp="1643651767811">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="93" y="100" width="774" height="857" key="AVDManager/0.0.1920.1050@0.0.1920.1050" timestamp="1643651767811" />
+    <state x="107" y="93" key="CommitChangelistDialog2" timestamp="1643650887286">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="107" y="93" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1643650887286" />
+    <state width="540" height="183" key="GridCell.Tab.0.bottom" timestamp="1643660127277">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="540" height="183" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1643660127277" />
+    <state width="540" height="183" key="GridCell.Tab.0.center" timestamp="1643660127277">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="540" height="183" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1643660127277" />
+    <state width="540" height="183" key="GridCell.Tab.0.left" timestamp="1643660127277">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="540" height="183" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1643660127277" />
+    <state width="540" height="183" key="GridCell.Tab.0.right" timestamp="1643660127277">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="540" height="183" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1643660127277" />
   </component>
 </project>
