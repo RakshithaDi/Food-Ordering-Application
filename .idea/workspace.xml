@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/get_otp.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/complaint.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/notifications.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/user.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/account_information/profile_details.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/cart.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/item.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/items_list.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/order_items/payment.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/orders/order_history.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/account_settings.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/edit_profile.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/feedbacks.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/settings/notification_settings.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="24TFg9ghy88TowaAITFOxUxq1fL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib\" />
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="" />
+      <created>1643646777019</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643646777019</updated>
+    </task>
+    <servers />
+  </component>
+</project>
