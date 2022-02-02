@@ -17,70 +17,90 @@ class _loginState extends State<login> {
         body: SafeArea(
           child: Column(
             children: <Widget>[
-              Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black87,
-                  ),
-                  margin: const EdgeInsets.only(
-                    top: 20.0,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                      image: AssetImage('images/foodx.png'),
-                      height: 100.0,
-                      width: 200.0,
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      top: 5,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image(
+                        image: AssetImage('images/foodx.png'),
+                        height: 100.0,
+                        width: 200.0,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
               ),
               Text(
                 'Welcome to FoodX!',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
               SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               Text(
                 'Lets help you meet up your tasks.',
                 style: TextStyle(fontSize: 15, color: Colors.grey),
               ),
               SizedBox(
-                height: 20.0,
+                height: 10.0,
                 width: 350,
                 child: Divider(
                   thickness: 2,
                   color: Colors.grey[400],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Email',
+              SizedBox(
+                height: 10.0,
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  margin: EdgeInsets.only(right: 30, left: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.email),
+                          labelText: 'Email',
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Password',
+                      SizedBox(
+                        height: 10.0,
                       ),
-                    ),
-                  ],
+                      TextField(
+                        style: TextStyle(height: 1),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.remove_red_eye),
+                          labelText: 'Password',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      SizedBox(
+                        width: 250,
+                        height: 50,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color(0XFFD8352C),
+                          ),
+                          onPressed: () {},
+                          child: Text('Sign In'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
