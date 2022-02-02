@@ -19,14 +19,20 @@ class _loginState extends State<login> {
             children: <Widget>[
               Center(
                 child: Container(
-                  color: Colors.amber[600],
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black87,
+                  ),
                   margin: const EdgeInsets.only(
                     top: 20.0,
                   ),
-                  child: Image(
-                    image: AssetImage('images/foodx.png'),
-                    height: 100.0,
-                    width: 200.0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      image: AssetImage('images/foodx.png'),
+                      height: 100.0,
+                      width: 200.0,
+                    ),
                   ),
                 ),
               ),
@@ -52,10 +58,29 @@ class _loginState extends State<login> {
                   color: Colors.grey[400],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Row(
-                  children: [Text('Email')],
+              Container(
+                margin: EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Email',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
