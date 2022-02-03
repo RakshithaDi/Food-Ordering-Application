@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class login extends StatefulWidget {
+class Login extends StatefulWidget {
   //const login({Key? key}) : super(key: key);
 
   @override
-  _loginState createState() => _loginState();
+  _LoginState createState() => _LoginState();
 }
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -112,7 +112,7 @@ class _loginState extends State<login> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
+                margin: EdgeInsets.only(right: 50, left: 50),
                 child: SizedBox(
                   width: 250,
                   height: 50,
@@ -127,7 +127,7 @@ class _loginState extends State<login> {
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 20.0,
               ),
               Container(
                 margin: EdgeInsets.only(right: 30, left: 30),
@@ -173,6 +173,30 @@ class _loginState extends State<login> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 100),
+                  child: Row(
+                    children: [
+                      Text('Dont Have an account?'),
+                      SizedBox(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.black,
+                            //backgroundColor: Color(0XFFD8352C),
+                            textStyle: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: Text('Sign Up'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
