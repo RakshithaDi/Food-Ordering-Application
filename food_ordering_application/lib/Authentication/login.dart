@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_ordering_application/Authentication/signup.dart';
+import 'package:food_ordering_application/constant.dart';
 
 class Login extends StatefulWidget {
   //const login({Key? key}) : super(key: key);
+  static String id = 'loginScreen';
 
   @override
   _LoginState createState() => _LoginState();
@@ -14,7 +17,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: kbackgroundcolor,
         body: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -156,65 +159,31 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
-                child: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: SizedBox(
+                margin: EdgeInsets.only(right: 50, left: 50),
+                child: TextButton(
+                  child: Image(
+                    image: AssetImage('images/googleIcon.png'),
+                    width: 300,
                     height: 50,
-                    child: TextButton.icon(
-                      style: TextButton.styleFrom(
-                          //primary: Colors.white,
-                          // backgroundColor: Color(0XFFD8352C),
-
-                          side: BorderSide(color: Colors.grey[600], width: 1)),
-                      onPressed: () {},
-                      icon: FaIcon(FontAwesomeIcons.google),
-                      label: Text(
-                        'Sign In With Google',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
                   ),
+                  // style: TextButton.styleFrom(
+                  //     side: BorderSide(color: Colors.grey[600], width: 1)),
+                  onPressed: () {},
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
               Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
-                child: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                margin: EdgeInsets.only(right: 50, left: 50),
+                child: TextButton(
+                  child: Image(
+                    image: AssetImage('images/facebookIcon.png'),
+                    width: 300,
                   ),
-                  child: SizedBox(
-                    height: 50,
-                    child: TextButton.icon(
-                      style: TextButton.styleFrom(
-                          //primary: Colors.white,
-                          // backgroundColor: Color(0XFFD8352C),
-
-                          side: BorderSide(color: Colors.grey[600], width: 1)),
-                      onPressed: () {},
-                      icon: FaIcon(FontAwesomeIcons.facebook),
-                      label: Text(
-                        'Sign In With Facebook',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // style: TextButton.styleFrom(
+                  //     side: BorderSide(color: Colors.grey[600], width: 1)),
+                  onPressed: () {},
                 ),
               ),
               Container(
@@ -233,7 +202,9 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Signup.id);
+                          },
                           child: Text('Sign Up'),
                         ),
                       ),
