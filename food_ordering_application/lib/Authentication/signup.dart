@@ -19,154 +19,72 @@ class _SignupState extends State<Signup> {
           child: ListView(
             children: [
               Center(
-                child: Container(
-                  margin: EdgeInsets.only(
-                    top: 30,
-                    bottom: 30,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image(
-                      image: AssetImage('images/foodx.png'),
-                      height: 100.0,
-                      width: 200.0,
-                    ),
-                  ),
-                ),
+                child: FoodLogo(),
               ),
+              SignupTitle(),
               Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'Let\'s Get Started',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      'Create and account to continue!',
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                      width: 350,
-                      child: Divider(
-                        thickness: 2,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
                 child: Row(
                   children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              // prefixIcon: Icon(Icons.email),
-                              labelText: 'First Name',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            style: TextStyle(height: 1),
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              //  prefixIcon: Icon(Icons.remove_red_eye),
-                              labelText: 'Last Name',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    DoubleRawTextField('First Name'),
+                    DoubleRawTextField('Last Name'),
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              // prefixIcon: Icon(Icons.email),
-                              labelText: 'Email',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              SingleRawTextField(word: 'Email'),
               Padding(
-                padding: const EdgeInsets.only(left: 45),
+                padding: const EdgeInsets.only(left: 20, top: 10),
                 child: Text(
                   'Gender',
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: FontWeight.bold,
-                      color: Color(0XFF545454)),
+                      color: Colors.grey[500]),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
                 child: Row(
                   children: [
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            title: Text("Male"),
-                            leading: Radio(
-                              value: 1,
-                              groupValue: val,
-                              onChanged: (value) {
-                                setState(() {
-                                  val = value;
-                                  print(val);
-                                });
-                              },
-                              activeColor: Colors.blue,
+                        child: Container(
+                          height: 45,
+                          child: Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: ListTile(
+                                title: Padding(
+                                  padding: const EdgeInsets.only(bottom: 1),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 18.0),
+                                    child: Text(
+                                      "Male",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.grey[700],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                leading: Padding(
+                                  padding: const EdgeInsets.only(bottom: 18),
+                                  child: Radio(
+                                    value: 1,
+                                    groupValue: val,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        val = value;
+                                        print(val);
+                                      });
+                                    },
+                                    activeColor: Colors.blue,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -175,23 +93,38 @@ class _SignupState extends State<Signup> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            title: Text("Female"),
-                            leading: Radio(
-                              value: 2,
-                              groupValue: val,
-                              onChanged: (value) {
-                                setState(() {
-                                  val = value;
-                                  print(val);
-                                });
-                              },
-                              activeColor: Colors.blue,
+                        child: Container(
+                          height: 45,
+                          child: Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              title: Padding(
+                                padding: const EdgeInsets.only(bottom: 18.0),
+                                child: Text(
+                                  "Female",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                              ),
+                              leading: Padding(
+                                padding: const EdgeInsets.only(bottom: 18.0),
+                                child: Radio(
+                                  value: 2,
+                                  groupValue: val,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      val = value;
+                                      print(val);
+                                    });
+                                  },
+                                  activeColor: Colors.blue,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -200,84 +133,9 @@ class _SignupState extends State<Signup> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              // prefixIcon: Icon(Icons.email),
-                              labelText: 'Mobile No',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              // prefixIcon: Icon(Icons.email),
-                              labelText: 'Password',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              // prefixIcon: Icon(Icons.email),
-                              labelText: 'Confirm Password',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              SingleRawTextField(word: 'Mobile No'),
+              SingleRawTextField(word: 'Password'),
+              SingleRawTextField(word: 'Confirm Password'),
               SizedBox(
                 height: 10,
               ),
@@ -290,6 +148,9 @@ class _SignupState extends State<Signup> {
                     style: TextButton.styleFrom(
                       primary: Colors.white,
                       backgroundColor: Color(0XFFD8352C),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red)),
                     ),
                     onPressed: () {},
                     child: Text('Sign Up'),
@@ -297,7 +158,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               Container(
                 child: Padding(
@@ -325,6 +186,143 @@ class _SignupState extends State<Signup> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SingleRawTextField extends StatelessWidget {
+  String word;
+  SingleRawTextField({this.word});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: Container(
+                  height: 40,
+                  child: TextField(
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(11),
+                      ),
+                      // prefixIcon: Icon(Icons.email),
+                      labelText: word,
+                      labelStyle: TextStyle(
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DoubleRawTextField extends StatelessWidget {
+  String type;
+  DoubleRawTextField(this.type);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(11),
+          ),
+          child: Container(
+            height: 40,
+            child: TextField(
+              obscureText: false,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                // prefixIcon: Icon(Icons.email),
+
+                labelText: type,
+                labelStyle: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SignupTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Let\'s Get Started',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Text(
+            'Create and account to continue!',
+            style: TextStyle(
+                fontSize: 15,
+                color: Colors.grey[500],
+                fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 30.0,
+            width: 350,
+            child: Divider(
+              thickness: 2,
+              color: Colors.grey[400],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FoodLogo extends StatelessWidget {
+  const FoodLogo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 30,
+        bottom: 30,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image(
+          image: AssetImage('images/foodx.png'),
+          height: 100.0,
+          width: 200.0,
         ),
       ),
     );

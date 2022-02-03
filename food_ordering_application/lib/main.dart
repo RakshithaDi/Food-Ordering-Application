@@ -4,5 +4,5 @@ import 'Authentication/login.dart';
 import 'Authentication/signup.dart';
 
 void main() {
-  runApp(Login());
+  runApp(Signup());
 }
