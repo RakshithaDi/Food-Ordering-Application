@@ -14,7 +14,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Colors.grey[200],
         body: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -69,24 +69,36 @@ class _LoginState extends State<Login> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.email),
-                        labelText: 'Email',
+                    Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.email),
+                          labelText: 'Email',
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    TextField(
-                      style: TextStyle(height: 1),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.remove_red_eye),
-                        labelText: 'Password',
+                    Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        style: TextStyle(height: 1),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.remove_red_eye),
+                          labelText: 'Password',
+                        ),
                       ),
                     ),
                   ],
@@ -131,21 +143,27 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 margin: EdgeInsets.only(right: 30, left: 30),
-                child: SizedBox(
-                  height: 50,
-                  child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                        //primary: Colors.white,
-                        // backgroundColor: Color(0XFFD8352C),
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SizedBox(
+                    height: 50,
+                    child: TextButton.icon(
+                      style: TextButton.styleFrom(
+                          //primary: Colors.white,
+                          // backgroundColor: Color(0XFFD8352C),
 
-                        side: BorderSide(color: Colors.black87, width: 1)),
-                    onPressed: () {},
-                    icon: FaIcon(FontAwesomeIcons.google),
-                    label: Text(
-                      'Sign In With Google',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                          side: BorderSide(color: Colors.black87, width: 1)),
+                      onPressed: () {},
+                      icon: FaIcon(FontAwesomeIcons.google),
+                      label: Text(
+                        'Sign In With Google',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -156,21 +174,27 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 margin: EdgeInsets.only(right: 30, left: 30),
-                child: SizedBox(
-                  height: 50,
-                  child: TextButton.icon(
-                    style: TextButton.styleFrom(
-                        //primary: Colors.white,
-                        // backgroundColor: Color(0XFFD8352C),
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SizedBox(
+                    height: 50,
+                    child: TextButton.icon(
+                      style: TextButton.styleFrom(
+                          //primary: Colors.white,
+                          // backgroundColor: Color(0XFFD8352C),
 
-                        side: BorderSide(color: Colors.black87, width: 1)),
-                    onPressed: () {},
-                    icon: FaIcon(FontAwesomeIcons.google),
-                    label: Text(
-                      'Sign In With Google',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
+                          side: BorderSide(color: Colors.black87, width: 1)),
+                      onPressed: () {},
+                      icon: FaIcon(FontAwesomeIcons.google),
+                      label: Text(
+                        'Sign In With Facebook',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
