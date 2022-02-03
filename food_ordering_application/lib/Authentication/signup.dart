@@ -306,10 +306,6 @@ class SignupTitle extends StatelessWidget {
 }
 
 class FoodLogo extends StatelessWidget {
-  const FoodLogo({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(

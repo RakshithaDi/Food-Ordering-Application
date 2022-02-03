@@ -48,7 +48,10 @@ class _LoginState extends State<Login> {
                     ),
                     Text(
                       'Lets help you meet up your tasks.',
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey[500],
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 30.0,
@@ -62,39 +65,54 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(right: 30, left: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Card(
                       elevation: 5,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      child: TextField(
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.email),
-                          labelText: 'Email',
+                      child: Container(
+                        height: 45,
+                        child: TextField(
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            prefixIcon: Icon(Icons.email),
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                              fontSize: 13,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 10.0,
+                      height: 20.0,
                     ),
                     Card(
                       elevation: 5,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      child: TextField(
-                        style: TextStyle(height: 1),
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(Icons.remove_red_eye),
-                          labelText: 'Password',
+                      child: Container(
+                        height: 45,
+                        child: TextField(
+                          style: TextStyle(height: 1),
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            prefixIcon: Icon(Icons.remove_red_eye),
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                              fontSize: 13,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -107,16 +125,15 @@ class _LoginState extends State<Login> {
                 height: 40,
                 child: SizedBox(
                   child: TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                      //backgroundColor: Color(0XFFD8352C),
-                      textStyle: TextStyle(
+                    onPressed: () {},
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Colors.grey[600],
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () {},
-                    child: Text('Forgot Password?'),
                   ),
                 ),
               ),
@@ -129,6 +146,9 @@ class _LoginState extends State<Login> {
                     style: TextButton.styleFrom(
                       primary: Colors.white,
                       backgroundColor: Color(0XFFD8352C),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          side: BorderSide(color: Colors.red)),
                     ),
                     onPressed: () {},
                     child: Text('Sign In'),
@@ -152,7 +172,7 @@ class _LoginState extends State<Login> {
                           //primary: Colors.white,
                           // backgroundColor: Color(0XFFD8352C),
 
-                          side: BorderSide(color: Colors.black87, width: 1)),
+                          side: BorderSide(color: Colors.grey[600], width: 1)),
                       onPressed: () {},
                       icon: FaIcon(FontAwesomeIcons.google),
                       label: Text(
@@ -183,9 +203,9 @@ class _LoginState extends State<Login> {
                           //primary: Colors.white,
                           // backgroundColor: Color(0XFFD8352C),
 
-                          side: BorderSide(color: Colors.black87, width: 1)),
+                          side: BorderSide(color: Colors.grey[600], width: 1)),
                       onPressed: () {},
-                      icon: FaIcon(FontAwesomeIcons.google),
+                      icon: FaIcon(FontAwesomeIcons.facebook),
                       label: Text(
                         'Sign In With Facebook',
                         style: TextStyle(
