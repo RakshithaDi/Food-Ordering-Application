@@ -21,8 +21,8 @@ class _LoginState extends State<Login> {
               Center(
                 child: Container(
                   margin: EdgeInsets.only(
-                    top: 30,
-                    bottom: 30,
+                    top: 20,
+                    bottom: 20,
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -57,9 +57,6 @@ class _LoginState extends State<Login> {
                         thickness: 2,
                         color: Colors.grey[400],
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
                     ),
                   ],
                 ),
