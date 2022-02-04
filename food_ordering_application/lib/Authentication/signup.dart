@@ -12,8 +12,6 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  bool _value = false;
-  int val = -1;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,172 +20,89 @@ class _SignupState extends State<Signup> {
         body: SafeArea(
           child: ListView(
             children: [
-              Center(
-                child: FoodLogo(),
-              ),
-              SignupTitle(),
               Container(
-                child: Row(
+                child: Column(
                   children: [
-                    DoubleRawTextField('First Name'),
-                    DoubleRawTextField('Last Name'),
+                    Center(
+                      child: FoodLogo(),
+                    ),
+                    SignupTitle(),
                   ],
                 ),
               ),
-              SingleRawTextField(word: 'Email'),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20, top: 10),
-              //   child: Text(
-              //     'Gender',
-              //     style: TextStyle(
-              //         fontSize: 13,
-              //         fontWeight: FontWeight.bold,
-              //         color: Colors.grey[500]),
-              //   ),
-              // ),
-              // Container(
-              //   child: Row(
-              //     children: [
-              //       Expanded(
-              //         child: Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: Container(
-              //             height: 45,
-              //             child: Card(
-              //               elevation: 5,
-              //               shape: RoundedRectangleBorder(
-              //                 borderRadius: BorderRadius.circular(10),
-              //               ),
-              //               child: Center(
-              //                 child: ListTile(
-              //                   title: Padding(
-              //                     padding: const EdgeInsets.only(bottom: 1),
-              //                     child: Padding(
-              //                       padding:
-              //                           const EdgeInsets.only(bottom: 18.0),
-              //                       child: Text(
-              //                         "Male",
-              //                         style: TextStyle(
-              //                           fontSize: 13,
-              //                           color: Colors.grey[700],
-              //                         ),
-              //                       ),
-              //                     ),
-              //                   ),
-              //                   leading: Padding(
-              //                     padding: const EdgeInsets.only(bottom: 18),
-              //                     child: Radio(
-              //                       value: 1,
-              //                       groupValue: val,
-              //                       onChanged: (value) {
-              //                         setState(() {
-              //                           val = value;
-              //                           print(val);
-              //                         });
-              //                       },
-              //                       activeColor: Colors.blue,
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //       Expanded(
-              //         child: Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: Container(
-              //             height: 45,
-              //             child: Card(
-              //               elevation: 5,
-              //               shape: RoundedRectangleBorder(
-              //                 borderRadius: BorderRadius.circular(10),
-              //               ),
-              //               child: ListTile(
-              //                 title: Padding(
-              //                   padding: const EdgeInsets.only(bottom: 18.0),
-              //                   child: Text(
-              //                     "Female",
-              //                     style: TextStyle(
-              //                       fontSize: 13,
-              //                       color: Colors.grey[700],
-              //                     ),
-              //                   ),
-              //                 ),
-              //                 leading: Padding(
-              //                   padding: const EdgeInsets.only(bottom: 18.0),
-              //                   child: Radio(
-              //                     value: 2,
-              //                     groupValue: val,
-              //                     onChanged: (value) {
-              //                       setState(() {
-              //                         val = value;
-              //                         print(val);
-              //                       });
-              //                     },
-              //                     activeColor: Colors.blue,
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              SingleRawTextField(word: 'Mobile No'),
-              SingleRawTextField(word: 'Password'),
-              SingleRawTextField(word: 'Confirm Password'),
-              SizedBox(
-                height: 10,
-              ),
               Container(
-                margin: EdgeInsets.only(right: 50, left: 50),
-                child: SizedBox(
-                  width: 250,
-                  height: 45,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                      backgroundColor: Color(0XFFD8352C),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.red)),
+                child: Column(
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          DoubleRawTextField('First Name'),
+                          DoubleRawTextField('Last Name'),
+                        ],
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, OtpSetup.id);
-                    },
-                    child: Text('Sign Up'),
-                  ),
+                    SingleRawTextField(word: 'Email'),
+                    SingleRawTextField(word: 'Mobile No'),
+                    SingleRawTextField(word: 'Password'),
+                    SingleRawTextField(word: 'Confirm Password'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
               ),
-
               Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 100),
-                  child: Row(
-                    children: [
-                      Text('Already Have an account?'),
-                      SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 50, left: 50),
+                      child: SizedBox(
+                        width: 250,
+                        height: 45,
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            primary: Colors.black,
-                            //backgroundColor: Color(0XFFD8352C),
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            primary: Colors.white,
+                            backgroundColor: Color(0XFFD8352C),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.red)),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, Login.id);
+                            Navigator.pushNamed(context, OtpSetup.id);
                           },
-                          child: Text('Sign In'),
+                          child: Text('Sign Up'),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 100),
+                        child: Row(
+                          children: [
+                            Text('Already Have an account?'),
+                            SizedBox(
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  //backgroundColor: Color(0XFFD8352C),
+                                  textStyle: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, Login.id);
+                                },
+                                child: Text('Sign In'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -297,7 +212,7 @@ class SignupTitle extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 30.0,
+            height: 10.0,
             width: 350,
             child: Divider(
               thickness: 2,
