@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Authentication/otp_setup.dart';
 
 import 'Authentication/login.dart';
 import 'Authentication/signup.dart';
@@ -15,6 +16,7 @@ class FoodOrderingApp extends StatelessWidget {
         LoadingScreen.id: (context) => LoadingScreen(),
         Login.id: (context) => Login(),
         Signup.id: (context) => Signup(),
+        OtpSetup.id: (context) => OtpSetup(),
       },
     );
   }

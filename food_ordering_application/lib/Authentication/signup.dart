@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_ordering_application/Authentication/otp_setup.dart';
 
 import 'login.dart';
 
@@ -155,7 +156,9 @@ class _SignupState extends State<Signup> {
                           borderRadius: BorderRadius.circular(18.0),
                           side: BorderSide(color: Colors.red)),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, OtpSetup.id);
+                    },
                     child: Text('Sign Up'),
                   ),
                 ),

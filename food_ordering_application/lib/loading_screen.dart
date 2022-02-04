@@ -39,9 +39,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     child: TextButton(
                       style: TextButton.styleFrom(
                         backgroundColor: Color(0XFFD8352C),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: BorderSide(color: Colors.white)),
+                        // shape: RoundedRectangleBorder(
+                        //     borderRadius: BorderRadius.circular(12),
+                        //     side: BorderSide(color: Colors.white)
+                        // ),
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, Login.id);
