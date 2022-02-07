@@ -14,64 +14,70 @@ class _AccountState extends State<Account> {
         body: SafeArea(
           child: ListView(
             children: [
-              Container(
-                margin: EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Container(
-                      child: CircleAvatar(
-                        radius: 70.0,
-                        child: Image(
-                          image: AssetImage('images/foodx.png'),
-                          width: 40,
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Container(
+                        child: CircleAvatar(
+                          radius: 70.0,
+                          child: Image(
+                            image: AssetImage('images/foodx.png'),
+                            width: 40,
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                size: 20,
-                              ),
-                              Text(' NAR Dilshan'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.email,
-                                size: 20,
-                              ),
-                              Text(' rakshithadilshan1@gmail.com'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                size: 20,
-                              ),
-                              Text(' 0766807668'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  size: 20,
+                                ),
+                                Text(' NAR Dilshan'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.email,
+                                  size: 20,
+                                ),
+                                Text(' rakshithadilshan1@gmail.com'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.phone,
+                                  size: 20,
+                                ),
+                                Text(' 0766807668'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -227,9 +233,6 @@ class _AccountState extends State<Account> {
                                 const SizedBox(
                                   height: 30,
                                   width: 15,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 15, left: 20),
-                                  ),
                                 ),
                               ],
                             ),
