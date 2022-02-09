@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_ordering_application/Authentication/signup.dart';
+import 'package:food_ordering_application/Home/home.dart';
 import 'package:food_ordering_application/constant.dart';
 
 import 'otp_setup.dart';
@@ -180,7 +181,7 @@ class _LoginState extends State<Login> {
                                 side: BorderSide(color: Colors.red)),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, OtpSetup.id);
+                            Navigator.pushNamed(context, Home.id);
                           },
                           child: Text('Sign In'),
                         ),

@@ -19,7 +19,7 @@ class _CartState extends State<Cart> {
               Text(
                 'Cart',
                 style: TextStyle(color: Colors.black87),
-              )
+              ),
             ],
           ),
         ),

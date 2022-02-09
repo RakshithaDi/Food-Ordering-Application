@@ -14,7 +14,7 @@ class FoodOrderingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Home.id,
+      initialRoute: LoadingScreen.id,
       routes: {
         LoadingScreen.id: (context) => LoadingScreen(),
         Login.id: (context) => Login(),

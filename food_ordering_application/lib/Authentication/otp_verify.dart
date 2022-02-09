@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Home/home.dart';
 
 import '../constant.dart';
 
@@ -154,7 +155,9 @@ class _OtpVerifyState extends State<OtpVerify> {
                               borderRadius: BorderRadius.circular(12.0),
                               side: BorderSide(color: Colors.red)),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, Home.id);
+                        },
                         child: Text('Verify & Proceed'),
                       ),
                     ),

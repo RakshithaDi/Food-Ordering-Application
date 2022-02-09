@@ -13,12 +13,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController controller;
-  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this, initialIndex: 1);
+    controller = TabController(length: 3, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -56,10 +55,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
               ),
               Tab(
-                icon: Icon(Icons.shopping_cart_rounded),
+                icon: Icon(
+                  Icons.shopping_cart_rounded,
+                  color: Colors.white,
+                ),
               ),
               Tab(
-                icon: Icon(Icons.account_circle_rounded),
+                icon: Icon(
+                  Icons.account_circle_rounded,
+                  color: Colors.white,
+                ),
               ),
             ],
             controller: controller,
