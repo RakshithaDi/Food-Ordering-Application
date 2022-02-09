@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../constant.dart';
 
-class Menu extends StatefulWidget {
+class Cart extends StatefulWidget {
   @override
-  _MenuState createState() => _MenuState();
+  _CartState createState() => _CartState();
 }
 
-class _MenuState extends State<Menu> {
+class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +17,7 @@ class _MenuState extends State<Menu> {
           child: ListView(
             children: [
               Text(
-                'Menu',
+                'Cart',
                 style: TextStyle(color: Colors.black87),
               )
             ],

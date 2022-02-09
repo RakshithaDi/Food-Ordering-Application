@@ -5,6 +5,7 @@ import 'package:food_ordering_application/Authentication/otp_verify.dart';
 import 'Authentication/login.dart';
 import 'Authentication/signup.dart';
 import 'Home/account.dart';
+import 'Home/home.dart';
 import 'loading_screen.dart';
 
 void main() => runApp(FoodOrderingApp());
@@ -13,7 +14,7 @@ class FoodOrderingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Account.id,
+      initialRoute: Home.id,
       routes: {
         LoadingScreen.id: (context) => LoadingScreen(),
         Login.id: (context) => Login(),
@@ -21,6 +22,7 @@ class FoodOrderingApp extends StatelessWidget {
         OtpSetup.id: (context) => OtpSetup(),
         OtpVerify.id: (context) => OtpVerify(),
         Account.id: (context) => Account(),
+        Home.id: (context) => Home(),
       },
     );
   }
