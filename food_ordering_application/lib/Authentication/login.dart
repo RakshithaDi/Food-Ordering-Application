@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                             height: 10.0,
                           ),
                           Text(
-                            'Lets help you meet up your tasks.',
+                            'Let\'s help you meet up your tasks.',
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.grey[500],
