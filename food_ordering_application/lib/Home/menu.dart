@@ -36,7 +36,7 @@ class _MenuState extends State<Menu> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Text(
-                                'Hello, Rakshitha!',
+                                'Hello, Rakshithaaaa!',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
