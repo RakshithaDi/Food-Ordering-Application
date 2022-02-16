@@ -16,6 +16,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+  bool value = false;
+  final maxLines = 5;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -92,22 +95,21 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Container(
-                child: Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Container(
-                              height: 45,
-                              child: TextField(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Container(
+                              height: maxLines * 13.0,
+                              child: TextFormField(
                                 obscureText: false,
                                 decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
@@ -117,23 +119,24 @@ class _LoginState extends State<Login> {
                                     fontSize: 13,
                                   ),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your email';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 20.0,
-                          ),
-                          Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                            SizedBox(
+                              height: 15.0,
                             ),
-                            child: Container(
-                              height: 45,
-                              child: TextField(
-                                style: TextStyle(height: 1),
+                            Container(
+                              height: maxLines * 13.0,
+                              child: TextFormField(
                                 obscureText: true,
                                 decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
@@ -143,51 +146,66 @@ class _LoginState extends State<Login> {
                                     fontSize: 13,
                                   ),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter the password';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerRight,
+                        margin: EdgeInsets.only(right: 30),
+                        height: 40,
+                        child: SizedBox(
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      margin: EdgeInsets.only(right: 30),
-                      height: 40,
-                      child: SizedBox(
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
+                      Container(
+                        margin: EdgeInsets.only(right: 50, left: 50),
+                        child: SizedBox(
+                          width: 250,
+                          height: 50,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color(0XFFD8352C),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  side: BorderSide(color: Colors.red)),
                             ),
+                            onPressed: () {
+                              // Validate returns true if the form is valid, or false otherwise.
+                              if (_formKey.currentState.validate()) {
+                                Navigator.pushNamed(context, Home.id);
+                                // If the form is valid, display a snackbar. In the real world,
+                                // you'd often call a server or save the information in a database.
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Processing Data')),
+                                );
+                              }
+                            },
+                            child: Text('Sign In'),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 50, left: 50),
-                      child: SizedBox(
-                        width: 250,
-                        height: 50,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Color(0XFFD8352C),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                                side: BorderSide(color: Colors.red)),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, Home.id);
-                          },
-                          child: Text('Sign In'),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Container(

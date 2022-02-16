@@ -36,22 +36,24 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         top: 100, bottom: 30, right: 20, left: 20),
                     width: 250,
                     height: 10,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Color(0XFFD8352C),
-                        // shape: RoundedRectangleBorder(
-                        //     borderRadius: BorderRadius.circular(12),
-                        //     side: BorderSide(color: Colors.white)
-                        // ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Login.id);
-                      },
-                      child: Image(
-                        alignment: Alignment.bottomCenter,
-                        image: AssetImage('images/getStartedButton.png'),
-                        height: 150.0,
-                        width: 300.0,
+                    child: Card(
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Color(0XFFD8352C),
+                          // shape: RoundedRectangleBorder(
+                          //     borderRadius: BorderRadius.circular(12),
+                          //     side: BorderSide(color: Colors.white)
+                          // ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, Login.id);
+                        },
+                        child: Image(
+                          alignment: Alignment.bottomCenter,
+                          image: AssetImage('images/getStartedButton.png'),
+                          height: 150.0,
+                          width: 300.0,
+                        ),
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/home.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 import '../constant.dart';
 
@@ -52,7 +53,9 @@ class _OtpVerifyState extends State<OtpVerify> {
         ),
         backgroundColor: kbackgroundcolor,
         body: SafeArea(
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 height: 20.0,
@@ -84,34 +87,33 @@ class _OtpVerifyState extends State<OtpVerify> {
                     SizedBox(
                       height: 40,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Container(
-                              height: 45,
-                              child: TextField(
-                                keyboardType: TextInputType.phone,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  hintText: "OTP Code",
-                                ),
-                                onChanged: (value) {
-                                  // this.phoneNo=value;
-                                  print(value);
-                                },
-                              ),
-                            ),
-                          ),
+                    Container(
+                      height: 45,
+                      child: OtpTextField(
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
                         ),
-                      ],
+                        numberOfFields: 5,
+                        borderColor: Colors.black,
+                        //set to true to show as box or false to show as dash
+                        showFieldAsBox: true,
+                        //runs when a code is typed in
+                        onCodeChanged: (String code) {
+                          //handle validation or checks here
+                        },
+                        //runs when every textfield is filled
+                        onSubmit: (String verificationCode) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Verification Code"),
+                                  content:
+                                      Text('Code entered is $verificationCode'),
+                                );
+                              });
+                        }, // end onSubmit
+                      ),
                     ),
                     SizedBox(
                       height: 10,

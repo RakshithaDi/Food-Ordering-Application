@@ -94,63 +94,42 @@ class _OtpSetupState extends State<OtpSetup> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                    Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Container(
+                        height: 45,
+                        child: TextFormField(
+                          obscureText: false,
+                          keyboardType: TextInputType.number,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Container(
-                              height: 45,
-                              child: TextField(
-                                enabled: false,
-                                keyboardType: TextInputType.phone,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  hintText: "+94",
-                                  labelStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            prefix: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                '(+94) ',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                onChanged: (value) {
-                                  // this.phoneNo=value;
-                                  print(value);
-                                },
                               ),
+                            ),
+                            suffixIcon: const Icon(
+                              Icons.done,
+                              color: Colors.green,
+                              size: 32,
                             ),
                           ),
                         ),
-                        Expanded(
-                          flex: 5,
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Container(
-                              height: 45,
-                              child: TextField(
-                                keyboardType: TextInputType.phone,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  hintText: "Phone Number",
-                                ),
-                                onChanged: (value) {
-                                  // this.phoneNo=value;
-                                  print(value);
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
