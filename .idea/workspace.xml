@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/images/ad.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/search.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,26 +81,26 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="107" y="93" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1643650887286" />
-    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1645009781331">
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1645036010641">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1645009781331" />
-    <state width="914" height="189" key="GridCell.Tab.0.bottom" timestamp="1645015853265">
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1645036010641" />
+    <state width="914" height="189" key="GridCell.Tab.0.bottom" timestamp="1645035460315">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="914" height="189" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1645015853265" />
-    <state width="914" height="189" key="GridCell.Tab.0.center" timestamp="1645015853265">
+    <state width="914" height="189" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1645035460315" />
+    <state width="914" height="189" key="GridCell.Tab.0.center" timestamp="1645035460315">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="914" height="189" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1645015853265" />
-    <state width="914" height="189" key="GridCell.Tab.0.left" timestamp="1645015853265">
+    <state width="914" height="189" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1645035460315" />
+    <state width="914" height="189" key="GridCell.Tab.0.left" timestamp="1645035460314">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="914" height="189" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1645015853265" />
-    <state width="914" height="189" key="GridCell.Tab.0.right" timestamp="1645015853265">
+    <state width="914" height="189" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1645035460314" />
+    <state width="914" height="189" key="GridCell.Tab.0.right" timestamp="1645035460315">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="914" height="189" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1645015853265" />
+    <state width="914" height="189" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1645035460315" />
     <state x="538" y="170" key="SettingsEditor" timestamp="1644998232880">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -112,9 +109,9 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="121" y="245" key="run.anything.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1645013241842" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1644995700464">
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1645107514511">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1644995700464" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1645107514511" />
   </component>
 </project>

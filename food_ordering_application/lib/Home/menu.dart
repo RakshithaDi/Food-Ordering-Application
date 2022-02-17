@@ -9,7 +9,6 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +18,7 @@ class _MenuState extends State<Menu> {
           child: ListView(
             children: [
               Container(
-                height: 220,
+                height: 190,
                 color: kredbackgroundcolor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +31,7 @@ class _MenuState extends State<Menu> {
                           child: Container(
                             height: 60.0,
                             //color: Colors.grey,
-                            margin: EdgeInsets.only(top: 20),
+                            margin: EdgeInsets.only(top: 10),
                             child: Padding(
                               padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Text(
@@ -49,12 +48,12 @@ class _MenuState extends State<Menu> {
                         Expanded(
                           child: Container(
                             // color: Colors.blue,
-                            margin: EdgeInsets.only(top: 20),
+                            margin: EdgeInsets.only(top: 10),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Image(
                                 image: AssetImage('images/menulogo.png'),
-                                height: 60.0,
+                                height: 50.0,
                                 width: 200.0,
                               ),
                             ),
@@ -64,7 +63,9 @@ class _MenuState extends State<Menu> {
                     ),
                     Container(
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 5),
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                        ),
                         child: Text(
                           'Let\'s select the best taste for you',
                           style: TextStyle(
@@ -75,30 +76,29 @@ class _MenuState extends State<Menu> {
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: AnimSearchBar(
-                            rtl: true,
-                            width: 300,
-                            textController: textController,
-                            helpText: 'Search for food...',
-                            onSuffixTap: () {
-                              setState(() {
-                                textController.clear();
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),
-              Text(
-                'Menu',
-                style: TextStyle(color: Colors.black87),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                height: 200,
+                child: PageView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, position) {
+                      return Container(
+                        margin: EdgeInsets.only(left: 5, right: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.grey,
+                          image: DecorationImage(
+                            image: AssetImage('images/ad.jpg'),
+                          ),
+                        ),
+                        child: Column(
+                          children: [],
+                        ),
+                      );
+                    }),
               ),
             ],
           ),
