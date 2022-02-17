@@ -13,7 +13,7 @@ class _MenuState extends State<Menu> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var currentPageValue = 0.0;
   double scaleFactor = 0.8;
-  double height = 140.0;
+  double height = 160.0;
   @override
   void initState() {
     super.initState();
@@ -27,79 +27,80 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height.toString());
     return MaterialApp(
       home: Scaffold(
         backgroundColor: kbackgroundcolor,
-        body: SafeArea(
-          child: ListView(
-            children: [
-              Container(
-                height: 130,
-                color: kredbackgroundcolor,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 60.0,
-                            //color: Colors.grey,
-                            margin: EdgeInsets.only(top: 10),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 20, left: 20),
-                              child: Text(
-                                'Hello, Rakshithaaaa!',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 19,
-                                ),
+        body: Column(
+          children: [
+            Container(
+              height: 200,
+              color: kredbackgroundcolor,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 60.0,
+                          //color: Colors.grey,
+                          margin: EdgeInsets.only(top: 50),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20, left: 20),
+                            child: Text(
+                              'Hello, Rakshithaaaa!',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19,
                               ),
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            // color: Colors.blue,
-                            margin: EdgeInsets.only(top: 10),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image(
-                                image: AssetImage('images/menulogo.png'),
-                                height: 50.0,
-                                width: 200.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                        ),
-                        child: Text(
-                          'Let\'s select the best taste for you',
-                          style: TextStyle(
-                            color: Colors.grey[300],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
+                      Expanded(
+                        child: Container(
+                          // color: Colors.blue,
+                          margin: EdgeInsets.only(top: 50),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image(
+                              image: AssetImage('images/menulogo.png'),
+                              height: 50.0,
+                              width: 200.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Container(
-                    margin: EdgeInsets.only(top: 5),
-                    height: 140,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                      ),
+                      child: Text(
+                        'Let\'s select the best taste for you',
+                        style: TextStyle(
+                          color: Colors.grey[300],
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Container(
+                  height: 180,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
                     child: PageView.builder(
                         controller: pageController,
                         itemCount: 3,
@@ -107,26 +108,103 @@ class _MenuState extends State<Menu> {
                           return buildPageItem(position);
                         }),
                   ),
-                  new DotsIndicator(
-                    dotsCount: 3,
-                    position: currentPageValue,
+                ),
+                new DotsIndicator(
+                  decorator: DotsDecorator(
+                    activeColor: kredbackgroundcolor,
                   ),
-                ],
+                  dotsCount: 3,
+                  position: currentPageValue,
+                ),
+              ],
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(left: 20),
+              child: Text(
+                'Categories',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              // Container(
-              //   child: ListView(
-              //     scrollDirection: Axis.horizontal,
-              //     children: [
-              //       Container(
-              //         height: 60,
-              //         width: 60,
-              //         color: Colors.grey,
-              //       ),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
+            ),
+            Container(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  child: Row(
+                    children: [
+                      Container(
+                        color: Colors.grey,
+                        height: 100,
+                        width: 100,
+                        child: TextButton(
+                          child: Text('Meals'),
+                          onPressed: () {},
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        color: Colors.grey,
+                        height: 100,
+                        width: 100,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        color: Colors.grey,
+                        height: 100,
+                        width: 100,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        color: Colors.grey,
+                        height: 100,
+                        width: 100,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        color: Colors.grey,
+                        height: 100,
+                        width: 100,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20, top: 20),
+              alignment: Alignment.topLeft,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Card(
+                      color: Colors.grey,
+                      child: TextButton(
+                        child: Text('Meals'),
+                        onPressed: () {},
+                      ),
+                    ),
+                    SizedBox(
+                      width: 89,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -164,7 +242,7 @@ class _MenuState extends State<Menu> {
       child: Stack(
         children: [
           Container(
-            height: 130,
+            height: 160,
             margin: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
