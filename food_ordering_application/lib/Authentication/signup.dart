@@ -56,7 +56,12 @@ class _SignupState extends State<Signup> {
       RegisterUser adduser = RegisterUser(_fnameController.text,
           _lnameController.text, _userEmailController.text, mobileno);
       adduser.addUser();
-      Navigator.pushNamed(context, OtpSetup.id);
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => OtpSetup(mobileno),
+        ),
+      );
       print('Registered succesfully {$UserEmail} ');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

@@ -31,4 +31,9 @@ class RegisterUser {
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
+
+  int getPhoneno(mobileno) {
+    int mobno = this.mobileno;
+    return mobno;
+  }
 }

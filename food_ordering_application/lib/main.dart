@@ -38,7 +38,7 @@ class FoodOrderingApp extends StatelessWidget {
         LoadingScreen.id: (context) => LoadingScreen(),
         Login.id: (context) => Login(),
         Signup.id: (context) => Signup(),
-        OtpSetup.id: (context) => OtpSetup(),
+        OtpSetup.id: (context) => OtpSetup(2),
         OtpVerify.id: (context) => OtpVerify(),
         Account.id: (context) => Account(),
         Home.id: (context) => Home(),

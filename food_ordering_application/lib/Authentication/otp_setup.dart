@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_ordering_application/Authentication/otp_verify.dart';
 import 'package:food_ordering_application/constant.dart';
+import 'package:food_ordering_application/registeruser.dart';
 
 class OtpSetup extends StatefulWidget {
   static String id = 'otp_setup';
-
+  final int mobileno;
+  OtpSetup(this.mobileno);
   @override
-  _OtpSetupState createState() => _OtpSetupState();
+  _OtpSetupState createState() => _OtpSetupState(this.mobileno);
 }
 
 class _OtpSetupState extends State<OtpSetup> {
+  int mobileno;
+  _OtpSetupState(this.mobileno);
+  TextEditingController _mobilenoController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    _mobilenoController.text = mobileno.toString();
+
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -102,8 +111,12 @@ class _OtpSetupState extends State<OtpSetup> {
                       child: Container(
                         height: 45,
                         child: TextFormField(
-                          obscureText: false,
                           keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          controller: _mobilenoController,
+                          obscureText: false,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -128,6 +141,16 @@ class _OtpSetupState extends State<OtpSetup> {
                               size: 32,
                             ),
                           ),
+                          validator: (value) {
+                            String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                            RegExp regExp = new RegExp(pattern);
+                            if (value.isEmpty) {
+                              return 'Please enter your mobile number';
+                            } else if (!regExp.hasMatch(value)) {
+                              return 'Please enter valid mobile number';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ),
@@ -155,6 +178,7 @@ class _OtpSetupState extends State<OtpSetup> {
                         ),
                         onPressed: () {
                           Navigator.pushNamed(context, OtpVerify.id);
+                          print(_mobilenoController.text);
                         },
                         child: Text('Get OTP'),
                       ),
