@@ -130,21 +130,24 @@ class _LoginState extends State<Login> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Container(
-                                    height: maxLines * 13.0,
+                                    margin:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    height: 50,
                                     child: TextFormField(
                                       controller: _userEmailController,
-                                      obscureText: false,
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        prefixIcon: Icon(Icons.email),
                                         labelText: 'Email',
                                         labelStyle: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(11),
+                                        ),
+                                        suffixIcon: Icon(
+                                          Icons.email,
                                         ),
                                       ),
                                       keyboardType: TextInputType.emailAddress,
@@ -163,24 +166,26 @@ class _LoginState extends State<Login> {
                                   ),
                                   SizedBox(height: 20.0),
                                   Container(
-                                    height: maxLines * 13.0,
+                                    margin:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    height: 50,
                                     child: TextFormField(
                                       controller: _userPassworController,
-                                      obscureText: true,
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        prefixIcon: Icon(Icons.remove_red_eye),
                                         labelText: 'Password',
                                         labelStyle: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 15,
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(11),
+                                        ),
+                                        suffixIcon: Icon(
+                                          Icons.remove_red_eye,
                                         ),
                                       ),
-// ignore: missing_return
                                       validator: (value) {
                                         if (value.isEmpty || value.length < 7) {
                                           return 'Please enter a long password';
