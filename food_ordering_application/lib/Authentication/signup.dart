@@ -15,6 +15,19 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  bool _obscureText = true;
+
+  String _password;
+  String _confirmPassword;
+
+  // Toggles the password show status
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  String UserEmail;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fnameController = TextEditingController();
   final TextEditingController _lnameController = TextEditingController();
@@ -23,7 +36,8 @@ class _SignupState extends State<Signup> {
   final TextEditingController _userPassworController = TextEditingController();
   final TextEditingController _confirmPassworController =
       TextEditingController();
-  String icon = '';
+  String checkpassworweak;
+  String checkaccexist;
 
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
@@ -33,13 +47,17 @@ class _SignupState extends State<Signup> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              email: "barry.allen@example.com",
-              password: "SuperSecretPassword!");
+              email: _userEmailController.text,
+              password: _confirmPassworController.text);
+      UserEmail = _userEmailController.text;
+      print('Registered succesfully {$UserEmail} ');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        showAlertDialog('The password provided is too weak.', context);
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        showAlertDialog('The account already exists for that email.', context);
       }
     } catch (e) {
       print(e);
@@ -96,7 +114,6 @@ class _SignupState extends State<Signup> {
                                     validator: (value) {
                                       if (value.isEmpty) {
                                         return 'Please enter the First Name';
-                                        icon = 'error';
                                       } else if (RegExp(
                                               r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
                                           .hasMatch(value)) {
@@ -239,28 +256,41 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  child: TextFormField(
-                                    controller: _userPassworController,
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      labelText: 'Password',
-                                      labelStyle: TextStyle(
-                                        fontSize: 15,
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        controller: _userPassworController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          helperText:
+                                              '*Should be at least 8 characters long',
+                                          labelText: 'Password',
+                                          labelStyle: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(11),
+                                          ),
+                                          suffixIcon: IconButton(
+                                            onPressed: _toggle,
+                                            icon: Icon(
+                                                Icons.remove_red_eye_rounded),
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'Please enter a long password';
+                                          } else if (value.length < 7) {
+                                            return 'should be at least 8 characters long';
+                                          }
+                                          return null;
+                                        },
+                                        onSaved: (val) => _password = val,
+                                        obscureText: _obscureText,
                                       ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(11),
-                                      ),
-                                      // suffixIcon: Icon(
-                                      //   Icons.error,
-                                      // ),
-                                    ),
-                                    validator: (value) {
-                                      if (value.isEmpty || value.length < 7) {
-                                        return 'Please enter a long password';
-                                      }
-                                      return null;
-                                    },
+                                    ],
                                   ),
                                 ),
                               ),
@@ -280,6 +310,7 @@ class _SignupState extends State<Signup> {
                                     decoration: InputDecoration(
                                       filled: true,
                                       fillColor: Colors.white,
+                                      helperText: '',
                                       labelText: 'Re-type Password',
                                       labelStyle: TextStyle(
                                         fontSize: 15,
@@ -287,16 +318,22 @@ class _SignupState extends State<Signup> {
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(11),
                                       ),
-                                      // suffixIcon: Icon(
-                                      //   Icons.error,
-                                      // ),
+                                      suffixIcon: IconButton(
+                                        onPressed: _toggle,
+                                        icon:
+                                            Icon(Icons.remove_red_eye_rounded),
+                                      ),
                                     ),
                                     validator: (value) {
-                                      if (value.isEmpty || value.length < 7) {
+                                      if (value.isEmpty) {
                                         return 'Please enter a long password';
+                                      } else if (value.length < 7) {
+                                        return 'should be at least 8 characters long';
                                       }
                                       return null;
                                     },
+                                    onSaved: (val) => _confirmPassword = val,
+                                    obscureText: _obscureText,
                                   ),
                                 ),
                               ),
@@ -317,7 +354,10 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: 50, left: 50, top: 20),
+                      margin: EdgeInsets.only(
+                        right: 50,
+                        left: 50,
+                      ),
                       child: SizedBox(
                         width: 250,
                         height: 45,
@@ -331,7 +371,7 @@ class _SignupState extends State<Signup> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              return 1;
+                              createUserWithEmailAndPassword();
                             } else {
                               return null;
                             }
@@ -474,4 +514,29 @@ class FoodLogo extends StatelessWidget {
       ),
     );
   }
+}
+
+showAlertDialog(String message, BuildContext context) {
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Alert Box"),
+    content: Text(message),
+    actions: [
+      okButton,
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

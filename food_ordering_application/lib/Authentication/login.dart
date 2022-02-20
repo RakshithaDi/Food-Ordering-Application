@@ -14,6 +14,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  String Useremail;
   final TextEditingController _userEmailController = TextEditingController();
   final TextEditingController _userPassworController = TextEditingController();
 
@@ -27,10 +28,10 @@ class _LoginState extends State<Login> {
           .signInWithEmailAndPassword(
               email: _userEmailController.text,
               password: _userPassworController.text);
-      print(_userPassworController);
-      print(_userEmailController);
 
-      print('fsfsfsfsfsfs ${userCredential}');
+      Useremail = _userPassworController.text;
+
+      print('Sign in Succefully {$Useremail}');
       Navigator.pushNamed(context, Home.id);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
