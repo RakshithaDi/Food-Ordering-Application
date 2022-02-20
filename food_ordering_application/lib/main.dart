@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/otp_setup.dart';
 import 'package:food_ordering_application/Authentication/otp_verify.dart';
-import 'package:food_ordering_application/adduser.dart';
+import 'package:food_ordering_application/registeruser.dart';
 // Import the generated file
 import 'firebase_options.dart';
 
@@ -35,7 +35,6 @@ class FoodOrderingApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: LoadingScreen.id,
       routes: {
-        AddUser.id: (context) => AddUser('rakshihta', 'dfsf', 33),
         LoadingScreen.id: (context) => LoadingScreen(),
         Login.id: (context) => Login(),
         Signup.id: (context) => Signup(),

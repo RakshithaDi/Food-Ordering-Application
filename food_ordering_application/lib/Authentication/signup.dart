@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_ordering_application/Authentication/otp_setup.dart';
 
+import '../registeruser.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
@@ -19,6 +20,7 @@ class _SignupState extends State<Signup> {
 
   String _password;
   String _confirmPassword;
+  int mobileno;
 
   // Toggles the password show status
   void _toggle() {
@@ -50,6 +52,11 @@ class _SignupState extends State<Signup> {
               email: _userEmailController.text,
               password: _confirmPassworController.text);
       UserEmail = _userEmailController.text;
+      mobileno = int.parse(_mobileNoController.text);
+      RegisterUser adduser = RegisterUser(_fnameController.text,
+          _lnameController.text, _userEmailController.text, mobileno);
+      adduser.addUser();
+      Navigator.pushNamed(context, OtpSetup.id);
       print('Registered succesfully {$UserEmail} ');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
