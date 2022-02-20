@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
@@ -53,7 +55,10 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TMA/PassengerApplication" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="emulator" />
     <property name="show.migrate.to.gradle.popup" value="false" />

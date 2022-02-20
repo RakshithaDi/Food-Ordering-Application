@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/otp_setup.dart';
@@ -24,8 +25,15 @@ void main() async {
 class FoodOrderingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth.instance.userChanges().listen((User user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
     return MaterialApp(
-      initialRoute: AddUser.id,
+      initialRoute: LoadingScreen.id,
       routes: {
         AddUser.id: (context) => AddUser('rakshihta', 'dfsf', 33),
         LoadingScreen.id: (context) => LoadingScreen(),
