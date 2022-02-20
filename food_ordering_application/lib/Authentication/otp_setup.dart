@@ -177,7 +177,13 @@ class _OtpSetupState extends State<OtpSetup> {
                               side: BorderSide(color: Colors.red)),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, OtpVerify.id);
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => OtpVerify(
+                                  int.parse(_mobilenoController.text)),
+                            ),
+                          );
                           print(_mobilenoController.text);
                         },
                         child: Text('Get OTP'),

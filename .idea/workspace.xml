@@ -10,9 +10,8 @@
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/registeruser.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/registeruser.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

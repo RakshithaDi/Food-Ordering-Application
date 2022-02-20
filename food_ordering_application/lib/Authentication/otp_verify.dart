@@ -6,12 +6,16 @@ import '../constant.dart';
 
 class OtpVerify extends StatefulWidget {
   static String id = 'otp_verify';
+  final int mobileno;
+  OtpVerify(this.mobileno);
 
   @override
-  _OtpVerifyState createState() => _OtpVerifyState();
+  _OtpVerifyState createState() => _OtpVerifyState(this.mobileno);
 }
 
 class _OtpVerifyState extends State<OtpVerify> {
+  int mobileno;
+  _OtpVerifyState(this.mobileno);
   @override
   Widget build(BuildContext context) {
     var text = new RichText(
@@ -28,7 +32,7 @@ class _OtpVerifyState extends State<OtpVerify> {
               text: 'OTP ', style: new TextStyle(fontWeight: FontWeight.bold)),
           new TextSpan(text: 'sent to '),
           new TextSpan(
-              text: '+94-766807668',
+              text: '+94-{$mobileno}',
               style: new TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
