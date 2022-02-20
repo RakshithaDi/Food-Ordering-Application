@@ -76,8 +76,7 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  margin: EdgeInsets.only(top: 20),
-                                  height: 50,
+                                  margin: EdgeInsets.only(top: 10),
                                   child: TextFormField(
                                     controller: _fnameController,
                                     decoration: InputDecoration(
@@ -113,8 +112,7 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  margin: EdgeInsets.only(top: 20),
-                                  height: 50,
+                                  margin: EdgeInsets.only(top: 10),
                                   child: TextFormField(
                                     controller: _lnameController,
                                     decoration: InputDecoration(
@@ -155,7 +153,6 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
                                   child: TextFormField(
                                     controller: _userEmailController,
                                     decoration: InputDecoration(
@@ -197,7 +194,6 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
                                   child: TextFormField(
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [
@@ -243,7 +239,6 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
                                   child: TextFormField(
                                     controller: _userPassworController,
                                     decoration: InputDecoration(
@@ -280,7 +275,6 @@ class _SignupState extends State<Signup> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
                                   child: TextFormField(
                                     controller: _confirmPassworController,
                                     decoration: InputDecoration(

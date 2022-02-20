@@ -107,6 +107,9 @@ class _LoginState extends State<Login> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
+                                  height: 30.0,
+                                ),
+                                SizedBox(
                                   height: 10.0,
                                   width: 350,
                                   child: Divider(
@@ -130,9 +133,8 @@ class _LoginState extends State<Login> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    height: 50,
+                                    margin: EdgeInsets.only(
+                                        left: 10, right: 10, top: 10),
                                     child: TextFormField(
                                       controller: _userEmailController,
                                       decoration: InputDecoration(
@@ -168,7 +170,6 @@ class _LoginState extends State<Login> {
                                   Container(
                                     margin:
                                         EdgeInsets.only(left: 10, right: 10),
-                                    height: 50,
                                     child: TextFormField(
                                       controller: _userPassworController,
                                       decoration: InputDecoration(
