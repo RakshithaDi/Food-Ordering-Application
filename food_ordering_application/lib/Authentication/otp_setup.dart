@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_ordering_application/Authentication/otp_verify.dart';
@@ -20,6 +21,50 @@ class _OtpSetupState extends State<OtpSetup> {
   @override
   Widget build(BuildContext context) {
     _mobilenoController.text = mobileno.toString();
+
+    Future<void> verifyPhoneNumber() async {
+      FirebaseAuth auth = FirebaseAuth.instance;
+
+      await auth.verifyPhoneNumber(
+        phoneNumber: '+94766807668',
+        //1.verificationCompleted
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // ANDROID ONLY!
+          // Sign the user in (or link) with the auto-generated credential
+          await auth.signInWithCredential(credential);
+        },
+        //2.verificationFailed
+        verificationFailed: (FirebaseAuthException e) {
+          if (e.code == 'invalid-phone-number') {
+            print('The provided phone number is not valid.');
+          }
+          // Handle other errors
+        },
+        //3.codeSent
+        codeSent: (String verificationId, int resendToken) async {
+          // Update the UI - wait for the user to enter the SMS code
+          String smsCode = 'xxxx';
+          // Create a PhoneAuthCredential with the code
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: verificationId, smsCode: smsCode);
+          // Sign the user in (or link) with the credential
+          await auth.signInWithCredential(credential);
+          Navigator.push<void>(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) =>
+                  OtpVerify(int.parse(_mobilenoController.text)),
+            ),
+          );
+          print('code sent');
+        },
+        //4.timeout
+        timeout: const Duration(seconds: 60),
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Auto-resolution timed out...
+        },
+      );
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -177,13 +222,8 @@ class _OtpSetupState extends State<OtpSetup> {
                               side: BorderSide(color: Colors.red)),
                         ),
                         onPressed: () {
-                          Navigator.push<void>(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) => OtpVerify(
-                                  int.parse(_mobilenoController.text)),
-                            ),
-                          );
+                          verifyPhoneNumber();
+
                           print(_mobilenoController.text);
                         },
                         child: Text('Get OTP'),
