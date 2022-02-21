@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Authentication/login.dart';
 
 class Account extends StatefulWidget {
   static String id = 'account';
   @override
   _AccountState createState() => _AccountState();
 }
+
+FirebaseAuth auth = FirebaseAuth.instance;
 
 class _AccountState extends State<Account> {
   @override
@@ -256,7 +260,9 @@ class _AccountState extends State<Account> {
                           borderRadius: BorderRadius.circular(12.0),
                           side: BorderSide(color: Colors.red)),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      showAlertDialog(context);
+                    },
                     child: Text('Log Out'),
                   ),
                 ),
@@ -267,4 +273,81 @@ class _AccountState extends State<Account> {
       ),
     );
   }
+}
+
+// showAlertDialog(BuildContext context) {
+//   AlertDialog alert = AlertDialog(
+//     title: Text('Log Out'),
+//     content: Text('Are you sure you want to Logout?'),
+//     actions: [
+//       FlatButton(
+//         textColor: Color(0xFF6200EE),
+//         onPressed: () async {
+//           await auth.signOut();
+//           Navigator.push<void>(
+//             context,
+//             MaterialPageRoute<void>(
+//               builder: (BuildContext context) => Login(),
+//             ),
+//           );
+//         },
+//         child: Text('Yes'),
+//       ),
+//       FlatButton(
+//         textColor: Color(0xFF6200EE),
+//         onPressed: () {
+//           Navigator.pop(context);
+//         },
+//         child: Text('No'),
+//       ),
+//     ],
+//   );
+//   // show the dialog
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return alert;
+//     },
+//   );
+// }
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget yesButton = FlatButton(
+    textColor: Color(0xFF6200EE),
+    child: Text("Yes"),
+    onPressed: () async {
+      await auth.signOut();
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => Login(),
+        ),
+      );
+      Navigator.of(context, rootNavigator: true).pop();
+    },
+  );
+  Widget noButton = FlatButton(
+    textColor: Color(0xFF6200EE),
+    child: Text("No"),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Log Out"),
+    content: Text('Are you sure you want to Logout?'),
+    actions: [
+      yesButton,
+      noButton,
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
