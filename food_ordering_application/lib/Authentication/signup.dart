@@ -20,7 +20,7 @@ class _SignupState extends State<Signup> {
 
   String _password;
   String _confirmPassword;
-  int mobileno;
+  String mobileno;
 
   // Toggles the password show status
   void _toggle() {
@@ -52,14 +52,14 @@ class _SignupState extends State<Signup> {
               email: _userEmailController.text,
               password: _confirmPassworController.text);
       UserEmail = _userEmailController.text;
-      mobileno = int.parse(_mobileNoController.text);
+      mobileno = _mobileNoController.text;
       RegisterUser adduser = RegisterUser(_fnameController.text,
           _lnameController.text, _userEmailController.text, mobileno);
       adduser.addUser();
       Navigator.push<void>(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => OtpSetup(mobileno),
+          builder: (BuildContext context) => OtpSetup(_mobileNoController.text),
         ),
       );
       print('Registered succesfully {$UserEmail} ');

@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/login.dart';
+import 'package:food_ordering_application/loading_screen.dart';
+
+import '../main.dart';
 
 class Account extends StatefulWidget {
   static String id = 'account';
@@ -11,6 +14,20 @@ class Account extends StatefulWidget {
 FirebaseAuth auth = FirebaseAuth.instance;
 
 class _AccountState extends State<Account> {
+  String userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    if (auth.currentUser != null) {
+      userEmail = auth.currentUser.email;
+      print(auth.currentUser.email);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -311,36 +328,46 @@ class _AccountState extends State<Account> {
 //   );
 // }
 
+void logout() async {
+  await FirebaseAuth.instance.signOut();
+  streamController.add('2');
+}
+
 showAlertDialog(BuildContext context) {
-  // set up the button
-  Widget yesButton = FlatButton(
-    textColor: Color(0xFF6200EE),
-    child: Text("Yes"),
-    onPressed: () async {
-      await auth.signOut();
-      Navigator.push<void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => Login(),
-        ),
-      );
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text(
+      "YES",
+      style: TextStyle(
+        fontSize: 16.0,
+        color: Colors.red,
+      ),
+    ),
+    onPressed: () {
+      logout();
       Navigator.of(context, rootNavigator: true).pop();
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoadingScreen()));
     },
   );
-  Widget noButton = FlatButton(
-    textColor: Color(0xFF6200EE),
-    child: Text("No"),
+  Widget continueButton = TextButton(
+    child: Text(
+      "NO",
+      style: TextStyle(
+        fontSize: 16.0,
+        color: Colors.black,
+      ),
+    ),
     onPressed: () {
       Navigator.of(context, rootNavigator: true).pop();
     },
   );
-  // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text("Log Out"),
-    content: Text('Are you sure you want to Logout?'),
+    content: Text("Are you sure you want to log out?"),
     actions: [
-      yesButton,
-      noButton,
+      cancelButton,
+      continueButton,
     ],
   );
   // show the dialog

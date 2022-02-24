@@ -14,7 +14,7 @@ enum MobileVerificationState {
 
 class OtpSetup extends StatefulWidget {
   static String id = 'otp_setup';
-  final int mobileno;
+  final String mobileno;
   OtpSetup(this.mobileno);
   @override
   _OtpSetupState createState() => _OtpSetupState(this.mobileno);
@@ -23,7 +23,7 @@ class OtpSetup extends StatefulWidget {
 class _OtpSetupState extends State<OtpSetup> {
   bool showLoading = false;
   String verifiatoinId;
-  int mobileno;
+  String mobileno;
   String mob;
   String countryMobNo;
   final _formKey = GlobalKey<FormState>();
@@ -37,7 +37,7 @@ class _OtpSetupState extends State<OtpSetup> {
 
   Future<void> verifyPhoneNumber() async {
     await auth.verifyPhoneNumber(
-      phoneNumber: countryMobNo,
+      phoneNumber: "+94${mobileno}",
       //1.verificationCompleted
       verificationCompleted: (PhoneAuthCredential credential) async {
         setState(() {
@@ -50,6 +50,8 @@ class _OtpSetupState extends State<OtpSetup> {
           showLoading = false;
         });
         print('User Sign in Successfully!');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Home()));
 
         // signInWithPhoneAuthCredential(phoneAuthCredential);
       },
@@ -118,7 +120,7 @@ class _OtpSetupState extends State<OtpSetup> {
   }
 
   getMobileFormWidget(context) {
-    _mobilenoController.text = mobileno.toString();
+    _mobilenoController.text = mobileno;
 
     return SafeArea(
       child: ListView(

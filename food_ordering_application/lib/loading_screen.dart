@@ -46,7 +46,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
                           // ),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, Login.id);
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => Login(),
+                            ),
+                          );
                         },
                         child: Image(
                           alignment: Alignment.bottomCenter,

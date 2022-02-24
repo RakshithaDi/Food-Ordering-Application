@@ -8,7 +8,7 @@ class RegisterUser {
   final String fname;
   final String lname;
   final String email;
-  final int mobileno;
+  final String mobileno;
 
   RegisterUser(this.fname, this.lname, this.email, this.mobileno);
 
@@ -27,10 +27,5 @@ class RegisterUser {
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
-  }
-
-  int getPhoneno(mobileno) {
-    int mobno = this.mobileno;
-    return mobno;
   }
 }
