@@ -6,6 +6,7 @@ import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/registeruser.dart';
 
 import '../Home/home.dart';
+import '../main.dart';
 
 enum MobileVerificationState {
   SHOW_MOBILE_FORM_STATE,
@@ -20,7 +21,10 @@ class OtpSetup extends StatefulWidget {
   _OtpSetupState createState() => _OtpSetupState(this.mobileno);
 }
 
+FirebaseAuth auth = FirebaseAuth.instance;
+
 class _OtpSetupState extends State<OtpSetup> {
+  String email;
   bool showLoading = false;
   String verifiatoinId;
   String mobileno;
@@ -33,7 +37,17 @@ class _OtpSetupState extends State<OtpSetup> {
   TextEditingController _mobilenoController = new TextEditingController();
   TextEditingController _otpController = new TextEditingController();
 
-  FirebaseAuth auth = FirebaseAuth.instance;
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    if (auth.currentUser != null) {
+      email = auth.currentUser.email;
+      print(auth.currentUser.email);
+    }
+  }
 
   Future<void> verifyPhoneNumber() async {
     await auth.verifyPhoneNumber(
@@ -49,7 +63,7 @@ class _OtpSetupState extends State<OtpSetup> {
         setState(() {
           showLoading = false;
         });
-        print('User Sign in Successfully!');
+        print('OTP Verified Automatically!');
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Home()));
 
@@ -88,7 +102,7 @@ class _OtpSetupState extends State<OtpSetup> {
       //4.timeout
       timeout: const Duration(seconds: 60),
       codeAutoRetrievalTimeout: (String verificationId) {
-        // Auto-resolution timed out...
+        showAlertDialog('Time Out Waiting for SMS. Try Again', context);
       },
     );
   }
@@ -99,11 +113,11 @@ class _OtpSetupState extends State<OtpSetup> {
       showLoading = true;
     });
     try {
-      final authCredential =
-          await auth.signInWithCredential(phoneAuthCredential);
+      final authCredential = await auth.signInWithEmailLink(email: email);
       setState(() {
         showLoading = false;
       });
+      print(email);
       if (authCredential?.user != null) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Home()));
@@ -282,6 +296,7 @@ class _OtpSetupState extends State<OtpSetup> {
   }
 
   getOtpFormWidget(context) {
+    _otpController.text = verifiatoinId;
     var text = new RichText(
       text: new TextSpan(
         // Note: Styles for TextSpans must be explicitly defined.
@@ -375,6 +390,9 @@ class _OtpSetupState extends State<OtpSetup> {
                         }
                         return null;
                       },
+                      onSaved: (value) {
+                        value = verifiatoinId;
+                      },
                     ),
                   ),
                 ),
@@ -401,14 +419,10 @@ class _OtpSetupState extends State<OtpSetup> {
                         ),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          verifyPhoneNumber();
-                          showAlertDialog('OTP Sent Back', context);
-                          print('verify');
-                          print(_mobilenoController.text);
-                        } else {
-                          return null;
-                        }
+                        verifyPhoneNumber();
+                        showAlertDialog('OTP Sent Back', context);
+                        print('OTP Sent Back');
+                        print(_mobilenoController.text);
                       },
                     ),
                   ],
@@ -494,6 +508,11 @@ class _OtpSetupState extends State<OtpSetup> {
       ),
     );
   }
+}
+
+void logout() async {
+  await FirebaseAuth.instance.signOut();
+  streamController.add('2');
 }
 
 showAlertDialog(String message, BuildContext context) {
