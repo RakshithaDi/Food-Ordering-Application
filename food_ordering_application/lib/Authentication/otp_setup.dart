@@ -390,9 +390,6 @@ class _OtpSetupState extends State<OtpSetup> {
                         }
                         return null;
                       },
-                      onSaved: (value) {
-                        value = verifiatoinId;
-                      },
                     ),
                   ),
                 ),
