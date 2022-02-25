@@ -113,7 +113,8 @@ class _OtpSetupState extends State<OtpSetup> {
       showLoading = true;
     });
     try {
-      final authCredential = await auth.signInWithEmailLink(email: email);
+      final authCredential =
+          await auth.signInWithCredential(phoneAuthCredential);
       setState(() {
         showLoading = false;
       });
@@ -296,7 +297,6 @@ class _OtpSetupState extends State<OtpSetup> {
   }
 
   getOtpFormWidget(context) {
-    _otpController.text = verifiatoinId;
     var text = new RichText(
       text: new TextSpan(
         // Note: Styles for TextSpans must be explicitly defined.
