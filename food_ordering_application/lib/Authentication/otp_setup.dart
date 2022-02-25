@@ -319,10 +319,8 @@ class _OtpSetupState extends State<OtpSetup> {
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 20.0,
             width: double.infinity,
             child: Divider(
               thickness: 2,
@@ -354,7 +352,10 @@ class _OtpSetupState extends State<OtpSetup> {
                 Form(
                   key: _formKey,
                   child: Container(
+                    margin: EdgeInsets.only(left: 100, right: 100),
                     child: TextFormField(
+                      maxLength: 6,
+                      textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       controller: _otpController,
@@ -366,7 +367,8 @@ class _OtpSetupState extends State<OtpSetup> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        labelText: 'OTP Number',
+
+                        hintText: 'Enter OTP',
                         labelStyle: TextStyle(
                           fontSize: 15,
                         ),

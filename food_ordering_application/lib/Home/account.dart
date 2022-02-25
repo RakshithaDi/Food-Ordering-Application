@@ -76,7 +76,7 @@ class _AccountState extends State<Account> {
                                   Icons.email,
                                   size: 20,
                                 ),
-                                Text(' rakshithadilshan1@gmail.com'),
+                                Text(' rakshithad@gmail.com'),
                               ],
                             ),
                             SizedBox(

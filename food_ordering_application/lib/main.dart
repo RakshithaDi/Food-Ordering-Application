@@ -22,10 +22,12 @@ String appState = '1';
 StreamController<String> streamController = StreamController<String>();
 
 void main() async {
+  //initialze the application
   WidgetsFlutterBinding.ensureInitialized();
+  //firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  ); //run the application
   runApp(FoodOrderingApp());
 }
 
