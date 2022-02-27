@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/account.dart';
 import 'package:food_ordering_application/Home/cart.dart';
+import 'package:food_ordering_application/Home/complaint.dart';
 import 'package:food_ordering_application/Home/menu.dart';
 import 'package:food_ordering_application/Home/search.dart';
 
@@ -37,7 +38,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: <Widget>[
             Menu(),
             Cart(),
-            Search(),
+            Complaints(),
             Account(),
           ],
           controller: controller,
@@ -64,7 +65,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
               Tab(
                 icon: Icon(
-                  Icons.search,
+                  Icons.report,
                   color: Colors.white,
                 ),
               ),

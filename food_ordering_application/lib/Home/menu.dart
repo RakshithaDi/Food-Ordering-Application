@@ -3,6 +3,18 @@ import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class MyWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return IconButton(
+        // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
+        icon: FaIcon(FontAwesomeIcons.gamepad),
+        onPressed: () {
+          print("Pressed");
+        });
+  }
+}
 
 class Menu extends StatefulWidget {
   @override
@@ -30,67 +42,111 @@ class _MenuState extends State<Menu> {
     print(MediaQuery.of(context).size.height.toString());
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 68,
+          elevation: 0,
+          backgroundColor: kredbackgroundcolor,
+          title: Text('Hello, Rakshitha!'),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.white,
+                size: 35,
+              ),
+              onPressed: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20, right: 5),
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(4),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
+                child: Text(
+                  '5',
+                  style: TextStyle(fontSize: 12, color: Colors.black),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 34,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
         backgroundColor: kbackgroundcolor,
-        body: Column(
+        body: ListView(
           children: [
             Container(
-              height: 200,
               color: kredbackgroundcolor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Container(
-                          height: 60.0,
-                          //color: Colors.grey,
-                          margin: EdgeInsets.only(top: 50),
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 20),
-                            child: Text(
-                              'Hello, Rakshithaaaa!',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
+                      Container(
+                        //  margin: EdgeInsets.only(top: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
                           ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          // color: Colors.blue,
-                          margin: EdgeInsets.only(top: 50),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image(
-                              image: AssetImage('images/menulogo.png'),
-                              height: 50.0,
-                              width: 200.0,
+                          child: Text(
+                            'Let\'s select the best taste for you',
+                            style: TextStyle(
+                              color: Colors.grey[300],
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                      ),
-                      child: Text(
-                        'Let\'s select the best taste for you',
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                          ),
+                          child: Text(
+                            'Vote for tomorrow',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Stack(
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(
+                                  Icons.double_arrow,
+                                  color: Colors.white,
+                                  size: 34,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -98,7 +154,7 @@ class _MenuState extends State<Menu> {
             Column(
               children: [
                 Container(
-                  height: 180,
+                  height: 160,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: PageView.builder(
@@ -182,27 +238,102 @@ class _MenuState extends State<Menu> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 20, top: 20),
               alignment: Alignment.topLeft,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Card(
-                      color: Colors.grey,
-                      child: TextButton(
-                        child: Text('Meals'),
-                        onPressed: () {},
-                      ),
-                    ),
-                    SizedBox(
-                      width: 89,
-                    ),
-                  ],
+              margin: EdgeInsets.only(left: 20, top: 15),
+              child: Text(
+                'Rcommended',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Card(
+                      elevation: 5,
+                      child: new InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              margin:
+                                  EdgeInsets.only(top: 5, right: 5, left: 5),
+                              height: 160,
+                              width: double.infinity,
+                              child: Image.asset(
+                                'images/food11.jpg',
+                                alignment: Alignment.topLeft,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            const ListTile(
+                              // leading: Icon(
+                              //   Icons.star,
+                              //   color: Colors.yellow,
+                              // ),
+                              title: Text(
+                                'Chicken Rice & Curry',
+                              ),
+
+                              subtitle: Text(
+                                'Rs 160',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: Card(
+                      elevation: 5,
+                      child: new InkWell(
+                        onTap: () {
+                          print("tapped");
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              margin:
+                                  EdgeInsets.only(top: 5, right: 5, left: 5),
+                              height: 160,
+                              width: double.infinity,
+                              child: Image.asset(
+                                'images/food11.jpg',
+                                alignment: Alignment.topLeft,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            const ListTile(
+                              // leading: Icon(
+                              //   Icons.star,
+                              //   color: Colors.yellow,
+                              // ),
+                              title: Text(
+                                'Chicken Rice & Curry',
+                              ),
+
+                              subtitle: Text(
+                                'Rs 160',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
