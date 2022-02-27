@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -188,49 +189,144 @@ class _MenuState extends State<Menu> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 10),
                   child: Row(
                     children: [
                       Container(
-                        color: Colors.grey,
-                        height: 100,
-                        width: 100,
-                        child: TextButton(
-                          child: Text('Meals'),
-                          onPressed: () {},
+                        child: Card(
+                          elevation: 5,
+                          child: new InkWell(
+                            onTap: () {
+                              print("tapped");
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 5, right: 5, left: 5),
+                                  width: 100,
+                                  height: 80,
+                                  child: Image.asset(
+                                    'images/ricencurry1.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Rice & Curry',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: 20,
+                      Container(
+                        child: Card(
+                          elevation: 5,
+                          child: new InkWell(
+                            onTap: () {
+                              print("tapped");
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 5, right: 5, left: 5),
+                                  width: 100,
+                                  height: 80,
+                                  child: Image.asset(
+                                    'images/burger1.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Burgers',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       Container(
-                        color: Colors.grey,
-                        height: 100,
-                        width: 100,
-                      ),
-                      SizedBox(
-                        width: 20,
+                        child: Card(
+                          elevation: 5,
+                          child: new InkWell(
+                            onTap: () {
+                              print("tapped");
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 5, right: 5, left: 5),
+                                  width: 100,
+                                  height: 80,
+                                  child: Image.asset(
+                                    'images/drink1.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Drinks',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       Container(
-                        color: Colors.grey,
-                        height: 100,
-                        width: 100,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        color: Colors.grey,
-                        height: 100,
-                        width: 100,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        color: Colors.grey,
-                        height: 100,
-                        width: 100,
+                        child: Card(
+                          elevation: 5,
+                          child: new InkWell(
+                            onTap: () {
+                              print("tapped");
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 5, right: 5, left: 5),
+                                  width: 100,
+                                  height: 80,
+                                  child: Image.asset(
+                                    'images/drink1.jpg',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    'Drinks',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

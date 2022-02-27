@@ -57,10 +57,31 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   color: Colors.white,
                 ),
               ),
-              Tab(
-                icon: Icon(
-                  Icons.shopping_cart_rounded,
-                  color: Colors.white,
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                height: 40,
+                child: Row(
+                  children: [
+                    Tab(
+                      icon: Icon(
+                        Icons.shopping_cart_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20, right: 5),
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.yellow),
+                        child: Text(
+                          '5',
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Tab(

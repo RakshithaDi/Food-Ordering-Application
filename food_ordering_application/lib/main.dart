@@ -2,21 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Authentication/otp_setup.dart';
-import 'package:food_ordering_application/Authentication/otp_verify.dart';
-import 'package:food_ordering_application/registeruser.dart';
-import 'package:get/get.dart';
-// Import the generated file
 import 'firebase_options.dart';
-
-import 'Authentication/login.dart';
-import 'Authentication/signup.dart';
-import 'Home/account.dart';
 import 'Home/home.dart';
 import 'loading_screen.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:io';
 
 String appState = '1';
 StreamController<String> streamController = StreamController<String>();
@@ -76,7 +68,6 @@ class _ViewControllerState extends State<ViewController> {
   @override
   void initState() {
     super.initState();
-
     widget.stream.listen((appStateValue) {
       setAppState(appStateValue);
     });
@@ -91,6 +82,7 @@ class _ViewControllerState extends State<ViewController> {
         setAppState('0');
       }
     });
+    checkNetConnection();
   }
 
   @override
@@ -116,9 +108,47 @@ class _ViewControllerState extends State<ViewController> {
       return LoadingScreen();
     }
     print(appState);
+
     // else {
     //   print(appState);
     //   return RideView(appState);
     // }
   }
+
+  Future<void> checkNetConnection() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('internet connected');
+      }
+    } on SocketException catch (_) {
+      print('no internet connection');
+      showAlertDialog('Internet Connection Required', context);
+    }
+  }
+}
+
+showAlertDialog(String message, BuildContext context) {
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Alert Box"),
+    content: Text(message),
+    actions: [
+      okButton,
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

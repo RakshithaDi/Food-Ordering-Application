@@ -21,9 +21,10 @@ class RegisterUser {
     return users
         .doc(email)
         .set({
-          'name': '$fname $lname', // John Doe
-          'email': email, // Stokes and Sons
-          'mobileno': mobileno // 42
+          'fname': fname,
+          'lname': lname,
+          'email': email,
+          'mobileno': mobileno,
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));

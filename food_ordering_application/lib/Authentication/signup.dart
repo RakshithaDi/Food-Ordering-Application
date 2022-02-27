@@ -224,7 +224,7 @@ class _SignupState extends State<Signup> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   child: TextFormField(
-                                    maxLength: 12,
+                                    maxLength: 10,
                                     keyboardType: TextInputType.number,
                                     inputFormatters: [
                                       FilteringTextInputFormatter.digitsOnly

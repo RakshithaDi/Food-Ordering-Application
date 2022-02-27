@@ -33,10 +33,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.only(
-                        top: 100, bottom: 30, right: 20, left: 20),
+                        top: 150, bottom: 30, right: 30, left: 30),
                     width: 250,
                     height: 10,
                     child: Card(
+                      elevation: 20,
                       child: TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: Color(0XFFD8352C),
