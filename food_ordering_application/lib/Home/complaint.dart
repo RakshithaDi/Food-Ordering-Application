@@ -31,7 +31,7 @@ class _ComplaintsState extends State<Complaints> {
   TextEditingController ComplaintDescription = new TextEditingController();
 
   String time;
-  String complaintType;
+  String complaintType = 'Food';
 
   @override
   void initState() {
@@ -81,7 +81,7 @@ class _ComplaintsState extends State<Complaints> {
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: DropdownButton(
-                        value: complaintType = 'Food',
+                        value: complaintType,
                         //hint: Text('Food'),
                         icon: const Icon(Icons.arrow_drop_down_outlined),
                         elevation: 16,
