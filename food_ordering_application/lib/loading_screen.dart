@@ -37,16 +37,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     width: 250,
                     height: 10,
                     child: Card(
-                      elevation: 20,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color(0XFFD8352C),
-                          // shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.circular(12),
-                          //     side: BorderSide(color: Colors.white)
-                          // ),
-                        ),
-                        onPressed: () {
+                      child: InkWell(
+                        onTap: () {
                           Navigator.push<void>(
                             context,
                             MaterialPageRoute<void>(
