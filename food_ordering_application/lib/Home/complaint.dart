@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:food_ordering_application/constant.dart';
 
 import 'home.dart';
-
-String busowner;
 
 class Complaints extends StatefulWidget {
   @override
