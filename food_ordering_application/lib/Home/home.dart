@@ -37,7 +37,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             Menu(),
-            Cart(),
+            CartPage(),
             Complaints(),
             Account(),
           ],

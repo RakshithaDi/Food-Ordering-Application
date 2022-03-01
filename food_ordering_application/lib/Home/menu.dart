@@ -6,6 +6,8 @@ import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'notifications.dart';
+
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
@@ -55,7 +57,14 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
                 size: 35,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => NotificationPage(),
+                  ),
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 20, right: 5),

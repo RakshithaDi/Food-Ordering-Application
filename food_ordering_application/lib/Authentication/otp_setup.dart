@@ -402,7 +402,7 @@ class _OtpSetupState extends State<OtpSetup> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Don\'t receive the OTP? ',
+                      'Didn\'t receive the OTP? ',
                       style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
