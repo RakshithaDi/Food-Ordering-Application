@@ -177,7 +177,7 @@ class _MenuState extends State<Menu> {
             Column(
               children: [
                 Container(
-                  height: 160,
+                  height: 150,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: PageView.builder(
@@ -199,7 +199,7 @@ class _MenuState extends State<Menu> {
             ),
             Container(
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 20),
+              margin: EdgeInsets.only(left: 10, bottom: 5),
               child: Text(
                 'Categories',
                 style: TextStyle(
@@ -280,7 +280,7 @@ class _MenuState extends State<Menu> {
             ),
             Container(
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 20, top: 15, bottom: 5),
+              margin: EdgeInsets.only(left: 10, top: 10, bottom: 5),
               child: Text(
                 'Rcommended',
                 style: TextStyle(
