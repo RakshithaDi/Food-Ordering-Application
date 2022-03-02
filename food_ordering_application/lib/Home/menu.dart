@@ -5,8 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -38,7 +39,19 @@ class _MenuState extends State<Menu> {
         print(currentPageValue.toString());
       });
     });
+    // downloadURLExample();
   }
+
+  // Future<String> downloadURLExample() async {
+  //   String downloadURL = await firebase_storage.FirebaseStorage.instance
+  //       .ref('items/thosai.jpg')
+  //       .getDownloadURL();
+  //   print(downloadURL);
+  //
+  //   return downloadURL;
+  //   // Within your widgets:
+  //   // Image.network(downloadURL);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -194,157 +207,80 @@ class _MenuState extends State<Menu> {
                 ),
               ),
             ),
-            Container(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        child: Card(
-                          elevation: 5,
-                          child: new InkWell(
-                            onTap: () {
-                              print("tapped");
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: 5, right: 5, left: 5),
-                                  width: 100,
-                                  height: 80,
-                                  child: Image.asset(
-                                    'images/ricencurry1.jpg',
-                                    fit: BoxFit.fill,
+            StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("categories")
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text("Something went wrong");
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting ||
+                    !snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+
+                if (snapshot.hasData) {
+                  print('has data');
+                  return Container(
+                    height: 120,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.docs.length,
+
+                      // ignore: missing_return
+                      itemBuilder: (BuildContext context, index) {
+                        QueryDocumentSnapshot category =
+                            snapshot.data.docs[index];
+                        return Container(
+                          child: Card(
+                            elevation: 5,
+                            child: new InkWell(
+                              onTap: () {
+                                print("tapped");
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: 5, right: 5, left: 5),
+                                    width: 100,
+                                    height: 80,
+                                    child: Image.network(
+                                      category['imgUrl'],
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    'Rice & Curry',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 5),
+                                    child: Text(
+                                      category['name'],
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        child: Card(
-                          elevation: 5,
-                          child: new InkWell(
-                            onTap: () {
-                              print("tapped");
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: 5, right: 5, left: 5),
-                                  width: 100,
-                                  height: 80,
-                                  child: Image.asset(
-                                    'images/burger1.jpg',
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    'Burgers',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Card(
-                          elevation: 5,
-                          child: new InkWell(
-                            onTap: () {
-                              print("tapped");
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: 5, right: 5, left: 5),
-                                  width: 100,
-                                  height: 80,
-                                  child: Image.asset(
-                                    'images/drink1.jpg',
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    'Drinks',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Card(
-                          elevation: 5,
-                          child: new InkWell(
-                            onTap: () {
-                              print("tapped");
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: 5, right: 5, left: 5),
-                                  width: 100,
-                                  height: 80,
-                                  child: Image.asset(
-                                    'images/drink1.jpg',
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    'Drinks',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                        );
+                      },
+                    ),
+                  );
+                }
+
+                return Container(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
             Container(
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 20, top: 15),
+              margin: EdgeInsets.only(left: 20, top: 15, bottom: 5),
               child: Text(
                 'Rcommended',
                 style: TextStyle(
@@ -352,93 +288,95 @@ class _MenuState extends State<Menu> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    child: Card(
-                      elevation: 5,
-                      child: new InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              margin:
-                                  EdgeInsets.only(top: 5, right: 5, left: 5),
-                              height: 160,
-                              width: double.infinity,
-                              child: Image.asset(
-                                'images/food11.jpg',
-                                alignment: Alignment.topLeft,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const ListTile(
-                              // leading: Icon(
-                              //   Icons.star,
-                              //   color: Colors.yellow,
-                              // ),
-                              title: Text(
-                                'Chicken Rice & Curry',
-                              ),
+            FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('items')
+                  .where('recommend', isEqualTo: 'yes')
+                  .get(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text("Something went wrong");
+                }
 
-                              subtitle: Text(
-                                'Rs 160',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                if (snapshot.connectionState == ConnectionState.waiting ||
+                    !snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+
+                if (snapshot.hasData) {
+                  print('has data in items');
+                  return Container(
+                    height: 200,
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      children: List.generate(
+                        snapshot.data.docs.length,
+                        (index) {
+                          QueryDocumentSnapshot recommend =
+                              snapshot.data.docs[index];
+                          String name = recommend['name'];
+                          String price = recommend['price'];
+                          return Container(
+                            margin: EdgeInsets.only(
+                              bottom: 0,
+                            ),
+                            child: Card(
+                              elevation: 5,
+                              child: new InkWell(
+                                onTap: () {
+                                  print("tapped");
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 5, right: 5, left: 5),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 120,
+                                            width: double.infinity,
+                                            child: Image.network(
+                                              recommend['imgUrl'],
+                                              alignment: Alignment.topLeft,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 7),
+                                            child: Text(
+                                              recommend['name'],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8),
+                                            child: Text(
+                                              'Rs. ${recommend['price']}',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Card(
-                      elevation: 5,
-                      child: new InkWell(
-                        onTap: () {
-                          print("tapped");
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              margin:
-                                  EdgeInsets.only(top: 5, right: 5, left: 5),
-                              height: 160,
-                              width: double.infinity,
-                              child: Image.asset(
-                                'images/food11.jpg',
-                                alignment: Alignment.topLeft,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const ListTile(
-                              // leading: Icon(
-                              //   Icons.star,
-                              //   color: Colors.yellow,
-                              // ),
-                              title: Text(
-                                'Chicken Rice & Curry',
-                              ),
+                  );
+                }
 
-                              subtitle: Text(
-                                'Rs 160',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                return Container(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ],
         ),
