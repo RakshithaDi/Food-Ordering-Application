@@ -6,6 +6,7 @@ import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'items.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -30,6 +31,7 @@ class _MenuState extends State<Menu> {
   var currentPageValue = 0.0;
   double scaleFactor = 0.8;
   double height = 160.0;
+  int categoryId;
   @override
   void initState() {
     super.initState();
@@ -39,12 +41,12 @@ class _MenuState extends State<Menu> {
         print(currentPageValue.toString());
       });
     });
-    // downloadURLExample();
+    //  downloadURLExample();
   }
 
   // Future<String> downloadURLExample() async {
   //   String downloadURL = await firebase_storage.FirebaseStorage.instance
-  //       .ref('items/thosai.jpg')
+  //       .ref('items/rolls.jpg')
   //       .getDownloadURL();
   //   print(downloadURL);
   //
@@ -239,7 +241,15 @@ class _MenuState extends State<Menu> {
                             elevation: 5,
                             child: new InkWell(
                               onTap: () {
-                                print("tapped");
+                                categoryId = category['id'];
+                                print(categoryId);
+                                Navigator.push<void>(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        Items(categoryId),
+                                  ),
+                                );
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -314,8 +324,6 @@ class _MenuState extends State<Menu> {
                         (index) {
                           QueryDocumentSnapshot recommend =
                               snapshot.data.docs[index];
-                          String name = recommend['name'];
-                          String price = recommend['price'];
                           return Container(
                             margin: EdgeInsets.only(
                               bottom: 0,
