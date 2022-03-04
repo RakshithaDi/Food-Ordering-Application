@@ -4,11 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'cart.dart';
 import 'firebase_options.dart';
 import 'Home/home.dart';
 import 'loading_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:io';
+import 'package:provider/provider.dart';
 
 String appState = '1';
 StreamController<String> streamController = StreamController<String>();
@@ -20,7 +23,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ); //run the application
-  runApp(FoodOrderingApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => Cart(),
+    child: FoodOrderingApp(),
+  ));
 }
 
 class FoodOrderingApp extends StatelessWidget {
@@ -33,7 +39,7 @@ class FoodOrderingApp extends StatelessWidget {
     //     print('User is signed in!');
     //   }
     // });
-    return MaterialApp(
+    return GetMaterialApp(
       // initialRoute: LoadingScreen.id,
       // routes: {
       //   LoadingScreen.id: (context) => LoadingScreen(),

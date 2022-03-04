@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_ordering_application/Home/cartpage.dart';
+import '../cart.dart';
 import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'items.dart';
+import 'itemspage.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -81,6 +80,21 @@ class _MenuState extends State<Menu> {
                 );
               },
             ),
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart_rounded,
+                color: Colors.white,
+                size: 35,
+              ),
+              onPressed: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => CartPage(),
+                  ),
+                );
+              },
+            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 20, right: 5),
               child: Container(
@@ -89,7 +103,7 @@ class _MenuState extends State<Menu> {
                 decoration:
                     BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
                 child: Text(
-                  '5',
+                  Cart.count.toString(),
                   style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
               ),
