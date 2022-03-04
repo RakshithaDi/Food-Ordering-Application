@@ -106,11 +106,13 @@ class _CartPageState extends State<CartPage> {
   }
 
   createCartList() {
+    int itemcount = 0;
     return ListView.builder(
       shrinkWrap: true,
       primary: false,
       itemCount: Cart.basketItems.length,
       itemBuilder: (context, index) {
+        print(index);
         return Stack(
           children: <Widget>[
             Container(
@@ -174,7 +176,15 @@ class _CartPageState extends State<CartPage> {
                                             size: 24,
                                             color: Colors.red,
                                           ),
-                                          onTap: () {},
+                                          onTap: () {
+                                            setState(() {
+                                              Cart.updateProduct(
+                                                  Cart.basketItems[index],
+                                                  Cart.basketItems[index]
+                                                          .quantity -
+                                                      1);
+                                            });
+                                          },
                                         ),
                                       ),
                                       Container(
@@ -182,7 +192,8 @@ class _CartPageState extends State<CartPage> {
                                         padding: const EdgeInsets.only(
                                             bottom: 5, right: 10, left: 10),
                                         child: Text(
-                                          "1",
+                                          Cart.basketItems[index].quantity
+                                              .toString(),
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -195,7 +206,15 @@ class _CartPageState extends State<CartPage> {
                                             size: 24,
                                             color: Colors.blueGrey,
                                           ),
-                                          onTap: () {},
+                                          onTap: () {
+                                            setState(() {
+                                              Cart.updateProduct(
+                                                  Cart.basketItems[index],
+                                                  Cart.basketItems[index]
+                                                          .quantity +
+                                                      1);
+                                            });
+                                          },
                                         ),
                                       ),
                                     ],
@@ -244,5 +263,13 @@ class _CartPageState extends State<CartPage> {
         );
       },
     );
+  }
+}
+
+class ItemView extends State<CartPage> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }

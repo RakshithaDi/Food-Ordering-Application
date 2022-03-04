@@ -99,7 +99,11 @@ class _ItemsState extends State<Items> {
 
                           final List<Item> items = [
                             for (var i = 0; i < snapshot.data.docs.length; i++)
-                              Item(name: name, price: price, imgUrl: imgUrl),
+                              Item(
+                                  name: name,
+                                  price: price,
+                                  imgUrl: imgUrl,
+                                  quantity: quantity),
                           ];
 
                           return Stack(

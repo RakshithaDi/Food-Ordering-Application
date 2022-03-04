@@ -9,13 +9,30 @@ class Cart extends ChangeNotifier {
   void add(Item item) {
     _items.add(item);
     _totalPrice += item.price;
+    print('fdsfsf');
     notifyListeners();
   }
 
   static void remove(Item item) {
     _totalPrice -= item.price;
     _items.remove(item);
-    // notifyListeners();
+    //notifyListeners();
+  }
+
+  static void calculateTotal() {
+    _totalPrice = 0;
+    _items.forEach((f) {
+      _totalPrice += f.price * f.quantity;
+    });
+  }
+
+  static void updateProduct(item, quantity) {
+    int index = _items.indexWhere((i) => i.name == item.name);
+    _items[index].quantity = quantity;
+    if (_items[index].quantity == 0) remove(item);
+
+    calculateTotal();
+    //notifyListeners();
   }
 
   static int get count {

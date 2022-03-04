@@ -4,7 +4,8 @@ import 'package:food_ordering_application/Home/cartpage.dart';
 import 'package:food_ordering_application/Home/complaint.dart';
 import 'package:food_ordering_application/Home/menu.dart';
 import 'package:food_ordering_application/Home/search.dart';
-
+import 'package:provider/provider.dart';
+import '../cart.dart';
 import '../constant.dart';
 
 class Home extends StatefulWidget {
@@ -30,23 +31,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Consumer<Cart>(builder: (context, cart, child) {
+      return Scaffold(
         backgroundColor: kbackgroundcolor,
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             Menu(),
-            CartPage(),
+            Search(),
             Complaints(),
             Account(),
           ],
           controller: controller,
         ),
-        // Center(
-        //   child: _widgetOptions.elementAt(_selectedIndex),
-        // ),
-
         bottomNavigationBar: Material(
           color: kredbackgroundcolor,
           child: TabBar(
@@ -64,23 +61,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: [
                     Tab(
                       icon: Icon(
-                        Icons.shopping_cart_rounded,
+                        Icons.search,
                         color: Colors.white,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20, right: 5),
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.yellow),
-                        child: Text(
-                          '5',
-                          style: TextStyle(fontSize: 12, color: Colors.black),
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 20, right: 5),
+                    //   child: Container(
+                    //     alignment: Alignment.center,
+                    //     padding: EdgeInsets.all(4),
+                    //     decoration: BoxDecoration(
+                    //         shape: BoxShape.circle, color: Colors.yellow),
+                    //     child: Text(
+                    //       Cart.count.toString(),
+                    //       style: TextStyle(fontSize: 12, color: Colors.black),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -100,7 +97,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             controller: controller,
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
