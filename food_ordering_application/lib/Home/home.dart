@@ -38,7 +38,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             Menu(),
-            Search(),
+            CartPage(),
             Complaints(),
             Account(),
           ],
@@ -61,23 +61,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: [
                     Tab(
                       icon: Icon(
-                        Icons.search,
+                        Icons.shopping_cart_rounded,
                         color: Colors.white,
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(bottom: 20, right: 5),
-                    //   child: Container(
-                    //     alignment: Alignment.center,
-                    //     padding: EdgeInsets.all(4),
-                    //     decoration: BoxDecoration(
-                    //         shape: BoxShape.circle, color: Colors.yellow),
-                    //     child: Text(
-                    //       Cart.count.toString(),
-                    //       style: TextStyle(fontSize: 12, color: Colors.black),
-                    //     ),
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20, right: 5),
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.yellow),
+                        child: Text(
+                          Cart.count.toString(),
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

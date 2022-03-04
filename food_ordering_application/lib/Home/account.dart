@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/login.dart';
+import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
 import '../main.dart';
@@ -45,12 +46,10 @@ class _AccountState extends State<Account> {
                   child: Row(
                     children: [
                       Container(
-                        child: CircleAvatar(
-                          radius: 70.0,
-                          child: Image(
-                            image: AssetImage('images/foodx.png'),
-                            width: 40,
-                          ),
+                        child: Icon(
+                          Icons.account_circle,
+                          size: 110,
+                          color: kredbackgroundcolor,
                         ),
                       ),
                       Container(
@@ -291,42 +290,6 @@ class _AccountState extends State<Account> {
     );
   }
 }
-
-// showAlertDialog(BuildContext context) {
-//   AlertDialog alert = AlertDialog(
-//     title: Text('Log Out'),
-//     content: Text('Are you sure you want to Logout?'),
-//     actions: [
-//       FlatButton(
-//         textColor: Color(0xFF6200EE),
-//         onPressed: () async {
-//           await auth.signOut();
-//           Navigator.push<void>(
-//             context,
-//             MaterialPageRoute<void>(
-//               builder: (BuildContext context) => Login(),
-//             ),
-//           );
-//         },
-//         child: Text('Yes'),
-//       ),
-//       FlatButton(
-//         textColor: Color(0xFF6200EE),
-//         onPressed: () {
-//           Navigator.pop(context);
-//         },
-//         child: Text('No'),
-//       ),
-//     ],
-//   );
-//   // show the dialog
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return alert;
-//     },
-//   );
-// }
 
 void logout() async {
   await FirebaseAuth.instance.signOut();

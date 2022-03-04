@@ -31,36 +31,6 @@ class _ItemsState extends State<Items> {
           centerTitle: true,
           title: Text('Items'),
           backgroundColor: kredbackgroundcolor,
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart_rounded,
-                color: Colors.white,
-                size: 35,
-              ),
-              onPressed: () {
-                Navigator.push<void>(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => CartPage(),
-                  ),
-                );
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20, right: 5),
-              child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(4),
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
-                child: Text(
-                  Cart.count.toString(),
-                  style: TextStyle(fontSize: 12, color: Colors.black),
-                ),
-              ),
-            ),
-          ],
         ),
         resizeToAvoidBottomInset: false,
         body: ListView(
@@ -143,100 +113,30 @@ class _ItemsState extends State<Items> {
                                           width: 230,
                                           child: Row(
                                             children: [
-                                              Expanded(
-                                                child: Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: 8, top: 4),
-                                                  child: Text(
-                                                    recommend['name'],
-                                                    maxLines: 2,
-                                                    softWrap: true,
-                                                    style:
-                                                        TextStyle(fontSize: 14),
-                                                  ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    right: 8, top: 4),
+                                                child: Text(
+                                                  recommend['name'],
+                                                  maxLines: 2,
+                                                  softWrap: true,
+                                                  style:
+                                                      TextStyle(fontSize: 14),
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: <Widget>[
-                                                      Card(
-                                                        child: InkWell(
-                                                          child: Icon(
-                                                            Icons.remove,
-                                                            size: 24,
-                                                            color: Colors.red,
-                                                          ),
-                                                          onTap: () {},
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        //color: Colors.grey.shade200,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                bottom: 5,
-                                                                right: 10,
-                                                                left: 10),
-                                                        child: Text(
-                                                          '1',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Card(
-                                                        child: InkWell(
-                                                          child: Icon(
-                                                            Icons.add,
-                                                            size: 24,
-                                                            color:
-                                                                Colors.blueGrey,
-                                                          ),
-                                                          onTap: () {},
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
                                             ],
                                           ),
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(top: 10),
                                           width: 230,
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  child: Text(
-                                                    "M",
-                                                    style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Center(
-                                                  child: Container(
-                                                    child: Text(
-                                                      "Total: RS.80",
-                                                      style: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 14),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                          child: Container(
+                                            child: Text(
+                                              "M",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14),
+                                            ),
                                           ),
                                         ),
                                         Container(

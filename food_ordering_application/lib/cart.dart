@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 
 import 'item.dart';
 
@@ -7,16 +10,26 @@ class Cart extends ChangeNotifier {
 
   static double _totalPrice = 0.0;
   void add(Item item) {
-    _items.add(item);
-    _totalPrice += item.price;
-    print('fdsfsf');
-    notifyListeners();
+    int index = _items.indexWhere((i) => i.name == item.name);
+    print('indexxxx $index');
+    if (index == -1) {
+      _items.add(item);
+      _totalPrice += item.price;
+      notifyListeners();
+      Get.snackbar(
+          "Product Added", "You have added the ${item.name} to the cart",
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
+    } else {
+      Get.snackbar("Already Added ",
+          "You have added the ${item.name} to the cart alredy",
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
+    }
   }
 
-  static void remove(Item item) {
+  void remove(Item item) {
     _totalPrice -= item.price;
     _items.remove(item);
-    //notifyListeners();
+    notifyListeners();
   }
 
   static void calculateTotal() {
@@ -29,7 +42,7 @@ class Cart extends ChangeNotifier {
   static void updateProduct(item, quantity) {
     int index = _items.indexWhere((i) => i.name == item.name);
     _items[index].quantity = quantity;
-    if (_items[index].quantity == 0) remove(item);
+    // if (_items[index].quantity == 0) remove(item);
 
     calculateTotal();
     //notifyListeners();

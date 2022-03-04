@@ -1,7 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_ordering_application/Home/cartpage.dart';
 import '../cart.dart';
 import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -9,18 +8,8 @@ import 'itemspage.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class MyWidget extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return IconButton(
-        // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-        icon: FaIcon(FontAwesomeIcons.gamepad),
-        onPressed: () {
-          print("Pressed");
-        });
-  }
-}
-
 class Menu extends StatefulWidget {
+  static String id = 'menu';
   @override
   _MenuState createState() => _MenuState();
 }
@@ -31,6 +20,8 @@ class _MenuState extends State<Menu> {
   double scaleFactor = 0.8;
   double height = 160.0;
   int categoryId;
+
+  var currentUser = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
     super.initState();
@@ -40,19 +31,11 @@ class _MenuState extends State<Menu> {
         print(currentPageValue.toString());
       });
     });
+    if (currentUser != null) {
+      print(currentUser.email);
+    }
     //  downloadURLExample();
   }
-
-  // Future<String> downloadURLExample() async {
-  //   String downloadURL = await firebase_storage.FirebaseStorage.instance
-  //       .ref('items/rolls.jpg')
-  //       .getDownloadURL();
-  //   print(downloadURL);
-  //
-  //   return downloadURL;
-  //   // Within your widgets:
-  //   // Image.network(downloadURL);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +46,31 @@ class _MenuState extends State<Menu> {
           toolbarHeight: 68,
           elevation: 0,
           backgroundColor: kredbackgroundcolor,
-          title: Text('Hello, Rakshitha!'),
+          title: FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection("userprofile")
+                  .doc('${currentUser.email}')
+                  .get(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text("Something went wrong");
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting ||
+                    !snapshot.hasData) {
+                  // return CircularProgressIndicator();
+                }
+
+                if (snapshot.hasData) {
+                  Map<String, dynamic> userprofile =
+                      snapshot.data.data() as Map<String, dynamic>;
+                  return Text('Hello ${userprofile['fname']}!');
+                }
+                return Container(
+                  child: CircularProgressIndicator(),
+                );
+              }),
           actions: [
             IconButton(
               icon: Icon(
@@ -76,21 +83,6 @@ class _MenuState extends State<Menu> {
                   context,
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) => NotificationPage(),
-                  ),
-                );
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart_rounded,
-                color: Colors.white,
-                size: 35,
-              ),
-              onPressed: () {
-                Navigator.push<void>(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => CartPage(),
                   ),
                 );
               },
@@ -234,7 +226,7 @@ class _MenuState extends State<Menu> {
 
                 if (snapshot.connectionState == ConnectionState.waiting ||
                     !snapshot.hasData) {
-                  return CircularProgressIndicator();
+                  //  return CircularProgressIndicator();
                 }
 
                 if (snapshot.hasData) {
@@ -297,8 +289,12 @@ class _MenuState extends State<Menu> {
                   );
                 }
 
-                return Container(
-                  child: CircularProgressIndicator(),
+                return SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),
@@ -324,7 +320,7 @@ class _MenuState extends State<Menu> {
 
                 if (snapshot.connectionState == ConnectionState.waiting ||
                     !snapshot.hasData) {
-                  return CircularProgressIndicator();
+                  //   return CircularProgressIndicator();
                 }
 
                 if (snapshot.hasData) {
@@ -395,8 +391,12 @@ class _MenuState extends State<Menu> {
                   );
                 }
 
-                return Container(
-                  child: CircularProgressIndicator(),
+                return SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),

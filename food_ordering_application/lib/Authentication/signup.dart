@@ -486,7 +486,7 @@ class SignupTitle extends StatelessWidget {
             height: 10.0,
           ),
           Text(
-            'Create and account to continue!',
+            'Create an account to continue!',
             style: TextStyle(
                 fontSize: 15,
                 color: Colors.grey[500],

@@ -6,4 +6,20 @@ class Item {
   // final String description;
 
   Item({this.name, this.price, this.imgUrl, this.quantity});
+
+  String getName() {
+    return name;
+  }
+
+  double getPrice() {
+    return price;
+  }
+
+  String getImgurl() {
+    return imgUrl;
+  }
+
+  int getQuantity() {
+    return quantity;
+  }
 }
