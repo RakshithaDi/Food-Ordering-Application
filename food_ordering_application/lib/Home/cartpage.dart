@@ -21,7 +21,31 @@ class _CartPageState extends State<CartPage> {
         ),
         resizeToAvoidBottomInset: false,
         body: Cart.basketItems.length == 0
-            ? Text('No Items in Your basket')
+            ? Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(
+                        'No Items in Your basket',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          'Add some items! ',
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             : Column(
                 children: [
                   createSubTitle(),
@@ -128,7 +152,7 @@ class _CartPageState extends State<CartPage> {
                                                                   onTap: () {
                                                                     setState(
                                                                         () {
-                                                                      Cart.updateProduct(
+                                                                      cart.updateProduct(
                                                                           Cart.basketItems[
                                                                               index],
                                                                           Cart.basketItems[index].quantity -
@@ -173,7 +197,7 @@ class _CartPageState extends State<CartPage> {
                                                                   onTap: () {
                                                                     setState(
                                                                         () {
-                                                                      Cart.updateProduct(
+                                                                      cart.updateProduct(
                                                                           Cart.basketItems[
                                                                               index],
                                                                           Cart.basketItems[index].quantity +

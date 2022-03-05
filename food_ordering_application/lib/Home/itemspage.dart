@@ -31,6 +31,36 @@ class _ItemsState extends State<Items> {
           centerTitle: true,
           title: Text('Items'),
           backgroundColor: kredbackgroundcolor,
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart_rounded,
+                color: Colors.white,
+                size: 35,
+              ),
+              onPressed: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => CartPage(),
+                  ),
+                );
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20, right: 5),
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(4),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
+                child: Text(
+                  Cart.count.toString(),
+                  style: TextStyle(fontSize: 12, color: Colors.black),
+                ),
+              ),
+            ),
+          ],
         ),
         resizeToAvoidBottomInset: false,
         body: ListView(
@@ -60,12 +90,12 @@ class _ItemsState extends State<Items> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (BuildContext context, index) {
-                          QueryDocumentSnapshot recommend =
+                          QueryDocumentSnapshot itemcat =
                               snapshot.data.docs[index];
 
-                          price = double.parse(recommend['price']);
-                          name = recommend['name'];
-                          imgUrl = recommend['imgUrl'];
+                          price = double.parse(itemcat['price']);
+                          name = itemcat['name'];
+                          imgUrl = itemcat['imgUrl'];
 
                           final List<Item> items = [
                             for (var i = 0; i < snapshot.data.docs.length; i++)
@@ -101,7 +131,7 @@ class _ItemsState extends State<Items> {
                                           color: Colors.grey,
                                           image: DecorationImage(
                                               image: NetworkImage(
-                                            recommend['imgUrl'],
+                                            itemcat['imgUrl'],
                                           ))),
                                     ),
                                     Column(
@@ -117,7 +147,7 @@ class _ItemsState extends State<Items> {
                                                 padding: EdgeInsets.only(
                                                     right: 8, top: 4),
                                                 child: Text(
-                                                  recommend['name'],
+                                                  itemcat['name'],
                                                   maxLines: 2,
                                                   softWrap: true,
                                                   style:
@@ -146,7 +176,7 @@ class _ItemsState extends State<Items> {
                                               Expanded(
                                                 child: Container(
                                                   child: Text(
-                                                    'Rs. ${recommend['price']}',
+                                                    'Rs. ${itemcat['price']}',
                                                     style: TextStyle(
                                                         color: Colors.black),
                                                   ),
@@ -197,8 +227,12 @@ class _ItemsState extends State<Items> {
                     );
                   }
 
-                  return Container(
-                    child: CircularProgressIndicator(),
+                  return SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 },
               ),

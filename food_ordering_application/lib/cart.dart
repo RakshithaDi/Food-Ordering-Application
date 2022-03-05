@@ -32,20 +32,21 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  static void calculateTotal() {
+  void calculateTotal() {
     _totalPrice = 0;
     _items.forEach((f) {
       _totalPrice += f.price * f.quantity;
     });
+    notifyListeners();
   }
 
-  static void updateProduct(item, quantity) {
+  void updateProduct(item, quantity) {
     int index = _items.indexWhere((i) => i.name == item.name);
     _items[index].quantity = quantity;
-    // if (_items[index].quantity == 0) remove(item);
+    if (_items[index].quantity == 0) remove(item);
 
     calculateTotal();
-    //notifyListeners();
+    notifyListeners();
   }
 
   static int get count {
