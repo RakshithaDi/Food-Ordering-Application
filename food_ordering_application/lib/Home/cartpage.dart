@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../cart.dart';
 import '../constant.dart';
+import 'checkout.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -25,6 +26,15 @@ class _CartPageState extends State<CartPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Center(
+                        child: Icon(
+                      Icons.report_gmailerrorred_outlined,
+                      size: 100,
+                      color: Colors.red,
+                    )),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Center(
                       child: Text(
                         'No Items in Your basket',
@@ -297,8 +307,8 @@ class _CartPageState extends State<CartPage> {
           SizedBox(height: 8),
           RaisedButton(
             onPressed: () {
-              // Navigator.push(context,
-              //     new MaterialPageRoute(builder: (context) => CheckOutPage()));
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => CheckOut()));
             },
             color: kredbackgroundcolor,
             padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),

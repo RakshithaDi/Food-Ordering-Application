@@ -66,7 +66,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 20, right: 5),
+                      padding: const EdgeInsets.only(bottom: 20, right: 0),
                       child: Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.all(4),
