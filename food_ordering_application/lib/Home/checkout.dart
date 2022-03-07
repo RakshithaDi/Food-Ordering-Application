@@ -6,6 +6,7 @@ import '../cart.dart';
 import '../constant.dart';
 import 'package:pay/pay.dart';
 import 'package:payhere_mobilesdk_flutter/payhere_mobilesdk_flutter.dart';
+import 'package:intl/intl.dart';
 
 class CheckOut extends StatefulWidget {
   @override
@@ -17,10 +18,16 @@ class _CheckOutState extends State<CheckOut> {
   String userEmail;
   String fname;
   String lname;
+  String fullname;
   String phoneNo;
   String totalPrice;
   String items;
+  int orderNum;
+  String orderId;
+  String currentDate;
+  String currentTime;
   List<String> itemsArr = [];
+  List<String> itemQuantityArr = [];
 
   @override
   void initState() {
@@ -31,9 +38,27 @@ class _CheckOutState extends State<CheckOut> {
     getUserInfo();
 
     itemsArr = [
-      for (int i = 0; i < Cart.basketItems.length; i++) Cart.basketItems[i].name
+      for (int i = 0; i < Cart.basketItems.length; i++)
+        " ${Cart.basketItems[i].name} * ${Cart.basketItems[i].quantity}  Rs.${Cart.basketItems[i].quantity * Cart.basketItems[i].price}"
     ];
     print(itemsArr);
+    itemQuantityArr = [
+      for (int i = 0; i < Cart.basketItems.length; i++)
+        " ${Cart.basketItems[i].name} * ${Cart.basketItems[i].quantity}"
+    ];
+    print(itemQuantityArr);
+    getCurrentDate();
+    getCurrentTime();
+  }
+
+  void getCurrentDate() {
+    currentDate = DateFormat("EEEEE, dd, yyyy").format(DateTime.now());
+    print(currentDate);
+  }
+
+  void getCurrentTime() {
+    currentTime = DateFormat("hh:mm:ss a").format(DateTime.now());
+    print(currentTime);
   }
 
   void getUserMail() {
@@ -54,7 +79,7 @@ class _CheckOutState extends State<CheckOut> {
         fname = documentSnapshot.data()['fname'];
         lname = documentSnapshot.data()['lname'];
         phoneNo = documentSnapshot.data()['mobileno'];
-
+        fullname = "${fname}' '${lname} ";
         print('fname $fname');
         print('fname $phoneNo');
       }
@@ -77,7 +102,7 @@ class _CheckOutState extends State<CheckOut> {
       "sandbox": true, // true if using Sandbox Merchant ID
       "merchant_id": "1219901", // Replace your Merchant ID
       "notify_url": "http://sample.com/notify",
-      "order_id": "ItemNo12345",
+      "order_id": orderId,
       "items": itemsArr,
       "amount": totalPrice,
       "currency": "LKR",
@@ -97,11 +122,57 @@ class _CheckOutState extends State<CheckOut> {
 
     PayHere.startPayment(paymentObject, (paymentId) {
       print("One Time Payment Success. Payment Id: $paymentId");
+      IncreaseOrderNumbers();
+      AddOrderDetails();
     }, (error) {
       print("One Time Payment Failed. Error: $error");
     }, () {
       print("One Time Payment Dismissed");
     });
+  }
+
+  void getOrderId() async {
+    FirebaseFirestore.instance
+        .collection('orders')
+        .doc('OrderNumbers')
+        .get()
+        .then((DocumentSnapshot OrderNo) {
+      if (OrderNo.exists) {
+        orderNum = OrderNo['lastOrderNumber'];
+        orderNum = orderNum + 1;
+
+        orderId = 'ORID' + orderNum.toString();
+        print('Order ID: ' + orderId);
+
+        Pay();
+      }
+    });
+  }
+
+  void IncreaseOrderNumbers() {
+    FirebaseFirestore.instance
+        .collection("orders")
+        .doc('OrderNumbers')
+        .update({"lastOrderNumber": FieldValue.increment(1)})
+        .then((value) => print("Order Number Increased"))
+        .catchError((error) => print("Failed: $error"));
+  }
+
+  void AddOrderDetails() {
+    FirebaseFirestore.instance
+        .collection("orders")
+        .doc(orderId)
+        .set({
+          "OrderId": orderId,
+          "OrderItems": itemQuantityArr,
+          "Time": currentDate,
+          "Date": currentTime,
+          "Name": fullname,
+          "Amount": totalPrice,
+          "PhoneNo": phoneNo,
+        })
+        .then((value) => print("Records Added Successfully!"))
+        .catchError((error) => print("Failed: $error"));
   }
 
   @override
@@ -130,7 +201,7 @@ class _CheckOutState extends State<CheckOut> {
                 children: [
                   Container(
                     color: Colors.white,
-                    height: 400,
+                    height: 500,
                     child: ListView(
                       children: [
                         Builder(
@@ -202,23 +273,6 @@ class _CheckOutState extends State<CheckOut> {
                                               ),
                                             ),
                                           ),
-
-                                          SizedBox(height: 6),
-                                          // Text(
-                                          //   "M",
-                                          //   style: TextStyle(
-                                          //       color: Colors.grey, fontSize: 14),
-                                          // ),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.spaceBetween,
-                                          //   children: <Widget>[
-                                          //     Text(
-                                          //       'Rs.${Cart.basketItems[index].price.toString()}',
-                                          //       style: TextStyle(color: Colors.black),
-                                          //     ),
-                                          //   ],
-                                          // )
                                         ],
                                       ),
                                       Text(
@@ -249,7 +303,7 @@ class _CheckOutState extends State<CheckOut> {
                         Container(
                           margin: EdgeInsets.only(left: 30),
                           child: Text(
-                            "Total",
+                            "Total amount:",
                             style: TextStyle(color: Colors.grey, fontSize: 12),
                           ),
                         ),
@@ -267,10 +321,8 @@ class _CheckOutState extends State<CheckOut> {
                     ),
                     SizedBox(height: 8),
                     Container(
-                      width: 100,
-                      height: 50,
-                      color: Colors.red,
                       child: GooglePayButton(
+                        width: 150,
                         paymentConfigurationAsset: 'googlepay.json',
                         paymentItems: _paymentItems,
                         style: GooglePayButtonStyle.black,
@@ -282,34 +334,21 @@ class _CheckOutState extends State<CheckOut> {
                         ),
                       ),
                     ),
-
-                    RaisedButton(
+                    FlatButton(
                       onPressed: () {
-                        Pay();
+                        getOrderId();
                       },
-                      child: Text("One Time Payment SANDBOX"),
+                      child: FittedBox(
+                        child: Container(
+                          width: 150,
+                          height: 35,
+                          child: Image(
+                            image: AssetImage('images/payhere.jpg'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
                     ),
-                    Text('button'),
-                    // RaisedButton(
-                    //   onPressed: () async {
-                    //     print('jj');
-                    //
-                    //     // Navigator.push(
-                    //     //     context,
-                    //     //     new MaterialPageRoute(
-                    //     //         builder: (context) => CheckOut()));
-                    //   },
-                    //   color: kredbackgroundcolor,
-                    //   padding: EdgeInsets.only(
-                    //       top: 12, left: 60, right: 60, bottom: 12),
-                    //   shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.all(Radius.circular(0))),
-                    //   child: Text(
-                    //     "Pay",
-                    //     style: TextStyle(color: Colors.white),
-                    //   ),
-                    // ),
-                    SizedBox(height: 8),
                   ],
                 ),
                 margin: EdgeInsets.only(top: 16),

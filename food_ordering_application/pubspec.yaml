@@ -43,6 +43,7 @@ dependencies:
   firebase_phone_auth_handler: ^1.0.1
   pay: ^1.0.8
   payhere_mobilesdk_flutter: ^2.0.0
+  intl: ^0.17.0
   dependencies:
 
 

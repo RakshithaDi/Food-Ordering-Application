@@ -18,11 +18,11 @@ class Cart extends ChangeNotifier {
       notifyListeners();
       Get.snackbar(
           "Product Added", "You have added the ${item.name} to the cart",
-          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 1));
     } else {
       Get.snackbar("Already Added ",
           "You have added the ${item.name} to the cart alredy",
-          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 1));
     }
   }
 
