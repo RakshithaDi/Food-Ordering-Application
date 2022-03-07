@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -8,9 +13,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +61,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TMA/PassengerApplication" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TMA/PassengerApplication/tma_passenger" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -64,15 +74,20 @@
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\assets" />
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib\settings" />
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\android\gradle" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\images" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\android\app" />
-      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib\" />
-      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter.main.dart">
+  <component name="RunManager" selected="Flutter.myapp.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="myapp.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/Home/myapp.dart" />
       <method v="2" />
     </configuration>
     <configuration name="otp_setup.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
@@ -85,6 +100,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter.myapp.dart" />
         <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.otp_setup.dart" />
         <item itemvalue="Flutter.otp_verify.dart" />
@@ -117,11 +133,6 @@
           <url>file://$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart</url>
           <line>341</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart</url>
-          <line>203</line>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

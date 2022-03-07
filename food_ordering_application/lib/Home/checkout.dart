@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../cart.dart';
 import '../constant.dart';
+import 'package:pay/pay.dart';
+import 'package:payhere_mobilesdk_flutter/payhere_mobilesdk_flutter.dart';
 
 class CheckOut extends StatefulWidget {
   @override
@@ -11,6 +14,95 @@ class CheckOut extends StatefulWidget {
 
 class _CheckOutState extends State<CheckOut> {
   double quantityPrice;
+  String userEmail;
+  String fname;
+  String lname;
+  String phoneNo;
+  String totalPrice;
+  String items;
+  List<String> itemsArr = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    getUserMail();
+    totalPrice = Cart.totalPrice.toString();
+    getUserInfo();
+
+    itemsArr = [
+      for (int i = 0; i < Cart.basketItems.length; i++) Cart.basketItems[i].name
+    ];
+    print(itemsArr);
+  }
+
+  void getUserMail() {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (auth.currentUser != null) {
+      userEmail = auth.currentUser.email;
+      print(auth.currentUser.email);
+    }
+  }
+
+  void getUserInfo() {
+    FirebaseFirestore.instance
+        .collection("userprofile")
+        .doc(userEmail)
+        .get()
+        .then((documentSnapshot) {
+      if (documentSnapshot.exists) {
+        fname = documentSnapshot.data()['fname'];
+        lname = documentSnapshot.data()['lname'];
+        phoneNo = documentSnapshot.data()['mobileno'];
+
+        print('fname $fname');
+        print('fname $phoneNo');
+      }
+    });
+  }
+
+  final _paymentItems = [
+    PaymentItem(
+      label: 'Total',
+      amount: '1',
+      status: PaymentItemStatus.final_price,
+    )
+  ];
+  void onGooglePayResult(paymentResult) {
+    debugPrint(paymentResult.toString());
+  }
+
+  void Pay() {
+    Map paymentObject = {
+      "sandbox": true, // true if using Sandbox Merchant ID
+      "merchant_id": "1219901", // Replace your Merchant ID
+      "notify_url": "http://sample.com/notify",
+      "order_id": "ItemNo12345",
+      "items": itemsArr,
+      "amount": totalPrice,
+      "currency": "LKR",
+      "first_name": fname,
+      "last_name": lname,
+      "email": userEmail,
+      "phone": phoneNo,
+      "address": "",
+      "city": "",
+      "country": "Sri Lanka",
+      // "delivery_address": "No. 46, Galle road, Kalutara South",
+      // "delivery_city": "Kalutara",
+      // "delivery_country": "Sri Lanka",
+      // "custom_1": "",
+      // "custom_2": ""
+    };
+
+    PayHere.startPayment(paymentObject, (paymentId) {
+      print("One Time Payment Success. Payment Id: $paymentId");
+    }, (error) {
+      print("One Time Payment Failed. Error: $error");
+    }, () {
+      print("One Time Payment Dismissed");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +130,7 @@ class _CheckOutState extends State<CheckOut> {
                 children: [
                   Container(
                     color: Colors.white,
-                    height: 550,
+                    height: 400,
                     child: ListView(
                       children: [
                         Builder(
@@ -174,23 +266,49 @@ class _CheckOutState extends State<CheckOut> {
                       ],
                     ),
                     SizedBox(height: 8),
-                    RaisedButton(
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     new MaterialPageRoute(
-                        //         builder: (context) => CheckOut()));
-                      },
-                      color: kredbackgroundcolor,
-                      padding: EdgeInsets.only(
-                          top: 12, left: 60, right: 60, bottom: 12),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(0))),
-                      child: Text(
-                        "Pay",
-                        style: TextStyle(color: Colors.white),
+                    Container(
+                      width: 100,
+                      height: 50,
+                      color: Colors.red,
+                      child: GooglePayButton(
+                        paymentConfigurationAsset: 'googlepay.json',
+                        paymentItems: _paymentItems,
+                        style: GooglePayButtonStyle.black,
+                        type: GooglePayButtonType.pay,
+                        margin: const EdgeInsets.only(top: 15.0),
+                        onPaymentResult: onGooglePayResult,
+                        loadingIndicator: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                     ),
+
+                    RaisedButton(
+                      onPressed: () {
+                        Pay();
+                      },
+                      child: Text("One Time Payment SANDBOX"),
+                    ),
+                    Text('button'),
+                    // RaisedButton(
+                    //   onPressed: () async {
+                    //     print('jj');
+                    //
+                    //     // Navigator.push(
+                    //     //     context,
+                    //     //     new MaterialPageRoute(
+                    //     //         builder: (context) => CheckOut()));
+                    //   },
+                    //   color: kredbackgroundcolor,
+                    //   padding: EdgeInsets.only(
+                    //       top: 12, left: 60, right: 60, bottom: 12),
+                    //   shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.all(Radius.circular(0))),
+                    //   child: Text(
+                    //     "Pay",
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    // ),
                     SizedBox(height: 8),
                   ],
                 ),
