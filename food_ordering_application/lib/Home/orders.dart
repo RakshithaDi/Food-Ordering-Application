@@ -32,7 +32,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       backgroundColor: kbackgroundcolor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Check Out'),
+        title: Text('Orders'),
         backgroundColor: kredbackgroundcolor,
       ),
       body: SafeArea(
@@ -40,7 +40,6 @@ class _OrderDetailsState extends State<OrderDetails> {
           child: Column(
             children: [
               Container(
-                height: 650,
                 child: FutureBuilder(
                   future: FirebaseFirestore.instance
                       .collection('orders')
@@ -59,58 +58,183 @@ class _OrderDetailsState extends State<OrderDetails> {
 
                     if (snapshot.hasData) {
                       print('has data in orders');
-                      return Container(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.docs.length,
-                          itemBuilder: (BuildContext context, index) {
-                            QueryDocumentSnapshot orders =
-                                snapshot.data.docs[index];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Text('Pending Orders'),
+                            margin: EdgeInsets.only(top: 10, left: 15),
+                          ),
+                          Container(
+                            height: 350,
+                            child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.docs.length,
+                              itemBuilder: (BuildContext context, index) {
+                                QueryDocumentSnapshot orders =
+                                    snapshot.data.docs[index];
 
-                            return Container(
-                              margin: EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          child: Text(
-                                            'Order #${orders['OrderId']}',
-                                            maxLines: 2,
-                                            softWrap: true,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
+                                return Card(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print('tapped');
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: <Widget>[
+                                              Expanded(
+                                                flex: 2,
+                                                child: Container(
+                                                  child: Text(
+                                                    'Order #${orders['OrderId']}',
+                                                    maxLines: 2,
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10),
+                                                  child: Text(
+                                                    "Status : ${orders['Status']}",
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ),
-                                      Container(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 10),
-                                          child: Text(
-                                            "Status : ${orders['Status']}",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
+                                          Text(
+                                            'Total Amount:  Rs.${orders['Amount']}',
+                                            style: TextStyle(fontSize: 14),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                  Text(
-                                    'Total Amount:  Rs.${orders['Amount']}',
-                                    style: TextStyle(fontSize: 14),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+
+                    return SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                child: FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('orders')
+                      .where('Email', isEqualTo: userEmail)
+                      .where('Status', isEqualTo: 'Delivered')
+                      .get(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("Something went wrong");
+                    }
+                    //
+                    // if (snapshot.connectionState == ConnectionState.waiting ||
+                    //     !snapshot.hasData) {
+                    //   return CircularProgressIndicator();
+                    // }
+
+                    if (snapshot.hasData) {
+                      print('has data in orders');
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Text('Delivered Orders'),
+                            margin: EdgeInsets.only(top: 10, left: 15),
+                          ),
+                          Container(
+                            child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.docs.length,
+                              itemBuilder: (BuildContext context, index) {
+                                QueryDocumentSnapshot orders =
+                                    snapshot.data.docs[index];
+
+                                return Card(
+                                  child: InkWell(
+                                    onTap: () {
+                                      print('tapped');
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: <Widget>[
+                                              Expanded(
+                                                flex: 2,
+                                                child: Container(
+                                                  child: Text(
+                                                    'Order #${orders['OrderId']}',
+                                                    maxLines: 2,
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10),
+                                                  child: Text(
+                                                    "Status : ${orders['Status']}",
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            'Total Amount:  Rs.${orders['Amount']}',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       );
                     }
 
