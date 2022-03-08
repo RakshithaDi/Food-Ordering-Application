@@ -5,6 +5,7 @@ import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
 import '../main.dart';
+import 'orders.dart';
 
 class Account extends StatefulWidget {
   static String id = 'account';
@@ -131,7 +132,12 @@ class _AccountState extends State<Account> {
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(10),
                       onTap: () {
-                        debugPrint('Card tapped.');
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => OrderDetails(),
+                          ),
+                        );
                       },
                       child: const SizedBox(
                         width: double.infinity,

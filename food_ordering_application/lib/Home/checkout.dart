@@ -172,7 +172,7 @@ class _CheckOutState extends State<CheckOut> {
           "Amount": totalPrice,
           "PhoneNo": phoneNo,
           "Email": userEmail,
-          "States": 'Pending',
+          "Status": 'Pending',
         })
         .then((value) => print("Records Added Successfully!"))
         .catchError((error) => print("Failed: $error"));
