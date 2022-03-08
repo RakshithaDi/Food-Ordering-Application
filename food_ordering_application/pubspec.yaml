@@ -44,6 +44,7 @@ dependencies:
   pay: ^1.0.8
   payhere_mobilesdk_flutter: ^2.0.0
   intl: ^0.17.0
+  search_page: ^2.0.0+1
   dependencies:
 
 

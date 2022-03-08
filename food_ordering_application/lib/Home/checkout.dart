@@ -124,6 +124,7 @@ class _CheckOutState extends State<CheckOut> {
       print("One Time Payment Success. Payment Id: $paymentId");
       IncreaseOrderNumbers();
       AddOrderDetails();
+      AddEachItems();
     }, (error) {
       print("One Time Payment Failed. Error: $error");
     }, () {
@@ -165,14 +166,40 @@ class _CheckOutState extends State<CheckOut> {
         .set({
           "OrderId": orderId,
           "OrderItems": itemQuantityArr,
-          "Time": currentDate,
-          "Date": currentTime,
+          "Time": currentTime,
+          "Date": currentDate,
           "Name": fullname,
           "Amount": totalPrice,
           "PhoneNo": phoneNo,
+          "Email": userEmail,
+          "States": 'Pending',
         })
         .then((value) => print("Records Added Successfully!"))
         .catchError((error) => print("Failed: $error"));
+  }
+
+  void AddEachItems() {
+    for (int index = 0; index < Cart.basketItems.length; index++) {
+      String addName = Cart.basketItems[index].name;
+      double addPrice = Cart.basketItems[index].price;
+      int addQuantity = Cart.basketItems[index].quantity;
+
+      print(addName);
+      print(addPrice);
+      print(addQuantity);
+      FirebaseFirestore.instance
+          .collection("orders")
+          .doc(orderId)
+          .collection('OrderItems')
+          .doc(addName)
+          .set({
+            "name": addName,
+            "price": addPrice,
+            "quantity": addQuantity,
+          })
+          .then((value) => print("Each item added!"))
+          .catchError((error) => print("Failed: $error"));
+    }
   }
 
   @override

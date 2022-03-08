@@ -7,6 +7,7 @@ import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import '../item.dart';
 import 'itemspage.dart';
+import 'searchpage.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -114,7 +115,14 @@ class _MenuState extends State<Menu> {
                   color: Colors.white,
                   size: 34,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => SearchItemsPage(),
+                    ),
+                  );
+                },
               ),
             ),
           ],

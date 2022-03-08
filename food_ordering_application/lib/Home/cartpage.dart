@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Home/searchpage.dart';
 import 'package:provider/provider.dart';
 import '../cart.dart';
 import '../constant.dart';
@@ -19,6 +20,26 @@ class _CartPageState extends State<CartPage> {
           centerTitle: true,
           title: Text('Cart'),
           backgroundColor: kredbackgroundcolor,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 34,
+                ),
+                onPressed: () {
+                  Navigator.push<void>(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => SearchItemsPage(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
         resizeToAvoidBottomInset: false,
         body: Cart.basketItems.length == 0
