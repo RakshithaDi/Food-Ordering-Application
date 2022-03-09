@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Home/menu.dart';
 import 'package:provider/provider.dart';
 import '../cart.dart';
 import '../constant.dart';
@@ -125,6 +126,18 @@ class _CheckOutState extends State<CheckOut> {
       IncreaseOrderNumbers();
       AddOrderDetails();
       AddEachItems();
+      setState(() {
+        Cart.EmptyCart();
+      });
+
+      setState(() {
+        Navigator.push<void>(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => Menu(),
+          ),
+        );
+      });
     }, (error) {
       print("One Time Payment Failed. Error: $error");
     }, () {

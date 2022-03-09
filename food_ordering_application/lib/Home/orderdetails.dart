@@ -31,8 +31,8 @@ class _EachOrdersState extends State<EachOrders> {
             Container(
               alignment: Alignment.topLeft,
               child: Text(
-                "Orders",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                "Order Id: $orderId",
+                style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
               margin: EdgeInsets.only(left: 12, top: 10, bottom: 5),
             ),
@@ -53,6 +53,7 @@ class _EachOrdersState extends State<EachOrders> {
                       snapshot.data.data() as Map<String, dynamic>;
                   //return Text("Full Name: ${data['full_name']} ${data['last_name']}");
                   return Container(
+                    color: Colors.white,
                     margin: EdgeInsets.all(2),
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
@@ -160,9 +161,30 @@ class _EachOrdersState extends State<EachOrders> {
                               ),
                               Center(
                                 child: Container(
+                                  width: double.infinity,
+                                  color: kbackgroundcolor,
                                   child: Column(
                                     children: [
                                       Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        child: Text(
+                                          'Date: ${orderDetails['Date']}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        child: Text(
+                                          'Time: ${orderDetails['Time']}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20),
                                         child: Text(
                                           'Total Amount: Rs.${orderDetails['Amount']}',
                                           style: TextStyle(

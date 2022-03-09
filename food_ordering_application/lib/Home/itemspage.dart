@@ -203,7 +203,9 @@ class _ItemsState extends State<Items> {
                                                                 color:
                                                                     kredbackgroundcolor)),
                                                       ),
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        cart.add(items[index]);
+                                                      },
                                                       child:
                                                           Text('Add to Cart'),
                                                     ),

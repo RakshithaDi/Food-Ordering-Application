@@ -8,6 +8,10 @@ import 'item.dart';
 class Cart extends ChangeNotifier {
   static List<Item> _items = [];
 
+  static void EmptyCart() {
+    _items.removeRange(0, _items.length);
+  }
+
   static double _totalPrice = 0.0;
   void add(Item item) {
     int index = _items.indexWhere((i) => i.name == item.name);
@@ -59,5 +63,10 @@ class Cart extends ChangeNotifier {
 
   static List<Item> get basketItems {
     return _items;
+  }
+
+  static void PaymentStates() {
+    Get.snackbar("Order Completed Successfully!", "Thank You!",
+        snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
   }
 }
