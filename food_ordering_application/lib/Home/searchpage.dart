@@ -114,7 +114,14 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                           price = double.parse(allproducts['price']);
                           name = allproducts['name'];
                           imgUrl = allproducts['imgUrl'];
-
+                          List<Item> items = [
+                            for (var i = 0; i < snapshot.data.docs.length; i++)
+                              Item(
+                                  name: name,
+                                  price: price,
+                                  imgUrl: imgUrl,
+                                  quantity: quantity),
+                          ];
                           allitems = [
                             for (var i = 0; i < snapshot.data.docs.length; i++)
                               Item(
@@ -230,8 +237,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                                                                     kredbackgroundcolor)),
                                                       ),
                                                       onPressed: () {
-                                                        cart.add(
-                                                            allitems[index]);
+                                                        cart.add(items[index]);
                                                       },
                                                       child:
                                                           Text('Add to Cart'),
