@@ -338,9 +338,11 @@ showAlertDialog(BuildContext context) {
     ),
     onPressed: () {
       logout();
-      Navigator.of(context, rootNavigator: true).pop();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoadingScreen()));
+      // Navigator.of(context, rootNavigator: true).pop();
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => LoadingScreen()));
+      Navigator.pushNamedAndRemoveUntil(
+          context, LoadingScreen.id, (route) => false);
     },
   );
   Widget continueButton = TextButton(

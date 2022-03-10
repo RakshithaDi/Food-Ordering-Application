@@ -72,7 +72,9 @@ class _MenuState extends State<Menu> {
                 if (snapshot.hasData) {
                   Map<String, dynamic> userprofile =
                       snapshot.data.data() as Map<String, dynamic>;
-                  return Text('Hello ${userprofile['fname']}!');
+                  return currentUser.email != null
+                      ? Text('Hello ${userprofile['fname']}!')
+                      : Text('');
                 }
                 return Container(
                   child: CircularProgressIndicator(),

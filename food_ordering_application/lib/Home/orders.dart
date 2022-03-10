@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Home/account.dart';
+import 'package:food_ordering_application/Home/home.dart';
 import 'package:food_ordering_application/Home/orderdetails.dart';
 
 import '../constant.dart';
 
 class OrderDetails extends StatefulWidget {
+  static String id = 'OrderDetails';
   @override
   _OrderDetailsState createState() => _OrderDetailsState();
 }
@@ -67,7 +70,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           collectedOrderslength = documentSnapshot.size;
         });
       }
-      print('Delivered Orders length:${documentSnapshot.size}');
+      print('Collected Orders length:${documentSnapshot.size}');
     });
   }
 
@@ -92,14 +95,13 @@ class _OrderDetailsState extends State<OrderDetails> {
             .catchError((error) => print("Failed: $error"));
         // Navigator.of(context, rootNavigator: true).pop();
 
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, OrderDetails.id, (route) => false);
+        Navigator.pop(context);
         setState(() {
-          Navigator.push<void>(
-            context,
-            MaterialPageRoute<void>(
-              builder: (BuildContext context) => OrderDetails(),
-            ),
-          );
+          Navigator.pushNamed(context, OrderDetails.id);
         });
+        Navigator.of(context).popUntil((route) => route.isCurrent);
       },
     );
     Widget cancelButton = TextButton(
@@ -139,6 +141,17 @@ class _OrderDetailsState extends State<OrderDetails> {
         centerTitle: true,
         title: Text('Orders'),
         backgroundColor: kredbackgroundcolor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => Account(),
+              ),
+            );
+          },
+        ),
       ),
       body: SafeArea(
         child: collectedOrderslength != 0 || pendingOrderslength != 0
@@ -422,6 +435,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
+                                        height: 250,
                                         child: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,

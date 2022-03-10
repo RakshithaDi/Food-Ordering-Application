@@ -44,7 +44,8 @@ class _LoginState extends State<Login> {
       Useremail = _userPassworController.text;
 
       print('Sign in Succefully {$Useremail}');
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      //  Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -297,7 +298,8 @@ class _LoginState extends State<Login> {
                                 Navigator.push<void>(
                                   context,
                                   MaterialPageRoute<void>(
-                                    builder: (BuildContext context) => Signup(),
+                                    builder: (BuildContext context) =>
+                                        OtpSetup(),
                                   ),
                                 );
                               },

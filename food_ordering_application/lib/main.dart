@@ -4,7 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Home/orders.dart';
 import 'package:get/get.dart';
+import 'Authentication/login.dart';
+import 'Authentication/otp_setup.dart';
+import 'Authentication/otp_verify.dart';
+import 'Authentication/signup.dart';
+import 'Home/account.dart';
 import 'cart.dart';
 import 'firebase_options.dart';
 import 'Home/home.dart';
@@ -41,15 +47,16 @@ class FoodOrderingApp extends StatelessWidget {
     // });
     return GetMaterialApp(
       // initialRoute: LoadingScreen.id,
-      // routes: {
-      //   LoadingScreen.id: (context) => LoadingScreen(),
-      //   Login.id: (context) => Login(),
-      //   Signup.id: (context) => Signup(0),
-      //   OtpSetup.id: (context) => OtpSetup(),
-      //   OtpVerify.id: (context) => OtpVerify(0),
-      //   Account.id: (context) => Account(),
-      //   Home.id: (context) => Home(),
-      // },
+      routes: {
+        LoadingScreen.id: (context) => LoadingScreen(),
+        Login.id: (context) => Login(),
+        Signup.id: (context) => Signup('0'),
+        OtpSetup.id: (context) => OtpSetup(),
+        OtpVerify.id: (context) => OtpVerify(0),
+        Account.id: (context) => Account(),
+        Home.id: (context) => Home(),
+        OrderDetails.id: (context) => OrderDetails(),
+      },
       home: ViewController(streamController.stream),
       debugShowCheckedModeBanner: false,
     );
@@ -59,13 +66,13 @@ class FoodOrderingApp extends StatelessWidget {
 class ViewController extends StatefulWidget {
   ViewController(this.stream);
   final Stream<String> stream;
-
   @override
   _ViewControllerState createState() => _ViewControllerState();
 }
 
 class _ViewControllerState extends State<ViewController> {
   void setAppState(String appStateValue) {
+    print(appStateValue);
     setState(() {
       appState = appStateValue;
     });
@@ -81,6 +88,7 @@ class _ViewControllerState extends State<ViewController> {
     FirebaseAuth.instance.authStateChanges().listen((User user) {
       if (user == null) {
         print('User is currently signed out!');
+
         setAppState('2');
       } else {
         print('User is signed in!');
@@ -109,16 +117,9 @@ class _ViewControllerState extends State<ViewController> {
       setState(() {
         appState = '2';
       });
-      print(appState);
 
       return LoadingScreen();
     }
-    print(appState);
-
-    // else {
-    //   print(appState);
-    //   return RideView(appState);
-    // }
   }
 
   Future<void> checkNetConnection() async {

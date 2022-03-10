@@ -6,16 +6,21 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_ordering_application/Authentication/otp_setup.dart';
 
+import '../Home/home.dart';
 import '../registeruser.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
   static String id = "signup_screen";
+  String phoneno;
+  Signup(this.phoneno);
   @override
-  _SignupState createState() => _SignupState();
+  _SignupState createState() => _SignupState(this.phoneno);
 }
 
 class _SignupState extends State<Signup> {
+  String phoneno;
+  _SignupState(this.phoneno);
   bool _obscureText = true;
 
   String _password;
@@ -56,12 +61,14 @@ class _SignupState extends State<Signup> {
       RegisterUser adduser = RegisterUser(_fnameController.text,
           _lnameController.text, _userEmailController.text, mobileno);
       adduser.addUser();
-      Navigator.push<void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => OtpSetup(_mobileNoController.text),
-        ),
-      );
+      // Navigator.push<void>(
+      //   context,
+      //   MaterialPageRoute<void>(
+      //     builder: (BuildContext context) => Home(),
+      //   ),
+      // );
+
+      Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
       print('Registered succesfully {$UserEmail} ');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -78,6 +85,7 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
+    _mobileNoController.text = phoneno;
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey[200],
@@ -216,52 +224,54 @@ class _SignupState extends State<Signup> {
                           ],
                         ),
                       ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  child: TextFormField(
-                                    maxLength: 10,
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
-                                    controller: _mobileNoController,
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      labelText: 'Mobile No',
-                                      labelStyle: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(11),
-                                      ),
-                                      // suffixIcon: Icon(
-                                      //   Icons.error,
-                                      // ),
-                                    ),
-                                    validator: (value) {
-                                      String pattern =
-                                          r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                                      RegExp regExp = new RegExp(pattern);
-                                      if (value.isEmpty) {
-                                        return 'Please enter your mobile number';
-                                      } else if (!regExp.hasMatch(value)) {
-                                        return 'Please enter valid mobile number';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(8.0),
+                      //           child: Container(
+                      //             child: TextFormField(
+                      //               enabled: false,
+                      //               readOnly: true,
+                      //               maxLength: 10,
+                      //               keyboardType: TextInputType.number,
+                      //               inputFormatters: [
+                      //                 FilteringTextInputFormatter.digitsOnly
+                      //               ],
+                      //               controller: _mobileNoController,
+                      //               decoration: InputDecoration(
+                      //                 filled: true,
+                      //                 fillColor: Colors.white,
+                      //                 labelText: 'Mobile No',
+                      //                 labelStyle: TextStyle(
+                      //                   fontSize: 15,
+                      //                 ),
+                      //                 border: OutlineInputBorder(
+                      //                   borderRadius: BorderRadius.circular(11),
+                      //                 ),
+                      //                 // suffixIcon: Icon(
+                      //                 //   Icons.error,
+                      //                 // ),
+                      //               ),
+                      //               validator: (value) {
+                      //                 String pattern =
+                      //                     r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                      //                 RegExp regExp = new RegExp(pattern);
+                      //                 if (value.isEmpty) {
+                      //                   return 'Please enter your mobile number';
+                      //                 } else if (!regExp.hasMatch(value)) {
+                      //                   return 'Please enter valid mobile number';
+                      //                 }
+                      //                 return null;
+                      //               },
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Container(
                         child: Row(
                           children: [

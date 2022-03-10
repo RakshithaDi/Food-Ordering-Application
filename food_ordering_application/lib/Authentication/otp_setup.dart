@@ -2,10 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_ordering_application/Authentication/otp_verify.dart';
+import 'package:food_ordering_application/Authentication/signup.dart';
 import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/registeruser.dart';
-
-import '../Home/home.dart';
 import '../main.dart';
 
 enum MobileVerificationState {
@@ -15,10 +14,8 @@ enum MobileVerificationState {
 
 class OtpSetup extends StatefulWidget {
   static String id = 'otp_setup';
-  final String mobileno;
-  OtpSetup(this.mobileno);
   @override
-  _OtpSetupState createState() => _OtpSetupState(this.mobileno);
+  _OtpSetupState createState() => _OtpSetupState();
 }
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -27,11 +24,9 @@ class _OtpSetupState extends State<OtpSetup> {
   String email;
   bool showLoading = false;
   String verifiatoinId;
-  String mobileno;
   String mob;
   String countryMobNo;
   final _formKey = GlobalKey<FormState>();
-  _OtpSetupState(this.mobileno);
   MobileVerificationState currentState =
       MobileVerificationState.SHOW_MOBILE_FORM_STATE;
   TextEditingController _mobilenoController = new TextEditingController();
@@ -51,7 +46,7 @@ class _OtpSetupState extends State<OtpSetup> {
 
   Future<void> verifyPhoneNumber() async {
     await auth.verifyPhoneNumber(
-      phoneNumber: "+94${mobileno}",
+      phoneNumber: "+94${_mobilenoController.text}",
       //1.verificationCompleted
       verificationCompleted: (PhoneAuthCredential credential) async {
         setState(() {
@@ -65,7 +60,9 @@ class _OtpSetupState extends State<OtpSetup> {
         });
         print('OTP Verified Automatically!');
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => Signup(_mobilenoController.text)));
 
         // signInWithPhoneAuthCredential(phoneAuthCredential);
       },
@@ -73,6 +70,7 @@ class _OtpSetupState extends State<OtpSetup> {
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
           print('The provided phone number is not valid.');
+          showAlertDialog('Invalid Phone Number provided', context);
           _scaffoldKey.currentState
               .showSnackBar(SnackBar(content: Text(e.message)));
 
@@ -102,7 +100,7 @@ class _OtpSetupState extends State<OtpSetup> {
       //4.timeout
       timeout: const Duration(seconds: 60),
       codeAutoRetrievalTimeout: (String verificationId) {
-        showAlertDialog('Time Out Waiting for SMS. Try Again', context);
+        //showAlertDialog('Time Out Waiting for SMS. Try Again', context);
       },
     );
   }
@@ -121,7 +119,9 @@ class _OtpSetupState extends State<OtpSetup> {
       print(email);
       if (authCredential?.user != null) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => Signup(_mobilenoController.text)));
       }
     } on FirebaseAuthException catch (e) {
       showAlertDialog('Invalid OTP Code!', context);
@@ -135,214 +135,181 @@ class _OtpSetupState extends State<OtpSetup> {
   }
 
   getMobileFormWidget(context) {
-    _mobilenoController.text = mobileno;
-
     return SafeArea(
-      child: ListView(
-        children: [
-          SizedBox(
-            height: 20.0,
-            width: double.infinity,
-            child: Divider(
-              thickness: 2,
-              color: Colors.grey[400],
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 30, left: 10, right: 10),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.black,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'We will send you an ',
+                          style: TextStyle(fontSize: 18)),
+                      TextSpan(
+                          text: 'One Time Password ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                      TextSpan(
+                        text: 'on Your Mobile number ',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            child: Column(
-              children: [
-                Text(
-                  'OTP Verification',
-                  style: TextStyle(
-                    fontSize: 25,
+            SizedBox(
+              height: 20,
+            ),
+            Form(
+              key: _formKey,
+              child: Container(
+                margin: EdgeInsets.only(left: 10, right: 10),
+                height: 60,
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  controller: _mobilenoController,
+                  obscureText: false,
+                  style: const TextStyle(
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Column(
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: RichText(
-                              text: TextSpan(
-                                // Note: Styles for TextSpans must be explicitly defined.
-                                // Child text spans will inherit styles from parent
-
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.black,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(text: 'We will send you an '),
-                                  TextSpan(
-                                      text: 'One Time Password ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  TextSpan(text: 'on this number '),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                  decoration: InputDecoration(
+                    labelText: "Enter Your Number",
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Container(
-                      height: 45,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        controller: _mobilenoController,
-                        obscureText: false,
-                        style: const TextStyle(
-                          fontSize: 18,
+                    prefix: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        '(+94) ',
+                        style: TextStyle(
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          prefix: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              '(+94) ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          suffixIcon: const Icon(
-                            Icons.done,
-                            color: Colors.green,
-                            size: 32,
-                          ),
+                      ),
+                    ),
+                    suffixIcon: const Icon(
+                      Icons.done,
+                      color: Colors.green,
+                      size: 32,
+                    ),
+                  ),
+                  validator: (value) {
+                    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                    RegExp regExp = new RegExp(pattern);
+                    if (value.isEmpty) {
+                      return 'Please enter your mobile number';
+                    } else if (!regExp.hasMatch(value)) {
+                      return 'Please enter valid mobile number';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image(
+                      image: AssetImage('images/otpSetup.png'),
+                      height: 350.0,
+                      width: 300.0,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 60),
+                    child: SizedBox(
+                      width: 250,
+                      height: 50,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: Color(0XFFD8352C),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              side: BorderSide(color: Colors.red)),
                         ),
-                        validator: (value) {
-                          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                          RegExp regExp = new RegExp(pattern);
-                          if (value.isEmpty) {
-                            return 'Please enter your mobile number';
-                          } else if (!regExp.hasMatch(value)) {
-                            return 'Please enter valid mobile number';
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            setState(() {
+                              showLoading = true;
+                              mob = _mobilenoController.text;
+                              countryMobNo = '+94$mob';
+                            });
+                            verifyPhoneNumber();
+                            print('controller');
+                            print(_mobilenoController.text);
+                          } else {
+                            return null;
                           }
-                          return null;
                         },
+                        child: Text('Get OTP'),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            child: Column(
-              children: [
-                Image(
-                  image: AssetImage('images/otpSetup.png'),
-                  height: 350.0,
-                  width: 300.0,
-                ),
-                SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                      backgroundColor: Color(0XFFD8352C),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          side: BorderSide(color: Colors.red)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        showLoading = true;
-                        mob = _mobilenoController.text;
-                        countryMobNo = '+94$mob';
-                      });
-                      verifyPhoneNumber();
-                      print('controller');
-                      print(_mobilenoController.text);
-                    },
-                    child: Text('Get OTP'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   getOtpFormWidget(context) {
-    var text = new RichText(
-      text: new TextSpan(
-        // Note: Styles for TextSpans must be explicitly defined.
-        // Child text spans will inherit styles from parent
-        style: new TextStyle(
+    var text = RichText(
+      text: TextSpan(
+        style: TextStyle(
           fontSize: 14.0,
           color: Colors.black,
         ),
         children: <TextSpan>[
-          new TextSpan(text: 'Enter the '),
-          new TextSpan(
-              text: 'OTP ', style: new TextStyle(fontWeight: FontWeight.bold)),
-          new TextSpan(text: 'sent to '),
-          new TextSpan(
-              text: '$countryMobNo',
-              style: new TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(
+            text: 'Enter the ',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          TextSpan(
+            text: 'OTP ',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          TextSpan(
+            text: 'sent to ',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          TextSpan(
+            text: '+94${mob.substring(1)}',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
         ],
       ),
     );
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: Divider(
-              thickness: 2,
-              color: Colors.grey[400],
-            ),
-          ),
           SizedBox(
             height: 20,
           ),
           Container(
             child: Column(
               children: [
-                Text(
-                  'OTP Verification',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
                 Container(
                   child: text,
                 ),
@@ -429,15 +396,18 @@ class _OtpSetupState extends State<OtpSetup> {
               ],
             ),
           ),
-          Container(
-            child: Column(
-              children: [
-                Image(
-                  image: AssetImage('images/otpVerify.png'),
+          Column(
+            children: [
+              Container(
+                child: Image(
+                  image: AssetImage('images/otp.png'),
                   height: 300.0,
                   width: 300.0,
                 ),
-                SizedBox(
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 50),
+                child: SizedBox(
                   width: 250,
                   height: 50,
                   child: TextButton(
@@ -462,8 +432,8 @@ class _OtpSetupState extends State<OtpSetup> {
                     child: Text('Verify & Proceed'),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
@@ -477,10 +447,9 @@ class _OtpSetupState extends State<OtpSetup> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: kbackgroundcolor,
-          elevation: 0.0,
-          titleSpacing: 10.0,
           centerTitle: true,
+          title: Text('OTP Verification'),
+          backgroundColor: kredbackgroundcolor,
           leading: InkWell(
             onTap: () {
               setState(() {
