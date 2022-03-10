@@ -13,7 +13,7 @@ class OrderDetails extends StatefulWidget {
 class _OrderDetailsState extends State<OrderDetails> {
   String userEmail;
   int pendingOrderslength;
-  int deliveredOrderslength;
+  int collectedOrderslength;
   @override
   void initState() {
     super.initState();
@@ -55,20 +55,80 @@ class _OrderDetailsState extends State<OrderDetails> {
     FirebaseFirestore.instance
         .collection('orders')
         .where('Email', isEqualTo: userEmail)
-        .where('Status', isEqualTo: 'Delivered')
+        .where('Status', isEqualTo: 'Collected')
         .get()
         .then((documentSnapshot) {
       if (documentSnapshot.size == 0) {
         setState(() {
-          deliveredOrderslength = 0;
+          collectedOrderslength = 0;
         });
       } else {
         setState(() {
-          deliveredOrderslength = documentSnapshot.size;
+          collectedOrderslength = documentSnapshot.size;
         });
       }
       print('Delivered Orders length:${documentSnapshot.size}');
     });
+  }
+
+  showAlertDialog(BuildContext context, String orderId) {
+    // set up the buttons
+    Widget continueButton = TextButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.red,
+        ),
+      ),
+      onPressed: () {
+        FirebaseFirestore.instance
+            .collection("orders")
+            .doc(orderId)
+            .update({
+              "Status": 'Collected',
+            })
+            .then((value) => print("Status Updated Successfully!"))
+            .catchError((error) => print("Failed: $error"));
+        // Navigator.of(context, rootNavigator: true).pop();
+
+        setState(() {
+          Navigator.push<void>(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => OrderDetails(),
+            ),
+          );
+        });
+      },
+    );
+    Widget cancelButton = TextButton(
+      child: Text(
+        "No",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+      ),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      //title: Text("Confirm"),
+      content: Text("Did You collect your Order?"),
+      actions: [
+        continueButton,
+        cancelButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override
@@ -81,7 +141,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         backgroundColor: kredbackgroundcolor,
       ),
       body: SafeArea(
-        child: deliveredOrderslength != 0 || pendingOrderslength != 0
+        child: collectedOrderslength != 0 || pendingOrderslength != 0
             ? Container(
                 child: Column(
                   children: [
@@ -250,12 +310,19 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                                     child:
                                                                         InkWell(
                                                                       onTap:
-                                                                          () {},
+                                                                          () {
+                                                                        String
+                                                                            orderId =
+                                                                            orders['OrderId'];
+                                                                        showAlertDialog(
+                                                                            context,
+                                                                            orderId);
+                                                                      },
                                                                       child:
                                                                           Center(
                                                                         child:
                                                                             Text(
-                                                                          'Recieved',
+                                                                          'Collected',
                                                                           style:
                                                                               TextStyle(),
                                                                         ),
@@ -321,7 +388,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       alignment: Alignment.topLeft,
                       height: 30,
                       child: Text(
-                        'Delivered Orders',
+                        'Collected Orders',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -329,13 +396,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                       ),
                       margin: EdgeInsets.only(top: 10, left: 15),
                     ),
-                    deliveredOrderslength != 0
+                    collectedOrderslength != 0
                         ? Container(
                             child: FutureBuilder(
                               future: FirebaseFirestore.instance
                                   .collection('orders')
                                   .where('Email', isEqualTo: userEmail)
-                                  .where('Status', isEqualTo: 'Delivered')
+                                  .where('Status', isEqualTo: 'Collected')
                                   .get(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -502,7 +569,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Text(
-                                        'No delivered orders!',
+                                        'No Collected orders!',
                                         style: TextStyle(
                                             fontSize: 16, color: Colors.grey),
                                       ),

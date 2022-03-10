@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../constant.dart';
+import 'orders.dart';
 
 class EachOrders extends StatefulWidget {
   String orderId;
@@ -15,6 +16,67 @@ class _EachOrdersState extends State<EachOrders> {
   String orderId;
   _EachOrdersState(this.orderId);
   CollectionReference orders = FirebaseFirestore.instance.collection('orders');
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget continueButton = TextButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.red,
+        ),
+      ),
+      onPressed: () {
+        FirebaseFirestore.instance
+            .collection("orders")
+            .doc(orderId)
+            .update({
+              "Status": 'Collected',
+            })
+            .then((value) => print("Status Updated Successfully!"))
+            .catchError((error) => print("Failed: $error"));
+        // Navigator.of(context, rootNavigator: true).pop();
+
+        setState(() {
+          Navigator.push<void>(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => OrderDetails(),
+            ),
+          );
+        });
+      },
+    );
+    Widget cancelButton = TextButton(
+      child: Text(
+        "No",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+      ),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      // title: Text("Confirm"),
+      content: Text("Did You collect your Order?"),
+      actions: [
+        continueButton,
+        cancelButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,10 +273,12 @@ class _EachOrdersState extends State<EachOrders> {
                                                   elevation: 4,
                                                   color: Colors.yellow,
                                                   child: InkWell(
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                      showAlertDialog(context);
+                                                    },
                                                     child: Center(
                                                       child: Text(
-                                                        'Recieved',
+                                                        'Collected',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,

@@ -12,7 +12,7 @@ class Cart extends ChangeNotifier {
     _items.removeRange(0, _items.length);
   }
 
-  static double _totalPrice = 0.0;
+  static double _totalPrice = 0.00;
   void add(Item item) {
     int index = _items.indexWhere((i) => i.name == item.name);
     print('indexxxx $index');
