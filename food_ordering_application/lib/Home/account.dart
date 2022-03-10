@@ -33,70 +33,74 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kbackgroundcolor,
       body: SafeArea(
         child: ListView(
           children: [
-            Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Container(
-                margin: EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Container(
-                      child: Icon(
-                        Icons.account_circle,
-                        size: 110,
-                        color: kredbackgroundcolor,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Icon(
+                          Icons.account_circle,
+                          size: 110,
+                          color: kredbackgroundcolor,
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                size: 20,
-                              ),
-                              Text(' NAR Dilshan'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.email,
-                                size: 20,
-                              ),
-                              Text(' rakshithad@gmail.com'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                size: 20,
-                              ),
-                              Text(' 0766807668'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  size: 20,
+                                ),
+                                Text(' NAR Dilshan'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.email,
+                                  size: 20,
+                                ),
+                                Text(' rakshithad@gmail.com'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.phone,
+                                  size: 20,
+                                ),
+                                Text(' 0766807668'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -119,7 +123,7 @@ class _AccountState extends State<Account> {
                         height: 45,
                         child: Padding(
                           padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Account Information'),
+                          child: Text('Personal Information'),
                         ),
                       ),
                     ),
@@ -164,7 +168,27 @@ class _AccountState extends State<Account> {
                         height: 45,
                         child: Padding(
                           padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Settings'),
+                          child: Text('Change password'),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.blue.withAlpha(10),
+                      onTap: () {
+                        debugPrint('Card tapped.');
+                      },
+                      child: const SizedBox(
+                        width: double.infinity,
+                        height: 45,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 15, left: 20),
+                          child: Text('Notifications'),
                         ),
                       ),
                     ),
@@ -200,7 +224,7 @@ class _AccountState extends State<Account> {
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Send Feedback',
+                      'Invite a Friend',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 13,
@@ -268,23 +292,25 @@ class _AccountState extends State<Account> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10, right: 150, left: 150),
-              child: SizedBox(
-                width: 250,
-                height: 50,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Color(0XFFD8352C),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        side: BorderSide(color: Colors.red)),
+            Center(
+              child: Container(
+                margin: EdgeInsets.only(top: 15),
+                child: SizedBox(
+                  height: 40,
+                  width: 150,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Color(0XFFD8352C),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          side: BorderSide(color: Colors.red)),
+                    ),
+                    onPressed: () async {
+                      showAlertDialog(context);
+                    },
+                    child: Text('Log Out'),
                   ),
-                  onPressed: () async {
-                    showAlertDialog(context);
-                  },
-                  child: Text('Log Out'),
                 ),
               ),
             ),
