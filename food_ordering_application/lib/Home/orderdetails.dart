@@ -294,7 +294,8 @@ class _EachOrdersState extends State<EachOrders> {
                           );
                         }
 
-                        return SizedBox(
+                        return Container(
+                          color: kbackgroundcolor,
                           height: 100,
                           width: 100,
                           child: Center(
