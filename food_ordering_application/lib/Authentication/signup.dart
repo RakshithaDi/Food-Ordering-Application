@@ -26,6 +26,7 @@ class _SignupState extends State<Signup> {
   String _password;
   String _confirmPassword;
   String mobileno;
+  bool states = true;
 
   // Toggles the password show status
   void _toggle() {
@@ -52,6 +53,9 @@ class _SignupState extends State<Signup> {
 
   Future<void> createUserWithEmailAndPassword() async {
     try {
+      setState(() {
+        states = false;
+      });
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: _userEmailController.text,
@@ -72,9 +76,15 @@ class _SignupState extends State<Signup> {
       print('Registered succesfully {$UserEmail} ');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        setState(() {
+          states = true;
+        });
         print('The password provided is too weak.');
         showAlertDialog('The password provided is too weak.', context);
       } else if (e.code == 'email-already-in-use') {
+        setState(() {
+          states = true;
+        });
         print('The account already exists for that email.');
         showAlertDialog('The account already exists for that email.', context);
       }
@@ -400,7 +410,12 @@ class _SignupState extends State<Signup> {
                             }
                             //  Navigator.pushNamed(context, OtpSetup.id);
                           },
-                          child: Text('Sign Up'),
+                          child: states == true
+                              ? Text('Sign Up')
+                              : CircularProgressIndicator(
+                                  backgroundColor: Colors.black38,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white)),
                         ),
                       ),
                     ),

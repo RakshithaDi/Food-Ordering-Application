@@ -30,12 +30,13 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-  }
+  bool status = true;
 
   Future<void> _signInWithEmailAndPassword() async {
     try {
+      setState(() {
+        status = false;
+      });
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: _userEmailController.text,
@@ -48,9 +49,15 @@ class _LoginState extends State<Login> {
       Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        setState(() {
+          status = true;
+        });
         print('No user found for that email.');
         showAlertDialog('No user found for that email.', context);
       } else if (e.code == 'wrong-password') {
+        setState(() {
+          status = true;
+        });
         print('Wrong password provided for that user.');
         showAlertDialog('Wrong password provided for that user.', context);
       }
@@ -220,26 +227,30 @@ class _LoginState extends State<Login> {
                         width: 250,
                         height: 50,
                         child: TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Color(0XFFD8352C),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                                side: BorderSide(color: Colors.red)),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              _signInWithEmailAndPassword();
-                            } else {
-                              return null;
-                            }
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color(0XFFD8352C),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  side: BorderSide(color: Colors.red)),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                _signInWithEmailAndPassword();
+                              } else {
+                                return null;
+                              }
 
-                            //
-                          },
-                          child: Text(
-                            "Login",
-                          ),
-                        ),
+                              //
+                            },
+                            child: status == true
+                                ? Text(
+                                    "Login",
+                                  )
+                                : CircularProgressIndicator(
+                                    backgroundColor: Colors.black38,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white))),
                       ),
                     ),
                   ],

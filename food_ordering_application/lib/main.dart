@@ -87,7 +87,7 @@ class _ViewControllerState extends State<ViewController> {
       setAppState(appStateValue);
     });
 
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
+    FirebaseAuth.instance.userChanges().listen((User user) {
       if (user == null) {
         print('User is currently signed out!');
 

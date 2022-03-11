@@ -14,9 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/orderdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/orderdetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/orders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/orders.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/personalinfo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/personalinfo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,11 +120,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart</url>
-          <line>368</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart</url>
           <line>341</line>
