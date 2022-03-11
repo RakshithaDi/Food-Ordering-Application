@@ -15,12 +15,7 @@
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/account.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/account.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,14 +69,14 @@
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\images" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\assets" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\lib\settings" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\android\gradle" />
-      <recent name="D:\github\Food-Ordering-Application\food_ordering_application\images" />
       <recent name="D:\github\Food-Ordering-Application\food_ordering_application\android\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter.myapp.dart">
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/main.dart" />
       <method v="2" />
@@ -100,8 +95,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter.myapp.dart" />
         <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Flutter.myapp.dart" />
         <item itemvalue="Flutter.otp_setup.dart" />
         <item itemvalue="Flutter.otp_verify.dart" />
       </list>

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/login.dart';
+import 'package:food_ordering_application/Home/personalinfo.dart';
 import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
@@ -17,6 +19,8 @@ FirebaseAuth auth = FirebaseAuth.instance;
 
 class _AccountState extends State<Account> {
   String userEmail;
+  String name;
+  String phoneNo;
 
   @override
   void initState() {
@@ -55,50 +59,76 @@ class _AccountState extends State<Account> {
                           color: kredbackgroundcolor,
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(left: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.person,
-                                  size: 20,
+                      FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance
+                              .collection('userprofile')
+                              .doc(userEmail)
+                              .get(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text("Something went wrong");
+                            }
+
+                            if (snapshot.connectionState ==
+                                    ConnectionState.waiting ||
+                                !snapshot.hasData) {
+                              // return CircularProgressIndicator();
+                            }
+
+                            if (snapshot.hasData) {
+                              Map<String, dynamic> userData =
+                                  snapshot.data.data() as Map<String, dynamic>;
+                              return Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.person,
+                                          size: 20,
+                                        ),
+                                        Text(
+                                            '${userData['fname']} ${userData['lname']}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.email,
+                                          size: 20,
+                                        ),
+                                        Text('$userEmail'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.phone,
+                                          size: 20,
+                                        ),
+                                        Text('${userData['mobileno']}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                  ],
                                 ),
-                                Text(' NAR Dilshan'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.email,
-                                  size: 20,
-                                ),
-                                Text(' rakshithad@gmail.com'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.phone,
-                                  size: 20,
-                                ),
-                                Text(' 0766807668'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                          ],
-                        ),
-                      ),
+                              );
+                            }
+                            return Container(
+                              child: CircularProgressIndicator(),
+                            );
+                          }),
                     ],
                   ),
                 ),
@@ -116,7 +146,12 @@ class _AccountState extends State<Account> {
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(10),
                       onTap: () {
-                        debugPrint('Card tapped.');
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => PersonalInfo(),
+                          ),
+                        );
                       },
                       child: const SizedBox(
                         width: double.infinity,
