@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../constant.dart';
 
 class PersonalInfo extends StatefulWidget {
+  static String id = 'personalInfo';
   @override
   _PersonalInfoState createState() => _PersonalInfoState();
 }
@@ -19,7 +20,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
   String fname;
   String lname;
   String phoneno;
-  bool edit = true;
+  bool edit = false;
 
   @override
   void initState() {
@@ -58,68 +59,73 @@ class _PersonalInfoState extends State<PersonalInfo> {
     phoneNoController.text = phoneno;
     //var decorationOutline = OutlineInputBorder(borderRadius: BorderRadius.circular(0));
 
-    var outlineBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(0),
-      borderSide: BorderSide(color: Colors.black),
-    );
-
-    var underlineBorder = UnderlineInputBorder(
-        // borderSide: BorderSide(color: Colors.blue),
-        );
+    // var outlineBorder = OutlineInputBorder(
+    //   borderRadius: BorderRadius.circular(0),
+    //   borderSide: BorderSide(color: Colors.black),
+    // );
+    //
+    // var underlineBorder = UnderlineInputBorder(
+    //     // borderSide: BorderSide(color: Colors.blue),
+    //     );
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Personal Information'),
-          backgroundColor: kredbackgroundcolor,
-        ),
-        body: Container(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: edit == false
-                            ? Padding(
-                                padding: EdgeInsets.only(bottom: 20),
-                                child: Text(
-                                  'Edit Profile',
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black38,
-                                  ),
+      backgroundColor: kbackgroundcolor,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Personal Information'),
+        backgroundColor: kredbackgroundcolor,
+      ),
+      body: Container(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 30),
+                child: Column(
+                  children: [
+                    Center(
+                      child: edit == true
+                          ? Padding(
+                              padding: EdgeInsets.only(bottom: 20),
+                              child: Text(
+                                'Edit Profile',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black38,
                                 ),
-                              )
-                            : Container(),
+                              ),
+                            )
+                          : Container(),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Image.asset(
+                        'images/editprofile.png',
+                        height: 200,
                       ),
-                      InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                          'images/editprofile.png',
-                          height: 200,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                            height: 100,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                          height: 80,
+                          child: Card(
+                            elevation: edit == false ? 4 : 0,
+                            color:
+                                edit == false ? Colors.white : kbackgroundcolor,
                             child: TextFormField(
                               textAlign: TextAlign.center,
-                              readOnly: edit,
+                              enabled: edit,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your first name';
@@ -127,26 +133,40 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                enabledBorder: edit == true
-                                    ? underlineBorder
-                                    : outlineBorder,
-                                labelText: 'First Name',
-                                suffixIcon: edit == true
-                                    ? Icon(Icons.format_list_bulleted)
+                                label: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text('First Name'),
+                                ),
+                                border: edit == false
+                                    ? InputBorder.none
+                                    : UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.blue),
+                                      ),
+                                suffixIcon: edit == false
+                                    ? Icon(
+                                        Icons.format_list_bulleted,
+                                        color: Colors.red,
+                                      )
                                     : Icon(Icons.drive_file_rename_outline),
                               ),
                               controller: firstNameController,
-                            )),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                            height: 100,
+                            ),
+                          )),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                          height: 80,
+                          child: Card(
+                            elevation: edit == false ? 4 : 0,
+                            color:
+                                edit == false ? Colors.white : kbackgroundcolor,
                             child: TextFormField(
                               textAlign: TextAlign.center,
-                              readOnly: edit,
+                              enabled: edit,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your last name';
@@ -154,114 +174,197 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                enabledBorder: edit == true
-                                    ? underlineBorder
-                                    : outlineBorder,
-                                labelText: 'Last Name',
-                                suffixIcon: edit == true
-                                    ? Icon(Icons.format_list_bulleted)
+                                border: edit == false
+                                    ? InputBorder.none
+                                    : UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.blue),
+                                      ),
+                                label: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text('Last Name'),
+                                ),
+                                suffixIcon: edit == false
+                                    ? Icon(
+                                        Icons.format_list_bulleted,
+                                        color: Colors.red,
+                                      )
                                     : Icon(Icons.drive_file_rename_outline),
                               ),
                               controller: secondNameController,
-                            )),
-                      )
-                    ],
-                  ),
+                            ),
+                          )),
+                    )
+                  ],
                 ),
-                Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    height: 100,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  height: 80,
+                  child: Card(
                     child: TextFormField(
                       textAlign: TextAlign.center,
-                      readOnly: edit,
+                      // readOnly: true,
+                      enabled: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your first name';
+                          return 'Please enter your email address';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        enabledBorder:
-                            edit == true ? underlineBorder : outlineBorder,
-                        labelText: 'Email',
-                        suffixIcon: edit == true
-                            ? Icon(Icons.format_list_bulleted)
+                        border: InputBorder.none,
+                        label: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text('Email'),
+                        ),
+                        suffixIcon: edit == false
+                            ? Icon(
+                                Icons.format_list_bulleted,
+                                color: Colors.red,
+                              )
                             : Icon(Icons.drive_file_rename_outline),
                       ),
                       controller: emailController,
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    height: 100,
+                    ),
+                  )),
+              Container(
+                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  height: 80,
+                  child: Card(
                     child: TextFormField(
                       textAlign: TextAlign.center,
-                      readOnly: true,
+                      // readOnly: true,
+                      enabled: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your first name';
+                          return 'Please enter your phone number';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        enabledBorder:
-                            edit == true ? underlineBorder : outlineBorder,
-                        labelText: 'Phone No',
-                        suffixIcon: edit == true
-                            ? Icon(Icons.format_list_bulleted)
+                        border: InputBorder.none,
+                        label: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text('Phone No'),
+                        ),
+                        suffixIcon: edit == false
+                            ? Icon(
+                                Icons.format_list_bulleted,
+                                color: Colors.red,
+                              )
                             : Icon(Icons.drive_file_rename_outline),
                       ),
                       controller: phoneNoController,
-                    )),
-                edit == true
-                    ? Align(
-                        alignment: Alignment.bottomCenter,
-                        child: SizedBox(
-                          width: 330,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: kredbackgroundcolor,
-                            ),
-                            onPressed: () {
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState.validate()) {}
-                              setState(() {
-                                edit = false;
-                              });
-                            },
-                            child: const Text(
-                              'Edit',
-                              style: TextStyle(fontSize: 15),
-                            ),
+                    ),
+                  )),
+              edit == false
+                  ? Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        width: 330,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: kredbackgroundcolor,
+                          ),
+                          onPressed: () {
+                            // Validate returns true if the form is valid, or false otherwise.
+                            if (_formKey.currentState.validate()) {}
+                            setState(() {
+                              edit = true;
+                            });
+                          },
+                          child: const Text(
+                            'Edit',
+                            style: TextStyle(fontSize: 15),
                           ),
                         ),
-                      )
-                    : Align(
-                        alignment: Alignment.bottomCenter,
-                        child: SizedBox(
-                          width: 330,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                            ),
-                            onPressed: () {
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState.validate()) {}
-                              setState(() {
-                                edit = false;
-                              });
-                            },
-                            child: const Text(
-                              'Update',
-                              style: TextStyle(fontSize: 15),
-                            ),
+                      ),
+                    )
+                  : Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        width: 330,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                          ),
+                          onPressed: () {
+                            // Validate returns true if the form is valid, or false otherwise.
+                            if (_formKey.currentState.validate()) {
+                              showAlertDialog(context);
+                            }
+                          },
+                          child: const Text(
+                            'Update',
+                            style: TextStyle(fontSize: 15),
                           ),
                         ),
-                      )
-              ],
-            ),
+                      ),
+                    )
+            ],
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget continueButton = TextButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.red,
+        ),
+      ),
+      onPressed: () {
+        FirebaseFirestore.instance
+            .collection("userprofile")
+            .doc(userEmail)
+            .update({
+              "fname": firstNameController.text,
+              "lname": secondNameController.text,
+            })
+            .then((value) => print("Records Updated Successfully!"))
+            .catchError((error) => print("Failed: $error"));
+
+        Navigator.pop(context);
+        setState(() {
+          Navigator.pushReplacementNamed(context, PersonalInfo.id);
+          edit = false;
+        });
+      },
+    );
+    Widget cancelButton = TextButton(
+      child: Text(
+        "No",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+      ),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      // title: Text("Confirm"),
+      content: Text("Are your sure you want to change it?"),
+      actions: [
+        continueButton,
+        cancelButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

@@ -37,11 +37,16 @@ class _EachOrdersState extends State<EachOrders> {
             .then((value) => print("Status Updated Successfully!"))
             .catchError((error) => print("Failed: $error"));
 
+        // Navigator.pop(context);
+        // setState(() {
+        //   Navigator.pushNamed(context, OrderDetails.id);
+        // });
+        // Navigator.of(context).popUntil((route) => route.isCurrent);
+        Navigator.pop(context);
         Navigator.pop(context);
         setState(() {
-          Navigator.pushNamed(context, OrderDetails.id);
+          Navigator.pushReplacementNamed(context, OrderDetails.id);
         });
-        Navigator.of(context).popUntil((route) => route.isCurrent);
       },
     );
     Widget cancelButton = TextButton(

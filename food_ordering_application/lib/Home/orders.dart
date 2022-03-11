@@ -34,8 +34,8 @@ class _OrderDetailsState extends State<OrderDetails> {
     }
   }
 
-  void CheckPendingOrders() {
-    FirebaseFirestore.instance
+  void CheckPendingOrders() async {
+    await FirebaseFirestore.instance
         .collection('orders')
         .where('Email', isEqualTo: userEmail)
         .where('Status', isEqualTo: 'Pending')
@@ -54,8 +54,8 @@ class _OrderDetailsState extends State<OrderDetails> {
     });
   }
 
-  void CheckDeliveredOrders() {
-    FirebaseFirestore.instance
+  void CheckDeliveredOrders() async {
+    await FirebaseFirestore.instance
         .collection('orders')
         .where('Email', isEqualTo: userEmail)
         .where('Status', isEqualTo: 'Collected')
@@ -84,8 +84,8 @@ class _OrderDetailsState extends State<OrderDetails> {
           color: Colors.red,
         ),
       ),
-      onPressed: () {
-        FirebaseFirestore.instance
+      onPressed: () async {
+        await FirebaseFirestore.instance
             .collection("orders")
             .doc(orderId)
             .update({
@@ -93,15 +93,17 @@ class _OrderDetailsState extends State<OrderDetails> {
             })
             .then((value) => print("Status Updated Successfully!"))
             .catchError((error) => print("Failed: $error"));
-        // Navigator.of(context, rootNavigator: true).pop();
 
-        // Navigator.pushNamedAndRemoveUntil(
-        //     context, OrderDetails.id, (route) => false);
         Navigator.pop(context);
         setState(() {
-          Navigator.pushNamed(context, OrderDetails.id);
+          Navigator.pushReplacementNamed(context, OrderDetails.id);
         });
-        Navigator.of(context).popUntil((route) => route.isCurrent);
+
+        // Navigator.pop(context);
+        // setState(() {
+        //   Navigator.pushNamed(context, OrderDetails.id);
+        // });
+        // Navigator.of(context).popUntil((route) => route.isCurrent);
       },
     );
     Widget cancelButton = TextButton(
@@ -435,7 +437,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        height: 250,
+                                        height: pendingOrderslength == 0
+                                            ? 450
+                                            : 250,
                                         child: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
@@ -583,7 +587,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: Text(
-                                        'No Collected orders!',
+                                        'No Collected orders yet!',
                                         style: TextStyle(
                                             fontSize: 16, color: Colors.grey),
                                       ),
