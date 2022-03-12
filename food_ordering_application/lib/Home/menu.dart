@@ -27,6 +27,7 @@ class _MenuState extends State<Menu> {
   String name;
   String imgUrl;
   double price;
+  int notifyCount = 0;
 
   var currentUser = FirebaseAuth.instance.currentUser;
   @override
@@ -41,13 +42,45 @@ class _MenuState extends State<Menu> {
     if (currentUser != null) {
       print(currentUser.email);
     }
-    //  downloadURLExample();
+    getNotificationCount();
+  }
+
+  void getNotificationCount() {
+    FirebaseFirestore.instance
+        .collection('orders')
+        .where('Email', isEqualTo: currentUser.email)
+        .where('Status', isEqualTo: 'Pending')
+        .get()
+        .then((documentSnapshot) {
+      if (documentSnapshot.size == 0) {
+        setState(() {
+          Cart.NotificationLength(0);
+        });
+      } else {
+        setState(() {
+          Cart.NotificationLength(documentSnapshot.size);
+        });
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.height.toString());
     return Consumer<Cart>(builder: (context, cart, child) {
+      // FirebaseFirestore.instance
+      //     .collection('orders')
+      //     .where('Email', isEqualTo: currentUser.email)
+      //     .where('Status', isEqualTo: 'Pending')
+      //     .get()
+      //     .then((documentSnapshot) {
+      //   if (documentSnapshot.size == 0) {
+      //     cart.NotificationLength(0);
+      //   } else {
+      //     cart.NotificationLength(documentSnapshot.size);
+      //   }
+      // });
+
       return Scaffold(
         appBar: AppBar(
           toolbarHeight: 68,
@@ -104,7 +137,7 @@ class _MenuState extends State<Menu> {
                 decoration:
                     BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
                 child: Text(
-                  Cart.count.toString(),
+                  Cart.NotifyCount.toString(),
                   style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
               ),

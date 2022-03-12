@@ -9,6 +9,8 @@ import 'package:pay/pay.dart';
 import 'package:payhere_mobilesdk_flutter/payhere_mobilesdk_flutter.dart';
 import 'package:intl/intl.dart';
 
+import 'home.dart';
+
 class CheckOut extends StatefulWidget {
   @override
   _CheckOutState createState() => _CheckOutState();
@@ -129,14 +131,15 @@ class _CheckOutState extends State<CheckOut> {
       setState(() {
         Cart.EmptyCart();
       });
-
+      Navigator.pop(context);
       setState(() {
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => Menu(),
+            builder: (BuildContext context) => Home(),
           ),
         );
+        Cart.PaymentStates();
       });
     }, (error) {
       print("One Time Payment Failed. Error: $error");
@@ -186,6 +189,7 @@ class _CheckOutState extends State<CheckOut> {
           "PhoneNo": phoneNo,
           "Email": userEmail,
           "Status": 'Pending',
+          "Ready": 'no',
         })
         .then((value) => print("Records Added Successfully!"))
         .catchError((error) => print("Failed: $error"));

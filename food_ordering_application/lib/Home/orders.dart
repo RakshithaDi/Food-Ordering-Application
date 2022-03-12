@@ -160,18 +160,20 @@ class _OrderDetailsState extends State<OrderDetails> {
             ? Container(
                 child: Column(
                   children: [
-                    Container(
-                      height: 30,
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Pending Orders',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      margin: EdgeInsets.only(top: 10, left: 15),
-                    ),
+                    pendingOrderslength != 0
+                        ? Container(
+                            height: 30,
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'Pending Orders',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(top: 10, left: 15),
+                          )
+                        : Container(),
                     pendingOrderslength != 0
                         ? Container(
                             margin: EdgeInsets.all(2),
@@ -199,7 +201,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        height: 350,
+                                        height: collectedOrderslength == 0
+                                            ? 640
+                                            : 350,
                                         child: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
@@ -373,44 +377,46 @@ class _OrderDetailsState extends State<OrderDetails> {
                             ),
                           )
                         : Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Center(
-                                    child: Icon(
-                                  Icons.downloading_rounded,
-                                  size: 100,
-                                  color: Colors.red,
-                                )),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Text(
-                                      'No pending orders!',
-                                      style: TextStyle(
-                                          fontSize: 16, color: Colors.grey),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            // child: Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   crossAxisAlignment: CrossAxisAlignment.center,
+                            //   children: [
+                            //     Center(
+                            //         child: Icon(
+                            //       Icons.downloading_rounded,
+                            //       size: 100,
+                            //       color: Colors.red,
+                            //     )),
+                            //     SizedBox(
+                            //       height: 10,
+                            //     ),
+                            //     Center(
+                            //       child: Padding(
+                            //         padding: const EdgeInsets.only(top: 10),
+                            //         child: Text(
+                            //           'No pending orders!',
+                            //           style: TextStyle(
+                            //               fontSize: 16, color: Colors.grey),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             ),
-                          ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      height: 30,
-                      child: Text(
-                        'Collected Orders',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      margin: EdgeInsets.only(top: 10, left: 15),
-                    ),
+                    collectedOrderslength != 0
+                        ? Container(
+                            alignment: Alignment.topLeft,
+                            height: 30,
+                            child: Text(
+                              'Collected Orders',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(top: 10, left: 15),
+                          )
+                        : Container(),
                     collectedOrderslength != 0
                         ? Container(
                             child: FutureBuilder(
@@ -438,7 +444,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     children: [
                                       Container(
                                         height: pendingOrderslength == 0
-                                            ? 450
+                                            ? 650
                                             : 250,
                                         child: ListView.builder(
                                           scrollDirection: Axis.vertical,
@@ -570,33 +576,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               },
                             ),
                           )
-                        : Center(
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Center(
-                                      child: Icon(
-                                    Icons.downloading_rounded,
-                                    size: 100,
-                                    color: Colors.red,
-                                  )),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Text(
-                                        'No Collected orders yet!',
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.grey),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                        : Container(),
                   ],
                 ),
               )

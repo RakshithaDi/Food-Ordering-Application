@@ -34,15 +34,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Consumer<Cart>(builder: (context, cart, child) {
       return Scaffold(
         backgroundColor: kbackgroundcolor,
-        body: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            Menu(),
-            CartPage(),
-            Complaints(),
-            Account(),
-          ],
-          controller: controller,
+        body: SafeArea(
+          child: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            children: <Widget>[
+              Menu(),
+              CartPage(),
+              Complaints(),
+              Account(),
+            ],
+            controller: controller,
+          ),
         ),
         bottomNavigationBar: Material(
           color: kredbackgroundcolor,

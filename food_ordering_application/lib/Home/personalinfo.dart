@@ -69,6 +69,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
     //     );
     return Scaffold(
       backgroundColor: kbackgroundcolor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Personal Information'),

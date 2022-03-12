@@ -7,7 +7,7 @@ import 'item.dart';
 
 class Cart extends ChangeNotifier {
   static List<Item> _items = [];
-
+  static int noificationCount = 0;
   static void EmptyCart() {
     _items.removeRange(0, _items.length);
   }
@@ -25,9 +25,17 @@ class Cart extends ChangeNotifier {
           snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 1));
     } else {
       Get.snackbar("Already Added ",
-          "You have added the ${item.name} to the cart alredy",
+          "You have added the ${item.name} to the cart already",
           snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 1));
     }
+  }
+
+  static void NotificationLength(int value) {
+    noificationCount = value;
+  }
+
+  static int get NotifyCount {
+    return noificationCount;
   }
 
   void remove(Item item) {

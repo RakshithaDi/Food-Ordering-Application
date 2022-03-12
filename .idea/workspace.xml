@@ -15,7 +15,15 @@
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/account.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/account.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/notifications.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/notifications.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/orders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/orders.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/personalinfo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/personalinfo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/cart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/cart.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

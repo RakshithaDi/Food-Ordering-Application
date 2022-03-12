@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/login.dart';
+import 'package:food_ordering_application/Home/changepassword.dart';
 import 'package:food_ordering_application/Home/personalinfo.dart';
 import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
 import '../main.dart';
+import 'notifications.dart';
 import 'orders.dart';
 
 class Account extends StatefulWidget {
@@ -196,7 +198,12 @@ class _AccountState extends State<Account> {
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(10),
                       onTap: () {
-                        debugPrint('Card tapped.');
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => ChangePassword(),
+                          ),
+                        );
                       },
                       child: const SizedBox(
                         width: double.infinity,
@@ -216,7 +223,13 @@ class _AccountState extends State<Account> {
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(10),
                       onTap: () {
-                        debugPrint('Card tapped.');
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                NotificationPage(),
+                          ),
+                        );
                       },
                       child: const SizedBox(
                         width: double.infinity,
