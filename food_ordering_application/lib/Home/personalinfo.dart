@@ -121,10 +121,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       child: SizedBox(
                           height: 80,
                           child: Card(
-                            elevation: edit == false ? 4 : 0,
-                            color:
-                                edit == false ? Colors.white : kbackgroundcolor,
+                            elevation: 2,
+                            color: Colors.red.withOpacity(0.6),
                             child: TextFormField(
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                              ),
                               textAlign: TextAlign.center,
                               enabled: edit,
                               validator: (value) {
@@ -136,20 +138,14 @@ class _PersonalInfoState extends State<PersonalInfo> {
                               decoration: InputDecoration(
                                 label: Padding(
                                   padding: const EdgeInsets.only(left: 10),
-                                  child: Text('First Name'),
+                                  child: Text(
+                                    'First Name',
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.6),
+                                    ),
+                                  ),
                                 ),
-                                border: edit == false
-                                    ? InputBorder.none
-                                    : UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.blue),
-                                      ),
-                                suffixIcon: edit == false
-                                    ? Icon(
-                                        Icons.format_list_bulleted,
-                                        color: Colors.red,
-                                      )
-                                    : Icon(Icons.drive_file_rename_outline),
+                                border: InputBorder.none,
                               ),
                               controller: firstNameController,
                             ),
@@ -162,10 +158,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       child: SizedBox(
                           height: 80,
                           child: Card(
-                            elevation: edit == false ? 4 : 0,
-                            color:
-                                edit == false ? Colors.white : kbackgroundcolor,
+                            elevation: 2,
+                            color: Colors.red.withOpacity(0.6),
                             child: TextFormField(
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                              ),
                               textAlign: TextAlign.center,
                               enabled: edit,
                               validator: (value) {
@@ -175,22 +173,23 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                border: edit == false
-                                    ? InputBorder.none
-                                    : UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.blue),
-                                      ),
+                                border: InputBorder.none,
                                 label: Padding(
                                   padding: const EdgeInsets.only(left: 10),
-                                  child: Text('Last Name'),
+                                  child: Text(
+                                    'Last Name',
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.6),
+                                    ),
+                                  ),
                                 ),
                                 suffixIcon: edit == false
                                     ? Icon(
                                         Icons.format_list_bulleted,
-                                        color: Colors.red,
+                                        color: Colors.white,
                                       )
-                                    : Icon(Icons.drive_file_rename_outline),
+                                    : Icon(Icons.drive_file_rename_outline,
+                                        color: Colors.white),
                               ),
                               controller: secondNameController,
                             ),
@@ -203,7 +202,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   height: 80,
                   child: Card(
+                    elevation: 2,
+                    color: Colors.red.withOpacity(0.6),
                     child: TextFormField(
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.9),
+                      ),
                       textAlign: TextAlign.center,
                       // readOnly: true,
                       enabled: false,
@@ -217,14 +221,22 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         border: InputBorder.none,
                         label: Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text('Email'),
+                          child: Text(
+                            'Email',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.6),
+                            ),
+                          ),
                         ),
                         suffixIcon: edit == false
                             ? Icon(
                                 Icons.format_list_bulleted,
-                                color: Colors.red,
+                                color: Colors.white,
                               )
-                            : Icon(Icons.drive_file_rename_outline),
+                            : Icon(
+                                Icons.drive_file_rename_outline,
+                                color: Colors.white,
+                              ),
                       ),
                       controller: emailController,
                     ),
@@ -233,7 +245,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                   height: 80,
                   child: Card(
+                    elevation: 2,
+                    color: Colors.red.withOpacity(0.6),
                     child: TextFormField(
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.9),
+                      ),
                       textAlign: TextAlign.center,
                       // readOnly: true,
                       enabled: false,
@@ -247,14 +264,20 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         border: InputBorder.none,
                         label: Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text('Phone No'),
+                          child: Text(
+                            'Phone No',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.6),
+                            ),
+                          ),
                         ),
                         suffixIcon: edit == false
                             ? Icon(
                                 Icons.format_list_bulleted,
-                                color: Colors.red,
+                                color: Colors.white,
                               )
-                            : Icon(Icons.drive_file_rename_outline),
+                            : Icon(Icons.drive_file_rename_outline,
+                                color: Colors.white),
                       ),
                       controller: phoneNoController,
                     ),
@@ -263,7 +286,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   ? Align(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
-                        width: 330,
+                        width: 300,
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -286,11 +309,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   : Align(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
-                        width: 330,
+                        width: 300,
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            primary: Colors.red.withOpacity(0.8),
                           ),
                           onPressed: () {
                             // Validate returns true if the form is valid, or false otherwise.

@@ -182,6 +182,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   .collection('orders')
                                   .where('Email', isEqualTo: userEmail)
                                   .where('Status', isEqualTo: 'Pending')
+                                  .orderBy('OrderId', descending: true)
                                   .get(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -424,6 +425,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   .collection('orders')
                                   .where('Email', isEqualTo: userEmail)
                                   .where('Status', isEqualTo: 'Collected')
+                                  .orderBy('OrderId', descending: true)
                                   .get(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {

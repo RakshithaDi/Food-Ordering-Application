@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                   'Welcome to FoodX!',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      fontSize: 30,
                       color: Colors.white),
                 ),
               ),
@@ -102,7 +102,7 @@ class _LoginState extends State<Login> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(11),
                     child: Image(
-                      image: AssetImage('images/foodxgg.png'),
+                      image: AssetImage('images/foodxbgremoved.png'),
                       height: 100.0,
                       width: 200.0,
                     ),
@@ -115,7 +115,7 @@ class _LoginState extends State<Login> {
               Text(
                 'Let\'s help you meet up your tasks.',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 17,
                     color: Colors.grey[100],
                     fontWeight: FontWeight.bold),
               ),
@@ -247,34 +247,35 @@ class _LoginState extends State<Login> {
                           width: 250,
                           height: 50,
                           child: ElevatedButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.red,
-                                backgroundColor: Colors.white.withOpacity(0.4),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(11),
-                                    side: BorderSide(
-                                        width: 0, style: BorderStyle.none)),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState.validate()) {
-                                  _signInWithEmailAndPassword();
-                                } else {
-                                  return null;
-                                }
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Colors.white.withOpacity(0.5),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  side: BorderSide(color: Colors.red)),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                _signInWithEmailAndPassword();
+                              } else {
+                                return null;
+                              }
 
-                                //
-                              },
-                              child: status == true
-                                  ? Text(
-                                      "Login",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  : CircularProgressIndicator(
-                                      backgroundColor: Colors.black38,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.white))),
+                              //
+                            },
+                            child: status == true
+                                ? Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                : CircularProgressIndicator(
+                                    backgroundColor: Colors.black38,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
+                                  ),
+                          ),
                         ),
                       ),
                     ],

@@ -349,10 +349,10 @@ class _AccountState extends State<Account> {
                   child: TextButton(
                     style: TextButton.styleFrom(
                       primary: Colors.white,
-                      backgroundColor: Color(0XFFD8352C),
+                      backgroundColor: Colors.red.withOpacity(0.9),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
-                          side: BorderSide(color: Colors.red)),
+                          side: BorderSide(color: Colors.white)),
                     ),
                     onPressed: () async {
                       showAlertDialog(context);
