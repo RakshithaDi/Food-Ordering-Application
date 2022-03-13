@@ -40,6 +40,11 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kbackgroundcolor,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Account'),
+        backgroundColor: kredbackgroundcolor,
+      ),
       body: SafeArea(
         child: ListView(
           children: [
@@ -291,17 +296,17 @@ class _AccountState extends State<Account> {
                       ),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Rate us on the Play Store',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: Text(
+                  //     'Rate us on the Play Store',
+                  //     style: TextStyle(
+                  //       color: Colors.grey[600],
+                  //       fontSize: 13,
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // ),
                   Row(
                     children: [
                       Card(

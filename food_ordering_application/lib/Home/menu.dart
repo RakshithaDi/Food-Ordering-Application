@@ -10,6 +10,7 @@ import 'itemspage.dart';
 import 'searchpage.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Menu extends StatefulWidget {
   static String id = 'menu';
@@ -43,6 +44,20 @@ class _MenuState extends State<Menu> {
       print(currentUser.email);
     }
     getNotificationCount();
+    getAdsLinks();
+  }
+
+  final List<String> imgList = [];
+  void getAdsLinks() async {
+    await FirebaseFirestore.instance
+        .collection('advertisments')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        imgList.add(doc["imgUrl"]);
+        print(doc["imgUrl"]);
+      });
+    });
   }
 
   void getNotificationCount() {
@@ -64,8 +79,44 @@ class _MenuState extends State<Menu> {
     });
   }
 
+  final CarouselController _controller = CarouselController();
+  int _current = 0;
   @override
   Widget build(BuildContext context) {
+    final List<Widget> imageSliders = imgList
+        .map((item) => Container(
+              child: Container(
+                margin: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                        Positioned(
+                          bottom: 0.0,
+                          left: 0.0,
+                          right: 0.0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(200, 0, 0, 0),
+                                  Color.fromARGB(0, 0, 0, 0)
+                                ],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+            ))
+        .toList();
+
     print(MediaQuery.of(context).size.height.toString());
     return Consumer<Cart>(builder: (context, cart, child) {
       // FirebaseFirestore.instance
@@ -233,24 +284,64 @@ class _MenuState extends State<Menu> {
             ),
             Column(
               children: [
+                // Container(
+                //   height: 150,
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(top: 10),
+                //     child: PageView.builder(
+                //         controller: pageController,
+                //         itemCount: 3,
+                //         itemBuilder: (context, position) {
+                //           return buildPageItem(position);
+                //         }),
+                //   ),
+                // ),
+                // new DotsIndicator(
+                //   decorator: DotsDecorator(
+                //     activeColor: kredbackgroundcolor,
+                //   ),
+                //   dotsCount: 3,
+                //   position: currentPageValue,
+                // ),
                 Container(
-                  height: 150,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: PageView.builder(
-                        controller: pageController,
-                        itemCount: 3,
-                        itemBuilder: (context, position) {
-                          return buildPageItem(position);
+                  margin: EdgeInsets.only(top: 10),
+                  height: 140,
+                  width: 450,
+                  child: CarouselSlider(
+                    items: imageSliders,
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        aspectRatio: 2.0,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
                         }),
                   ),
                 ),
-                new DotsIndicator(
-                  decorator: DotsDecorator(
-                    activeColor: kredbackgroundcolor,
-                  ),
-                  dotsCount: 3,
-                  position: currentPageValue,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: imgList.asMap().entries.map((entry) {
+                    return GestureDetector(
+                      onTap: () => _controller.animateToPage(entry.key),
+                      child: Container(
+                        width: 12.0,
+                        height: 12.0,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black)
+                                    .withOpacity(
+                                        _current == entry.key ? 0.9 : 0.4)),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ],
             ),
