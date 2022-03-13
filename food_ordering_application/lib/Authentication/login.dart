@@ -17,13 +17,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool _obscureText = true;
   String Useremail;
   String _password;
   final TextEditingController _userEmailController = TextEditingController();
   final TextEditingController _userPassworController = TextEditingController();
 
   // Toggles the password show status
-  bool _obscureText = true;
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
@@ -71,63 +71,64 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: kbackgroundcolor,
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color(0xFFEf44949),
-            Color(0xFFEf00e0e),
-            Color(0xFFEEc00b0b),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          child: ListView(
+            children: <Widget>[
               Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: Text(
-                  'Welcome to FoodX!',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.white),
-                ),
-              ),
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(
-                    bottom: 20,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(11),
-                    child: Image(
-                      image: AssetImage('images/foodxbgremoved.png'),
-                      height: 100.0,
-                      width: 200.0,
+                child: Column(
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image(
+                            image: AssetImage('images/foodx.png'),
+                            height: 100.0,
+                            width: 200.0,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                'Let\'s help you meet up your tasks.',
-                style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.grey[100],
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              SizedBox(
-                height: 10.0,
-                width: 350,
-                child: Divider(
-                  thickness: 2,
-                  color: Colors.grey[300],
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Welcome to FoodX!',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'Let\'s help you meet up your tasks.',
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey[500],
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                            width: 350,
+                            child: Divider(
+                              thickness: 2,
+                              color: Colors.grey[400],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -144,27 +145,18 @@ class _LoginState extends State<Login> {
                                   EdgeInsets.only(left: 10, right: 10, top: 10),
                               child: TextFormField(
                                 controller: _userEmailController,
-                                cursorColor: Colors.white,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.9)),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  fillColor: Colors.white.withOpacity(0.4),
+                                  fillColor: Colors.white,
                                   labelText: 'Email',
-                                  errorStyle: TextStyle(color: Colors.white),
                                   labelStyle: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.white.withOpacity(0.9)),
+                                    fontSize: 15,
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(11),
-                                    borderSide: const BorderSide(
-                                        width: 0, style: BorderStyle.none),
                                   ),
                                   suffixIcon: Icon(
                                     Icons.email,
-                                    color: Colors.white,
                                   ),
                                 ),
                                 keyboardType: TextInputType.emailAddress,
@@ -184,30 +176,19 @@ class _LoginState extends State<Login> {
                               margin: EdgeInsets.only(left: 10, right: 10),
                               child: TextFormField(
                                 controller: _userPassworController,
-                                cursorColor: Colors.white,
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.9)),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  fillColor: Colors.white.withOpacity(0.4),
+                                  fillColor: Colors.white,
                                   labelText: 'Password',
-                                  errorStyle: TextStyle(color: Colors.white),
                                   labelStyle: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.white.withOpacity(0.9)),
+                                    fontSize: 15,
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(11),
-                                    borderSide: const BorderSide(
-                                        width: 0, style: BorderStyle.none),
                                   ),
                                   suffixIcon: IconButton(
                                     onPressed: _toggle,
-                                    icon: Icon(
-                                      Icons.remove_red_eye_rounded,
-                                      color: Colors.white,
-                                    ),
+                                    icon: Icon(Icons.remove_red_eye_rounded),
                                   ),
                                 ),
                                 validator: (value) {
@@ -233,8 +214,8 @@ class _LoginState extends State<Login> {
                             child: Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
+                                color: Colors.grey[600],
+                                fontSize: 13,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -246,36 +227,31 @@ class _LoginState extends State<Login> {
                         child: SizedBox(
                           width: 250,
                           height: 50,
-                          child: ElevatedButton(
-                            style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: Colors.white.withOpacity(0.5),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  side: BorderSide(color: Colors.red)),
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                _signInWithEmailAndPassword();
-                              } else {
-                                return null;
-                              }
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                primary: Colors.white,
+                                backgroundColor: Color(0XFFD8352C),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    side: BorderSide(color: Colors.red)),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                  _signInWithEmailAndPassword();
+                                } else {
+                                  return null;
+                                }
 
-                              //
-                            },
-                            child: status == true
-                                ? Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                : CircularProgressIndicator(
-                                    backgroundColor: Colors.black38,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
-                                  ),
-                          ),
+                                //
+                              },
+                              child: status == true
+                                  ? Text(
+                                      "Login",
+                                    )
+                                  : CircularProgressIndicator(
+                                      backgroundColor: Colors.black38,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white))),
                         ),
                       ),
                     ],
@@ -289,62 +265,63 @@ class _LoginState extends State<Login> {
                       height: 20,
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 50, left: 50, top: 40),
+                      margin: EdgeInsets.only(right: 50, left: 50),
                       child: TextButton(
                         child: Image(
                           image: AssetImage('images/googleIcon.png'),
                           width: 300,
                           height: 50,
                         ),
+// style: TextButton.styleFrom(
+//     side: BorderSide(color: Colors.grey, width: 0.1)),
                         onPressed: () {},
                       ),
                     ),
-                    // Container(
-                    //   margin: EdgeInsets.only(right: 50, left: 50),
-                    //   child: TextButton(
-                    //     child: Image(
-                    //       image: AssetImage('images/facebookIcon.png'),
-                    //       width: 300,
-                    //       height: 50,
-                    //     ),
-                    //     onPressed: () {},
-                    //   ),
-                    // ),
                     Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Dont Have an account?',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black,
-                                textStyle: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
+                      margin: EdgeInsets.only(right: 50, left: 50),
+                      child: TextButton(
+                        child: Image(
+                          image: AssetImage('images/facebookIcon.png'),
+                          width: 300,
+                          height: 50,
+                        ),
+// style: TextButton.styleFrom(
+//     side: BorderSide(color: Colors.grey[600], width: 1)),
+                        onPressed: () {},
+                      ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 100),
+                        child: Row(
+                          children: [
+                            Text('Dont Have an account?'),
+                            SizedBox(
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+//backgroundColor: Color(0XFFD8352C),
+                                  textStyle: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          OtpSetup(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Sign Up",
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push<void>(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) =>
-                                        OtpSetup(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

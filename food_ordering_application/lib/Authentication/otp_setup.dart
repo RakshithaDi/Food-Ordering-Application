@@ -153,19 +153,14 @@ class _OtpSetupState extends State<OtpSetup> {
                     children: <TextSpan>[
                       TextSpan(
                           text: 'We will send you an ',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white.withOpacity(0.9))),
+                          style: TextStyle(fontSize: 16)),
                       TextSpan(
                           text: 'One Time Password ',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white.withOpacity(0.9))),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                       TextSpan(
                         text: 'on your Mobile number ',
-                        style: TextStyle(
-                            fontSize: 16, color: Colors.white.withOpacity(0.9)),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
@@ -179,33 +174,30 @@ class _OtpSetupState extends State<OtpSetup> {
               key: _formKey,
               child: Container(
                 margin: EdgeInsets.only(left: 10, right: 10),
-                height: 80,
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   controller: _mobilenoController,
                   obscureText: false,
-                  cursorColor: Colors.white,
-                  style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
                   decoration: InputDecoration(
-                    filled: true,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                    fillColor: Colors.white.withOpacity(0.4),
+                    filled: true,
+                    fillColor: Colors.white,
                     labelText: "Enter Your Number",
-                    errorStyle: TextStyle(color: Colors.white),
                     labelStyle: TextStyle(
-                        fontSize: 15, color: Colors.white.withOpacity(0.9)),
+                      fontSize: 15,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(11),
-                      borderSide:
-                          const BorderSide(width: 0, style: BorderStyle.none),
                     ),
                     prefix: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
                         '(+94) ',
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
@@ -213,7 +205,7 @@ class _OtpSetupState extends State<OtpSetup> {
                     ),
                     suffixIcon: const Icon(
                       Icons.done,
-                      color: Colors.white,
+                      color: Colors.green,
                       size: 32,
                     ),
                   ),
@@ -235,8 +227,7 @@ class _OtpSetupState extends State<OtpSetup> {
                 children: [
                   Container(
                     child: Image(
-                      color: Colors.white.withOpacity(0.9),
-                      image: AssetImage('images/otpimg.png'),
+                      image: AssetImage('images/otpSetup.png'),
                       height: 350.0,
                       width: 300.0,
                     ),
@@ -249,7 +240,7 @@ class _OtpSetupState extends State<OtpSetup> {
                       child: TextButton(
                         style: TextButton.styleFrom(
                           primary: Colors.white,
-                          backgroundColor: Colors.white.withOpacity(0.4),
+                          backgroundColor: Color(0XFFD8352C),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
                               side: BorderSide(color: Colors.red)),
@@ -285,38 +276,26 @@ class _OtpSetupState extends State<OtpSetup> {
     var text = RichText(
       text: TextSpan(
         style: TextStyle(
-          fontSize: 14.0,
+          fontSize: 17.0,
           color: Colors.black,
         ),
         children: <TextSpan>[
           TextSpan(
             text: 'Enter the ',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white.withOpacity(0.9),
-            ),
+            style: TextStyle(),
           ),
           TextSpan(
             text: 'OTP ',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white.withOpacity(0.9),
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           TextSpan(
             text: 'sent to ',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white.withOpacity(0.9),
-            ),
+            style: TextStyle(),
           ),
           TextSpan(
             text: '+94${mob.substring(1)}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.white.withOpacity(0.9),
             ),
           ),
         ],
@@ -350,21 +329,24 @@ class _OtpSetupState extends State<OtpSetup> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       controller: _otpController,
                       obscureText: false,
-                      cursorColor: Colors.white,
-                      style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                       decoration: InputDecoration(
                         filled: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        fillColor: Colors.white.withOpacity(0.4),
+                        fillColor: Colors.white,
+
                         labelText: 'Enter OTP',
-                        errorStyle: TextStyle(color: Colors.white),
                         labelStyle: TextStyle(
-                            fontSize: 15, color: Colors.white.withOpacity(0.9)),
+                          fontSize: 15,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(11),
-                          borderSide: const BorderSide(
-                              width: 0, style: BorderStyle.none),
                         ),
+                        // suffixIcon: Icon(
+                        //   Icons.error,
+                        // ),
                         suffixIcon: const Icon(
                           Icons.done,
                           color: Colors.green,
@@ -392,21 +374,21 @@ class _OtpSetupState extends State<OtpSetup> {
                       'Didn\'t receive the OTP? ',
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.black,
                       ),
                     ),
                     TextButton(
                       child: Text(
                         'RESEND OTP',
                         style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 15.0,
+                          color: Color(0XFFD8352C),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       onPressed: () async {
                         verifyPhoneNumber();
-                        showAlertDialog('OTP Sent Again!', context);
+                        showAlertDialog('OTP Sent Back', context);
                         print('OTP Sent Back');
                         print(_mobilenoController.text);
                       },
@@ -483,20 +465,11 @@ class _OtpSetupState extends State<OtpSetup> {
             ),
           ),
         ),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: kbackgroundcolor,
         body: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color(0xFFEf44949),
-            Color(0xFFEf00e0e),
-            Color(0xFFEEc00b0b),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: showLoading
               ? Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.black38,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
+                  child: CircularProgressIndicator(),
                 )
               : currentState == MobileVerificationState.SHOW_MOBILE_FORM_STATE
                   ? getMobileFormWidget(context)

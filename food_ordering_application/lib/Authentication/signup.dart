@@ -98,440 +98,360 @@ class _SignupState extends State<Signup> {
     _mobileNoController.text = phoneno;
     return MaterialApp(
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey[200],
         body: SafeArea(
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Color(0xFFEf44949),
-              Color(0xFFEf00e0e),
-              Color(0xFFEEc00b0b),
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Column(
-                    children: [
-                      Center(
-                        child: FoodLogo(),
-                      ),
-                      SignupTitle(),
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: TextFormField(
-                                      controller: _fnameController,
-                                      cursorColor: Colors.white,
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9)),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        fillColor:
-                                            Colors.white.withOpacity(0.4),
-                                        labelText: 'First Name',
-                                        errorStyle:
-                                            TextStyle(color: Colors.white),
-                                        labelStyle: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Colors.white.withOpacity(0.9)),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                          borderSide: const BorderSide(
-                                              width: 0,
-                                              style: BorderStyle.none),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'Please enter the First Name';
-                                        } else if (RegExp(
-                                                r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                                            .hasMatch(value)) {
-                                          return 'Enter a Valid Name';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: TextFormField(
-                                      controller: _lnameController,
-                                      cursorColor: Colors.white,
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9)),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        fillColor:
-                                            Colors.white.withOpacity(0.4),
-                                        labelText: 'Last Name',
-                                        errorStyle:
-                                            TextStyle(color: Colors.white),
-                                        labelStyle: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Colors.white.withOpacity(0.9)),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                          borderSide: const BorderSide(
-                                              width: 0,
-                                              style: BorderStyle.none),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'Please enter the second Name';
-                                        } else if (RegExp(
-                                                r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                                            .hasMatch(value)) {
-                                          return 'Enter a Valid Name';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    child: TextFormField(
-                                      controller: _userEmailController,
-                                      cursorColor: Colors.white,
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9)),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        fillColor:
-                                            Colors.white.withOpacity(0.4),
-                                        labelText: 'Email',
-                                        errorStyle:
-                                            TextStyle(color: Colors.white),
-                                        labelStyle: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Colors.white.withOpacity(0.9)),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                          borderSide: const BorderSide(
-                                              width: 0,
-                                              style: BorderStyle.none),
-                                        ),
-                                        suffixIcon: IconButton(
-                                          onPressed: _toggle,
-                                          icon: Icon(
-                                            Icons.email_outlined,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                      autocorrect: false,
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      enableSuggestions: false,
-                                      validator: (value) {
-                                        if (value.isEmpty ||
-                                            !value.contains('@')) {
-                                          return 'Please enter a valid email address';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Container(
-                        //   child: Row(
-                        //     children: [
-                        //       Expanded(
-                        //         child: Padding(
-                        //           padding: const EdgeInsets.all(8.0),
-                        //           child: Container(
-                        //             child: TextFormField(
-                        //               enabled: false,
-                        //               readOnly: true,
-                        //               maxLength: 10,
-                        //               keyboardType: TextInputType.number,
-                        //               inputFormatters: [
-                        //                 FilteringTextInputFormatter.digitsOnly
-                        //               ],
-                        //               controller: _mobileNoController,
-                        //               decoration: InputDecoration(
-                        //                 filled: true,
-                        //                 fillColor: Colors.white,
-                        //                 labelText: 'Mobile No',
-                        //                 labelStyle: TextStyle(
-                        //                   fontSize: 15,
-                        //                 ),
-                        //                 border: OutlineInputBorder(
-                        //                   borderRadius: BorderRadius.circular(11),
-                        //                 ),
-                        //                 // suffixIcon: Icon(
-                        //                 //   Icons.error,
-                        //                 // ),
-                        //               ),
-                        //               validator: (value) {
-                        //                 String pattern =
-                        //                     r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                        //                 RegExp regExp = new RegExp(pattern);
-                        //                 if (value.isEmpty) {
-                        //                   return 'Please enter your mobile number';
-                        //                 } else if (!regExp.hasMatch(value)) {
-                        //                   return 'Please enter valid mobile number';
-                        //                 }
-                        //                 return null;
-                        //               },
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    child: Column(
-                                      children: [
-                                        TextFormField(
-                                          controller: _userPassworController,
-                                          cursorColor: Colors.white,
-                                          style: TextStyle(
-                                              color: Colors.white
-                                                  .withOpacity(0.9)),
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.never,
-                                            fillColor:
-                                                Colors.white.withOpacity(0.4),
-                                            helperText:
-                                                '*Should be at least 8 characters long',
-                                            helperStyle:
-                                                TextStyle(color: Colors.white),
-                                            labelText: 'Password',
-                                            errorStyle:
-                                                TextStyle(color: Colors.white),
-                                            labelStyle: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white
-                                                    .withOpacity(0.9)),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(11),
-                                              borderSide: const BorderSide(
-                                                  width: 0,
-                                                  style: BorderStyle.none),
-                                            ),
-                                            suffixIcon: IconButton(
-                                              onPressed: _toggle,
-                                              icon: Icon(
-                                                Icons.remove_red_eye_rounded,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value.isEmpty) {
-                                              return 'Please enter a long password';
-                                            } else if (value.length < 7) {
-                                              return 'should be at least 8 characters long';
-                                            }
-                                            return null;
-                                          },
-                                          onSaved: (val) => _password = val,
-                                          obscureText: _obscureText,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    child: TextFormField(
-                                      controller: _confirmPassworController,
-                                      cursorColor: Colors.white,
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9)),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        fillColor:
-                                            Colors.white.withOpacity(0.4),
-                                        labelText: 'Re-type Password',
-                                        errorStyle:
-                                            TextStyle(color: Colors.white),
-                                        labelStyle: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Colors.white.withOpacity(0.9)),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                          borderSide: const BorderSide(
-                                              width: 0,
-                                              style: BorderStyle.none),
-                                        ),
-                                        suffixIcon: IconButton(
-                                          onPressed: _toggle,
-                                          icon: Icon(
-                                            Icons.remove_red_eye_rounded,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'Please enter a long password';
-                                        } else if (value.length < 7) {
-                                          return 'should be at least 8 characters long';
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (val) => _confirmPassword = val,
-                                      obscureText: _obscureText,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
+          child: ListView(
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Center(
+                      child: FoodLogo(),
                     ),
-                  ),
+                    SignupTitle(),
+                  ],
                 ),
-                Container(
+              ),
+              Container(
+                child: Form(
+                  key: _formKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(
-                          right: 50,
-                          left: 50,
-                        ),
-                        child: SizedBox(
-                          width: 250,
-                          height: 45,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: Color(0XFFD8352C),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.red)),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: TextFormField(
+                                    controller: _fnameController,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      labelText: 'First Name',
+                                      labelStyle: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(11),
+                                      ),
+                                      // suffixIcon: Icon(
+                                      //   Icons.error,
+                                      // ),
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter the First Name';
+                                      } else if (RegExp(
+                                              r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
+                                          .hasMatch(value)) {
+                                        return 'Enter a Valid Name';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ),
                             ),
-                            onPressed: () {
-                              if (_formKey.currentState.validate()) {
-                                createUserWithEmailAndPassword();
-                              } else {
-                                return null;
-                              }
-                              //  Navigator.pushNamed(context, OtpSetup.id);
-                            },
-                            child: states == true
-                                ? Text('Sign Up')
-                                : CircularProgressIndicator(
-                                    backgroundColor: Colors.black38,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white)),
-                          ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: TextFormField(
+                                    controller: _lnameController,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      labelText: 'Last Name',
+                                      labelStyle: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(11),
+                                      ),
+                                      // suffixIcon: Icon(
+                                      //   Icons.error,
+                                      // ),
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter the second Name';
+                                      } else if (RegExp(
+                                              r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
+                                          .hasMatch(value)) {
+                                        return 'Enter a Valid Name';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 100),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Already Have an account?',
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
-                                ),
-                              ),
-                              SizedBox(
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    primary: Colors.white.withOpacity(0.9),
-                                    textStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: TextFormField(
+                                    controller: _userEmailController,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      labelText: 'Email',
+                                      labelStyle: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(11),
+                                      ),
+                                      // suffixIcon: Icon(
+                                      //   Icons.error,
+                                      // ),
                                     ),
+                                    keyboardType: TextInputType.emailAddress,
+                                    autocorrect: false,
+                                    textCapitalization: TextCapitalization.none,
+                                    enableSuggestions: false,
+                                    validator: (value) {
+                                      if (value.isEmpty ||
+                                          !value.contains('@')) {
+                                        return 'Please enter a valid email address';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, Login.id);
-                                  },
-                                  child: Text('Sign In'),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
+                      ),
+                      // Container(
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: Padding(
+                      //           padding: const EdgeInsets.all(8.0),
+                      //           child: Container(
+                      //             child: TextFormField(
+                      //               enabled: false,
+                      //               readOnly: true,
+                      //               maxLength: 10,
+                      //               keyboardType: TextInputType.number,
+                      //               inputFormatters: [
+                      //                 FilteringTextInputFormatter.digitsOnly
+                      //               ],
+                      //               controller: _mobileNoController,
+                      //               decoration: InputDecoration(
+                      //                 filled: true,
+                      //                 fillColor: Colors.white,
+                      //                 labelText: 'Mobile No',
+                      //                 labelStyle: TextStyle(
+                      //                   fontSize: 15,
+                      //                 ),
+                      //                 border: OutlineInputBorder(
+                      //                   borderRadius: BorderRadius.circular(11),
+                      //                 ),
+                      //                 // suffixIcon: Icon(
+                      //                 //   Icons.error,
+                      //                 // ),
+                      //               ),
+                      //               validator: (value) {
+                      //                 String pattern =
+                      //                     r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                      //                 RegExp regExp = new RegExp(pattern);
+                      //                 if (value.isEmpty) {
+                      //                   return 'Please enter your mobile number';
+                      //                 } else if (!regExp.hasMatch(value)) {
+                      //                   return 'Please enter valid mobile number';
+                      //                 }
+                      //                 return null;
+                      //               },
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        controller: _userPassworController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          helperText:
+                                              '*Should be at least 8 characters long',
+                                          labelText: 'Password',
+                                          labelStyle: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(11),
+                                          ),
+                                          suffixIcon: IconButton(
+                                            onPressed: _toggle,
+                                            icon: Icon(
+                                                Icons.remove_red_eye_rounded),
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'Please enter a long password';
+                                          } else if (value.length < 7) {
+                                            return 'should be at least 8 characters long';
+                                          }
+                                          return null;
+                                        },
+                                        onSaved: (val) => _password = val,
+                                        obscureText: _obscureText,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: TextFormField(
+                                    controller: _confirmPassworController,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      helperText: '',
+                                      labelText: 'Re-type Password',
+                                      labelStyle: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(11),
+                                      ),
+                                      suffixIcon: IconButton(
+                                        onPressed: _toggle,
+                                        icon:
+                                            Icon(Icons.remove_red_eye_rounded),
+                                      ),
+                                    ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter a long password';
+                                      } else if (value.length < 7) {
+                                        return 'should be at least 8 characters long';
+                                      } else if (_userPassworController.text !=
+                                          _confirmPassworController.text) {
+                                        return 'Password not matching';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (val) => _confirmPassword = val,
+                                    obscureText: _obscureText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 50,
+                        left: 50,
+                      ),
+                      child: SizedBox(
+                        width: 250,
+                        height: 45,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Color(0XFFD8352C),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.red)),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              createUserWithEmailAndPassword();
+                            } else {
+                              return null;
+                            }
+                            //  Navigator.pushNamed(context, OtpSetup.id);
+                          },
+                          child: states == true
+                              ? Text('Sign Up')
+                              : CircularProgressIndicator(
+                                  backgroundColor: Colors.black38,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white)),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 100),
+                        child: Row(
+                          children: [
+                            Text('Already Have an account?'),
+                            SizedBox(
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  //backgroundColor: Color(0XFFD8352C),
+                                  textStyle: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, Login.id);
+                                },
+                                child: Text('Sign In'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -588,19 +508,16 @@ class SignupTitle extends StatelessWidget {
         children: <Widget>[
           Text(
             'Let\'s Get Started',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.white.withOpacity(0.9)),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
           ),
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
           Text(
             'Create an account to continue!',
             style: TextStyle(
                 fontSize: 15,
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.grey[500],
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
@@ -609,7 +526,10 @@ class SignupTitle extends StatelessWidget {
           SizedBox(
             height: 10.0,
             width: 350,
-            child: Divider(thickness: 2, color: Colors.white.withOpacity(0.9)),
+            child: Divider(
+              thickness: 2,
+              color: Colors.grey[400],
+            ),
           ),
         ],
       ),
@@ -621,13 +541,16 @@ class FoodLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(),
+      margin: EdgeInsets.only(
+        top: 25,
+        bottom: 25,
+      ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(20),
         child: Image(
-          image: AssetImage('images/foodxbgremoved.png'),
-          height: 120.0,
-          width: 300.0,
+          image: AssetImage('images/foodx.png'),
+          height: 100.0,
+          width: 200.0,
         ),
       ),
     );
