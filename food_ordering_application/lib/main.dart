@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_ordering_application/Home/cartpage.dart';
 import 'package:food_ordering_application/Home/changepassword.dart';
 import 'package:food_ordering_application/Home/orders.dart';
 import 'package:food_ordering_application/Home/personalinfo.dart';
@@ -60,6 +61,7 @@ class FoodOrderingApp extends StatelessWidget {
         OrderDetails.id: (context) => OrderDetails(),
         PersonalInfo.id: (context) => PersonalInfo(),
         ChangePassword.id: (context) => ChangePassword(),
+        CartPage.id: (context) => CartPage(),
       },
       home: ViewController(streamController.stream),
       debugShowCheckedModeBanner: false,

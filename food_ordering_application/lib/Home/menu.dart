@@ -6,6 +6,7 @@ import '../cart.dart';
 import '../constant.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import '../item.dart';
+import 'Itemdetails.dart';
 import 'itemspage.dart';
 import 'searchpage.dart';
 import 'notifications.dart';
@@ -55,7 +56,6 @@ class _MenuState extends State<Menu> {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         imgList.add(doc["imgUrl"]);
-        print(doc["imgUrl"]);
       });
     });
   }
@@ -284,25 +284,6 @@ class _MenuState extends State<Menu> {
             ),
             Column(
               children: [
-                // Container(
-                //   height: 150,
-                //   child: Padding(
-                //     padding: const EdgeInsets.only(top: 10),
-                //     child: PageView.builder(
-                //         controller: pageController,
-                //         itemCount: 3,
-                //         itemBuilder: (context, position) {
-                //           return buildPageItem(position);
-                //         }),
-                //   ),
-                // ),
-                // new DotsIndicator(
-                //   decorator: DotsDecorator(
-                //     activeColor: kredbackgroundcolor,
-                //   ),
-                //   dotsCount: 3,
-                //   position: currentPageValue,
-                // ),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   height: 140,
@@ -311,7 +292,7 @@ class _MenuState extends State<Menu> {
                     items: imageSliders,
                     carouselController: _controller,
                     options: CarouselOptions(
-                        autoPlay: true,
+                        autoPlay: false,
                         enlargeCenterPage: true,
                         aspectRatio: 2.0,
                         onPageChanged: (index, reason) {
@@ -493,74 +474,86 @@ class _MenuState extends State<Menu> {
                             ),
                             child: Card(
                               elevation: 5,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 5, right: 5, left: 5),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 110,
-                                          width: double.infinity,
-                                          child: Image.network(
-                                            recommend['imgUrl'],
-                                            alignment: Alignment.topLeft,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                        Container(
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 7),
-                                            child: Text(
-                                              recommend['name'],
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          ItemDetails(recommend['id']),
+                                    ),
+                                  );
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 5, right: 5, left: 5),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 110,
+                                            width: double.infinity,
+                                            child: Image.network(
+                                              recommend['imgUrl'],
+                                              alignment: Alignment.topLeft,
+                                              fit: BoxFit.fill,
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 0, left: 20),
-                                                  child: Center(
-                                                    child: Text(
-                                                      'Rs. ${recommend['price']}.00',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ),
+                                          Container(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 7),
+                                              child: Text(
+                                                recommend['name'],
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                  margin:
-                                                      EdgeInsets.only(left: 20),
-                                                  child: IconButton(
-                                                    icon: Icon(
-                                                      Icons.add_box,
-                                                      color: Colors.red,
-                                                      size: 30,
-                                                    ),
-                                                    onPressed: () {
-                                                      print('tapped');
-                                                      cart.add(items[index]);
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 0, left: 20),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Rs. ${recommend['price']}',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 20),
+                                                    child: IconButton(
+                                                      icon: Icon(
+                                                        Icons.add_box,
+                                                        color: Colors.red,
+                                                        size: 30,
+                                                      ),
+                                                      onPressed: () {
+                                                        print('tapped');
+                                                        cart.add(items[index]);
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           );

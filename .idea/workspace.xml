@@ -13,7 +13,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/itemspage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/itemspage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/search.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/order_items/cart.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/order_items/item.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/order_items/items_list.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/order_items/payment.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/settings/account_settings.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/settings/edit_profile.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/settings/feedbacks.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/settings/notification_settings.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,17 +107,17 @@
       <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="otp_verify.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_verify.dart" />
+    <configuration name="search.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/food_ordering_application/lib/Home/search.dart" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Flutter.search.dart" />
         <item itemvalue="Flutter.dd.dart" />
         <item itemvalue="Flutter.myapp.dart" />
         <item itemvalue="Flutter.otp_setup.dart" />
-        <item itemvalue="Flutter.otp_verify.dart" />
       </list>
     </recent_temporary>
   </component>

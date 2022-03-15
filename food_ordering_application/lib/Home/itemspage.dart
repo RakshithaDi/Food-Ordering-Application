@@ -5,6 +5,7 @@ import '../constant.dart';
 import '../item.dart';
 import 'package:provider/provider.dart';
 
+import 'Itemdetails.dart';
 import 'cartpage.dart';
 
 class Items extends StatefulWidget {
@@ -108,117 +109,132 @@ class _ItemsState extends State<Items> {
 
                           return Stack(
                             children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: 16, right: 16, top: 16),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(16))),
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          right: 15,
-                                          left: 8,
-                                          top: 8,
-                                          bottom: 8),
-                                      width: 100,
-                                      height: 90,
-                                      decoration: BoxDecoration(
+                              InkWell(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      left: 16, right: 16, top: 16),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(16))),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            right: 15,
+                                            left: 8,
+                                            top: 8,
+                                            bottom: 8),
+                                        width: 100,
+                                        height: 90,
+                                        decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(14)),
                                           color: Colors.grey,
                                           image: DecorationImage(
-                                              image: NetworkImage(
-                                            itemcat['imgUrl'],
-                                          ))),
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                          width: 230,
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                    right: 8, top: 4),
-                                                child: Text(
-                                                  itemcat['name'],
-                                                  maxLines: 2,
-                                                  softWrap: true,
-                                                  style:
-                                                      TextStyle(fontSize: 14),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          width: 230,
-                                          child: Container(
-                                            child: Text(
-                                              "M",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
+                                            image: NetworkImage(
+                                              itemcat['imgUrl'],
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          width: 230,
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            width: 230,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                      right: 8, top: 4),
                                                   child: Text(
-                                                    'Rs. ${itemcat['price']}',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
+                                                    itemcat['name'],
+                                                    maxLines: 2,
+                                                    softWrap: true,
+                                                    style:
+                                                        TextStyle(fontSize: 14),
                                                   ),
                                                 ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 10),
+                                            width: 230,
+                                            child: Container(
+                                              child: Text(
+                                                "M",
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10, right: 10),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 230,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
                                                   child: Container(
-                                                    child: TextButton(
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                        primary: Colors.white,
-                                                        backgroundColor:
-                                                            Color(0XFFD8352C),
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            side: BorderSide(
-                                                                color:
-                                                                    kredbackgroundcolor)),
-                                                      ),
-                                                      onPressed: () {
-                                                        cart.add(items[index]);
-                                                      },
-                                                      child:
-                                                          Text('Add to Cart'),
+                                                    child: Text(
+                                                      'Rs. ${itemcat['price']}',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
+                                                    child: Container(
+                                                      child: TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          primary: Colors.white,
+                                                          backgroundColor:
+                                                              Color(0XFFD8352C),
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              side: BorderSide(
+                                                                  color:
+                                                                      kredbackgroundcolor)),
+                                                        ),
+                                                        onPressed: () {
+                                                          cart.add(
+                                                              items[index]);
+                                                        },
+                                                        child:
+                                                            Text('Add to Cart'),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          ItemDetails(itemcat['id']),
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           );

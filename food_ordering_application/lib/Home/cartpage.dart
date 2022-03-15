@@ -6,6 +6,7 @@ import '../constant.dart';
 import 'checkout.dart';
 
 class CartPage extends StatefulWidget {
+  static String id = 'cartpage';
   @override
   _CartPageState createState() => _CartPageState();
 }
