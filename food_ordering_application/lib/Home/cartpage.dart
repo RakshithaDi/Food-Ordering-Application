@@ -240,7 +240,7 @@ class _CartPageState extends State<CartPage> {
                                                               ),
                                                             ],
                                                           ),
-                                                        )
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -299,6 +299,8 @@ class _CartPageState extends State<CartPage> {
 
   footer(BuildContext context) {
     return Container(
+      height: 100,
+      color: Colors.white,
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

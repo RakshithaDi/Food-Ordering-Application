@@ -150,7 +150,7 @@ class _CheckOutState extends State<CheckOut> {
 
   void getOrderId() async {
     FirebaseFirestore.instance
-        .collection('orders')
+        .collection('ordercount')
         .doc('OrderNumbers')
         .get()
         .then((DocumentSnapshot OrderNo) {
@@ -162,13 +162,15 @@ class _CheckOutState extends State<CheckOut> {
         print('Order ID: ' + orderId);
 
         Pay();
+      } else {
+        print('print Error');
       }
     });
   }
 
   void IncreaseOrderNumbers() {
     FirebaseFirestore.instance
-        .collection("orders")
+        .collection("ordercount")
         .doc('OrderNumbers')
         .update({"lastOrderNumber": FieldValue.increment(1)})
         .then((value) => print("Order Number Increased"))

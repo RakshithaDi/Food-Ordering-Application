@@ -376,7 +376,6 @@ class _AccountState extends State<Account> {
 
 void logout() async {
   await FirebaseAuth.instance.signOut();
-  streamController.add('2');
 }
 
 showAlertDialog(BuildContext context) {

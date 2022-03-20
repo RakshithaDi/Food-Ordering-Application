@@ -214,342 +214,192 @@ class _MenuState extends State<Menu> {
           ],
         ),
         backgroundColor: kbackgroundcolor,
-        body: ListView(
-          children: [
-            Container(
-              color: kredbackgroundcolor,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        //  margin: EdgeInsets.only(top: 10),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Text(
-                            'Let\'s select the best taste for you',
-                            style: TextStyle(
-                              color: Colors.grey[300],
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          child: ListView(
+            children: [
+              Container(
+                color: kredbackgroundcolor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          //  margin: EdgeInsets.only(top: 10),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            child: Text(
+                              'Let\'s select the best taste for you',
+                              style: TextStyle(
+                                color: Colors.grey[300],
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                            ),
+                            child: Text(
+                              'Vote for tomorrow',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Stack(
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.double_arrow,
+                                    color: Colors.white,
+                                    size: 34,
+                                  ),
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    height: 140,
+                    width: 450,
+                    child: CarouselSlider(
+                      items: imageSliders,
+                      carouselController: _controller,
+                      options: CarouselOptions(
+                          autoPlay: false,
+                          enlargeCenterPage: true,
+                          aspectRatio: 2.0,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          }),
+                    ),
                   ),
                   Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: Text(
-                            'Vote for tomorrow',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imgList.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () => _controller.animateToPage(entry.key),
+                        child: Container(
+                          width: 12.0,
+                          height: 12.0,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: (Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black)
+                                  .withOpacity(
+                                      _current == entry.key ? 0.9 : 0.4)),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Stack(
-                            children: <Widget>[
-                              IconButton(
-                                icon: Icon(
-                                  Icons.double_arrow,
-                                  color: Colors.white,
-                                  size: 34,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                   ),
                 ],
               ),
-            ),
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  height: 140,
-                  width: 450,
-                  child: CarouselSlider(
-                    items: imageSliders,
-                    carouselController: _controller,
-                    options: CarouselOptions(
-                        autoPlay: false,
-                        enlargeCenterPage: true,
-                        aspectRatio: 2.0,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _current = index;
-                          });
-                        }),
+              Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.only(left: 10, bottom: 5),
+                child: Text(
+                  'Categories',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: imgList.asMap().entries.map((entry) {
-                    return GestureDetector(
-                      onTap: () => _controller.animateToPage(entry.key),
-                      child: Container(
-                        width: 12.0,
-                        height: 12.0,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 4.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color:
-                                (Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black)
-                                    .withOpacity(
-                                        _current == entry.key ? 0.9 : 0.4)),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 10, bottom: 5),
-              child: Text(
-                'Categories',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
-            ),
-            StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection("categories")
-                  .snapshots(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text("Something went wrong");
-                }
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("categories")
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("Something went wrong");
+                  }
 
-                if (snapshot.connectionState == ConnectionState.waiting ||
-                    !snapshot.hasData) {
-                  //  return CircularProgressIndicator();
-                }
+                  if (snapshot.connectionState == ConnectionState.waiting ||
+                      !snapshot.hasData) {
+                    //  return CircularProgressIndicator();
+                  }
 
-                if (snapshot.hasData) {
-                  print('has data');
-                  return Container(
-                    height: 120,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.docs.length,
+                  if (snapshot.hasData) {
+                    print('has data');
+                    return Container(
+                      height: 120,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.docs.length,
 
-                      // ignore: missing_return
-                      itemBuilder: (BuildContext context, index) {
-                        QueryDocumentSnapshot category =
-                            snapshot.data.docs[index];
-                        return Container(
-                          child: Card(
-                            elevation: 5,
-                            child: new InkWell(
-                              onTap: () {
-                                categoryId = category['id'];
-                                print(categoryId);
-                                Navigator.push<void>(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                    builder: (BuildContext context) =>
-                                        Items(categoryId),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 5, right: 5, left: 5),
-                                    width: 100,
-                                    height: 80,
-                                    child: Image.network(
-                                      category['imgUrl'],
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 5),
-                                    child: Text(
-                                      category['name'],
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }
-
-                return SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              },
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 10, top: 10, bottom: 5),
-              child: Text(
-                'Rcommended',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FutureBuilder(
-              future: FirebaseFirestore.instance
-                  .collection('items')
-                  .where('recommend', isEqualTo: 'yes')
-                  .get(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text("Something went wrong");
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting ||
-                    !snapshot.hasData) {
-                  //   return CircularProgressIndicator();
-                }
-
-                if (snapshot.hasData) {
-                  print('has data in items');
-                  return Container(
-                    height: 210,
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      children: List.generate(
-                        snapshot.data.docs.length,
-                        (index) {
-                          QueryDocumentSnapshot recommend =
+                        // ignore: missing_return
+                        itemBuilder: (BuildContext context, index) {
+                          QueryDocumentSnapshot category =
                               snapshot.data.docs[index];
-
-                          price = double.parse(recommend['price']);
-                          name = recommend['name'];
-                          imgUrl = recommend['imgUrl'];
-
-                          final List<Item> items = [
-                            for (var i = 0; i < snapshot.data.docs.length; i++)
-                              Item(
-                                  name: name,
-                                  price: price,
-                                  imgUrl: imgUrl,
-                                  quantity: quantity),
-                          ];
                           return Container(
-                            margin: EdgeInsets.only(
-                              bottom: 0,
-                            ),
                             child: Card(
                               elevation: 5,
-                              child: InkWell(
+                              child: new InkWell(
                                 onTap: () {
+                                  categoryId = category['id'];
+                                  print(categoryId);
                                   Navigator.push<void>(
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
-                                          ItemDetails(recommend['id']),
+                                          Items(categoryId),
                                     ),
                                   );
                                 },
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Container(
                                       margin: EdgeInsets.only(
                                           top: 5, right: 5, left: 5),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 110,
-                                            width: double.infinity,
-                                            child: Image.network(
-                                              recommend['imgUrl'],
-                                              alignment: Alignment.topLeft,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 7),
-                                              child: Text(
-                                                recommend['name'],
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 0, left: 20),
-                                                    child: Center(
-                                                      child: Text(
-                                                        'Rs. ${recommend['price']}',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 20),
-                                                    child: IconButton(
-                                                      icon: Icon(
-                                                        Icons.add_box,
-                                                        color: Colors.red,
-                                                        size: 30,
-                                                      ),
-                                                      onPressed: () {
-                                                        print('tapped');
-                                                        cart.add(items[index]);
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                      width: 100,
+                                      height: 80,
+                                      child: Image.network(
+                                        category['imgUrl'],
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Text(
+                                        category['name'],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
                                       ),
                                     ),
                                   ],
@@ -559,20 +409,177 @@ class _MenuState extends State<Menu> {
                           );
                         },
                       ),
+                    );
+                  }
+
+                  return SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(),
                     ),
                   );
-                }
-
-                return SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                },
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.only(left: 10, top: 10, bottom: 5),
+                child: Text(
+                  'Rcommended',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
-                );
-              },
-            ),
-          ],
+                ),
+              ),
+              Container(
+                height: 515, //210
+                child: FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('items')
+                      .where('recommend', isEqualTo: 'yes')
+                      .get(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("Something went wrong");
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting ||
+                        !snapshot.hasData) {
+                      //   return CircularProgressIndicator();
+                    }
+
+                    if (snapshot.hasData) {
+                      print('has data in items');
+                      return GridView.count(
+                        crossAxisCount: 2,
+                        children: List.generate(
+                          snapshot.data.docs.length,
+                          (index) {
+                            QueryDocumentSnapshot recommend =
+                                snapshot.data.docs[index];
+
+                            price = double.parse(recommend['price']);
+                            name = recommend['name'];
+                            imgUrl = recommend['imgUrl'];
+
+                            final List<Item> items = [
+                              for (var i = 0;
+                                  i < snapshot.data.docs.length;
+                                  i++)
+                                Item(
+                                    name: name,
+                                    price: price,
+                                    imgUrl: imgUrl,
+                                    quantity: quantity),
+                            ];
+                            return Container(
+                              margin: EdgeInsets.only(
+                                bottom: 0,
+                              ),
+                              child: Card(
+                                elevation: 5,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push<void>(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            ItemDetails(recommend['id']),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: 5, right: 5, left: 5),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 110,
+                                              width: double.infinity,
+                                              child: Image.network(
+                                                recommend['imgUrl'],
+                                                alignment: Alignment.topLeft,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 7),
+                                                child: Text(
+                                                  recommend['name'],
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 0, left: 20),
+                                                      child: Center(
+                                                        child: Text(
+                                                          'Rs. ${recommend['price']}',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 20),
+                                                      child: IconButton(
+                                                        icon: Icon(
+                                                          Icons.add_box,
+                                                          color: Colors.red,
+                                                          size: 30,
+                                                        ),
+                                                        onPressed: () {
+                                                          print('tapped');
+                                                          cart.add(
+                                                              items[index]);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+
+                    return SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       );
     });

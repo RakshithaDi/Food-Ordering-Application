@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/cartpage.dart';
 import 'package:food_ordering_application/Home/searchpage.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../cart.dart';
@@ -23,6 +25,25 @@ class _ItemDetailsState extends State<ItemDetails> {
   String imgUrl;
   String name;
   List<Item> items = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  String rateConditions(double rate) {
+    if (rate <= 1) {
+      return '1.5';
+    } else if (rate > 1 && rate <= 3) {
+      return '2.5';
+    } else if (rate > 3 && rate <= 5) {
+      return '3.5';
+    } else if (rate > 5 && rate <= 7) {
+      return '4.0';
+    } else {
+      return '5.0';
+    }
+  }
 
   _ItemDetailsState(this.productId);
   @override
@@ -113,12 +134,27 @@ class _ItemDetailsState extends State<ItemDetails> {
                                 subtitle: Text(data['description']),
                               ),
                               Container(
+                                margin: EdgeInsets.only(left: 18, bottom: 10),
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Rating:${rateConditions(data['rating'])}',
+                                  style: TextStyle(),
+                                ),
+                              ),
+                              Container(
                                 margin: EdgeInsets.only(left: 18),
                                 alignment: Alignment.topLeft,
                                 child: Text('Rs.${data['price']}'),
                               ),
-                              Ratings(),
                               Container(
+                                alignment: Alignment.topLeft,
+                                margin: EdgeInsets.only(left: 18, top: 10),
+                                child: Ratings(),
+                              ),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height - 655,
+                                alignment: Alignment.bottomCenter,
                                 margin: EdgeInsets.only(top: 10),
                                 width: double.maxFinite,
                                 child: Column(
@@ -204,18 +240,99 @@ class _RatingsState extends State<Ratings> {
   bool _isVertical = false;
   double _initialRating = 2.0;
   IconData _selectedIcon;
+  double rateAvg;
+  int ratingCount;
+
+  @override
+  void initState() {
+    super.initState();
+    getRatingCount();
+  }
+
+  void IncreaseratingCount() {
+    FirebaseFirestore.instance
+        .collection("rating")
+        .doc('ratingCounts')
+        .update({"lastRateCount": FieldValue.increment(1)})
+        .then((value) => print("Order Number Increased"))
+        .catchError((error) => print("Failed: $error"));
+  }
+
+  void getRatingCount() async {
+    FirebaseFirestore.instance
+        .collection('rating')
+        .doc('ratingCounts')
+        .get()
+        .then((DocumentSnapshot rate) {
+      if (rate.exists) {
+        setState(() {
+          ratingCount = rate['lastRateCount'];
+        });
+
+        print('Rating Count: $ratingCount');
+      }
+    });
+  }
+
+  void updateRate() async {
+    FirebaseFirestore.instance
+        .collection("items")
+        .doc('prod1')
+        .update({
+          "rating": rateAvg,
+        })
+        .then((value) => print("Records Added Successfully!"))
+        .catchError((error) => print("Failed: $error"));
+    IncreaseratingCount();
+    getRatingCount();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Rate For Food'),
-        _ratingBar(_ratingBarMode),
-        SizedBox(height: 20.0),
+        Container(
+          margin: EdgeInsets.only(bottom: 10),
+          child: _ratingBar(_ratingBarMode),
+        ),
         Text(
           'Rating: $_rating',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        SizedBox(
+          height: 10,
+        ),
+        MaterialButton(
+            onPressed: () {
+              FirebaseFirestore.instance
+                  .collection('items')
+                  .doc('prod1')
+                  .get()
+                  .then((DocumentSnapshot rate) {
+                if (rate.exists) {
+                  double currRate = rate['rating'].toDouble();
+                  print('current rate of this item: $currRate');
+                  print('ratinggggg count $ratingCount');
+                  setState(() {
+                    currRate =
+                        currRate + _rating / (ratingCount.toDouble() + 1.00);
+                    rateAvg = currRate;
+                  });
+
+                  print('Average rate: $currRate');
+                }
+                Get.snackbar("Rated!", ".",
+                    snackPosition: SnackPosition.BOTTOM,
+                    duration: Duration(seconds: 1));
+                updateRate();
+              });
+            },
+            color: Colors.red,
+            textColor: Colors.white,
+            elevation: 0.2,
+            child: Text("Rate")),
       ],
     );
   }
@@ -236,7 +353,7 @@ class _RatingsState extends State<Ratings> {
             _selectedIcon ?? Icons.star,
             color: Colors.amber,
           ),
-          onRatingUpdate: (rating) {
+          onRatingUpdate: (rating) async {
             setState(() {
               _rating = rating;
             });
