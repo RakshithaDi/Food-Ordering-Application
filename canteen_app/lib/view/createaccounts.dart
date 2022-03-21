@@ -1,4 +1,3 @@
-import 'package:canteen_app/model/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
       TextEditingController();
   final TextEditingController _updateUserPasswordController =
       TextEditingController();
-  final TextEditingController _deleteUserPasswordController =
+  final TextEditingController _deleteUserNameController =
       TextEditingController();
   bool createButton = true;
   bool deleteButton = true;
@@ -86,16 +85,52 @@ class _CreateAccountsState extends State<CreateAccounts> {
                       child: Column(
                         children: [
                           Text('Users'),
-                          Container(
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: 4,
-                                itemBuilder: (BuildContext context, index) {
-                                  return Card(
-                                    child: Text('name'),
-                                  );
-                                }),
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("staff")
+                                .snapshots(),
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                return Text("Something went wrong");
+                              }
+
+                              if (snapshot.connectionState ==
+                                      ConnectionState.waiting ||
+                                  !snapshot.hasData) {
+                                //  return CircularProgressIndicator();
+                              }
+
+                              if (snapshot.hasData) {
+                                print('has data');
+                                return Container(
+                                  child: SingleChildScrollView(
+                                    primary: false,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.docs.length,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        QueryDocumentSnapshot data =
+                                            snapshot.data!.docs[index];
+                                        return Card(
+                                          child: Text(data['username']),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              }
+
+                              return const SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -331,7 +366,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                     children: [
                       Text('Delete User'),
                       TextFormField(
-                        controller: _deleteUserPasswordController,
+                        controller: _deleteUserNameController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -371,8 +406,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                 if (_deleteUserformKey.currentState!
                                     .validate()) {
                                   deleteUser(
-                                    username:
-                                        _deleteUserPasswordController.text,
+                                    username: _deleteUserNameController.text,
                                   );
                                   setState(() {
                                     deleteButton = false;
