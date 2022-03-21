@@ -18,6 +18,7 @@ class _ProductsState extends State<Products> {
   String recommendType = 'No';
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
     return Container(
       child: Row(
         children: [
@@ -27,244 +28,303 @@ class _ProductsState extends State<Products> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Form(
-                    key: _addproductform,
+                  Expanded(
+                    flex: 1,
                     child: Column(
                       children: [
-                        Text('add Items'),
-                        TextFormField(
-                          controller: _catIdController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            labelText: 'Product Id',
-                            labelStyle: const TextStyle(
-                              fontSize: 15,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                            ),
-                          ),
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
-                          enableSuggestions: false,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a product id';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _catIdController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            labelText: 'Name',
-                            labelStyle: const TextStyle(
-                              fontSize: 15,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                            ),
-                          ),
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
-                          enableSuggestions: false,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter product name';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _catIdController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            labelText: 'Description',
-                            labelStyle: const TextStyle(
-                              fontSize: 15,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                            ),
-                          ),
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
-                          enableSuggestions: false,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter description';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                'Select Type',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: DropdownButton(
-                                value: foodType,
-                                //hint: Text('Food'),
-                                icon:
-                                    const Icon(Icons.arrow_drop_down_outlined),
-                                elevation: 16,
-                                style: const TextStyle(color: Colors.blueGrey),
-                                underline: Container(
-                                  height: 2,
-                                  color: Colors.red,
-                                ),
-                                items: const <DropdownMenuItem<String>>[
-                                  DropdownMenuItem(
-                                    value: '1',
-                                    child: Text('Dishes'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: '2',
-                                    child: Text('Bevarages'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: '3',
-                                    child: Text('Burgers'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: '4',
-                                    child: Text('Short Eats'),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  setState(() {
-                                    foodType = value.toString();
-                                    print(foodType);
-                                  });
-                                },
-                              ),
-                            ),
-                            Expanded(flex: 2, child: Container()),
-                          ],
-                        ),
-                        TextFormField(
-                          controller: _catIdController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            labelText: 'Price',
-                            labelStyle: const TextStyle(
-                              fontSize: 15,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                            ),
-                          ),
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
-                          enableSuggestions: false,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter price';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        Row(
-                          children: [
-                            const Expanded(
-                              child: Text(
-                                'Recommend',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: DropdownButton(
-                                value: recommendType,
-                                //hint: Text('Food'),
-                                icon:
-                                    const Icon(Icons.arrow_drop_down_outlined),
-                                elevation: 16,
-                                style: const TextStyle(color: Colors.blueGrey),
-                                underline: Container(
-                                  height: 2,
-                                  color: Colors.red,
-                                ),
-                                items: const <DropdownMenuItem<String>>[
-                                  DropdownMenuItem(
-                                    value: 'Yes',
-                                    child: Text('Yes'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'No',
-                                    child: Text('No'),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  setState(() {
-                                    recommendType = value.toString();
-                                    print(recommendType);
-                                  });
-                                },
-                              ),
-                            ),
-                            Expanded(flex: 2, child: Container()),
-                          ],
-                        ),
+                        Text('View Items'),
                         Container(
-                          alignment: Alignment.topLeft,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text('Upload Image'),
+                          height: MediaQuery.of(context).size.height / 3.7,
+                          child: SingleChildScrollView(
+                            primary: false,
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: 5,
+                                itemBuilder: (BuildContext context, index) {
+                                  return Card(
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            alignment: Alignment.topLeft,
+                                            child: Image.network(
+                                              'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
+                                              height: 50,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 10),
+                                            alignment: Alignment.topLeft,
+                                            child: Column(
+                                              children: const [
+                                                Text('Id:'),
+                                                Text('name:'),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                }),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 50, left: 50),
-                          width: 100,
-                          height: 40,
-                          child: ElevatedButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor: Colors.blue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                  side: BorderSide(color: Colors.grey),
-                                ),
-                              ),
-                              onPressed: () async {
-                                if (_addproductform.currentState!.validate()) {
-                                } else {
-                                  return null;
-                                }
-
-                                //
-                              },
-                              child: status == true
-                                  ? const Text(
-                                      "Add",
-                                    )
-                                  : const CircularProgressIndicator(
-                                      backgroundColor: Colors.black38,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.white))),
                         ),
                       ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      child: Form(
+                        key: _addproductform,
+                        child: Column(
+                          children: [
+                            Text('add Items'),
+                            TextFormField(
+                              controller: _catIdController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Product Id',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a product id';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: 20.0),
+                            TextFormField(
+                              controller: _catIdController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Name',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter product name';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: 20.0),
+                            TextFormField(
+                              controller: _catIdController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Description',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter description';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: 20.0),
+                            Row(
+                              children: [
+                                const Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    'Select Type',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: DropdownButton(
+                                    value: foodType,
+                                    //hint: Text('Food'),
+                                    icon: const Icon(
+                                        Icons.arrow_drop_down_outlined),
+                                    elevation: 16,
+                                    style:
+                                        const TextStyle(color: Colors.blueGrey),
+                                    underline: Container(
+                                      height: 2,
+                                      color: Colors.red,
+                                    ),
+                                    items: const <DropdownMenuItem<String>>[
+                                      DropdownMenuItem(
+                                        value: '1',
+                                        child: Text('Dishes'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '2',
+                                        child: Text('Bevarages'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '3',
+                                        child: Text('Burgers'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '4',
+                                        child: Text('Short Eats'),
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        foodType = value.toString();
+                                        print(foodType);
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(flex: 2, child: Container()),
+                              ],
+                            ),
+                            TextFormField(
+                              controller: _catIdController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Price',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter price';
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: 20.0),
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    'Recommend',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: DropdownButton(
+                                    value: recommendType,
+                                    //hint: Text('Food'),
+                                    icon: const Icon(
+                                        Icons.arrow_drop_down_outlined),
+                                    elevation: 16,
+                                    style:
+                                        const TextStyle(color: Colors.blueGrey),
+                                    underline: Container(
+                                      height: 2,
+                                      color: Colors.red,
+                                    ),
+                                    items: const <DropdownMenuItem<String>>[
+                                      DropdownMenuItem(
+                                        value: 'Yes',
+                                        child: Text('Yes'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'No',
+                                        child: Text('No'),
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        recommendType = value.toString();
+                                        print(recommendType);
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(flex: 2, child: Container()),
+                              ],
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: Text('Upload Image'),
+                              ),
+                            ),
+                            Container(
+                              margin:
+                                  const EdgeInsets.only(right: 50, left: 50),
+                              width: 100,
+                              height: 40,
+                              child: ElevatedButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      side: BorderSide(color: Colors.grey),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    if (_addproductform.currentState!
+                                        .validate()) {
+                                    } else {
+                                      return null;
+                                    }
+
+                                    //
+                                  },
+                                  child: status == true
+                                      ? const Text(
+                                          "Add",
+                                        )
+                                      : const CircularProgressIndicator(
+                                          backgroundColor: Colors.black38,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white))),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],

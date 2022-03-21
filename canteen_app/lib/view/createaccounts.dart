@@ -1,3 +1,5 @@
+import 'package:canteen_app/model/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccounts extends StatefulWidget {
@@ -10,9 +12,64 @@ class _CreateAccountsState extends State<CreateAccounts> {
   final _createUserformKey = GlobalKey<FormState>();
   final _updateUserformKey = GlobalKey<FormState>();
   final _deleteUserformKey = GlobalKey<FormState>();
-  final TextEditingController _userNameController = TextEditingController();
-  final TextEditingController _userPassworController = TextEditingController();
-  bool status = true;
+  final TextEditingController _createUserNameController =
+      TextEditingController();
+  final TextEditingController _createUserPasswordController =
+      TextEditingController();
+  final TextEditingController _updateUserNameController =
+      TextEditingController();
+  final TextEditingController _updateUserPasswordController =
+      TextEditingController();
+  final TextEditingController _deleteUserPasswordController =
+      TextEditingController();
+  bool createButton = true;
+  bool deleteButton = true;
+  bool changeButton = true;
+
+  CollectionReference users = FirebaseFirestore.instance.collection('staff');
+  void createUser({required String username, required String password}) async {
+    await users
+        .doc(username)
+        .set({
+          'username': username,
+          'password': password,
+        })
+        .then(
+          (value) => showAlertDialog(context, 'User added succesfully!'),
+        )
+        .catchError(
+          (error) => showAlertDialog(context, 'Failed to add user!'),
+        );
+    setState(() {
+      createButton = true;
+    });
+  }
+
+  void updateUser({required String username, required String password}) async {
+    await users
+        .doc(username)
+        .update({'password': password})
+        .then((value) =>
+            showAlertDialog(context, 'Password updated succesfully!'))
+        .catchError(
+            (error) => showAlertDialog(context, 'Failed to update password!'));
+    setState(() {
+      changeButton = true;
+    });
+  }
+
+  void deleteUser({required String username}) async {
+    await users
+        .doc(username)
+        .delete()
+        .then((value) => showAlertDialog(context, 'User Deleted succesfully!'))
+        .catchError(
+            (error) => showAlertDialog(context, 'Failed to delete user!'));
+    setState(() {
+      deleteButton = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +92,9 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                 shrinkWrap: true,
                                 itemCount: 4,
                                 itemBuilder: (BuildContext context, index) {
-                                  return Card(child: Text('name'));
+                                  return Card(
+                                    child: Text('name'),
+                                  );
                                 }),
                           ),
                         ],
@@ -52,11 +111,11 @@ class _CreateAccountsState extends State<CreateAccounts> {
                               margin:
                                   EdgeInsets.only(left: 10, right: 10, top: 10),
                               child: TextFormField(
-                                controller: _userNameController,
+                                controller: _createUserNameController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
-                                  labelText: 'Email',
+                                  labelText: 'Username',
                                   labelStyle: const TextStyle(
                                     fontSize: 15,
                                   ),
@@ -64,13 +123,12 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                     borderRadius: BorderRadius.circular(0),
                                   ),
                                 ),
-                                keyboardType: TextInputType.emailAddress,
                                 autocorrect: false,
                                 textCapitalization: TextCapitalization.none,
                                 enableSuggestions: false,
                                 validator: (value) {
-                                  if (value!.isEmpty || !value.contains('@')) {
-                                    return 'Please enter a valid email address';
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a valid user name';
                                   }
                                   return null;
                                 },
@@ -80,7 +138,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                             Container(
                               margin: EdgeInsets.only(left: 10, right: 10),
                               child: TextFormField(
-                                controller: _userPassworController,
+                                controller: _createUserPasswordController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -93,7 +151,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                   ),
                                 ),
                                 validator: (value) {
-                                  if (value!.isEmpty || value.length < 7) {
+                                  if (value!.isEmpty || value.length < 4) {
                                     return 'Please enter a long password';
                                   }
                                   return null;
@@ -119,13 +177,22 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                     onPressed: () async {
                                       if (_createUserformKey.currentState!
                                           .validate()) {
+                                        createUser(
+                                            username:
+                                                _createUserNameController.text,
+                                            password:
+                                                _createUserPasswordController
+                                                    .text);
+                                        setState(() {
+                                          createButton = false;
+                                        });
                                       } else {
                                         return null;
                                       }
 
                                       //
                                     },
-                                    child: status == true
+                                    child: createButton == true
                                         ? const Text(
                                             "Create",
                                           )
@@ -151,11 +218,11 @@ class _CreateAccountsState extends State<CreateAccounts> {
                               margin:
                                   EdgeInsets.only(left: 10, right: 10, top: 10),
                               child: TextFormField(
-                                controller: _userNameController,
+                                controller: _updateUserNameController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
-                                  labelText: 'Email',
+                                  labelText: 'Username',
                                   labelStyle: const TextStyle(
                                     fontSize: 15,
                                   ),
@@ -163,13 +230,12 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                     borderRadius: BorderRadius.circular(0),
                                   ),
                                 ),
-                                keyboardType: TextInputType.emailAddress,
                                 autocorrect: false,
                                 textCapitalization: TextCapitalization.none,
                                 enableSuggestions: false,
                                 validator: (value) {
-                                  if (value!.isEmpty || !value.contains('@')) {
-                                    return 'Please enter a valid email address';
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a valid user name';
                                   }
                                   return null;
                                 },
@@ -179,7 +245,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                             Container(
                               margin: EdgeInsets.only(left: 10, right: 10),
                               child: TextFormField(
-                                controller: _userPassworController,
+                                controller: _updateUserPasswordController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -192,7 +258,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                   ),
                                 ),
                                 validator: (value) {
-                                  if (value!.isEmpty || value.length < 7) {
+                                  if (value!.isEmpty || value.length < 4) {
                                     return 'Please enter a long password';
                                   }
                                   return null;
@@ -218,13 +284,22 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                     onPressed: () async {
                                       if (_updateUserformKey.currentState!
                                           .validate()) {
+                                        updateUser(
+                                            username:
+                                                _updateUserNameController.text,
+                                            password:
+                                                _updateUserPasswordController
+                                                    .text);
+                                        setState(() {
+                                          changeButton = false;
+                                        });
                                       } else {
                                         return null;
                                       }
 
                                       //
                                     },
-                                    child: status == true
+                                    child: changeButton == true
                                         ? const Text(
                                             "Change",
                                           )
@@ -256,11 +331,11 @@ class _CreateAccountsState extends State<CreateAccounts> {
                     children: [
                       Text('Delete User'),
                       TextFormField(
-                        controller: _userNameController,
+                        controller: _deleteUserPasswordController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          labelText: 'Email',
+                          labelText: 'Username',
                           labelStyle: const TextStyle(
                             fontSize: 15,
                           ),
@@ -268,13 +343,12 @@ class _CreateAccountsState extends State<CreateAccounts> {
                             borderRadius: BorderRadius.circular(0),
                           ),
                         ),
-                        keyboardType: TextInputType.emailAddress,
                         autocorrect: false,
                         textCapitalization: TextCapitalization.none,
                         enableSuggestions: false,
                         validator: (value) {
-                          if (value!.isEmpty || !value.contains('@')) {
-                            return 'Please enter a valid email address';
+                          if (value!.isEmpty) {
+                            return 'Please enter a valid user name';
                           }
                           return null;
                         },
@@ -296,13 +370,20 @@ class _CreateAccountsState extends State<CreateAccounts> {
                               onPressed: () async {
                                 if (_deleteUserformKey.currentState!
                                     .validate()) {
+                                  deleteUser(
+                                    username:
+                                        _deleteUserPasswordController.text,
+                                  );
+                                  setState(() {
+                                    deleteButton = false;
+                                  });
                                 } else {
                                   return null;
                                 }
 
                                 //
                               },
-                              child: status == true
+                              child: deleteButton == true
                                   ? const Text(
                                       "Delete",
                                     )
@@ -320,6 +401,36 @@ class _CreateAccountsState extends State<CreateAccounts> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, message) {
+    // set up the buttons
+    Widget okButton = TextButton(
+      child: const Text(
+        "OK",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.red,
+        ),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      //title: Text("Log Out"),
+      content: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

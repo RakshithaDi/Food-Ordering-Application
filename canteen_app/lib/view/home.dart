@@ -1,4 +1,5 @@
 import 'package:canteen_app/model/auth.dart';
+import 'package:canteen_app/view/complaints.dart';
 import 'package:canteen_app/view/products.dart';
 import 'package:canteen_app/view/createaccounts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,8 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 
 import 'category.dart';
 import 'login.dart';
+import 'neworders.dart';
+import 'orders.dart';
 
 class MyHomePage extends StatefulWidget {
   static String id = 'home';
@@ -78,38 +81,46 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   page.jumpToPage(1);
                 },
-                icon: Icon(Icons.file_copy_rounded),
+                icon: Icon(Icons.food_bank_rounded),
               ),
               SideMenuItem(
                 priority: 2,
-                title: 'Orders',
+                title: 'Products',
                 onTap: () {
                   page.jumpToPage(2);
                 },
-                icon: Icon(Icons.download),
+                icon: Icon(Icons.no_food),
               ),
               SideMenuItem(
                 priority: 3,
-                title: 'Products',
+                title: 'Orders',
                 onTap: () {
                   page.jumpToPage(3);
                 },
-                icon: Icon(Icons.settings),
+                icon: Icon(Icons.event_note_sharp),
               ),
               SideMenuItem(
                 priority: 4,
+                title: 'Complaints',
+                onTap: () {
+                  page.jumpToPage(4);
+                },
+                icon: Icon(Icons.report),
+              ),
+              SideMenuItem(
+                priority: 5,
                 title: 'Sign Out',
                 onTap: () async {
-                  page.jumpToPage(4);
+                  page.jumpToPage(5);
                   showAlertDialog(context);
                 },
                 icon: Icon(Icons.exit_to_app),
               ),
               SideMenuItem(
-                priority: 5,
+                priority: 6,
                 title: 'Dashboard',
                 onTap: () {
-                  page.jumpToPage(5);
+                  page.jumpToPage(6);
                 },
                 icon: Icon(Icons.home),
                 badgeContent: Text(
@@ -125,25 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 CreateAccounts(),
                 CategoryDetails(),
-                Container(
-                  color: Colors.white,
-                  child: Center(
-                    child: Text(
-                      'Page\n   3',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
                 Products(),
-                Container(
-                  color: Colors.white,
-                  child: Center(
-                    child: Text(
-                      'Page\n   5',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
+                OrdersView(),
+                Complaints(),
               ],
             ),
           ),

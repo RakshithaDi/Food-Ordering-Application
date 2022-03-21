@@ -11,7 +11,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   final _addcategoryform = GlobalKey<FormState>();
   final _updatecategoryform = GlobalKey<FormState>();
   final _deletecategoryform = GlobalKey<FormState>();
-  final _addproductform = GlobalKey<FormState>();
+  final _searchprodIdform = GlobalKey<FormState>();
   bool status = true;
   final TextEditingController _catIdController = TextEditingController();
   final TextEditingController _catnameController = TextEditingController();
@@ -31,44 +31,43 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       Text('View Categories'),
                       Container(
                         height: 300,
-                        child: ListView(
-                          children: [
-                            ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: 5,
-                                itemBuilder: (BuildContext context, index) {
-                                  return Card(
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Image.network(
-                                              'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
-                                              height: 50,
-                                            ),
+                        child: SingleChildScrollView(
+                          primary: false,
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: 10,
+                              itemBuilder: (BuildContext context, index) {
+                                return Card(
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          alignment: Alignment.topLeft,
+                                          child: Image.network(
+                                            'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
+                                            height: 50,
                                           ),
                                         ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            alignment: Alignment.topLeft,
-                                            child: Column(
-                                              children: [
-                                                Text('Id:'),
-                                                Text('name:'),
-                                              ],
-                                            ),
+                                      ),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          margin: EdgeInsets.only(left: 10),
+                                          alignment: Alignment.topLeft,
+                                          child: Column(
+                                            children: [
+                                              Text('Id:'),
+                                              Text('name:'),
+                                            ],
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                }),
-                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }),
                         ),
                       ),
                     ],
@@ -187,6 +186,83 @@ class _CategoryDetailsState extends State<CategoryDetails> {
           margin: EdgeInsets.all(20),
           child: Column(
             children: [
+              Container(
+                child: Form(
+                  key: _searchprodIdform,
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: Text('Search by category ID'),
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          controller: _catIdController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: 'Search Category Id',
+                            labelStyle: const TextStyle(
+                              fontSize: 15,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                          ),
+                          autocorrect: false,
+                          textCapitalization: TextCapitalization.none,
+                          enableSuggestions: false,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter category id';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              right: 70, left: 70, top: 20, bottom: 20),
+                          child: SizedBox(
+                            width: 100,
+                            height: 50,
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.white,
+                                  backgroundColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                    side: BorderSide(color: Colors.grey),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  if (_searchprodIdform.currentState!
+                                      .validate()) {
+                                  } else {
+                                    return null;
+                                  }
+
+                                  //
+                                },
+                                child: status == true
+                                    ? const Text(
+                                        "Search",
+                                      )
+                                    : const CircularProgressIndicator(
+                                        backgroundColor: Colors.black38,
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Colors.white))),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: Form(
                   key: _updatecategoryform,
