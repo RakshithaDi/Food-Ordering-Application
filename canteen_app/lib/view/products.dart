@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Products extends StatefulWidget {
@@ -37,41 +38,143 @@ class _ProductsState extends State<Products> {
                           height: MediaQuery.of(context).size.height / 3.7,
                           child: SingleChildScrollView(
                             primary: false,
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: 5,
-                                itemBuilder: (BuildContext context, index) {
-                                  return Card(
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Image.network(
-                                              'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
-                                              height: 50,
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("items")
+                                  .snapshots(),
+                              builder: (context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text("Something went wrong");
+                                }
+
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) {
+                                  //  return CircularProgressIndicator();
+                                }
+
+                                if (snapshot.hasData) {
+                                  return ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (BuildContext context, index) {
+                                      QueryDocumentSnapshot item =
+                                          snapshot.data!.docs[index];
+
+                                      return Card(
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: Container(
+                                                alignment: Alignment.topLeft,
+                                                child: Image.network(
+                                                  item['imgUrl'],
+                                                  height: 50,
+                                                  width: 100,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                alignment: Alignment.topLeft,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Row(
+                                                        children: [
+                                                          const Expanded(
+                                                            flex: 1,
+                                                            child: Text('Id:'),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 4,
+                                                            child: Text(item[
+                                                                    'id']
+                                                                .toString()),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child:
+                                                                Text('name:'),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 4,
+                                                            child: Text(
+                                                                item['name']),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            alignment: Alignment.topLeft,
-                                            child: Column(
-                                              children: const [
-                                                Text('Id:'),
-                                                Text('name:'),
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   );
-                                }),
+                                }
+                                return const SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              },
+                            ),
+                            // ListView.builder(
+                            //     scrollDirection: Axis.vertical,
+                            //     shrinkWrap: true,
+                            //     itemCount: 5,
+                            //     itemBuilder: (BuildContext context, index) {
+                            //       return Card(
+                            //         child: Row(
+                            //           children: [
+                            //             Expanded(
+                            //               flex: 1,
+                            //               child: Container(
+                            //                 alignment: Alignment.topLeft,
+                            //                 child: Image.network(
+                            //                   'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
+                            //                   height: 50,
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //             Expanded(
+                            //               flex: 3,
+                            //               child: Container(
+                            //                 margin: EdgeInsets.only(left: 10),
+                            //                 alignment: Alignment.topLeft,
+                            //                 child: Column(
+                            //                   children: const [
+                            //                     Text('Id:'),
+                            //                     Text('name:'),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             )
+                            //           ],
+                            //         ),
+                            //       );
+                            //     }),
                           ),
                         ),
                       ],
@@ -168,6 +271,112 @@ class _ProductsState extends State<Products> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                ),
+                                StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection("items")
+                                      .snapshots(),
+                                  builder: (context,
+                                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Text("Something went wrong");
+                                    }
+
+                                    if (snapshot.connectionState ==
+                                            ConnectionState.waiting ||
+                                        !snapshot.hasData) {
+                                      //  return CircularProgressIndicator();
+                                    }
+
+                                    if (snapshot.hasData) {
+                                      return ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data!.docs.length,
+                                        itemBuilder:
+                                            (BuildContext context, index) {
+                                          QueryDocumentSnapshot item =
+                                              snapshot.data!.docs[index];
+
+                                          return Card(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Image.network(
+                                                      item['imgUrl'],
+                                                      height: 50,
+                                                      width: 100,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Row(
+                                                            children: [
+                                                              const Expanded(
+                                                                flex: 1,
+                                                                child:
+                                                                    Text('Id:'),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 4,
+                                                                child: Text(item[
+                                                                        'id']
+                                                                    .toString()),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Row(
+                                                            children: [
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                    'name:'),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 4,
+                                                                child: Text(item[
+                                                                    'name']),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
+                                    return const SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 Expanded(
                                   flex: 1,

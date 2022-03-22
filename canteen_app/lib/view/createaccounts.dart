@@ -102,7 +102,6 @@ class _CreateAccountsState extends State<CreateAccounts> {
                               }
 
                               if (snapshot.hasData) {
-                                print('has data');
                                 return Container(
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -114,8 +113,25 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                           (BuildContext context, index) {
                                         QueryDocumentSnapshot data =
                                             snapshot.data!.docs[index];
-                                        return Card(
-                                          child: Text(data['username']),
+                                        return Container(
+                                          height: 50,
+                                          child: Card(
+                                            child: InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  _updateUserNameController
+                                                      .text = data['username'];
+                                                  _deleteUserNameController
+                                                      .text = data['username'];
+                                                });
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Text(data['username']),
+                                              ),
+                                            ),
+                                          ),
                                         );
                                       },
                                     ),
@@ -174,6 +190,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                               margin: EdgeInsets.only(left: 10, right: 10),
                               child: TextFormField(
                                 controller: _createUserPasswordController,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -281,6 +298,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                               margin: EdgeInsets.only(left: 10, right: 10),
                               child: TextFormField(
                                 controller: _updateUserPasswordController,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
