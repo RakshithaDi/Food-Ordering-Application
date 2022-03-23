@@ -13,11 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/Itemdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/Itemdetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/products.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +56,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FoodOrderDeliverySystem/shopapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
