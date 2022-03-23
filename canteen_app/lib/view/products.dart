@@ -1,8 +1,10 @@
-import 'dart:html';
-
+//import 'dart:html';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Products extends StatefulWidget {
   const Products({Key? key}) : super(key: key);
@@ -43,6 +45,8 @@ class _ProductsState extends State<Products> {
   final TextEditingController _updatepriceController = TextEditingController();
   final TextEditingController _deleteProductController =
       TextEditingController();
+  File? file;
+  late String imagePath;
   CollectionReference items = FirebaseFirestore.instance.collection('items');
   void addProduct(
       {required int productId,
@@ -73,6 +77,31 @@ class _ProductsState extends State<Products> {
     setState(() {
       addButton = true;
     });
+  }
+
+  Future selectImage() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    imagePath = result.files.single.path!;
+    setState(() {
+      file = File(imagePath);
+    });
+  }
+
+  Future<void> uploadImage() async {
+    Timestamp time = Timestamp.now();
+    String filename = '$email-$time';
+    File file = File(filePath);
+    try {
+      final ref = await storage.FirebaseStorage.instance
+          .ref('advertisments/$filename')
+          .putFile(file);
+      final url = await ref.ref.getDownloadURL();
+      print(url);
+      addPost(url);
+    } on FirebaseException catch (e) {
+      print('image upload error');
+    }
   }
 
   void updateProduct(
@@ -128,14 +157,13 @@ class _ProductsState extends State<Products> {
             flex: 1,
             child: Container(
               margin: EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+              child: ListView(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child: Text(
+                        child: const Text(
                           'Items',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
@@ -296,18 +324,23 @@ class _ProductsState extends State<Products> {
               ),
             ),
           ),
-          VerticalDivider(
+          const VerticalDivider(
             color: Colors.grey,
             thickness: 2,
           ),
           Expanded(
             flex: 1,
             child: Container(
+              margin: EdgeInsets.only(top: 20),
               child: Form(
                 key: _addproductform,
-                child: Column(
+                child: ListView(
                   children: [
-                    Text('add Items'),
+                    const Text(
+                      'add Items',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                     TextFormField(
                       controller: _addProductIdController,
                       decoration: InputDecoration(
@@ -517,13 +550,36 @@ class _ProductsState extends State<Products> {
                         Expanded(flex: 2, child: Container()),
                       ],
                     ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Upload Image'),
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                selectImage();
+                              },
+                              child: Text('Upload Image'),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: (file == null)
+                              ? const Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    'Select an Image',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                )
+                              : Image.file(file!),
+                        ),
+                      ],
                     ),
                     Container(
                       margin: const EdgeInsets.only(right: 50, left: 50),
@@ -573,99 +629,119 @@ class _ProductsState extends State<Products> {
               ),
             ),
           ),
-          VerticalDivider(
+          const VerticalDivider(
             color: Colors.grey,
             thickness: 2,
           ),
           Expanded(
             flex: 1,
             child: Container(
-              margin: EdgeInsets.all(20),
-              child: Column(
+              margin: EdgeInsets.only(top: 10),
+              child: ListView(
                 children: [
-                  Container(
-                    child: Form(
-                      key: _searchprodIdform,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text('Search by product ID'),
-                          ),
-                          Expanded(
-                            child: TextFormField(
-                              controller: _searchProductIdController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'Search Product Id',
-                                labelStyle: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      child: Form(
+                        key: _searchprodIdform,
+                        child: Row(
+                          children: [
+                            const Expanded(
+                              flex: 1,
+                              child: Text(
+                                'Search by product ID',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
-                              autocorrect: false,
-                              textCapitalization: TextCapitalization.none,
-                              enableSuggestions: false,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter a product id';
-                                }
-                                return null;
-                              },
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                  right: 70, left: 70, top: 20, bottom: 20),
-                              child: SizedBox(
-                                width: 100,
-                                height: 50,
-                                child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      backgroundColor: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(0),
-                                        side: BorderSide(color: Colors.grey),
+                            Expanded(
+                              flex: 1,
+                              child: TextFormField(
+                                controller: _searchProductIdController,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  labelText: 'Search Product Id',
+                                  labelStyle: const TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                ),
+                                autocorrect: false,
+                                textCapitalization: TextCapitalization.none,
+                                enableSuggestions: false,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Please enter a product id';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.only(left: 30, right: 30),
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 40,
+                                  child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: Colors.white,
+                                        backgroundColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(0),
+                                          side: BorderSide(color: Colors.grey),
+                                        ),
                                       ),
-                                    ),
-                                    onPressed: () async {
-                                      if (_searchprodIdform.currentState!
-                                          .validate()) {
-                                      } else {
-                                        return null;
-                                      }
+                                      onPressed: () async {
+                                        if (_searchprodIdform.currentState!
+                                            .validate()) {
+                                        } else {
+                                          return null;
+                                        }
 
-                                      //
-                                    },
-                                    child: status == true
-                                        ? const Text(
-                                            "Search",
-                                          )
-                                        : const CircularProgressIndicator(
-                                            backgroundColor: Colors.black38,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white))),
+                                        //
+                                      },
+                                      child: status == true
+                                          ? const Text(
+                                              "Search",
+                                            )
+                                          : const CircularProgressIndicator(
+                                              backgroundColor: Colors.black38,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.white))),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 3,
                     child: Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: const EdgeInsets.only(
+                        top: 20,
+                      ),
                       child: Form(
                         key: _editform,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Update Items'),
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: const Text(
+                                'Update Items',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                             TextFormField(
                               controller: _updateProductIdController,
                               decoration: InputDecoration(
@@ -892,57 +968,62 @@ class _ProductsState extends State<Products> {
                                 ),
                               ],
                             ),
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(right: 50, left: 50),
-                              child: SizedBox(
-                                width: 100,
-                                height: 50,
-                                child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      backgroundColor: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(0),
-                                        side: BorderSide(color: Colors.grey),
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 40,
+                                  child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        primary: Colors.white,
+                                        backgroundColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(0),
+                                          side: BorderSide(color: Colors.grey),
+                                        ),
                                       ),
-                                    ),
-                                    onPressed: () async {
-                                      if (_editform.currentState!.validate()) {
-                                        updateProduct(
-                                            productId: int.parse(
-                                                _updateProductIdController
-                                                    .text),
-                                            productName:
-                                                _updateProductNameController
-                                                    .text,
-                                            description:
-                                                _updateDescriptionController
-                                                    .text,
-                                            categoryType:
-                                                int.parse(updatefoodType),
-                                            price: _updatepriceController.text,
-                                            recommendTyep: updaterecommendType,
-                                            image:
-                                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDs0k0VJUItROyqqq8doDZ8S8iBu3MkeVfVTDARhPTfVnav6PTDWS5Y_HhfihUsZktcs&usqp=CAU');
-                                        setState(() {
-                                          updateButton = false;
-                                        });
-                                      } else {
-                                        return null;
-                                      }
+                                      onPressed: () async {
+                                        if (_editform.currentState!
+                                            .validate()) {
+                                          updateProduct(
+                                              productId: int.parse(
+                                                  _updateProductIdController
+                                                      .text),
+                                              productName:
+                                                  _updateProductNameController
+                                                      .text,
+                                              description:
+                                                  _updateDescriptionController
+                                                      .text,
+                                              categoryType:
+                                                  int.parse(updatefoodType),
+                                              price:
+                                                  _updatepriceController.text,
+                                              recommendTyep:
+                                                  updaterecommendType,
+                                              image:
+                                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDs0k0VJUItROyqqq8doDZ8S8iBu3MkeVfVTDARhPTfVnav6PTDWS5Y_HhfihUsZktcs&usqp=CAU');
+                                          setState(() {
+                                            updateButton = false;
+                                          });
+                                        } else {
+                                          return null;
+                                        }
 
-                                      //
-                                    },
-                                    child: updateButton == true
-                                        ? const Text(
-                                            "Update",
-                                          )
-                                        : const CircularProgressIndicator(
-                                            backgroundColor: Colors.black38,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white))),
+                                        //
+                                      },
+                                      child: updateButton == true
+                                          ? const Text(
+                                              "Update",
+                                            )
+                                          : const CircularProgressIndicator(
+                                              backgroundColor: Colors.black38,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.white))),
+                                ),
                               ),
                             ),
                           ],
@@ -955,70 +1036,82 @@ class _ProductsState extends State<Products> {
                     child: Form(
                       key: _deleteform,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Delete Products'),
-                          TextFormField(
-                            controller: _deleteProductController,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              labelText: 'Product Id',
-                              labelStyle: const TextStyle(
-                                fontSize: 15,
+                          const Text(
+                            'Delete Products',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child: TextFormField(
+                              controller: _deleteProductController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Product Id',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(0),
-                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a category ID';
+                                }
+                                return null;
+                              },
                             ),
-                            autocorrect: false,
-                            textCapitalization: TextCapitalization.none,
-                            enableSuggestions: false,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter a category ID';
-                              }
-                              return null;
-                            },
                           ),
                           SizedBox(height: 20.0),
-                          Container(
-                            margin: const EdgeInsets.only(right: 50, left: 50),
-                            child: SizedBox(
-                              width: 100,
-                              height: 50,
-                              child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    primary: Colors.white,
-                                    backgroundColor: Colors.blue,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                      side: BorderSide(color: Colors.grey),
+                          Center(
+                            child: Container(
+                              margin:
+                                  const EdgeInsets.only(right: 50, left: 50),
+                              child: SizedBox(
+                                width: 100,
+                                height: 40,
+                                child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                      backgroundColor: Colors.blue,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                        side: BorderSide(color: Colors.grey),
+                                      ),
                                     ),
-                                  ),
-                                  onPressed: () async {
-                                    if (_deleteform.currentState!.validate()) {
-                                      deletCategory(
-                                          prodId: int.parse(
-                                              _deleteProductController.text));
+                                    onPressed: () async {
+                                      if (_deleteform.currentState!
+                                          .validate()) {
+                                        deletCategory(
+                                            prodId: int.parse(
+                                                _deleteProductController.text));
 
-                                      setState(() {
-                                        deleteButton = false;
-                                      });
-                                    } else {
-                                      return null;
-                                    }
+                                        setState(() {
+                                          deleteButton = false;
+                                        });
+                                      } else {
+                                        return null;
+                                      }
 
-                                    //
-                                  },
-                                  child: deleteButton == true
-                                      ? const Text(
-                                          "Delete",
-                                        )
-                                      : const CircularProgressIndicator(
-                                          backgroundColor: Colors.black38,
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.white))),
+                                      //
+                                    },
+                                    child: deleteButton == true
+                                        ? const Text(
+                                            "Delete",
+                                          )
+                                        : const CircularProgressIndicator(
+                                            backgroundColor: Colors.black38,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.white))),
+                              ),
                             ),
                           ),
                         ],
