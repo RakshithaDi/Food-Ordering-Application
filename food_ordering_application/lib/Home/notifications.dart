@@ -40,7 +40,7 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Notifications'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
       ),
       body: SafeArea(
         child: Column(
@@ -217,7 +217,9 @@ class _NotificationPageState extends State<NotificationPage> {
                       height: 100,
                       width: 100,
                       child: Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: titleColor,
+                        ),
                       ),
                     ),
                   );

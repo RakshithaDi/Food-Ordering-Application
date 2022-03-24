@@ -85,7 +85,7 @@ class _EachOrdersState extends State<EachOrders> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Order Details'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
       ),
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -95,7 +95,7 @@ class _EachOrdersState extends State<EachOrders> {
               alignment: Alignment.topLeft,
               child: Text(
                 "Order Id: $orderId",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
+                style: TextStyle(fontSize: 14, color: titleColor),
               ),
               margin: EdgeInsets.only(left: 12, top: 10, bottom: 5),
             ),
@@ -272,7 +272,7 @@ class _EachOrdersState extends State<EachOrders> {
                                                 width: 150,
                                                 child: Card(
                                                   elevation: 4,
-                                                  color: Colors.yellow,
+                                                  color: titleColor,
                                                   child: InkWell(
                                                     onTap: () {
                                                       showAlertDialog(context);
@@ -281,6 +281,7 @@ class _EachOrdersState extends State<EachOrders> {
                                                       child: Text(
                                                         'Collected',
                                                         style: TextStyle(
+                                                            color: Colors.white,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontSize: 16),

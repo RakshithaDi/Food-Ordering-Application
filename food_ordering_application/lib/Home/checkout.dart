@@ -229,7 +229,7 @@ class _CheckOutState extends State<CheckOut> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Check Out'),
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: greenTheme,
         ),
         resizeToAvoidBottomInset: false,
         body: Container(

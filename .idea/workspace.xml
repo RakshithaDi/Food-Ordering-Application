@@ -13,9 +13,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Food-Ordering-Application.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/products.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/category.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/images/complaint.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/otp_setup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Authentication/signup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/Itemdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/Itemdetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/account.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/account.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/cartpage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/changepassword.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/changepassword.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/checkout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/complaint.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/complaint.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/itemspage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/itemspage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/notifications.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/notifications.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/orderdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/orderdetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/orders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/orders.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/personalinfo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/personalinfo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/Home/searchpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/Home/searchpage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/constant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/constant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +79,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/canteen_app" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />

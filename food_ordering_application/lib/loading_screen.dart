@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Authentication/login.dart';
 import 'package:food_ordering_application/constant.dart';
+import 'dart:async';
 
 class LoadingScreen extends StatefulWidget {
   static String id = "loading_screen";
@@ -10,6 +11,15 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 3), () {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => Login()));
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -18,9 +28,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-              Color(0xFFEf44949),
-              Color(0xFFEf00e0e),
-              Color(0xFFEEc00b0b),
+              Color(0xFFED9EFCF),
+              Color(0xFFE91C93F),
+              Color(0xFFE95D9AB),
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             child: Center(
               child: Column(
@@ -31,38 +41,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     flex: 2,
                     child: Container(
                       child: Image(
-                        image: AssetImage('images/loadingLogo.png'),
+                        image: AssetImage('images/newLogofoodx.png'),
                         height: 150.0,
                         width: 300.0,
                       ),
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          top: 150, bottom: 30, right: 30, left: 30),
-                      width: 250,
-                      height: 10,
-                      child: Card(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push<void>(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => Login(),
-                              ),
-                            );
-                          },
-                          child: Image(
-                            alignment: Alignment.bottomCenter,
-                            image: AssetImage('images/getStartedButton.png'),
-                            height: 150.0,
-                            width: 300.0,
-                          ),
-                        ),
+                      child: SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(titleColor),
                       ),
                     ),
-                  ),
+                  )),
                 ],
               ),
             ),

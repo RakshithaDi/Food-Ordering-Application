@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_ordering_application/Authentication/otp_setup.dart';
+import 'package:food_ordering_application/constant.dart';
 
 import '../Home/home.dart';
 import '../registeruser.dart';
@@ -126,20 +127,20 @@ class _SignupState extends State<Signup> {
                                 child: Container(
                                   margin: EdgeInsets.only(top: 10),
                                   child: TextFormField(
+                                    cursorColor: Colors.green,
                                     controller: _fnameController,
                                     decoration: InputDecoration(
-                                      filled: true,
+                                      errorStyle: TextStyle(
+                                        color: titleColor,
+                                      ),
+                                      border: InputBorder.none,
                                       fillColor: Colors.white,
+                                      filled: true,
                                       labelText: 'First Name',
                                       labelStyle: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(11),
-                                      ),
-                                      // suffixIcon: Icon(
-                                      //   Icons.error,
-                                      // ),
+                                          fontSize: 15,
+                                          color: Sushi,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     validator: (value) {
                                       if (value.isEmpty) {
@@ -163,18 +164,17 @@ class _SignupState extends State<Signup> {
                                   child: TextFormField(
                                     controller: _lnameController,
                                     decoration: InputDecoration(
-                                      filled: true,
+                                      errorStyle: TextStyle(
+                                        color: titleColor,
+                                      ),
+                                      border: InputBorder.none,
                                       fillColor: Colors.white,
+                                      filled: true,
                                       labelText: 'Last Name',
                                       labelStyle: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(11),
-                                      ),
-                                      // suffixIcon: Icon(
-                                      //   Icons.error,
-                                      // ),
+                                          fontSize: 15,
+                                          color: Sushi,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     validator: (value) {
                                       if (value.isEmpty) {
@@ -203,18 +203,17 @@ class _SignupState extends State<Signup> {
                                   child: TextFormField(
                                     controller: _userEmailController,
                                     decoration: InputDecoration(
-                                      filled: true,
+                                      errorStyle: TextStyle(
+                                        color: titleColor,
+                                      ),
+                                      border: InputBorder.none,
                                       fillColor: Colors.white,
+                                      filled: true,
                                       labelText: 'Email',
                                       labelStyle: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(11),
-                                      ),
-                                      // suffixIcon: Icon(
-                                      //   Icons.error,
-                                      // ),
+                                          fontSize: 15,
+                                          color: Sushi,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     keyboardType: TextInputType.emailAddress,
                                     autocorrect: false,
@@ -294,22 +293,28 @@ class _SignupState extends State<Signup> {
                                       TextFormField(
                                         controller: _userPassworController,
                                         decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Colors.white,
                                           helperText:
                                               '*Should be at least 8 characters long',
+                                          helperStyle: TextStyle(
+                                            color: titleColor,
+                                          ),
                                           labelText: 'Password',
+                                          errorStyle: TextStyle(
+                                            color: titleColor,
+                                          ),
+                                          border: InputBorder.none,
+                                          fillColor: Colors.white,
+                                          filled: true,
                                           labelStyle: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(11),
-                                          ),
+                                              fontSize: 15,
+                                              color: Sushi,
+                                              fontWeight: FontWeight.bold),
                                           suffixIcon: IconButton(
                                             onPressed: _toggle,
                                             icon: Icon(
-                                                Icons.remove_red_eye_rounded),
+                                              Icons.remove_red_eye_rounded,
+                                              color: titleColor,
+                                            ),
                                           ),
                                         ),
                                         validator: (value) {
@@ -341,20 +346,23 @@ class _SignupState extends State<Signup> {
                                   child: TextFormField(
                                     controller: _confirmPassworController,
                                     decoration: InputDecoration(
-                                      filled: true,
+                                      errorStyle: TextStyle(
+                                        color: titleColor,
+                                      ),
+                                      border: InputBorder.none,
                                       fillColor: Colors.white,
-                                      helperText: '',
-                                      labelText: 'Re-type Password',
+                                      filled: true,
+                                      labelText: 'Re-Type Password',
                                       labelStyle: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(11),
-                                      ),
+                                          fontSize: 15,
+                                          color: Sushi,
+                                          fontWeight: FontWeight.bold),
                                       suffixIcon: IconButton(
                                         onPressed: _toggle,
-                                        icon:
-                                            Icon(Icons.remove_red_eye_rounded),
+                                        icon: Icon(
+                                          Icons.remove_red_eye_rounded,
+                                          color: titleColor,
+                                        ),
                                       ),
                                     ),
                                     validator: (value) {
@@ -400,10 +408,10 @@ class _SignupState extends State<Signup> {
                         child: TextButton(
                           style: TextButton.styleFrom(
                             primary: Colors.white,
-                            backgroundColor: Color(0XFFD8352C),
+                            backgroundColor: Sushi,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.red)),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
                           ),
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
@@ -418,7 +426,7 @@ class _SignupState extends State<Signup> {
                               : CircularProgressIndicator(
                                   backgroundColor: Colors.black38,
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.white)),
+                                      titleColor)),
                         ),
                       ),
                     ),
@@ -427,14 +435,18 @@ class _SignupState extends State<Signup> {
                         padding: const EdgeInsets.only(left: 100),
                         child: Row(
                           children: [
-                            Text('Already Have an account?'),
+                            Text(
+                              'Already Have an account?',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                             SizedBox(
                               child: TextButton(
                                 style: TextButton.styleFrom(
-                                  primary: Colors.black,
-                                  //backgroundColor: Color(0XFFD8352C),
+                                  primary: titleColor,
                                   textStyle: TextStyle(
-                                    fontSize: 13,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -508,7 +520,8 @@ class SignupTitle extends StatelessWidget {
         children: <Widget>[
           Text(
             'Let\'s Get Started',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 25, color: titleColor),
           ),
           SizedBox(
             height: 10.0,
@@ -516,7 +529,7 @@ class SignupTitle extends StatelessWidget {
           Text(
             'Create an account to continue!',
             style: TextStyle(
-                fontSize: 15,
+                fontSize: 16,
                 color: Colors.grey[500],
                 fontWeight: FontWeight.bold),
           ),
@@ -525,10 +538,10 @@ class SignupTitle extends StatelessWidget {
           ),
           SizedBox(
             height: 10.0,
-            width: 350,
+            width: MediaQuery.of(context).size.width - 30,
             child: Divider(
               thickness: 2,
-              color: Colors.grey[400],
+              color: titleColor,
             ),
           ),
         ],
@@ -542,15 +555,16 @@ class FoodLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        top: 25,
+        top: 60,
         bottom: 25,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Image(
-          image: AssetImage('images/foodx.png'),
+          color: Sushi,
+          image: AssetImage('images/newLogofoodx.png'),
           height: 100.0,
-          width: 200.0,
+          width: 300.0,
         ),
       ),
     );

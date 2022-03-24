@@ -35,11 +35,11 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   CollectionReference category =
       FirebaseFirestore.instance.collection('categories');
   void createCategory(
-      {required String catid,
+      {required int catid,
       required String catname,
       required String imgUrl}) async {
     await category
-        .doc(catid)
+        .doc(catid.toString())
         .set({
           'id': catid,
           'name': catname,
@@ -57,11 +57,11 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   }
 
   void updateCategory(
-      {required String catid,
+      {required int catid,
       required String catname,
       required String imgUrl}) async {
     await category
-        .doc(catid)
+        .doc(catid.toString())
         .update({
           'id': catid,
           'name': catname,
@@ -404,7 +404,8 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   if (_addcategoryform.currentState!
                                       .validate()) {
                                     createCategory(
-                                      catid: _addcatIdController.text,
+                                      catid:
+                                          int.parse(_addcatIdController.text),
                                       catname: _addcatnameController.text,
                                       imgUrl: imgUrl,
                                     );
@@ -557,7 +558,8 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                 if (_updatecategoryform.currentState!
                                     .validate()) {
                                   updateCategory(
-                                      catid: _updatecatIdController.text,
+                                      catid: int.parse(
+                                          _updatecatIdController.text),
                                       catname: _updatenameController.text,
                                       imgUrl: updateImgUrl);
                                   setState(() {

@@ -43,7 +43,7 @@ class _AccountState extends State<Account> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Account'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
       ),
       body: SafeArea(
         child: ListView(
@@ -63,7 +63,7 @@ class _AccountState extends State<Account> {
                         child: Icon(
                           Icons.account_circle,
                           size: 110,
-                          color: kredbackgroundcolor,
+                          color: titleColor,
                         ),
                       ),
                       FutureBuilder<DocumentSnapshot>(
@@ -133,7 +133,9 @@ class _AccountState extends State<Account> {
                               );
                             }
                             return Container(
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator(
+                                color: titleColor,
+                              ),
                             );
                           }),
                     ],
@@ -354,7 +356,7 @@ class _AccountState extends State<Account> {
                   child: TextButton(
                     style: TextButton.styleFrom(
                       primary: Colors.white,
-                      backgroundColor: Colors.red.withOpacity(0.9),
+                      backgroundColor: Sushi,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           side: BorderSide(color: Colors.white)),

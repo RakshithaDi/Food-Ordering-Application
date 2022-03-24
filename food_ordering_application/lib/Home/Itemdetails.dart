@@ -54,7 +54,7 @@ class _ItemDetailsState extends State<ItemDetails> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Cart'),
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: greenTheme,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),
@@ -129,27 +129,53 @@ class _ItemDetailsState extends State<ItemDetails> {
                                   onTap: () {},
                                 ),
                               ),
-                              ListTile(
-                                title: Text(data['name']),
-                                subtitle: Text(data['description']),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 18, bottom: 10),
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  'Rating:${rateConditions(data['rating'])}',
-                                  style: TextStyle(),
+                              Card(
+                                child: Container(
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        title: Text(
+                                          data['name'],
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              color: titleColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        subtitle: Text(data['description'],
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: titleColor,
+                                            )),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 18, bottom: 10),
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                            'Rating:${rateConditions(data['rating'])}',
+                                            style: TextStyle(
+                                                fontSize: 19,
+                                                color: titleColor,
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 18),
+                                        alignment: Alignment.topLeft,
+                                        child: Text('Rs.${data['price']}',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: titleColor,
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.topLeft,
+                                        margin:
+                                            EdgeInsets.only(left: 18, top: 10),
+                                        child: Ratings(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 18),
-                                alignment: Alignment.topLeft,
-                                child: Text('Rs.${data['price']}'),
-                              ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                margin: EdgeInsets.only(left: 18, top: 10),
-                                child: Ratings(),
                               ),
                               Container(
                                 height:
@@ -172,7 +198,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                                                 onPressed: () {
                                                   cart.add(items[0]);
                                                 },
-                                                color: Colors.red,
+                                                color: Sushi,
                                                 textColor: Colors.white,
                                                 elevation: 0.2,
                                                 child: Text("Add to Cart")),
@@ -186,7 +212,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                                             },
                                             icon: Icon(
                                               Icons.shopping_cart_rounded,
-                                              color: Colors.red,
+                                              color: Sushi,
                                               size: 30,
                                             ),
                                           ),
@@ -329,7 +355,7 @@ class _RatingsState extends State<Ratings> {
                 updateRate();
               });
             },
-            color: Colors.red,
+            color: Sushi,
             textColor: Colors.white,
             elevation: 0.2,
             child: Text("Rate")),

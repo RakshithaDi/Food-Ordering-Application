@@ -73,7 +73,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Personal Information'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
       ),
       body: Container(
         child: Form(
@@ -122,7 +122,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height: 80,
                           child: Card(
                             elevation: 2,
-                            color: Colors.red.withOpacity(0.6),
+                            color: Colors.green.withOpacity(0.4),
                             child: TextFormField(
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.9),
@@ -159,7 +159,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height: 80,
                           child: Card(
                             elevation: 2,
-                            color: Colors.red.withOpacity(0.6),
+                            color: Colors.green.withOpacity(0.4),
                             child: TextFormField(
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.9),
@@ -203,7 +203,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   height: 80,
                   child: Card(
                     elevation: 2,
-                    color: Colors.red.withOpacity(0.6),
+                    color: Colors.green.withOpacity(0.4),
                     child: TextFormField(
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
@@ -242,55 +242,59 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     ),
                   )),
               Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
-                  height: 80,
-                  child: Card(
-                    elevation: 2,
-                    color: Colors.red.withOpacity(0.6),
-                    child: TextFormField(
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                      ),
-                      textAlign: TextAlign.center,
-                      // readOnly: true,
-                      enabled: false,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        label: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            'Phone No',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
-                            ),
+                margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                height: 80,
+                child: Card(
+                  elevation: 2,
+                  color: Colors.green.withOpacity(0.4),
+                  child: TextFormField(
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                    ),
+                    textAlign: TextAlign.center,
+                    // readOnly: true,
+                    enabled: false,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your phone number';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      label: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Phone No',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
                           ),
                         ),
-                        suffixIcon: edit == false
-                            ? Icon(
-                                Icons.format_list_bulleted,
-                                color: Colors.white,
-                              )
-                            : Icon(Icons.drive_file_rename_outline,
-                                color: Colors.white),
                       ),
-                      controller: phoneNoController,
+                      suffixIcon: edit == false
+                          ? Icon(
+                              Icons.format_list_bulleted,
+                              color: Colors.white,
+                            )
+                          : Icon(Icons.drive_file_rename_outline,
+                              color: Colors.white),
                     ),
-                  )),
+                    controller: phoneNoController,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
               edit == false
                   ? Align(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
-                        width: 300,
+                        width: 250,
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: kredbackgroundcolor,
+                            primary: titleColor,
                           ),
                           onPressed: () {
                             // Validate returns true if the form is valid, or false otherwise.
@@ -309,11 +313,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   : Align(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
-                        width: 300,
+                        width: 250,
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red.withOpacity(0.8),
+                            primary: greenTheme,
                           ),
                           onPressed: () {
                             // Validate returns true if the form is valid, or false otherwise.

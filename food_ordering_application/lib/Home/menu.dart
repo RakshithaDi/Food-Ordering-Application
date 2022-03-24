@@ -136,7 +136,7 @@ class _MenuState extends State<Menu> {
         appBar: AppBar(
           toolbarHeight: 68,
           elevation: 0,
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: Color(0xFFE008000),
           title: FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
                   .collection("userprofile")
@@ -161,7 +161,9 @@ class _MenuState extends State<Menu> {
                       : Text('');
                 }
                 return Container(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: titleColor,
+                  ),
                 );
               }),
           actions: [
@@ -219,7 +221,7 @@ class _MenuState extends State<Menu> {
           child: ListView(
             children: [
               Container(
-                color: kredbackgroundcolor,
+                color: Color(0xFFE008000),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -230,6 +232,7 @@ class _MenuState extends State<Menu> {
                           child: Padding(
                             padding: const EdgeInsets.only(
                               left: 10,
+                              bottom: 20,
                             ),
                             child: Text(
                               'Let\'s select the best taste for you',
@@ -243,44 +246,44 @@ class _MenuState extends State<Menu> {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                            ),
-                            child: Text(
-                              'Vote for tomorrow',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Stack(
-                              children: <Widget>[
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.double_arrow,
-                                    color: Colors.white,
-                                    size: 34,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       margin: EdgeInsets.only(top: 10),
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.only(
+                    //           left: 10,
+                    //         ),
+                    //         child: Text(
+                    //           'Vote for tomorrow',
+                    //           style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontSize: 16,
+                    //             fontWeight: FontWeight.bold,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       margin: EdgeInsets.only(top: 10),
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.only(left: 10),
+                    //         child: Stack(
+                    //           children: <Widget>[
+                    //             IconButton(
+                    //               icon: Icon(
+                    //                 Icons.double_arrow,
+                    //                 color: Colors.white,
+                    //                 size: 34,
+                    //               ),
+                    //               onPressed: () {},
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -416,7 +419,9 @@ class _MenuState extends State<Menu> {
                     height: 100,
                     width: 100,
                     child: Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: titleColor,
+                      ),
                     ),
                   );
                 },
@@ -541,7 +546,7 @@ class _MenuState extends State<Menu> {
                                                       child: IconButton(
                                                         icon: Icon(
                                                           Icons.add_box,
-                                                          color: Colors.red,
+                                                          color: titleColor,
                                                           size: 30,
                                                         ),
                                                         onPressed: () {
@@ -572,7 +577,9 @@ class _MenuState extends State<Menu> {
                       height: 100,
                       width: 100,
                       child: Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: titleColor,
+                        ),
                       ),
                     );
                   },

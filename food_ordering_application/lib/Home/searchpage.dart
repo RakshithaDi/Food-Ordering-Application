@@ -51,7 +51,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Items'),
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: greenTheme,
           actions: [
             IconButton(
               icon: Icon(
@@ -87,7 +87,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
         body: ListView(
           children: [
             Container(
-              height: 650,
+              height: MediaQuery.of(context).size.height - 90,
               child: FutureBuilder(
                 future: FirebaseFirestore.instance.collection('items').get(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -225,16 +225,13 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                                                       style:
                                                           TextButton.styleFrom(
                                                         primary: Colors.white,
-                                                        backgroundColor:
-                                                            Color(0XFFD8352C),
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                            side: BorderSide(
-                                                                color:
-                                                                    kredbackgroundcolor)),
+                                                        backgroundColor: Sushi,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
                                                       ),
                                                       onPressed: () {
                                                         cart.add(items[index]);
@@ -273,7 +270,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.red,
+          backgroundColor: greenTheme,
           tooltip: 'Search for Food',
           onPressed: () => showSearch(
             context: context,

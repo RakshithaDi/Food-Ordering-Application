@@ -67,7 +67,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Change Password'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
       ),
       body: Container(
         child: Form(
@@ -85,7 +85,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     decoration: InputDecoration(
                       filled: true,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.red.withOpacity(0.6),
+                      fillColor: Colors.green.withOpacity(0.6),
                       errorStyle: TextStyle(color: Colors.red),
                       labelText: 'Current Password',
                       labelStyle: TextStyle(
@@ -127,7 +127,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     decoration: InputDecoration(
                       filled: true,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.red.withOpacity(0.6),
+                      fillColor: Colors.green.withOpacity(0.6),
                       errorStyle: TextStyle(color: Colors.red),
                       labelText: 'Enter New Password',
                       labelStyle: TextStyle(
@@ -161,11 +161,11 @@ class _ChangePasswordState extends State<ChangePassword> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
-                  width: 330,
+                  width: 300,
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red.withOpacity(0.9),
+                      primary: Colors.green.withOpacity(0.9),
                     ),
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.

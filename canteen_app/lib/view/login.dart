@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                         left: 10, right: 10, top: 10),
                                     child: TextFormField(
                                       controller: _userEmailController,

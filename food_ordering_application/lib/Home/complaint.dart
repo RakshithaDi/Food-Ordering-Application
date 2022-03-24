@@ -44,7 +44,7 @@ class _ComplaintsState extends State<Complaints> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Report Complaint'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
       ),
       body: SafeArea(
         child: Form(
@@ -58,7 +58,8 @@ class _ComplaintsState extends State<Complaints> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image(
-                    image: AssetImage('images/complaint.jpg'),
+                    color: titleColor,
+                    image: AssetImage('images/complaint.png'),
                     height: 160.0,
                     width: 200.0,
                   ),
@@ -130,12 +131,19 @@ class _ComplaintsState extends State<Complaints> {
                 ),
                 TextFormField(
                   controller: ComplaintDescription,
+                  cursorColor: Colors.green,
                   decoration: InputDecoration(
-                    labelText: "Enter your complaint",
-                    labelStyle: TextStyle(fontSize: 15),
+                    errorStyle: TextStyle(
+                      color: titleColor,
+                    ),
                     filled: true,
-                    border: OutlineInputBorder(),
                     fillColor: Colors.white,
+                    labelText: "Enter your complaint",
+                    labelStyle: TextStyle(
+                        fontSize: 15,
+                        color: titleColor,
+                        fontWeight: FontWeight.bold),
+                    border: InputBorder.none,
                   ),
                   maxLines: 5,
                   validator: (value) {
@@ -147,15 +155,16 @@ class _ComplaintsState extends State<Complaints> {
                   },
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 80.0,
                 ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     ButtonTheme(
                       height: 40,
                       disabledColor: Colors.grey,
                       child: RaisedButton(
-                        color: kredbackgroundcolor,
+                        color: Sushi,
                         disabledElevation: 4.0,
                         onPressed: () async {
                           if (formkey.currentState.validate()) {

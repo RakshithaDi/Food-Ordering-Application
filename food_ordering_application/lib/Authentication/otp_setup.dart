@@ -71,8 +71,8 @@ class _OtpSetupState extends State<OtpSetup> {
         if (e.code == 'invalid-phone-number') {
           print('The provided phone number is not valid.');
           showAlertDialog('Invalid Phone Number provided', context);
-          _scaffoldKey.currentState
-              .showSnackBar(SnackBar(content: Text(e.message)));
+          _scaffoldKey.currentState.showSnackBar(
+              SnackBar(content: Text(e.message), backgroundColor: titleColor));
 
           setState(() {
             showLoading = false;
@@ -129,8 +129,10 @@ class _OtpSetupState extends State<OtpSetup> {
       setState(() {
         showLoading = false;
       });
-      _scaffoldKey.currentState
-          .showSnackBar(SnackBar(content: Text(e.message)));
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text(e.message),
+        backgroundColor: titleColor,
+      ));
     }
   }
 
@@ -155,9 +157,12 @@ class _OtpSetupState extends State<OtpSetup> {
                           text: 'We will send you an ',
                           style: TextStyle(fontSize: 16)),
                       TextSpan(
-                          text: 'One Time Password ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16)),
+                        text: 'One Time Password ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: titleColor),
+                      ),
                       TextSpan(
                         text: 'on your Mobile number ',
                         style: TextStyle(fontSize: 16),
@@ -173,26 +178,29 @@ class _OtpSetupState extends State<OtpSetup> {
             Form(
               key: _formKey,
               child: Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
+                margin: EdgeInsets.only(left: 20, right: 20),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   controller: _mobilenoController,
+                  cursorColor: Colors.green,
                   obscureText: false,
                   style: const TextStyle(
                     fontSize: 16,
                   ),
                   decoration: InputDecoration(
+                    errorStyle: TextStyle(
+                      color: titleColor,
+                    ),
                     floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: InputBorder.none,
                     filled: true,
                     fillColor: Colors.white,
                     labelText: "Enter Your Number",
                     labelStyle: TextStyle(
-                      fontSize: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(11),
-                    ),
+                        fontSize: 15,
+                        color: Sushi,
+                        fontWeight: FontWeight.bold),
                     prefix: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
@@ -200,12 +208,13 @@ class _OtpSetupState extends State<OtpSetup> {
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
+                          color: titleColor,
                         ),
                       ),
                     ),
                     suffixIcon: const Icon(
                       Icons.done,
-                      color: Colors.green,
+                      color: titleColor,
                       size: 32,
                     ),
                   ),
@@ -227,6 +236,7 @@ class _OtpSetupState extends State<OtpSetup> {
                 children: [
                   Container(
                     child: Image(
+                      color: titleColor,
                       image: AssetImage('images/otpSetup.png'),
                       height: 350.0,
                       width: 300.0,
@@ -240,10 +250,10 @@ class _OtpSetupState extends State<OtpSetup> {
                       child: TextButton(
                         style: TextButton.styleFrom(
                           primary: Colors.white,
-                          backgroundColor: Color(0XFFD8352C),
+                          backgroundColor: Sushi,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              side: BorderSide(color: Colors.red)),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
                         ),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
@@ -276,7 +286,7 @@ class _OtpSetupState extends State<OtpSetup> {
     var text = RichText(
       text: TextSpan(
         style: TextStyle(
-          fontSize: 17.0,
+          fontSize: 16.0,
           color: Colors.black,
         ),
         children: <TextSpan>[
@@ -286,7 +296,7 @@ class _OtpSetupState extends State<OtpSetup> {
           ),
           TextSpan(
             text: 'OTP ',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: titleColor),
           ),
           TextSpan(
             text: 'sent to ',
@@ -294,9 +304,7 @@ class _OtpSetupState extends State<OtpSetup> {
           ),
           TextSpan(
             text: '+94${mob.substring(1)}',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, color: titleColor),
           ),
         ],
       ),
@@ -306,23 +314,22 @@ class _OtpSetupState extends State<OtpSetup> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Container(
             child: Column(
               children: [
                 Container(
+                  margin: EdgeInsets.only(bottom: 10),
                   child: text,
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 60,
                 ),
                 Form(
                   key: _formKey,
                   child: Container(
-                    margin: EdgeInsets.only(left: 100, right: 100),
+                    margin: EdgeInsets.only(left: 130, right: 130),
                     child: TextFormField(
+                      cursorColor: Colors.green,
                       maxLength: 6,
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
@@ -334,19 +341,14 @@ class _OtpSetupState extends State<OtpSetup> {
                         fontWeight: FontWeight.bold,
                       ),
                       decoration: InputDecoration(
+                        border: InputBorder.none,
                         filled: true,
                         fillColor: Colors.white,
-
                         labelText: 'Enter OTP',
                         labelStyle: TextStyle(
                           fontSize: 15,
+                          color: Sushi,
                         ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(11),
-                        ),
-                        // suffixIcon: Icon(
-                        //   Icons.error,
-                        // ),
                         suffixIcon: const Icon(
                           Icons.done,
                           color: Colors.green,
@@ -373,7 +375,7 @@ class _OtpSetupState extends State<OtpSetup> {
                     Text(
                       'Didn\'t receive the OTP? ',
                       style: TextStyle(
-                        fontSize: 14.0,
+                        fontSize: 15.0,
                         color: Colors.black,
                       ),
                     ),
@@ -382,14 +384,14 @@ class _OtpSetupState extends State<OtpSetup> {
                         'RESEND OTP',
                         style: TextStyle(
                           fontSize: 15.0,
-                          color: Color(0XFFD8352C),
+                          color: titleColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       onPressed: () async {
                         verifyPhoneNumber();
-                        showAlertDialog('OTP Sent Back', context);
-                        print('OTP Sent Back');
+                        showAlertDialog('OTP Sent Again!', context);
+                        print('OTP Sent Agin');
                         print(_mobilenoController.text);
                       },
                     ),
@@ -415,10 +417,10 @@ class _OtpSetupState extends State<OtpSetup> {
                   child: TextButton(
                     style: TextButton.styleFrom(
                       primary: Colors.white,
-                      backgroundColor: Color(0XFFD8352C),
+                      backgroundColor: Sushi,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          side: BorderSide(color: Colors.red)),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
                     ),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
@@ -451,7 +453,7 @@ class _OtpSetupState extends State<OtpSetup> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('OTP Verification'),
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: Sushi,
           leading: InkWell(
             onTap: () {
               setState(() {
@@ -469,7 +471,9 @@ class _OtpSetupState extends State<OtpSetup> {
         body: Container(
           child: showLoading
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: titleColor,
+                  ),
                 )
               : currentState == MobileVerificationState.SHOW_MOBILE_FORM_STATE
                   ? getMobileFormWidget(context)

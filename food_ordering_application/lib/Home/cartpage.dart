@@ -20,7 +20,7 @@ class _CartPageState extends State<CartPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Cart'),
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: greenTheme,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),
@@ -52,7 +52,7 @@ class _CartPageState extends State<CartPage> {
                         child: Icon(
                       Icons.report_gmailerrorred_outlined,
                       size: 100,
-                      color: Colors.red,
+                      color: titleColor,
                     )),
                     SizedBox(
                       height: 20,
@@ -278,7 +278,7 @@ class _CartPageState extends State<CartPage> {
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(4)),
-                                            color: Colors.red),
+                                            color: greenTheme),
                                       ),
                                     )
                                   ],
@@ -334,7 +334,7 @@ class _CartPageState extends State<CartPage> {
               Navigator.push(context,
                   new MaterialPageRoute(builder: (context) => CheckOut()));
             },
-            color: kredbackgroundcolor,
+            color: Sushi,
             padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(0))),

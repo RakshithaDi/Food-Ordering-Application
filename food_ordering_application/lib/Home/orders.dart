@@ -142,7 +142,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Orders'),
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: greenTheme,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -325,8 +325,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                                   child: Card(
                                                                     elevation:
                                                                         4,
-                                                                    color: Colors
-                                                                        .yellow,
+                                                                    color:
+                                                                        titleColor,
                                                                     child:
                                                                         InkWell(
                                                                       onTap:
@@ -344,7 +344,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                                             Text(
                                                                           'Collected',
                                                                           style:
-                                                                              TextStyle(),
+                                                                              TextStyle(color: Colors.white),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -371,7 +371,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   height: 100,
                                   width: 100,
                                   child: Center(
-                                    child: CircularProgressIndicator(),
+                                    child: CircularProgressIndicator(
+                                      color: titleColor,
+                                    ),
                                   ),
                                 );
                               },
@@ -572,7 +574,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   height: 100,
                                   width: 100,
                                   child: Center(
-                                    child: CircularProgressIndicator(),
+                                    child: CircularProgressIndicator(
+                                      color: titleColor,
+                                    ),
                                   ),
                                 );
                               },

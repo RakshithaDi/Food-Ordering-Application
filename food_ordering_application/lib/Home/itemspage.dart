@@ -31,7 +31,7 @@ class _ItemsState extends State<Items> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Items'),
-          backgroundColor: kredbackgroundcolor,
+          backgroundColor: greenTheme,
           actions: [
             IconButton(
               icon: Icon(
@@ -166,7 +166,7 @@ class _ItemsState extends State<Items> {
                                             width: 230,
                                             child: Container(
                                               child: Text(
-                                                "M",
+                                                itemcat['description'],
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 14),
@@ -198,15 +198,14 @@ class _ItemsState extends State<Items> {
                                                             .styleFrom(
                                                           primary: Colors.white,
                                                           backgroundColor:
-                                                              Color(0XFFD8352C),
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              side: BorderSide(
-                                                                  color:
-                                                                      kredbackgroundcolor)),
+                                                              Sushi,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
                                                         ),
                                                         onPressed: () {
                                                           cart.add(
