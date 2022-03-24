@@ -1,4 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -18,10 +22,16 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   final TextEditingController _updatecatIdController = TextEditingController();
   final TextEditingController _updatenameController = TextEditingController();
   final TextEditingController _deletecatIdController = TextEditingController();
-  late String imgUrl;
   bool addButton = true;
   bool updateButton = true;
   bool deleteButton = true;
+  bool imgUploading = false;
+  bool imgupdateUploading = false;
+  String imgUrl = '';
+  String updateImgUrl = '';
+  Uint8List? file;
+  String fileName = '';
+  String updatefileName = '';
   CollectionReference category =
       FirebaseFirestore.instance.collection('categories');
   void createCategory(
@@ -81,6 +91,82 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     });
   }
 
+  Future selectImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    setState(() {
+      file = result!.files.first.bytes;
+      fileName = result.files.first.name;
+    });
+    print(fileName);
+    setState(() {
+      imgUploading = true;
+    });
+
+    uploadImage();
+  }
+
+  Future<void> uploadImage() async {
+    try {
+      final ref = await FirebaseStorage.instance
+          .ref()
+          .child("test/$fileName")
+          .putData(file!);
+      final url = await ref.ref.getDownloadURL();
+      print(url);
+      imageUrlLink(url);
+    } on FirebaseException catch (e) {
+      print('image upload error');
+    }
+  }
+
+  void imageUrlLink(String url) async {
+    setState(() {
+      imgUrl = url;
+    });
+    print('dffffffffff $imgUrl');
+    setState(() {
+      imgUploading = false;
+    });
+  }
+
+  Future updateSelectImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    setState(() {
+      file = result!.files.first.bytes;
+      updatefileName = result.files.first.name;
+    });
+    print(updatefileName);
+    setState(() {
+      imgupdateUploading = true;
+    });
+
+    updateUploadImage();
+  }
+
+  Future<void> updateUploadImage() async {
+    try {
+      final ref = await FirebaseStorage.instance
+          .ref()
+          .child("test/$updatefileName")
+          .putData(file!);
+      final url = await ref.ref.getDownloadURL();
+      print(url);
+      updateImageUrlLink(url);
+    } on FirebaseException catch (e) {
+      print('image upload error');
+    }
+  }
+
+  void updateImageUrlLink(String url) async {
+    setState(() {
+      updateImgUrl = url;
+    });
+    print('dffffffffff $updateImgUrl');
+    setState(() {
+      imgupdateUploading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -132,7 +218,9 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                               category['name'];
                                           _deletecatIdController.text =
                                               category['id'].toString();
-                                          imgUrl = category['imgUrl'];
+                                          setState(() {
+                                            updateImgUrl = category['imgUrl'];
+                                          });
                                         },
                                         child: Row(
                                           children: [
@@ -259,13 +347,45 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                         ),
                         SizedBox(height: 20.0),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Upload Image'),
-                            )
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    selectImage();
+                                  },
+                                  child: Text('Upload Image'),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: (file == null)
+                                  ? const Padding(
+                                      padding: EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        'Select an Image',
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    )
+                                  : Text(fileName),
+                            ),
                           ],
                         ),
+                        imgUploading == false
+                            ? Container()
+                            : const SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
                         Container(
                           margin: const EdgeInsets.only(right: 50, left: 50),
                           child: SizedBox(
@@ -284,10 +404,10 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   if (_addcategoryform.currentState!
                                       .validate()) {
                                     createCategory(
-                                        catid: _addcatIdController.text,
-                                        catname: _addcatnameController.text,
-                                        imgUrl:
-                                            'https://media.istockphoto.com/photos/absurdly-small-diet-meal-picture-id182147903?k=20&m=182147903&s=612x612&w=0&h=P9Xp6NxI3_UEiedwYXkvIpcnxow63cG_BZCXntLUK5M=');
+                                      catid: _addcatIdController.text,
+                                      catname: _addcatnameController.text,
+                                      imgUrl: imgUrl,
+                                    );
                                     setState(() {
                                       addButton = false;
                                     });
@@ -380,13 +500,45 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       ),
                       SizedBox(height: 20.0),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Text('Upload Image:'),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              alignment: Alignment.topLeft,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  updateSelectImage();
+                                },
+                                child: Text('Upload Image'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: (file == null)
+                                ? const Padding(
+                                    padding: EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      'Select an Image',
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  )
+                                : Text(updatefileName),
                           ),
                         ],
                       ),
+                      imgupdateUploading == false
+                          ? Container()
+                          : const SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
                       Container(
                         margin: const EdgeInsets.only(right: 50, left: 50),
                         child: SizedBox(
@@ -407,8 +559,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   updateCategory(
                                       catid: _updatecatIdController.text,
                                       catname: _updatenameController.text,
-                                      imgUrl:
-                                          'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+                                      imgUrl: updateImgUrl);
                                   setState(() {
                                     updateButton = false;
                                   });

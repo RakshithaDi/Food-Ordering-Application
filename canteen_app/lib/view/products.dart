@@ -14,8 +14,6 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-  bool imgUploading = false;
-  bool imgupdateUploading = false;
   final _addproductform = GlobalKey<FormState>();
   final _editform = GlobalKey<FormState>();
   final _deleteform = GlobalKey<FormState>();
@@ -47,7 +45,8 @@ class _ProductsState extends State<Products> {
   final TextEditingController _updatepriceController = TextEditingController();
   final TextEditingController _deleteProductController =
       TextEditingController();
-
+  bool imgUploading = false;
+  bool imgupdateUploading = false;
   String imgUrl = '';
   String updateImgUrl = '';
   Uint8List? file;
