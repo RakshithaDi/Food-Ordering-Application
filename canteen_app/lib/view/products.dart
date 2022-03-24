@@ -1,10 +1,10 @@
-//import 'dart:html';
-import 'dart:io';
+import 'dart:html';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class Products extends StatefulWidget {
   const Products({Key? key}) : super(key: key);
@@ -14,6 +14,8 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
+  bool imgUploading = false;
+  bool imgupdateUploading = false;
   final _addproductform = GlobalKey<FormState>();
   final _editform = GlobalKey<FormState>();
   final _deleteform = GlobalKey<FormState>();
@@ -45,8 +47,12 @@ class _ProductsState extends State<Products> {
   final TextEditingController _updatepriceController = TextEditingController();
   final TextEditingController _deleteProductController =
       TextEditingController();
-  File? file;
-  late String imagePath;
+
+  String imgUrl = '';
+  String updateImgUrl = '';
+  Uint8List? file;
+  String fileName = '';
+  String updatefileName = '';
   CollectionReference items = FirebaseFirestore.instance.collection('items');
   void addProduct(
       {required int productId,
@@ -80,28 +86,79 @@ class _ProductsState extends State<Products> {
   }
 
   Future selectImage() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-    if (result == null) return;
-    imagePath = result.files.single.path!;
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
     setState(() {
-      file = File(imagePath);
+      file = result!.files.first.bytes;
+      fileName = result.files.first.name;
     });
+    print(fileName);
+    setState(() {
+      imgUploading = true;
+    });
+
+    uploadImage();
   }
 
   Future<void> uploadImage() async {
-    Timestamp time = Timestamp.now();
-    String filename = '$email-$time';
-    File file = File(filePath);
     try {
-      final ref = await storage.FirebaseStorage.instance
-          .ref('advertisments/$filename')
-          .putFile(file);
+      final ref = await FirebaseStorage.instance
+          .ref()
+          .child("test/$fileName")
+          .putData(file!);
       final url = await ref.ref.getDownloadURL();
       print(url);
-      addPost(url);
+      imageUrlLink(url);
     } on FirebaseException catch (e) {
       print('image upload error');
     }
+  }
+
+  void imageUrlLink(String url) async {
+    setState(() {
+      imgUrl = url;
+    });
+    print('dffffffffff $imgUrl');
+    setState(() {
+      imgUploading = false;
+    });
+  }
+
+  Future updateSelectImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    setState(() {
+      file = result!.files.first.bytes;
+      updatefileName = result.files.first.name;
+    });
+    print(updatefileName);
+    setState(() {
+      imgupdateUploading = true;
+    });
+
+    updateUploadImage();
+  }
+
+  Future<void> updateUploadImage() async {
+    try {
+      final ref = await FirebaseStorage.instance
+          .ref()
+          .child("test/$updatefileName")
+          .putData(file!);
+      final url = await ref.ref.getDownloadURL();
+      print(url);
+      updateImageUrlLink(url);
+    } on FirebaseException catch (e) {
+      print('image upload error');
+    }
+  }
+
+  void updateImageUrlLink(String url) async {
+    setState(() {
+      updateImgUrl = url;
+    });
+    print('dffffffffff $updateImgUrl');
+    setState(() {
+      imgupdateUploading = false;
+    });
   }
 
   void updateProduct(
@@ -213,8 +270,8 @@ class _ProductsState extends State<Products> {
                                           _updatepriceController.text =
                                               item['price'];
 
-                                          updateImg = item['imgUrl'];
                                           setState(() {
+                                            updateImgUrl = item['imgUrl'];
                                             updatefoodType =
                                                 item['categoryId'].toString();
                                             updaterecommendType =
@@ -336,10 +393,13 @@ class _ProductsState extends State<Products> {
                 key: _addproductform,
                 child: ListView(
                   children: [
-                    const Text(
-                      'add Items',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        'Add Items',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     TextFormField(
                       controller: _addProductIdController,
@@ -577,52 +637,62 @@ class _ProductsState extends State<Products> {
                                     textAlign: TextAlign.left,
                                   ),
                                 )
-                              : Image.file(file!),
+                              : Text(fileName),
                         ),
                       ],
                     ),
+                    imgUploading == false
+                        ? Container()
+                        : const SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
                     Container(
                       margin: const EdgeInsets.only(right: 50, left: 50),
                       width: 100,
                       height: 40,
                       child: ElevatedButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(0),
-                              side: BorderSide(color: Colors.grey),
-                            ),
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                            side: BorderSide(color: Colors.grey),
                           ),
-                          onPressed: () async {
-                            if (_addproductform.currentState!.validate()) {
-                              addProduct(
-                                  productId:
-                                      int.parse(_addProductIdController.text),
-                                  productName: _addProductNameController.text,
-                                  description: _addDescriptionController.text,
-                                  categoryType: int.parse(addfoodType),
-                                  price: _addpriceController.text,
-                                  recommendTyep: addrecommendType,
-                                  image:
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDs0k0VJUItROyqqq8doDZ8S8iBu3MkeVfVTDARhPTfVnav6PTDWS5Y_HhfihUsZktcs&usqp=CAU');
-                              setState(() {
-                                addButton = false;
-                              });
-                            } else {
-                              return null;
-                            }
+                        ),
+                        onPressed: () async {
+                          if (_addproductform.currentState!.validate()) {
+                            addProduct(
+                                productId:
+                                    int.parse(_addProductIdController.text),
+                                productName: _addProductNameController.text,
+                                description: _addDescriptionController.text,
+                                categoryType: int.parse(addfoodType),
+                                price: _addpriceController.text,
+                                recommendTyep: addrecommendType,
+                                image: imgUrl);
+                            setState(() {
+                              addButton = false;
+                            });
+                          } else {
+                            return null;
+                          }
 
-                            //
-                          },
-                          child: addButton == true
-                              ? const Text(
-                                  "Add",
-                                )
-                              : const CircularProgressIndicator(
-                                  backgroundColor: Colors.black38,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.white))),
+                          //
+                        },
+                        child: addButton == true
+                            ? const Text(
+                                "Add",
+                              )
+                            : const CircularProgressIndicator(
+                                backgroundColor: Colors.black38,
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                      ),
                     ),
                   ],
                 ),
@@ -961,13 +1031,45 @@ class _ProductsState extends State<Products> {
                               ],
                             ),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text('Upload Image:'),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        updateSelectImage();
+                                      },
+                                      child: Text('Upload Image'),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: (file == null)
+                                      ? const Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            'Select an Image',
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        )
+                                      : Text(updatefileName),
                                 ),
                               ],
                             ),
+                            imgupdateUploading == false
+                                ? Container()
+                                : const SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  ),
                             Center(
                               child: Container(
                                 margin: const EdgeInsets.only(top: 20),
@@ -1003,8 +1105,7 @@ class _ProductsState extends State<Products> {
                                                   _updatepriceController.text,
                                               recommendTyep:
                                                   updaterecommendType,
-                                              image:
-                                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDs0k0VJUItROyqqq8doDZ8S8iBu3MkeVfVTDARhPTfVnav6PTDWS5Y_HhfihUsZktcs&usqp=CAU');
+                                              image: updateImgUrl);
                                           setState(() {
                                             updateButton = false;
                                           });
