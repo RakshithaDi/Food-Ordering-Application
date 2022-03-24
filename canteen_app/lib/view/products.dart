@@ -209,6 +209,10 @@ class _ProductsState extends State<Products> {
     return Container(
       child: Row(
         children: [
+          const VerticalDivider(
+            color: Colors.grey,
+            thickness: 2,
+          ),
           Expanded(
             flex: 1,
             child: Container(
@@ -387,7 +391,7 @@ class _ProductsState extends State<Products> {
           Expanded(
             flex: 1,
             child: Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
               child: Form(
                 key: _addproductform,
                 child: ListView(
@@ -514,7 +518,6 @@ class _ProductsState extends State<Products> {
                               }
                               return DropdownButton(
                                 value: addfoodType,
-                                //hint: Text('Food'),
                                 icon:
                                     const Icon(Icons.arrow_drop_down_outlined),
                                 elevation: 16,
@@ -650,10 +653,10 @@ class _ProductsState extends State<Products> {
                             ),
                           ),
                     Container(
-                      margin: const EdgeInsets.only(right: 50, left: 50),
+                      margin: EdgeInsets.only(left: 180, right: 180),
                       width: 100,
                       height: 40,
-                      child: ElevatedButton(
+                      child: TextButton(
                         style: TextButton.styleFrom(
                           primary: Colors.white,
                           backgroundColor: Colors.blue,
@@ -705,7 +708,7 @@ class _ProductsState extends State<Products> {
           Expanded(
             flex: 1,
             child: Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 10, left: 20, right: 20),
               child: ListView(
                 children: [
                   Expanded(
@@ -1042,7 +1045,7 @@ class _ProductsState extends State<Products> {
                                       onPressed: () {
                                         updateSelectImage();
                                       },
-                                      child: Text('Upload Image'),
+                                      child: const Text('Upload Image'),
                                     ),
                                   ),
                                 ),

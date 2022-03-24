@@ -70,328 +70,346 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  child: Column(
-                    children: <Widget>[
-                      const Text(
-                        'Canteen Management System',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(
-                        'Admin Login',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[500],
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      ListTile(
-                        leading: Radio<String>(
-                          value: 'Staff',
-                          groupValue: _selectedUserType,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedUserType = value!;
-                            });
-                          },
-                        ),
-                        title: const Text('Staff'),
-                      ),
-                      ListTile(
-                        leading: Radio<String>(
-                          value: 'Admin',
-                          groupValue: _selectedUserType,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedUserType = value!;
-                            });
-                          },
-                        ),
-                        title: const Text('Admin'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              _selectedUserType == 'Staff'
-                  ? Container(
-                      child: Form(
-                        key: _formKey,
+        child: Row(
+          children: [
+            Expanded(child: Container()),
+            Expanded(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 10),
                         child: Column(
-                          children: [
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 10, right: 10, top: 10),
-                                    child: TextFormField(
-                                      controller: _userEmailController,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        labelText: 'Email',
-                                        labelStyle: const TextStyle(
-                                          fontSize: 15,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                        ),
-                                        suffixIcon: const Icon(
-                                          Icons.email,
-                                        ),
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                      autocorrect: false,
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      enableSuggestions: false,
-                                      validator: (value) {
-                                        if (value!.isEmpty ||
-                                            !value.contains('@')) {
-                                          return 'Please enter a valid email address';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(height: 20.0),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: TextFormField(
-                                      controller: _userPassworController,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        labelText: 'Password',
-                                        labelStyle: const TextStyle(
-                                          fontSize: 15,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                        ),
-                                        suffixIcon: IconButton(
-                                          onPressed: _toggle,
-                                          icon: Icon(
-                                              Icons.remove_red_eye_rounded),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value!.isEmpty ||
-                                            value.length < 7) {
-                                          return 'Please enter a long password';
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (val) => _password = val!,
-                                      obscureText: _obscureText,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          children: <Widget>[
+                            const Text(
+                              'Canteen Management System',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
                             ),
-                            Container(
-                              alignment: Alignment.centerRight,
-                              margin: EdgeInsets.only(right: 30),
-                              height: 40,
-                              child: SizedBox(
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, ResetPassword.id);
-                                  },
-                                  child: Text(
-                                    'Forgot Password?',
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                            const SizedBox(
+                              height: 10.0,
                             ),
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(right: 50, left: 50),
-                              child: SizedBox(
-                                width: 250,
-                                height: 50,
-                                child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      backgroundColor: Color(0XFFD8352C),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          side: BorderSide(color: Colors.red)),
-                                    ),
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        _signInWithEmailAndPassword();
-                                      } else {
-                                        return null;
-                                      }
-
-                                      //
-                                    },
-                                    child: status == true
-                                        ? const Text(
-                                            "Login",
-                                          )
-                                        : const CircularProgressIndicator(
-                                            backgroundColor: Colors.black38,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white))),
-                              ),
+                            Text(
+                              'Admin Login',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey[500],
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Container(
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: 10, right: 10, top: 10),
-                                    child: TextFormField(
-                                      controller: _userEmailController,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        labelText: 'Email',
-                                        labelStyle: const TextStyle(
-                                          fontSize: 15,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                        ),
-                                        suffixIcon: const Icon(
-                                          Icons.email,
-                                        ),
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                      autocorrect: false,
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      enableSuggestions: false,
-                                      validator: (value) {
-                                        if (value!.isEmpty ||
-                                            !value.contains('@')) {
-                                          return 'Please enter a valid email address';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(height: 20.0),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: TextFormField(
-                                      controller: _userPassworController,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        labelText: 'Password',
-                                        labelStyle: const TextStyle(
-                                          fontSize: 15,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11),
-                                        ),
-                                        suffixIcon: IconButton(
-                                          onPressed: _toggle,
-                                          icon: Icon(
-                                              Icons.remove_red_eye_rounded),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value!.isEmpty ||
-                                            value.length < 7) {
-                                          return 'Please enter a long password';
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (val) => _password = val!,
-                                      obscureText: _obscureText,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            const SizedBox(
+                              height: 30.0,
                             ),
-                            Container(
-                              alignment: Alignment.centerRight,
-                              margin: EdgeInsets.only(right: 30),
-                              height: 40,
-                            ),
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(right: 50, left: 50),
-                              child: SizedBox(
-                                width: 250,
-                                height: 50,
-                                child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      backgroundColor: Color(0XFFD8352C),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          side: BorderSide(color: Colors.red)),
-                                    ),
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        _signInWithEmailAndPassword();
-                                      } else {
-                                        return null;
-                                      }
-
-                                      //
-                                    },
-                                    child: status == true
-                                        ? const Text(
-                                            "Login",
-                                          )
-                                        : const CircularProgressIndicator(
-                                            backgroundColor: Colors.black38,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white))),
+                            ListTile(
+                              leading: Radio<String>(
+                                value: 'Staff',
+                                groupValue: _selectedUserType,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedUserType = value!;
+                                  });
+                                },
                               ),
+                              title: const Text('Staff'),
+                            ),
+                            ListTile(
+                              leading: Radio<String>(
+                                value: 'Admin',
+                                groupValue: _selectedUserType,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedUserType = value!;
+                                  });
+                                },
+                              ),
+                              title: const Text('Admin'),
                             ),
                           ],
                         ),
                       ),
                     ),
-            ],
-          ),
+                    _selectedUserType == 'Staff'
+                        ? Container(
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10, right: 10, top: 10),
+                                          child: TextFormField(
+                                            controller: _userEmailController,
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              labelText: 'Email',
+                                              labelStyle: const TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              suffixIcon: const Icon(
+                                                Icons.email,
+                                              ),
+                                            ),
+                                            keyboardType:
+                                                TextInputType.emailAddress,
+                                            autocorrect: false,
+                                            textCapitalization:
+                                                TextCapitalization.none,
+                                            enableSuggestions: false,
+                                            validator: (value) {
+                                              if (value!.isEmpty ||
+                                                  !value.contains('@')) {
+                                                return 'Please enter a valid email address';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(height: 20.0),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: TextFormField(
+                                            controller: _userPassworController,
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              labelText: 'Password',
+                                              labelStyle: const TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              suffixIcon: IconButton(
+                                                onPressed: _toggle,
+                                                icon: Icon(Icons
+                                                    .remove_red_eye_rounded),
+                                              ),
+                                            ),
+                                            validator: (value) {
+                                              if (value!.isEmpty ||
+                                                  value.length < 7) {
+                                                return 'Please enter a long password';
+                                              }
+                                              return null;
+                                            },
+                                            onSaved: (val) => _password = val!,
+                                            obscureText: _obscureText,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    margin: EdgeInsets.only(right: 30),
+                                    height: 40,
+                                    child: SizedBox(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, ResetPassword.id);
+                                        },
+                                        child: Text(
+                                          'Forgot Password?',
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        right: 50, left: 50),
+                                    child: SizedBox(
+                                      width: 250,
+                                      height: 50,
+                                      child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.white,
+                                            backgroundColor: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(2),
+                                            ),
+                                          ),
+                                          onPressed: () async {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              _signInWithEmailAndPassword();
+                                            } else {
+                                              return null;
+                                            }
+
+                                            //
+                                          },
+                                          child: status == true
+                                              ? const Text(
+                                                  "Login",
+                                                )
+                                              : const CircularProgressIndicator(
+                                                  backgroundColor:
+                                                      Colors.black38,
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                              Color>(
+                                                          Colors.white))),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : Container(
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 10, right: 10, top: 10),
+                                          child: TextFormField(
+                                            controller: _userEmailController,
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              labelText: 'Email',
+                                              labelStyle: const TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              suffixIcon: const Icon(
+                                                Icons.email,
+                                              ),
+                                            ),
+                                            keyboardType:
+                                                TextInputType.emailAddress,
+                                            autocorrect: false,
+                                            textCapitalization:
+                                                TextCapitalization.none,
+                                            enableSuggestions: false,
+                                            validator: (value) {
+                                              if (value!.isEmpty ||
+                                                  !value.contains('@')) {
+                                                return 'Please enter a valid email address';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(height: 20.0),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: TextFormField(
+                                            controller: _userPassworController,
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              labelText: 'Password',
+                                              labelStyle: const TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                              suffixIcon: IconButton(
+                                                onPressed: _toggle,
+                                                icon: Icon(Icons
+                                                    .remove_red_eye_rounded),
+                                              ),
+                                            ),
+                                            validator: (value) {
+                                              if (value!.isEmpty ||
+                                                  value.length < 7) {
+                                                return 'Please enter a long password';
+                                              }
+                                              return null;
+                                            },
+                                            onSaved: (val) => _password = val!,
+                                            obscureText: _obscureText,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    margin: EdgeInsets.only(right: 30),
+                                    height: 40,
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        right: 50, left: 50),
+                                    child: SizedBox(
+                                      width: 250,
+                                      height: 50,
+                                      child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.white,
+                                            backgroundColor: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(2.0),
+                                            ),
+                                          ),
+                                          onPressed: () async {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              _signInWithEmailAndPassword();
+                                            } else {
+                                              return null;
+                                            }
+
+                                            //
+                                          },
+                                          child: status == true
+                                              ? const Text(
+                                                  "Login",
+                                                )
+                                              : const CircularProgressIndicator(
+                                                  backgroundColor:
+                                                      Colors.black38,
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                              Color>(
+                                                          Colors.white))),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(child: Container()),
+          ],
         ),
       ),
     );

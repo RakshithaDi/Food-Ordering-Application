@@ -171,17 +171,30 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        const VerticalDivider(
+          color: Colors.grey,
+          thickness: 1,
+        ),
         Expanded(
           child: Container(
-            margin: EdgeInsets.all(20),
             child: Column(
               children: [
                 Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('View Categories'),
                       Container(
-                        height: 300,
+                        margin: const EdgeInsets.only(
+                            top: 20, left: 10, bottom: 20),
+                        child: const Text(
+                          'Categories',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Container(
                         child: SingleChildScrollView(
                           primary: false,
                           child: StreamBuilder<QuerySnapshot>(
@@ -250,19 +263,34 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                                         children: [
                                                           const Expanded(
                                                             flex: 1,
-                                                            child: Text('Id:'),
+                                                            child: Text(
+                                                              'Id:',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
                                                           Expanded(
                                                             flex: 2,
                                                             child: Text(
-                                                                category['id']
-                                                                    .toString()),
+                                                              category['id']
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
                                                           Expanded(
                                                             flex: 1,
                                                             child: Text(
-                                                                category[
-                                                                    'name']),
+                                                              category['name'],
+                                                              style: const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -292,12 +320,36 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Form(
-                    key: _addcategoryform,
+              ],
+            ),
+          ),
+        ),
+        const VerticalDivider(
+          color: Colors.grey,
+          thickness: 1,
+        ),
+        Expanded(
+          child: Form(
+            key: _addcategoryform,
+            child: Container(
+              margin: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                children: [
+                  Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Add new Category'),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 20, left: 10, bottom: 20),
+                          child: const Text(
+                            'Add new Category',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                         TextFormField(
                           controller: _addcatIdController,
                           decoration: InputDecoration(
@@ -387,6 +439,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                 ),
                               ),
                         Container(
+                          alignment: Alignment.center,
                           margin: const EdgeInsets.only(right: 50, left: 50),
                           child: SizedBox(
                             width: 100,
@@ -432,165 +485,189 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       ],
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Form(
+                      key: _updatecategoryform,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 20, left: 10, bottom: 20),
+                            child: const Text(
+                              'Update Category',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _updatecatIdController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Category Id',
+                              labelStyle: const TextStyle(
+                                fontSize: 15,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            enableSuggestions: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter a category ID';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _updatenameController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Category Name',
+                              labelStyle: const TextStyle(
+                                fontSize: 15,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            enableSuggestions: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter category name';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  alignment: Alignment.topLeft,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      updateSelectImage();
+                                    },
+                                    child: Text('Upload Image'),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: (file == null)
+                                    ? const Padding(
+                                        padding: EdgeInsets.only(top: 5),
+                                        child: Text(
+                                          'Select an Image',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      )
+                                    : Text(updatefileName),
+                              ),
+                            ],
+                          ),
+                          imgupdateUploading == false
+                              ? Container()
+                              : const SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(right: 50, left: 50),
+                            child: SizedBox(
+                              width: 100,
+                              height: 40,
+                              child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      side: BorderSide(color: Colors.grey),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    if (_updatecategoryform.currentState!
+                                        .validate()) {
+                                      updateCategory(
+                                          catid: int.parse(
+                                              _updatecatIdController.text),
+                                          catname: _updatenameController.text,
+                                          imgUrl: updateImgUrl);
+                                      setState(() {
+                                        updateButton = false;
+                                      });
+                                    } else {
+                                      return null;
+                                    }
+
+                                    //
+                                  },
+                                  child: updateButton == true
+                                      ? const Text(
+                                          "Update",
+                                        )
+                                      : const CircularProgressIndicator(
+                                          backgroundColor: Colors.black38,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        VerticalDivider(
+        const VerticalDivider(
           color: Colors.grey,
           thickness: 1,
         ),
         Expanded(
             child: Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.only(left: 10, right: 10),
           child: Column(
             children: [
               Expanded(
                 child: Form(
-                  key: _updatecategoryform,
-                  child: Column(
-                    children: [
-                      Text('Update Category'),
-                      TextFormField(
-                        controller: _updatecatIdController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: 'Category Id',
-                          labelStyle: const TextStyle(
-                            fontSize: 15,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
-                          ),
-                        ),
-                        autocorrect: false,
-                        textCapitalization: TextCapitalization.none,
-                        enableSuggestions: false,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a category ID';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20.0),
-                      TextFormField(
-                        controller: _updatenameController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: 'Category Name',
-                          labelStyle: const TextStyle(
-                            fontSize: 15,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
-                          ),
-                        ),
-                        autocorrect: false,
-                        textCapitalization: TextCapitalization.none,
-                        enableSuggestions: false,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter category name';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  updateSelectImage();
-                                },
-                                child: Text('Upload Image'),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: (file == null)
-                                ? const Padding(
-                                    padding: EdgeInsets.only(top: 5),
-                                    child: Text(
-                                      'Select an Image',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  )
-                                : Text(updatefileName),
-                          ),
-                        ],
-                      ),
-                      imgupdateUploading == false
-                          ? Container()
-                          : const SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            ),
-                      Container(
-                        margin: const EdgeInsets.only(right: 50, left: 50),
-                        child: SizedBox(
-                          width: 100,
-                          height: 40,
-                          child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor: Colors.blue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                  side: BorderSide(color: Colors.grey),
-                                ),
-                              ),
-                              onPressed: () async {
-                                if (_updatecategoryform.currentState!
-                                    .validate()) {
-                                  updateCategory(
-                                      catid: int.parse(
-                                          _updatecatIdController.text),
-                                      catname: _updatenameController.text,
-                                      imgUrl: updateImgUrl);
-                                  setState(() {
-                                    updateButton = false;
-                                  });
-                                } else {
-                                  return null;
-                                }
-
-                                //
-                              },
-                              child: updateButton == true
-                                  ? const Text(
-                                      "Update",
-                                    )
-                                  : const CircularProgressIndicator(
-                                      backgroundColor: Colors.black38,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.white))),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Form(
                   key: _deletecategoryform,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Delete Category'),
+                      Container(
+                        margin: const EdgeInsets.only(
+                            top: 20, left: 10, bottom: 20),
+                        child: const Text(
+                          'Delete Category',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                       TextFormField(
                         controller: _deletecatIdController,
                         decoration: InputDecoration(
@@ -616,6 +693,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                       ),
                       SizedBox(height: 20.0),
                       Container(
+                        alignment: Alignment.center,
                         margin: const EdgeInsets.only(right: 50, left: 50),
                         child: SizedBox(
                           width: 100,

@@ -75,16 +75,30 @@ class _CreateAccountsState extends State<CreateAccounts> {
       body: SafeArea(
         child: Row(
           children: [
+            const VerticalDivider(
+              color: Colors.grey,
+              thickness: 1,
+            ),
             Expanded(
               child: Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 1,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Users'),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 20, left: 10, bottom: 20),
+                            child: const Text(
+                              'Users',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                           StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection("staff")
@@ -92,7 +106,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                             builder: (context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
                               if (snapshot.hasError) {
-                                return Text("Something went wrong");
+                                return const Text("Something went wrong");
                               }
 
                               if (snapshot.connectionState ==
@@ -128,7 +142,12 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(10),
-                                                child: Text(data['username']),
+                                                child: Text(
+                                                  data['username'],
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -151,263 +170,310 @@ class _CreateAccountsState extends State<CreateAccounts> {
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Form(
-                        key: _createUserformKey,
-                        child: Column(
-                          children: [
-                            Text('Create Users'),
-                            Container(
-                              margin:
-                                  EdgeInsets.only(left: 10, right: 10, top: 10),
-                              child: TextFormField(
-                                controller: _createUserNameController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: 'Username',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ),
-                                ),
-                                autocorrect: false,
-                                textCapitalization: TextCapitalization.none,
-                                enableSuggestions: false,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a valid user name';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 20.0),
-                            Container(
-                              margin: EdgeInsets.only(left: 10, right: 10),
-                              child: TextFormField(
-                                controller: _createUserPasswordController,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: 'Password',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty || value.length < 4) {
-                                    return 'Please enter a long password';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 20.0),
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(right: 50, left: 50),
-                              child: SizedBox(
-                                width: 100,
-                                height: 40,
-                                child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      backgroundColor: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(0),
-                                        side: BorderSide(color: Colors.grey),
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      if (_createUserformKey.currentState!
-                                          .validate()) {
-                                        createUser(
-                                            username:
-                                                _createUserNameController.text,
-                                            password:
-                                                _createUserPasswordController
-                                                    .text);
-                                        setState(() {
-                                          createButton = false;
-                                        });
-                                      } else {
-                                        return null;
-                                      }
-
-                                      //
-                                    },
-                                    child: createButton == true
-                                        ? const Text(
-                                            "Create",
-                                          )
-                                        : const CircularProgressIndicator(
-                                            backgroundColor: Colors.black38,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white))),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Form(
-                        key: _updateUserformKey,
-                        child: Column(
-                          children: [
-                            Text('Change Password'),
-                            Container(
-                              margin:
-                                  EdgeInsets.only(left: 10, right: 10, top: 10),
-                              child: TextFormField(
-                                controller: _updateUserNameController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: 'Username',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ),
-                                ),
-                                autocorrect: false,
-                                textCapitalization: TextCapitalization.none,
-                                enableSuggestions: false,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a valid user name';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 20.0),
-                            Container(
-                              margin: EdgeInsets.only(left: 10, right: 10),
-                              child: TextFormField(
-                                controller: _updateUserPasswordController,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: 'Password',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty || value.length < 4) {
-                                    return 'Please enter a long password';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 20.0),
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(right: 50, left: 50),
-                              child: SizedBox(
-                                width: 100,
-                                height: 40,
-                                child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      backgroundColor: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(0),
-                                          side: BorderSide(color: Colors.grey)),
-                                    ),
-                                    onPressed: () async {
-                                      if (_updateUserformKey.currentState!
-                                          .validate()) {
-                                        updateUser(
-                                            username:
-                                                _updateUserNameController.text,
-                                            password:
-                                                _updateUserPasswordController
-                                                    .text);
-                                        setState(() {
-                                          changeButton = false;
-                                        });
-                                      } else {
-                                        return null;
-                                      }
-
-                                      //
-                                    },
-                                    child: changeButton == true
-                                        ? const Text(
-                                            "Change",
-                                          )
-                                        : const CircularProgressIndicator(
-                                            backgroundColor: Colors.black38,
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                                    Colors.white))),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
-            VerticalDivider(
+            const VerticalDivider(
+              color: Colors.grey,
+              thickness: 1,
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Form(
+                      key: _createUserformKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 20, left: 10, bottom: 20),
+                            child: const Text(
+                              'Create Users',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                left: 10, right: 10, top: 10),
+                            child: TextFormField(
+                              controller: _createUserNameController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Username',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a valid user name';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: TextFormField(
+                              controller: _createUserPasswordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Password',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 4) {
+                                  return 'Please enter a long password';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(right: 50, left: 50),
+                            child: SizedBox(
+                              width: 100,
+                              height: 40,
+                              child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(0),
+                                      side:
+                                          const BorderSide(color: Colors.grey),
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    if (_createUserformKey.currentState!
+                                        .validate()) {
+                                      createUser(
+                                          username:
+                                              _createUserNameController.text,
+                                          password:
+                                              _createUserPasswordController
+                                                  .text);
+                                      setState(() {
+                                        createButton = false;
+                                      });
+                                    } else {
+                                      return null;
+                                    }
+
+                                    //
+                                  },
+                                  child: createButton == true
+                                      ? const Text(
+                                          "Create",
+                                        )
+                                      : const CircularProgressIndicator(
+                                          backgroundColor: Colors.black38,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Form(
+                      key: _updateUserformKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 20, left: 10, bottom: 20),
+                            child: const Text(
+                              'Change Password',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                left: 10, right: 10, top: 10),
+                            child: TextFormField(
+                              controller: _updateUserNameController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Username',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              autocorrect: false,
+                              textCapitalization: TextCapitalization.none,
+                              enableSuggestions: false,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a valid user name';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: TextFormField(
+                              controller: _updateUserPasswordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                labelText: 'Password',
+                                labelStyle: const TextStyle(
+                                  fontSize: 15,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 4) {
+                                  return 'Please enter a long password';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(right: 50, left: 50),
+                            child: SizedBox(
+                              width: 100,
+                              height: 40,
+                              child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                        side: const BorderSide(
+                                            color: Colors.grey)),
+                                  ),
+                                  onPressed: () async {
+                                    if (_updateUserformKey.currentState!
+                                        .validate()) {
+                                      updateUser(
+                                          username:
+                                              _updateUserNameController.text,
+                                          password:
+                                              _updateUserPasswordController
+                                                  .text);
+                                      setState(() {
+                                        changeButton = false;
+                                      });
+                                    } else {
+                                      return null;
+                                    }
+
+                                    //
+                                  },
+                                  child: changeButton == true
+                                      ? const Text(
+                                          "Change",
+                                        )
+                                      : const CircularProgressIndicator(
+                                          backgroundColor: Colors.black38,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const VerticalDivider(
               color: Colors.grey,
               thickness: 1,
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                 child: Form(
                   key: _deleteUserformKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Delete User'),
-                      TextFormField(
-                        controller: _deleteUserNameController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: 'Username',
-                          labelStyle: const TextStyle(
-                            fontSize: 15,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
+                      Container(
+                        margin: const EdgeInsets.only(
+                            top: 20, left: 10, bottom: 30),
+                        child: const Text(
+                          'Delete User',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        autocorrect: false,
-                        textCapitalization: TextCapitalization.none,
-                        enableSuggestions: false,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter a valid user name';
-                          }
-                          return null;
-                        },
                       ),
-                      SizedBox(height: 20.0),
                       Container(
+                        margin: const EdgeInsets.only(left: 10, right: 10),
+                        child: TextFormField(
+                          controller: _deleteUserNameController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: 'Username',
+                            labelStyle: const TextStyle(
+                              fontSize: 15,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                          ),
+                          autocorrect: false,
+                          textCapitalization: TextCapitalization.none,
+                          enableSuggestions: false,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a valid user name';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Container(
+                        alignment: Alignment.center,
                         margin: const EdgeInsets.only(right: 50, left: 50),
                         child: SizedBox(
                           width: 100,
@@ -418,7 +484,7 @@ class _CreateAccountsState extends State<CreateAccounts> {
                                 backgroundColor: Colors.blue,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(0),
-                                    side: BorderSide(color: Colors.grey)),
+                                    side: const BorderSide(color: Colors.grey)),
                               ),
                               onPressed: () async {
                                 if (_deleteUserformKey.currentState!
