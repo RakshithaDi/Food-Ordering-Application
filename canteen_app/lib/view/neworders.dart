@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class NewOrders extends StatefulWidget {
@@ -18,44 +19,93 @@ class _NewOrdersState extends State<NewOrders> {
             flex: 1,
             child: Column(
               children: [
-                Text('New Orders'),
                 SingleChildScrollView(
                   primary: false,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, index) {
-                        return Card(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  alignment: Alignment.topLeft,
-                                  child: Image.network(
-                                    'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
-                                    height: 50,
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("orders")
+                        .snapshots(),
+                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return Text("Something went wrong");
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting ||
+                          !snapshot.hasData) {
+                        //  return CircularProgressIndicator();
+                      }
+
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (BuildContext context, index) {
+                            QueryDocumentSnapshot orders =
+                                snapshot.data!.docs[index];
+
+                            return Card(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(orders['OrderId']),
+                                          Text(orders['Name']),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      alignment: Alignment.topLeft,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(orders['Name']),
+                                          Text('name:'),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      alignment: Alignment.topLeft,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(orders['Name']),
+                                          Text('name:'),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  alignment: Alignment.topLeft,
-                                  child: Column(
-                                    children: const [
-                                      Text('Id:'),
-                                      Text('name:'),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                            );
+                          },
                         );
-                      }),
+                      }
+                      return const SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -70,7 +120,7 @@ class _NewOrdersState extends State<NewOrders> {
                 children: [
                   Container(
                     alignment: Alignment.center,
-                    child: Text(
+                    child: const Text(
                       'Order Description',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,

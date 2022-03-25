@@ -8,6 +8,7 @@ import 'package:search_page/search_page.dart';
 import '../cart.dart';
 import '../constant.dart';
 import '../item.dart';
+import 'Itemdetails.dart';
 import 'cartpage.dart';
 
 class SearchItemsPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
   String name;
 
   String imgUrl;
-
+  int prodId;
   double price;
 
   @override
@@ -110,13 +111,14 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                         itemBuilder: (BuildContext context, index) {
                           QueryDocumentSnapshot allproducts =
                               snapshot.data.docs[index];
-
+                          prodId = allproducts['id'];
                           price = double.parse(allproducts['price']);
                           name = allproducts['name'];
                           imgUrl = allproducts['imgUrl'];
                           List<Item> items = [
                             for (var i = 0; i < snapshot.data.docs.length; i++)
                               Item(
+                                  productId: prodId,
                                   name: name,
                                   price: price,
                                   imgUrl: imgUrl,
@@ -125,6 +127,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                           allitems = [
                             for (var i = 0; i < snapshot.data.docs.length; i++)
                               Item(
+                                  productId: prodId,
                                   name: name,
                                   price: price,
                                   imgUrl: imgUrl,
@@ -141,114 +144,129 @@ class _SearchItemsPage extends State<SearchItemsPage> {
 
                           return Stack(
                             children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: 16, right: 16, top: 16),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(16))),
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          right: 15,
-                                          left: 8,
-                                          top: 8,
-                                          bottom: 8),
-                                      width: 100,
-                                      height: 90,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(14)),
-                                          color: Colors.grey,
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                            allproducts['imgUrl'],
-                                          ))),
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                          width: 230,
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                    right: 8, top: 4),
-                                                child: Text(
-                                                  allproducts['name'],
-                                                  maxLines: 2,
-                                                  softWrap: true,
-                                                  style:
-                                                      TextStyle(fontSize: 14),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          width: 230,
-                                          child: Container(
-                                            child: Text(
-                                              "M",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 230,
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
+                              InkWell(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      left: 16, right: 16, top: 16),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(16))),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            right: 15,
+                                            left: 8,
+                                            top: 8,
+                                            bottom: 8),
+                                        width: 100,
+                                        height: 90,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(14)),
+                                            color: Colors.grey,
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                              allproducts['imgUrl'],
+                                            ))),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            width: 230,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.only(
+                                                      right: 8, top: 4),
                                                   child: Text(
-                                                    'Rs. ${allproducts['price']}',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
+                                                    allproducts['name'],
+                                                    maxLines: 2,
+                                                    softWrap: true,
+                                                    style:
+                                                        TextStyle(fontSize: 14),
                                                   ),
                                                 ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 10),
+                                            width: 230,
+                                            child: Container(
+                                              child: Text(
+                                                "M",
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10, right: 10),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 230,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
                                                   child: Container(
-                                                    child: TextButton(
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                        primary: Colors.white,
-                                                        backgroundColor: Sushi,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                      ),
-                                                      onPressed: () {
-                                                        cart.add(items[index]);
-                                                      },
-                                                      child:
-                                                          Text('Add to Cart'),
+                                                    child: Text(
+                                                      'Rs. ${allproducts['price']}',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
+                                                    child: Container(
+                                                      child: TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          primary: Colors.white,
+                                                          backgroundColor:
+                                                              Sushi,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
+                                                        ),
+                                                        onPressed: () {
+                                                          cart.add(
+                                                              items[index]);
+                                                        },
+                                                        child:
+                                                            Text('Add to Cart'),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.push<void>(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          ItemDetails(allproducts['id']),
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           );
@@ -278,7 +296,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
               onQueryUpdate: (s) => print(s),
               barTheme: ThemeData(
                 appBarTheme: AppBarTheme(
-                  color: Colors.red,
+                  color: greenTheme,
                 ),
               ),
               items: _products,
@@ -294,109 +312,121 @@ class _SearchItemsPage extends State<SearchItemsPage> {
               ],
               builder: (_products) => Stack(
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(
-                              right: 15, left: 8, top: 8, bottom: 8),
-                          width: 100,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(14)),
-                              color: Colors.grey,
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                _products.imgUrl,
-                              ))),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push<void>(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              ItemDetails(_products.productId),
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              width: 230,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(right: 8, top: 4),
-                                    child: Text(
-                                      _products.name,
-                                      maxLines: 2,
-                                      softWrap: true,
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              width: 230,
-                              child: Container(
-                                child: Text(
-                                  "M",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 230,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16, right: 16, top: 16),
+                      decoration: BoxDecoration(
+                          color: kbackgroundcolor,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(
+                                right: 15, left: 8, top: 8, bottom: 8),
+                            width: 100,
+                            height: 90,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(14)),
+                                color: Colors.grey,
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                  _products.imgUrl,
+                                ))),
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                width: 230,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding:
+                                          EdgeInsets.only(right: 8, top: 4),
                                       child: Text(
-                                        'Rs. ${_products.price}',
-                                        style: TextStyle(color: Colors.black),
+                                        _products.name,
+                                        maxLines: 2,
+                                        softWrap: true,
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 10),
+                                width: 230,
+                                child: Container(
+                                  child: Text(
+                                    "M",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 14),
                                   ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
+                                ),
+                              ),
+                              Container(
+                                width: 230,
+                                child: Row(
+                                  children: [
+                                    Expanded(
                                       child: Container(
-                                        child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            primary: Colors.white,
-                                            backgroundColor: Color(0XFFD8352C),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                side: BorderSide(
-                                                    color:
-                                                        kredbackgroundcolor)),
-                                          ),
-                                          onPressed: () {
-                                            final index = prod.indexWhere(
-                                                (element) =>
-                                                    element.name ==
-                                                    _products.name);
-                                            if (index != -1) {
-                                              cart.add(_products);
-                                              print('search index in  $index');
-                                            } else {
-                                              print('search index is  $index');
-                                            }
-                                          },
-                                          child: Text('Add to Cart'),
+                                        child: Text(
+                                          'Rs. ${_products.price}',
+                                          style: TextStyle(color: Colors.black),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child: Container(
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              backgroundColor: greenTheme,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              final index = prod.indexWhere(
+                                                  (element) =>
+                                                      element.name ==
+                                                      _products.name);
+                                              if (index != -1) {
+                                                cart.add(_products);
+                                                print(
+                                                    'search index in  $index');
+                                              } else {
+                                                print(
+                                                    'search index is  $index');
+                                              }
+                                            },
+                                            child: Text('Add to Cart'),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],

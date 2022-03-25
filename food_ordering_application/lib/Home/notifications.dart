@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/orders.dart';
+import 'package:intl/intl.dart';
 
 import '../cart.dart';
 import '../constant.dart';
@@ -101,6 +102,13 @@ class _NotificationPageState extends State<NotificationPage> {
                             itemBuilder: (BuildContext context, index) {
                               QueryDocumentSnapshot orders =
                                   snapshot.data.docs[index];
+                              String formatedDate;
+
+                              Timestamp timestamp = orders['TimeStamp'];
+                              DateTime dateTime = timestamp.toDate();
+                              String formatDate =
+                                  DateFormat.yMMMd().add_jm().format(dateTime);
+                              formatedDate = formatDate;
 
                               return Card(
                                 child: InkWell(
@@ -140,7 +148,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  '${orders['Date']}',
+                                                  formatedDate,
                                                   textAlign: TextAlign.right,
                                                   style:
                                                       TextStyle(fontSize: 14),
@@ -176,14 +184,6 @@ class _NotificationPageState extends State<NotificationPage> {
                                                                     FontWeight
                                                                         .bold),
                                                           )),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  '${orders['Time']}',
-                                                  textAlign: TextAlign.right,
-                                                  style:
-                                                      TextStyle(fontSize: 14),
-                                                ),
                                               ),
                                             ],
                                           ),

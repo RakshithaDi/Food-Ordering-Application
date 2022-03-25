@@ -80,11 +80,11 @@ class _ItemDetailsState extends State<ItemDetails> {
           child: Column(
             children: [
               Container(
-                child: FutureBuilder<QuerySnapshot>(
-                  future: FirebaseFirestore.instance
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
                       .collection('items')
                       .where('id', isEqualTo: productId)
-                      .get(),
+                      .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
@@ -119,8 +119,9 @@ class _ItemDetailsState extends State<ItemDetails> {
                                 elevation: 5,
                                 child: InkWell(
                                   child: Container(
-                                    width: double.infinity,
-                                    height: 300.0,
+                                    width: double.maxFinite,
+                                    height: MediaQuery.of(context).size.height /
+                                        3.5,
                                     child: Container(
                                       margin: EdgeInsets.all(5),
                                       child: Image.network(data['imgUrl']),

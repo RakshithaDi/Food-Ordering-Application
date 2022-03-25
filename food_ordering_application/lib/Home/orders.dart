@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/account.dart';
 import 'package:food_ordering_application/Home/home.dart';
 import 'package:food_ordering_application/Home/orderdetails.dart';
+import 'package:intl/intl.dart';
 
 import '../constant.dart';
 
@@ -213,6 +214,17 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               (BuildContext context, index) {
                                             QueryDocumentSnapshot orders =
                                                 snapshot.data.docs[index];
+                                            String formatedDate;
+
+                                            Timestamp timestamp =
+                                                orders['TimeStamp'];
+                                            DateTime dateTime =
+                                                timestamp.toDate();
+                                            String formatDate =
+                                                DateFormat.yMMMd()
+                                                    .add_jm()
+                                                    .format(dateTime);
+                                            formatedDate = formatDate;
 
                                             return Card(
                                               elevation: 3,
@@ -270,33 +282,19 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                           ],
                                                         ),
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 5),
-                                                        child: Row(
-                                                          children: [
-                                                            Expanded(
-                                                              child: Text(
-                                                                '${orders['Date']}',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        14),
-                                                              ),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top: 10),
+                                                            child: Text(
+                                                              formatedDate,
+                                                              style: TextStyle(
+                                                                  fontSize: 14),
                                                             ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                '${orders['Time']}',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .right,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        14),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
                                                       Padding(
                                                         padding:
@@ -458,6 +456,17 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               (BuildContext context, index) {
                                             QueryDocumentSnapshot orders =
                                                 snapshot.data.docs[index];
+                                            String formatedDate;
+
+                                            Timestamp timestamp =
+                                                orders['TimeStamp'];
+                                            DateTime dateTime =
+                                                timestamp.toDate();
+                                            String formatDate =
+                                                DateFormat.yMMMd()
+                                                    .add_jm()
+                                                    .format(dateTime);
+                                            formatedDate = formatDate;
 
                                             return Card(
                                               child: InkWell(
@@ -494,8 +503,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                                   softWrap:
                                                                       true,
                                                                   style: TextStyle(
-                                                                      fontSize:
-                                                                          16,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold),
@@ -522,20 +529,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                                 .only(top: 7),
                                                         child: Row(
                                                           children: [
-                                                            Expanded(
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      top: 10,
+                                                                      bottom:
+                                                                          10),
                                                               child: Text(
-                                                                '${orders['Date']}',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        14),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Text(
-                                                                '${orders['Time']}',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .right,
+                                                                formatedDate,
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         14),
@@ -595,7 +596,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         child: Icon(
                       Icons.downloading_rounded,
                       size: 100,
-                      color: Colors.red,
+                      color: titleColor,
                     )),
                     SizedBox(
                       height: 10,
@@ -605,7 +606,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
                           'You have no orders yet!',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                          style: TextStyle(fontSize: 16, color: titleColor),
                         ),
                       ),
                     ),

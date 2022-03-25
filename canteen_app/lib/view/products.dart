@@ -228,7 +228,7 @@ class _ProductsState extends State<Products> {
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        margin: EdgeInsets.only(left: 10),
+                        margin: EdgeInsets.only(left: 10, bottom: 20),
                       ),
                       Container(
                         child: SingleChildScrollView(
@@ -397,7 +397,7 @@ class _ProductsState extends State<Products> {
                 child: ListView(
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: EdgeInsets.only(bottom: 20),
                       child: Text(
                         'Add Items',
                         style: TextStyle(
@@ -653,7 +653,7 @@ class _ProductsState extends State<Products> {
                             ),
                           ),
                     Container(
-                      margin: EdgeInsets.only(left: 180, right: 180),
+                      margin: EdgeInsets.only(left: 190, right: 190),
                       width: 100,
                       height: 40,
                       child: TextButton(

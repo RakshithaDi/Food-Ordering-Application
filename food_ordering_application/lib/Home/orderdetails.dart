@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../constant.dart';
@@ -114,6 +115,14 @@ class _EachOrdersState extends State<EachOrders> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   Map<String, dynamic> orderDetails =
                       snapshot.data.data() as Map<String, dynamic>;
+                  String formatedDate;
+
+                  Timestamp timestamp = orderDetails['TimeStamp'];
+                  DateTime dateTime = timestamp.toDate();
+                  String formatDate =
+                      DateFormat.yMMMd().add_jm().format(dateTime);
+                  formatedDate = formatDate;
+
                   //return Text("Full Name: ${data['full_name']} ${data['last_name']}");
                   return Container(
                     color: Colors.white,
@@ -231,16 +240,7 @@ class _EachOrdersState extends State<EachOrders> {
                                       Container(
                                         margin: EdgeInsets.only(top: 20),
                                         child: Text(
-                                          'Date: ${orderDetails['Date']}',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 20),
-                                        child: Text(
-                                          'Time: ${orderDetails['Time']}',
+                                          'Time: ${formatedDate}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20),

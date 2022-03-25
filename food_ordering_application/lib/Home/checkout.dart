@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/menu.dart';
 import 'package:provider/provider.dart';
 import '../cart.dart';
 import '../constant.dart';
@@ -27,8 +26,6 @@ class _CheckOutState extends State<CheckOut> {
   String items;
   int orderNum;
   String orderId;
-  String currentDate;
-  String currentTime;
   List<String> itemsArr = [];
   List<String> itemQuantityArr = [];
 
@@ -50,21 +47,9 @@ class _CheckOutState extends State<CheckOut> {
         " ${Cart.basketItems[i].name} * ${Cart.basketItems[i].quantity}"
     ];
     print(itemQuantityArr);
-    getCurrentDate();
-    getCurrentTime();
   }
 
-  void getCurrentDate() {
-    currentDate = DateFormat("EEEEE, dd, yyyy").format(DateTime.now());
-    print(currentDate);
-  }
-
-  void getCurrentTime() {
-    currentTime = DateFormat("hh:mm:ss a").format(DateTime.now());
-    print(currentTime);
-  }
-
-  void getUserMail() {
+  void getUserMail() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     if (auth.currentUser != null) {
       userEmail = auth.currentUser.email;
@@ -72,8 +57,8 @@ class _CheckOutState extends State<CheckOut> {
     }
   }
 
-  void getUserInfo() {
-    FirebaseFirestore.instance
+  void getUserInfo() async {
+    await FirebaseFirestore.instance
         .collection("userprofile")
         .doc(userEmail)
         .get()
@@ -82,7 +67,7 @@ class _CheckOutState extends State<CheckOut> {
         fname = documentSnapshot.data()['fname'];
         lname = documentSnapshot.data()['lname'];
         phoneNo = documentSnapshot.data()['mobileno'];
-        fullname = "${fname}' '${lname} ";
+        fullname = "${fname} ${lname} ";
         print('fname $fname');
         print('fname $phoneNo');
       }
@@ -131,14 +116,15 @@ class _CheckOutState extends State<CheckOut> {
       setState(() {
         Cart.EmptyCart();
       });
-      Navigator.pop(context);
+      //Navigator.pop(context);
       setState(() {
-        Navigator.push<void>(
-          context,
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => Home(),
-          ),
-        );
+        Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
+        // Navigator.push<void>(
+        //   context,
+        //   MaterialPageRoute<void>(
+        //     builder: (BuildContext context) => Home(),
+        //   ),
+        // );
         Cart.PaymentStates();
       });
     }, (error) {
@@ -149,7 +135,7 @@ class _CheckOutState extends State<CheckOut> {
   }
 
   void getOrderId() async {
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('ordercount')
         .doc('OrderNumbers')
         .get()
@@ -168,8 +154,8 @@ class _CheckOutState extends State<CheckOut> {
     });
   }
 
-  void IncreaseOrderNumbers() {
-    FirebaseFirestore.instance
+  void IncreaseOrderNumbers() async {
+    await FirebaseFirestore.instance
         .collection("ordercount")
         .doc('OrderNumbers')
         .update({"lastOrderNumber": FieldValue.increment(1)})
@@ -177,27 +163,26 @@ class _CheckOutState extends State<CheckOut> {
         .catchError((error) => print("Failed: $error"));
   }
 
-  void AddOrderDetails() {
-    FirebaseFirestore.instance
+  void AddOrderDetails() async {
+    await FirebaseFirestore.instance
         .collection("orders")
         .doc(orderId)
         .set({
           "OrderId": orderId,
           "OrderItems": itemQuantityArr,
-          "Time": currentTime,
-          "Date": currentDate,
           "Name": fullname,
           "Amount": totalPrice,
           "PhoneNo": phoneNo,
           "Email": userEmail,
           "Status": 'Pending',
           "Ready": 'no',
+          "TimeStamp": DateTime.now(),
         })
         .then((value) => print("Records Added Successfully!"))
         .catchError((error) => print("Failed: $error"));
   }
 
-  void AddEachItems() {
+  void AddEachItems() async {
     for (int index = 0; index < Cart.basketItems.length; index++) {
       String addName = Cart.basketItems[index].name;
       double addPrice = Cart.basketItems[index].price;
@@ -206,7 +191,7 @@ class _CheckOutState extends State<CheckOut> {
       print(addName);
       print(addPrice);
       print(addQuantity);
-      FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection("orders")
           .doc(orderId)
           .collection('OrderItems')
