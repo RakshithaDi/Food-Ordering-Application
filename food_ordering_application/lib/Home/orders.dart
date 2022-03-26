@@ -39,20 +39,20 @@ class _OrderDetailsState extends State<OrderDetails> {
     await FirebaseFirestore.instance
         .collection('orders')
         .where('Email', isEqualTo: userEmail)
-        .where('Status', isEqualTo: 'Pending')
+        .where('Status', whereIn: ['Pending', 'New'])
         .get()
         .then((documentSnapshot) {
-      if (documentSnapshot.size == 0) {
-        setState(() {
-          pendingOrderslength = 0;
+          if (documentSnapshot.size == 0) {
+            setState(() {
+              pendingOrderslength = 0;
+            });
+          } else {
+            setState(() {
+              pendingOrderslength = documentSnapshot.size;
+            });
+          }
+          print('Pending Orders length:${documentSnapshot.size}');
         });
-      } else {
-        setState(() {
-          pendingOrderslength = documentSnapshot.size;
-        });
-      }
-      print('Pending Orders length:${documentSnapshot.size}');
-    });
   }
 
   void CheckDeliveredOrders() async {
@@ -182,8 +182,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                               future: FirebaseFirestore.instance
                                   .collection('orders')
                                   .where('Email', isEqualTo: userEmail)
-                                  .where('Status', isEqualTo: 'Pending')
-                                  .orderBy('OrderId', descending: true)
+                                  .where('Status', whereIn: ['Pending', 'New'])
+                                  .orderBy('TimeStamp', descending: true)
                                   .get(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -425,7 +425,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   .collection('orders')
                                   .where('Email', isEqualTo: userEmail)
                                   .where('Status', isEqualTo: 'Collected')
-                                  .orderBy('OrderId', descending: true)
+                                  .orderBy('TimeStamp', descending: true)
                                   .get(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {

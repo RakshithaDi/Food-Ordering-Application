@@ -174,7 +174,7 @@ class _CheckOutState extends State<CheckOut> {
           "Amount": totalPrice,
           "PhoneNo": phoneNo,
           "Email": userEmail,
-          "Status": 'Pending',
+          "Status": 'New',
           "Ready": 'no',
           "TimeStamp": DateTime.now(),
         })
@@ -182,7 +182,7 @@ class _CheckOutState extends State<CheckOut> {
         .catchError((error) => print("Failed: $error"));
   }
 
-  void AddEachItems() async {
+  void AddEachItems() {
     for (int index = 0; index < Cart.basketItems.length; index++) {
       String addName = Cart.basketItems[index].name;
       double addPrice = Cart.basketItems[index].price;
@@ -191,7 +191,7 @@ class _CheckOutState extends State<CheckOut> {
       print(addName);
       print(addPrice);
       print(addQuantity);
-      await FirebaseFirestore.instance
+      FirebaseFirestore.instance
           .collection("orders")
           .doc(orderId)
           .collection('OrderItems')
