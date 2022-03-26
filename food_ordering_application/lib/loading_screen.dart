@@ -13,7 +13,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => Login()));
     });
@@ -23,15 +23,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: kredbackgroundcolor,
+        backgroundColor: kbackgroundcolor,
         body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Color(0xFFED9EFCF),
-              Color(0xFFE91C93F),
-              Color(0xFFE95D9AB),
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -41,6 +35,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     flex: 2,
                     child: Container(
                       child: Image(
+                        color: klblack,
                         image: AssetImage('images/newLogofoodx.png'),
                         height: 150.0,
                         width: 300.0,
@@ -53,7 +48,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     width: 100,
                     child: Center(
                       child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(titleColor),
+                        valueColor: AlwaysStoppedAnimation<Color>(Sushi),
                       ),
                     ),
                   )),

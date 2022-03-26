@@ -101,8 +101,7 @@ class _LoginState extends State<Login> {
                       margin: EdgeInsets.only(top: 50),
                       child: Text(
                         'Welcome to FoodX!',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 28),
+                        style: fstlyepoppinsTitle,
                       ),
                     ),
                     SizedBox(
@@ -110,10 +109,7 @@ class _LoginState extends State<Login> {
                     ),
                     Text(
                       'Let\'s help you meet up your tasks.',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey[500],
-                          fontWeight: FontWeight.bold),
+                      style: fstlyepoppinsSubtitle,
                     ),
                     SizedBox(
                       height: 30.0,
@@ -123,7 +119,7 @@ class _LoginState extends State<Login> {
                       width: MediaQuery.of(context).size.width - 25,
                       child: Divider(
                         thickness: 2,
-                        color: titleColor,
+                        color: klblack,
                       ),
                     ),
                   ],
@@ -149,13 +145,10 @@ class _LoginState extends State<Login> {
                             filled: true,
                             fillColor: Colors.white,
                             labelText: 'Email',
-                            labelStyle: TextStyle(
-                                fontSize: 15,
-                                color: Sushi,
-                                fontWeight: FontWeight.bold),
+                            labelStyle: fstlyepromptTextFields,
                             suffixIcon: Icon(
                               Icons.email,
-                              color: titleColor,
+                              color: klblack,
                             ),
                             border: InputBorder.none,
                           ),
@@ -184,15 +177,12 @@ class _LoginState extends State<Login> {
                             filled: true,
                             fillColor: Colors.white,
                             labelText: 'Password',
-                            labelStyle: TextStyle(
-                                fontSize: 15,
-                                color: Sushi,
-                                fontWeight: FontWeight.bold),
+                            labelStyle: fstlyepromptTextFields,
                             suffixIcon: IconButton(
                               onPressed: _toggle,
                               icon: Icon(
                                 Icons.remove_red_eye_rounded,
-                                color: titleColor,
+                                color: klblack,
                               ),
                             ),
                             border: InputBorder.none,
@@ -216,11 +206,7 @@ class _LoginState extends State<Login> {
                             onPressed: () {},
                             child: Text(
                               'Forgot Password?',
-                              style: TextStyle(
-                                color: titleColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: fstlyemontserratAlternatesText,
                             ),
                           ),
                         ),
@@ -250,6 +236,7 @@ class _LoginState extends State<Login> {
                               child: status == true
                                   ? Text(
                                       "Login",
+                                      style: buttonText,
                                     )
                                   : CircularProgressIndicator(
                                       backgroundColor: Colors.black38,
@@ -298,9 +285,7 @@ class _LoginState extends State<Login> {
                           children: [
                             Text(
                               'Dont Have an account?',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
+                              style: fstlyemontserratAlternatesText,
                             ),
                             SizedBox(
                               child: TextButton(
@@ -322,6 +307,7 @@ class _LoginState extends State<Login> {
                                 },
                                 child: Text(
                                   "Sign Up",
+                                  style: normalText,
                                 ),
                               ),
                             ),

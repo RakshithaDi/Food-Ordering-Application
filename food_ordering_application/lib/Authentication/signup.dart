@@ -137,10 +137,7 @@ class _SignupState extends State<Signup> {
                                       fillColor: Colors.white,
                                       filled: true,
                                       labelText: 'First Name',
-                                      labelStyle: TextStyle(
-                                          fontSize: 15,
-                                          color: Sushi,
-                                          fontWeight: FontWeight.bold),
+                                      labelStyle: fstlyepromptTextFields,
                                     ),
                                     validator: (value) {
                                       if (value.isEmpty) {
@@ -171,10 +168,7 @@ class _SignupState extends State<Signup> {
                                       fillColor: Colors.white,
                                       filled: true,
                                       labelText: 'Last Name',
-                                      labelStyle: TextStyle(
-                                          fontSize: 15,
-                                          color: Sushi,
-                                          fontWeight: FontWeight.bold),
+                                      labelStyle: fstlyepromptTextFields,
                                     ),
                                     validator: (value) {
                                       if (value.isEmpty) {
@@ -210,10 +204,11 @@ class _SignupState extends State<Signup> {
                                       fillColor: Colors.white,
                                       filled: true,
                                       labelText: 'Email',
-                                      labelStyle: TextStyle(
-                                          fontSize: 15,
-                                          color: Sushi,
-                                          fontWeight: FontWeight.bold),
+                                      labelStyle: fstlyepromptTextFields,
+                                      suffixIcon: Icon(
+                                        Icons.email,
+                                        color: klblack,
+                                      ),
                                     ),
                                     keyboardType: TextInputType.emailAddress,
                                     autocorrect: false,
@@ -286,7 +281,7 @@ class _SignupState extends State<Signup> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(8.0),
                                 child: Container(
                                   child: Column(
                                     children: [
@@ -305,15 +300,12 @@ class _SignupState extends State<Signup> {
                                           border: InputBorder.none,
                                           fillColor: Colors.white,
                                           filled: true,
-                                          labelStyle: TextStyle(
-                                              fontSize: 15,
-                                              color: Sushi,
-                                              fontWeight: FontWeight.bold),
+                                          labelStyle: fstlyepromptTextFields,
                                           suffixIcon: IconButton(
                                             onPressed: _toggle,
                                             icon: Icon(
                                               Icons.remove_red_eye_rounded,
-                                              color: titleColor,
+                                              color: klblack,
                                             ),
                                           ),
                                         ),
@@ -353,15 +345,12 @@ class _SignupState extends State<Signup> {
                                       fillColor: Colors.white,
                                       filled: true,
                                       labelText: 'Re-Type Password',
-                                      labelStyle: TextStyle(
-                                          fontSize: 15,
-                                          color: Sushi,
-                                          fontWeight: FontWeight.bold),
+                                      labelStyle: fstlyepromptTextFields,
                                       suffixIcon: IconButton(
                                         onPressed: _toggle,
                                         icon: Icon(
                                           Icons.remove_red_eye_rounded,
-                                          color: titleColor,
+                                          color: klblack,
                                         ),
                                       ),
                                     ),
@@ -422,7 +411,10 @@ class _SignupState extends State<Signup> {
                             //  Navigator.pushNamed(context, OtpSetup.id);
                           },
                           child: states == true
-                              ? Text('Sign Up')
+                              ? Text(
+                                  'Sign Up',
+                                  style: buttonText,
+                                )
                               : CircularProgressIndicator(
                                   backgroundColor: Colors.black38,
                                   valueColor: AlwaysStoppedAnimation<Color>(
@@ -437,9 +429,7 @@ class _SignupState extends State<Signup> {
                           children: [
                             Text(
                               'Already Have an account?',
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
+                              style: fstlyemontserratAlternatesText,
                             ),
                             SizedBox(
                               child: TextButton(
@@ -453,7 +443,10 @@ class _SignupState extends State<Signup> {
                                 onPressed: () {
                                   Navigator.pushNamed(context, Login.id);
                                 },
-                                child: Text('Sign In'),
+                                child: Text(
+                                  'Sign In',
+                                  style: normalText,
+                                ),
                               ),
                             ),
                           ],
@@ -518,20 +511,13 @@ class SignupTitle extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          Text(
-            'Let\'s Get Started',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 25, color: titleColor),
-          ),
+          Text('Let\'s Get Started', style: fstlyepoppinsTitle),
           SizedBox(
             height: 10.0,
           ),
           Text(
             'Create an account to continue!',
-            style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[500],
-                fontWeight: FontWeight.bold),
+            style: fstlyepoppinsSubtitle,
           ),
           SizedBox(
             height: 10.0,
@@ -541,7 +527,7 @@ class SignupTitle extends StatelessWidget {
             width: MediaQuery.of(context).size.width - 30,
             child: Divider(
               thickness: 2,
-              color: titleColor,
+              color: klblack,
             ),
           ),
         ],

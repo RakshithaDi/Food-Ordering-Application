@@ -148,10 +148,7 @@ class _OtpSetupState extends State<OtpSetup> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                    ),
+                    style: fstlyepromptTextFields,
                     children: <TextSpan>[
                       TextSpan(
                           text: 'We will send you an ',
@@ -197,24 +194,17 @@ class _OtpSetupState extends State<OtpSetup> {
                     filled: true,
                     fillColor: Colors.white,
                     labelText: "Enter Your Number",
-                    labelStyle: TextStyle(
-                        fontSize: 15,
-                        color: Sushi,
-                        fontWeight: FontWeight.bold),
-                    prefix: const Padding(
+                    labelStyle: fstlyepromptTextFields,
+                    prefix: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
                         '(+94) ',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: titleColor,
-                        ),
+                        style: fstlyepromptTextFields,
                       ),
                     ),
                     suffixIcon: const Icon(
                       Icons.done,
-                      color: titleColor,
+                      color: Sushi,
                       size: 32,
                     ),
                   ),
@@ -236,8 +226,7 @@ class _OtpSetupState extends State<OtpSetup> {
                 children: [
                   Container(
                     child: Image(
-                      color: titleColor,
-                      image: AssetImage('images/otpSetup.png'),
+                      image: AssetImage('images/otp-veri.png'),
                       height: 350.0,
                       width: 300.0,
                     ),
@@ -269,7 +258,10 @@ class _OtpSetupState extends State<OtpSetup> {
                             return null;
                           }
                         },
-                        child: Text('Get OTP'),
+                        child: Text(
+                          'Get OTP',
+                          style: buttonText,
+                        ),
                       ),
                     ),
                   ),
@@ -285,10 +277,7 @@ class _OtpSetupState extends State<OtpSetup> {
   getOtpFormWidget(context) {
     var text = RichText(
       text: TextSpan(
-        style: TextStyle(
-          fontSize: 16.0,
-          color: Colors.black,
-        ),
+        style: fstlyepromptTextFields,
         children: <TextSpan>[
           TextSpan(
             text: 'Enter the ',
@@ -345,10 +334,7 @@ class _OtpSetupState extends State<OtpSetup> {
                         filled: true,
                         fillColor: Colors.white,
                         labelText: 'Enter OTP',
-                        labelStyle: TextStyle(
-                          fontSize: 15,
-                          color: Sushi,
-                        ),
+                        labelStyle: fstlyepromptTextFields,
                         suffixIcon: const Icon(
                           Icons.done,
                           color: Colors.green,
@@ -374,19 +360,12 @@ class _OtpSetupState extends State<OtpSetup> {
                   children: [
                     Text(
                       'Didn\'t receive the OTP? ',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.black,
-                      ),
+                      style: fstlyemontserratAlternatesText,
                     ),
                     TextButton(
                       child: Text(
                         'RESEND OTP',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: titleColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: normalText,
                       ),
                       onPressed: () async {
                         verifyPhoneNumber();
@@ -404,9 +383,9 @@ class _OtpSetupState extends State<OtpSetup> {
             children: [
               Container(
                 child: Image(
-                  image: AssetImage('images/otp.png'),
+                  image: AssetImage('images/otpgreen.png'),
                   height: 300.0,
-                  width: 300.0,
+                  width: 200.0,
                 ),
               ),
               Container(
@@ -433,7 +412,10 @@ class _OtpSetupState extends State<OtpSetup> {
                         return null;
                       }
                     },
-                    child: Text('Verify & Proceed'),
+                    child: Text(
+                      'Verify & Proceed',
+                      style: buttonText,
+                    ),
                   ),
                 ),
               ),
@@ -452,7 +434,10 @@ class _OtpSetupState extends State<OtpSetup> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('OTP Verification'),
+          title: Text(
+            'OTP Verification',
+            style: appbarText,
+          ),
           backgroundColor: Sushi,
           leading: InkWell(
             onTap: () {
