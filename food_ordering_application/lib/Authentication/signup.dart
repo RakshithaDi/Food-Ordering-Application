@@ -541,7 +541,7 @@ class FoodLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        top: 60,
+        top: 45,
         bottom: 25,
       ),
       child: ClipRRect(

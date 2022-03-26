@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
             Expanded(
               flex: 2,
               child: Container(
-                margin: EdgeInsets.only(top: 30),
+                margin: EdgeInsets.only(top: 25),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

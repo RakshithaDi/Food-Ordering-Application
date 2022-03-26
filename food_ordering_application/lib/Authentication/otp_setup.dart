@@ -316,7 +316,7 @@ class _OtpSetupState extends State<OtpSetup> {
                 Form(
                   key: _formKey,
                   child: Container(
-                    margin: EdgeInsets.only(left: 130, right: 130),
+                    margin: EdgeInsets.only(left: 120, right: 120),
                     child: TextFormField(
                       cursorColor: Colors.green,
                       maxLength: 6,
