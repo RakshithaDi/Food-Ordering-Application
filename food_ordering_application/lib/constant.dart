@@ -52,3 +52,21 @@ final normalText = GoogleFonts.prompt(
 
 final appbarText =
     GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold);
+
+final nameTitle = GoogleFonts.poppins(
+    fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold);
+
+final subText = GoogleFonts.prompt(
+    fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold);
+
+final menutitles = GoogleFonts.montserratAlternates(
+    fontSize: 16, color: titleColor, fontWeight: FontWeight.bold);
+
+final labeltext = GoogleFonts.montserratAlternates(
+    fontSize: 15, color: klblack, fontWeight: FontWeight.bold);
+
+final labelprice = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: titleColor,
+);

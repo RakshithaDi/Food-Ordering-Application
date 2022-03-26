@@ -136,7 +136,7 @@ class _MenuState extends State<Menu> {
         appBar: AppBar(
           toolbarHeight: 68,
           elevation: 0,
-          backgroundColor: Color(0xFFE008000),
+          backgroundColor: Sushi,
           title: FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
                   .collection("userprofile")
@@ -157,7 +157,10 @@ class _MenuState extends State<Menu> {
                   Map<String, dynamic> userprofile =
                       snapshot.data.data() as Map<String, dynamic>;
                   return currentUser.email != null
-                      ? Text('Hello ${userprofile['fname']}!')
+                      ? Text(
+                          'Hello ${userprofile['fname']}!',
+                          style: nameTitle,
+                        )
                       : Text('');
                 }
                 return Container(
@@ -221,7 +224,7 @@ class _MenuState extends State<Menu> {
           child: ListView(
             children: [
               Container(
-                color: Color(0xFFE008000),
+                color: Sushi,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -236,11 +239,7 @@ class _MenuState extends State<Menu> {
                             ),
                             child: Text(
                               'Let\'s select the best taste for you',
-                              style: TextStyle(
-                                color: Colors.grey[300],
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: subText,
                             ),
                           ),
                         ),
@@ -291,8 +290,8 @@ class _MenuState extends State<Menu> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(top: 10),
-                    height: 140,
-                    width: 450,
+                    height: MediaQuery.of(context).size.height / 5.9,
+                    width: MediaQuery.of(context).size.width / 0.8,
                     child: CarouselSlider(
                       items: imageSliders,
                       carouselController: _controller,
@@ -322,7 +321,7 @@ class _MenuState extends State<Menu> {
                               color: (Theme.of(context).brightness ==
                                           Brightness.dark
                                       ? Colors.white
-                                      : Colors.black)
+                                      : titleColor)
                                   .withOpacity(
                                       _current == entry.key ? 0.9 : 0.4)),
                         ),
@@ -336,9 +335,7 @@ class _MenuState extends State<Menu> {
                 margin: EdgeInsets.only(left: 10, bottom: 5),
                 child: Text(
                   'Categories',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: menutitles,
                 ),
               ),
               StreamBuilder(
@@ -358,7 +355,7 @@ class _MenuState extends State<Menu> {
                   if (snapshot.hasData) {
                     print('has data');
                     return Container(
-                      height: 120,
+                      height: MediaQuery.of(context).size.height / 6.3, //123,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
@@ -402,7 +399,7 @@ class _MenuState extends State<Menu> {
                                       child: Text(
                                         category['name'],
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(),
+                                        style: labeltext,
                                       ),
                                     ),
                                   ],
@@ -431,13 +428,11 @@ class _MenuState extends State<Menu> {
                 margin: EdgeInsets.only(left: 10, top: 10, bottom: 5),
                 child: Text(
                   'Rcommended',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: menutitles,
                 ),
               ),
               Container(
-                height: 515, //210
+                height: 510, //MediaQuery.of(context).size.height / 2.8, //210
                 child: FutureBuilder(
                   future: FirebaseFirestore.instance
                       .collection('items')
@@ -517,6 +512,7 @@ class _MenuState extends State<Menu> {
                                                     top: 7),
                                                 child: Text(
                                                   recommend['name'],
+                                                  style: labeltext,
                                                 ),
                                               ),
                                             ),
@@ -531,10 +527,7 @@ class _MenuState extends State<Menu> {
                                                       child: Center(
                                                         child: Text(
                                                           'Rs. ${recommend['price']}',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                                          style: labelprice,
                                                         ),
                                                       ),
                                                     ),

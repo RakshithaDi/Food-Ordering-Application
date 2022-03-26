@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
             Expanded(
               flex: 2,
               child: Container(
-                margin: EdgeInsets.only(top: 40),
+                margin: EdgeInsets.only(top: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 50),
+                      margin: EdgeInsets.only(top: 30),
                       child: Text(
                         'Welcome to FoodX!',
                         style: fstlyepoppinsTitle,

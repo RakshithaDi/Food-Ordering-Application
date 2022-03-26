@@ -33,7 +33,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Consumer<Cart>(builder: (context, cart, child) {
       return Scaffold(
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
         body: SafeArea(
           child: TabBarView(
             physics: NeverScrollableScrollPhysics(),
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
         bottomNavigationBar: Material(
-          color: Color(0xFFE008000),
+          color: Sushi,
           child: TabBar(
             tabs: [
               Tab(
