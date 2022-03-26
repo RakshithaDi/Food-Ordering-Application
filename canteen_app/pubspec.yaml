@@ -43,6 +43,7 @@ dependencies:
   firebase_storage: ^10.2.9
   firebase: ^9.0.2
   intl: ^0.17.0
+  twilio_flutter: ^0.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter
