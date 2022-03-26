@@ -44,7 +44,7 @@ class _ComplaintsState extends State<Complaints> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Report Complaint'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
       ),
       body: SafeArea(
         child: Form(

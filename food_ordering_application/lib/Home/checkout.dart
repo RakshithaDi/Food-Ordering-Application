@@ -214,7 +214,7 @@ class _CheckOutState extends State<CheckOut> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Check Out'),
-          backgroundColor: greenTheme,
+          backgroundColor: Sushi,
         ),
         resizeToAvoidBottomInset: false,
         body: Container(

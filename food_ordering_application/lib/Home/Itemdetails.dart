@@ -54,7 +54,7 @@ class _ItemDetailsState extends State<ItemDetails> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Cart'),
-          backgroundColor: greenTheme,
+          backgroundColor: Sushi,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),

@@ -73,7 +73,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Personal Information'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
       ),
       body: Container(
         child: Form(

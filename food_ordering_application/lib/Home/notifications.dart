@@ -41,7 +41,7 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Notifications'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
       ),
       body: SafeArea(
         child: Column(

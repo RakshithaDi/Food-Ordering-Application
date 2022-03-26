@@ -31,7 +31,7 @@ class _ItemsState extends State<Items> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Items'),
-          backgroundColor: greenTheme,
+          backgroundColor: Sushi,
           actions: [
             IconButton(
               icon: Icon(

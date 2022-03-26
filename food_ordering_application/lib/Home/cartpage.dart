@@ -20,7 +20,7 @@ class _CartPageState extends State<CartPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Cart'),
-          backgroundColor: greenTheme,
+          backgroundColor: Sushi,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),

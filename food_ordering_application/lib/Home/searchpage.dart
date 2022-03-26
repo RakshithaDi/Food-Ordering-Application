@@ -52,7 +52,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text('Items'),
-          backgroundColor: greenTheme,
+          backgroundColor: Sushi,
           actions: [
             IconButton(
               icon: Icon(
@@ -296,7 +296,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
               onQueryUpdate: (s) => print(s),
               barTheme: ThemeData(
                 appBarTheme: AppBarTheme(
-                  color: greenTheme,
+                  color: Sushi,
                 ),
               ),
               items: _products,
@@ -395,7 +395,7 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                                           child: TextButton(
                                             style: TextButton.styleFrom(
                                               primary: Colors.white,
-                                              backgroundColor: greenTheme,
+                                              backgroundColor: Sushi,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5),

@@ -86,7 +86,7 @@ class _EachOrdersState extends State<EachOrders> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Order Details'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
       ),
       resizeToAvoidBottomInset: false,
       body: Container(

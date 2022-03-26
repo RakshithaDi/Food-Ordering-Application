@@ -43,7 +43,7 @@ class _AccountState extends State<Account> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Account'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
       ),
       body: SafeArea(
         child: ListView(

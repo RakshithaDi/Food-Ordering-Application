@@ -143,7 +143,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Orders'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

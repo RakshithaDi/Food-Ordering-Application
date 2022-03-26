@@ -67,7 +67,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Change Password'),
-        backgroundColor: greenTheme,
+        backgroundColor: Sushi,
       ),
       body: Container(
         child: Form(
