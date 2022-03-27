@@ -509,11 +509,19 @@ class _PendingOrdersState extends State<PendingOrders> {
                         ],
                       ),
                     ),
+              const VerticalDivider(
+                color: Colors.grey,
+                thickness: 1,
+              ),
               Expanded(
                 child: Column(
                   children: [
-                    Expanded(child: Container()),
                     Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
+                    Expanded(
+                      flex: 3,
                       child: Container(
                         child: MobileScanner(
                             allowDuplicates: false,
@@ -524,7 +532,10 @@ class _PendingOrdersState extends State<PendingOrders> {
                             }),
                       ),
                     ),
-                    Expanded(child: Container()),
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
                   ],
                 ),
               ),
