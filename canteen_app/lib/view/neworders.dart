@@ -23,6 +23,7 @@ class _NewOrdersState extends State<NewOrders> {
   String price = '';
   int itemsIndex = 0;
   bool rightcontainer = true;
+  bool loadDescription = false;
 
   late TwilioFlutter twilioFlutter;
 
@@ -331,7 +332,14 @@ class _NewOrdersState extends State<NewOrders> {
                                                           ConnectionState
                                                               .waiting ||
                                                       !snapshot.hasData) {
-                                                    //  return CircularProgressIndicator();
+                                                    return const SizedBox(
+                                                      height: 100,
+                                                      width: 100,
+                                                      child: Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      ),
+                                                    );
                                                   }
 
                                                   if (snapshot.hasData) {
@@ -425,7 +433,7 @@ class _NewOrdersState extends State<NewOrders> {
                                 children: [
                                   const Expanded(
                                       child: Text(
-                                    'Price:',
+                                    'Total Price:',
                                     style: customTextStyle1,
                                   )),
                                   Expanded(
