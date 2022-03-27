@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 import '../constant.dart';
 import 'orders.dart';
@@ -150,7 +151,8 @@ class _EachOrdersState extends State<EachOrders> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                height: 400,
+                                height:
+                                    MediaQuery.of(context).size.height / 3.5,
                                 child: ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
@@ -231,6 +233,16 @@ class _EachOrdersState extends State<EachOrders> {
                                   },
                                 ),
                               ),
+                              Center(
+                                  child: Container(
+                                color: kbackgroundcolor,
+                                height: 250,
+                                child: SfBarcodeGenerator(
+                                  value: orderId,
+                                  symbology: QRCode(),
+                                  showValue: true,
+                                ),
+                              )),
                               Center(
                                 child: Container(
                                   width: double.infinity,
