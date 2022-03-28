@@ -219,166 +219,146 @@ class _ProductsState extends State<Products> {
               margin: EdgeInsets.all(20),
               child: ListView(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: const Text(
-                          'Items',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        margin: EdgeInsets.only(left: 10, bottom: 20),
-                      ),
-                      Container(
-                        child: SingleChildScrollView(
-                          primary: false,
-                          child: StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection("items")
-                                .snapshots(),
-                            builder: (context,
-                                AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.hasError) {
-                                return Text("Something went wrong");
-                              }
+                  Container(
+                    child: const Text(
+                      'Items',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    margin: EdgeInsets.only(left: 10, bottom: 20),
+                  ),
+                  Container(
+                    child: SingleChildScrollView(
+                      primary: false,
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("items")
+                            .snapshots(),
+                        builder:
+                            (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
 
-                              if (snapshot.connectionState ==
-                                      ConnectionState.waiting ||
-                                  !snapshot.hasData) {
-                                //  return CircularProgressIndicator();
-                              }
+                          if (snapshot.connectionState ==
+                                  ConnectionState.waiting ||
+                              !snapshot.hasData) {
+                            //  return CircularProgressIndicator();
+                          }
 
-                              if (snapshot.hasData) {
-                                return ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder: (BuildContext context, index) {
-                                    QueryDocumentSnapshot item =
-                                        snapshot.data!.docs[index];
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (BuildContext context, index) {
+                                QueryDocumentSnapshot item =
+                                    snapshot.data!.docs[index];
 
-                                    return Card(
-                                      child: InkWell(
-                                        onTap: () {
-                                          _deleteProductController.text =
-                                              item['id'].toString();
-                                          _updateProductIdController.text =
-                                              item['id'].toString();
-                                          _updateProductNameController.text =
-                                              item['name'];
-                                          _updateDescriptionController.text =
-                                              item['description'];
+                                return Card(
+                                  child: InkWell(
+                                    onTap: () {
+                                      _deleteProductController.text =
+                                          item['id'].toString();
+                                      _updateProductIdController.text =
+                                          item['id'].toString();
+                                      _updateProductNameController.text =
+                                          item['name'];
+                                      _updateDescriptionController.text =
+                                          item['description'];
 
-                                          _updatepriceController.text =
-                                              item['price'];
+                                      _updatepriceController.text =
+                                          item['price'];
 
-                                          setState(() {
-                                            updateImgUrl = item['imgUrl'];
-                                            updatefoodType =
-                                                item['categoryId'].toString();
-                                            updaterecommendType =
-                                                item['recommend'];
-                                          });
-                                          print('dsfsfsfs $updatefoodType');
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                alignment: Alignment.topLeft,
-                                                child: Image.network(
-                                                  item['imgUrl'],
-                                                  height: 50,
-                                                  width: 100,
-                                                ),
-                                              ),
+                                      setState(() {
+                                        updateImgUrl = item['imgUrl'];
+                                        updatefoodType =
+                                            item['categoryId'].toString();
+                                        updaterecommendType = item['recommend'];
+                                      });
+                                      print('dsfsfsfs $updatefoodType');
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            alignment: Alignment.topLeft,
+                                            child: Image.network(
+                                              item['imgUrl'],
+                                              height: 50,
+                                              width: 100,
                                             ),
-                                            Expanded(
-                                              flex: 4,
-                                              child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                alignment: Alignment.topLeft,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Row(
-                                                        children: [
-                                                          const Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              'Id:',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Text(
-                                                              item['id']
-                                                                  .toString(),
-                                                              style: const TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          const Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              'Name:',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Text(
-                                                              item['name'],
-                                                              style: const TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                        Expanded(
+                                          flex: 4,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 10),
+                                            alignment: Alignment.topLeft,
+                                            child: Row(
+                                              children: [
+                                                const Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    'Id:',
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Text(
+                                                    item['id'].toString(),
+                                                    style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                const Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    'Name:',
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 4,
+                                                  child: Text(
+                                                    item['name'],
+                                                    style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 );
-                              }
-                              return const SizedBox(
-                                height: 100,
-                                width: 100,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                              },
+                            );
+                          }
+                          return const SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        },
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -711,115 +691,27 @@ class _ProductsState extends State<Products> {
               margin: EdgeInsets.only(top: 10, left: 20, right: 20),
               child: ListView(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: Form(
-                        key: _searchprodIdform,
-                        child: Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                'Search by product ID',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
+                  Container(
+                    child: Form(
+                      key: _searchprodIdform,
+                      child: Row(
+                        children: [
+                          const Expanded(
+                            flex: 1,
+                            child: Text(
+                              'Search by product ID',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: TextFormField(
-                                controller: _searchProductIdController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: 'Search Product Id',
-                                  labelStyle: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ),
-                                ),
-                                autocorrect: false,
-                                textCapitalization: TextCapitalization.none,
-                                enableSuggestions: false,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a product id';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 30, right: 30),
-                                child: SizedBox(
-                                  width: 100,
-                                  height: 40,
-                                  child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.white,
-                                        backgroundColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(0),
-                                          side: BorderSide(color: Colors.grey),
-                                        ),
-                                      ),
-                                      onPressed: () async {
-                                        if (_searchprodIdform.currentState!
-                                            .validate()) {
-                                        } else {
-                                          return null;
-                                        }
-
-                                        //
-                                      },
-                                      child: status == true
-                                          ? const Text(
-                                              "Search",
-                                            )
-                                          : const CircularProgressIndicator(
-                                              backgroundColor: Colors.black38,
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.white))),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      child: Form(
-                        key: _editform,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(bottom: 20),
-                              child: const Text(
-                                'Update Items',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            TextFormField(
-                              controller: _updateProductIdController,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              controller: _searchProductIdController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white,
-                                labelText: 'Product Id',
+                                labelText: 'Search Product Id',
                                 labelStyle: const TextStyle(
                                   fontSize: 15,
                                 ),
@@ -837,305 +729,380 @@ class _ProductsState extends State<Products> {
                                 return null;
                               },
                             ),
-                            SizedBox(height: 20.0),
-                            TextFormField(
-                              controller: _updateProductNameController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'Name',
-                                labelStyle: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                              ),
-                              autocorrect: false,
-                              textCapitalization: TextCapitalization.none,
-                              enableSuggestions: false,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter product name';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: 20.0),
-                            TextFormField(
-                              controller: _updateDescriptionController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'Description',
-                                labelStyle: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                              ),
-                              autocorrect: false,
-                              textCapitalization: TextCapitalization.none,
-                              enableSuggestions: false,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter description';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: 20.0),
-                            Row(
-                              children: [
-                                const Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Select Type',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              margin: EdgeInsets.only(left: 30, right: 30),
+                              child: SizedBox(
+                                width: 100,
+                                height: 40,
+                                child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                      backgroundColor: Colors.blue,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                        side: BorderSide(color: Colors.grey),
+                                      ),
                                     ),
+                                    onPressed: () async {
+                                      if (_searchprodIdform.currentState!
+                                          .validate()) {
+                                      } else {
+                                        return null;
+                                      }
+
+                                      //
+                                    },
+                                    child: status == true
+                                        ? const Text(
+                                            "Search",
+                                          )
+                                        : const CircularProgressIndicator(
+                                            backgroundColor: Colors.black38,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.white))),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: 20,
+                    ),
+                    child: Form(
+                      key: _editform,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            child: const Text(
+                              'Update Items',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          TextFormField(
+                            controller: _updateProductIdController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Product Id',
+                              labelStyle: const TextStyle(
+                                fontSize: 15,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            enableSuggestions: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter a product id';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _updateProductNameController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Name',
+                              labelStyle: const TextStyle(
+                                fontSize: 15,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            enableSuggestions: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter product name';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _updateDescriptionController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Description',
+                              labelStyle: const TextStyle(
+                                fontSize: 15,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            enableSuggestions: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter description';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  'Select Type',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                StreamBuilder<QuerySnapshot>(
-                                  stream: FirebaseFirestore.instance
-                                      .collection("categories")
-                                      .snapshots(),
-                                  builder: (context,
-                                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                                    if (snapshot.hasError) {
-                                      return Text("Something went wrong");
-                                    }
+                              ),
+                              StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection("categories")
+                                    .snapshots(),
+                                builder: (context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.hasError) {
+                                    return Text("Something went wrong");
+                                  }
 
-                                    if (snapshot.connectionState ==
-                                            ConnectionState.waiting ||
-                                        !snapshot.hasData) {
-                                      //  return CircularProgressIndicator();
-                                    }
-                                    if (snapshot.hasData) {
-                                      List<DropdownMenuItem<String>>
-                                          updatecategories = [];
-                                      for (int i = 0;
-                                          i < snapshot.data!.docs.length;
-                                          i++) {
-                                        DocumentSnapshot cat =
-                                            snapshot.data!.docs[i];
-                                        updatecategories.add(
-                                          DropdownMenuItem(
-                                            child: Text(cat['name']),
-                                            value: cat['id'].toString(),
-                                          ),
-                                        );
-                                      }
-                                      return DropdownButton(
-                                        value: updatefoodType,
-                                        //hint: Text('Food'),
-                                        icon: const Icon(
-                                            Icons.arrow_drop_down_outlined),
-                                        elevation: 16,
-                                        style: const TextStyle(
-                                            color: Colors.blueGrey),
-                                        underline: Container(
-                                          height: 2,
-                                          color: Colors.red,
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.waiting ||
+                                      !snapshot.hasData) {
+                                    //  return CircularProgressIndicator();
+                                  }
+                                  if (snapshot.hasData) {
+                                    List<DropdownMenuItem<String>>
+                                        updatecategories = [];
+                                    for (int i = 0;
+                                        i < snapshot.data!.docs.length;
+                                        i++) {
+                                      DocumentSnapshot cat =
+                                          snapshot.data!.docs[i];
+                                      updatecategories.add(
+                                        DropdownMenuItem(
+                                          child: Text(cat['name']),
+                                          value: cat['id'].toString(),
                                         ),
-                                        items: updatecategories,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            updatefoodType = value.toString();
-                                            print(updatefoodType);
-                                          });
-                                        },
                                       );
                                     }
-                                    return const SizedBox(
-                                      height: 100,
-                                      width: 100,
-                                      child: Center(
-                                        child: CircularProgressIndicator(),
+                                    return DropdownButton(
+                                      value: updatefoodType,
+                                      //hint: Text('Food'),
+                                      icon: const Icon(
+                                          Icons.arrow_drop_down_outlined),
+                                      elevation: 16,
+                                      style: const TextStyle(
+                                          color: Colors.blueGrey),
+                                      underline: Container(
+                                        height: 2,
+                                        color: Colors.red,
                                       ),
-                                    );
-                                  },
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(),
-                                ),
-                              ],
-                            ),
-                            TextFormField(
-                              controller: _updatepriceController,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: 'Price',
-                                labelStyle: const TextStyle(
-                                  fontSize: 15,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                              ),
-                              autocorrect: false,
-                              textCapitalization: TextCapitalization.none,
-                              enableSuggestions: false,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter price';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: 20.0),
-                            Row(
-                              children: [
-                                const Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Recommend',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                DropdownButton(
-                                  value: updaterecommendType,
-                                  //hint: Text('Food'),
-                                  icon: const Icon(
-                                      Icons.arrow_drop_down_outlined),
-                                  elevation: 16,
-                                  style:
-                                      const TextStyle(color: Colors.blueGrey),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.red,
-                                  ),
-                                  items: const <DropdownMenuItem<String>>[
-                                    DropdownMenuItem(
-                                      value: 'yes',
-                                      child: Text('Yes'),
-                                    ),
-                                    DropdownMenuItem(
-                                      value: 'no',
-                                      child: Text('No'),
-                                    ),
-                                  ],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      updaterecommendType = value.toString();
-                                      print(updaterecommendType);
-                                    });
-                                  },
-                                ),
-                                Expanded(flex: 3, child: Container()),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    alignment: Alignment.topLeft,
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        updateSelectImage();
+                                      items: updatecategories,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          updatefoodType = value.toString();
+                                          print(updatefoodType);
+                                        });
                                       },
-                                      child: const Text('Upload Image'),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: (file == null)
-                                      ? const Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            'Select an Image',
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        )
-                                      : Text(updatefileName),
-                                ),
-                              ],
-                            ),
-                            imgupdateUploading == false
-                                ? Container()
-                                : const SizedBox(
+                                    );
+                                  }
+                                  return const SizedBox(
                                     height: 100,
                                     width: 100,
                                     child: Center(
                                       child: CircularProgressIndicator(),
                                     ),
-                                  ),
-                            Center(
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 20),
-                                child: SizedBox(
-                                  width: 100,
-                                  height: 40,
-                                  child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.white,
-                                        backgroundColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(0),
-                                          side: BorderSide(color: Colors.grey),
-                                        ),
-                                      ),
-                                      onPressed: () async {
-                                        if (_editform.currentState!
-                                            .validate()) {
-                                          updateProduct(
-                                              productId: int.parse(
-                                                  _updateProductIdController
-                                                      .text),
-                                              productName:
-                                                  _updateProductNameController
-                                                      .text,
-                                              description:
-                                                  _updateDescriptionController
-                                                      .text,
-                                              categoryType:
-                                                  int.parse(updatefoodType),
-                                              price:
-                                                  _updatepriceController.text,
-                                              recommendTyep:
-                                                  updaterecommendType,
-                                              image: updateImgUrl);
-                                          setState(() {
-                                            updateButton = false;
-                                          });
-                                        } else {
-                                          return null;
-                                        }
-
-                                        //
-                                      },
-                                      child: updateButton == true
-                                          ? const Text(
-                                              "Update",
-                                            )
-                                          : const CircularProgressIndicator(
-                                              backgroundColor: Colors.black38,
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.white))),
-                                ),
+                                  );
+                                },
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
+                            controller: _updatepriceController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Price',
+                              labelStyle: const TextStyle(
+                                fontSize: 15,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
                               ),
                             ),
-                          ],
-                        ),
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            enableSuggestions: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter price';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  'Recommend',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              DropdownButton(
+                                value: updaterecommendType,
+                                //hint: Text('Food'),
+                                icon:
+                                    const Icon(Icons.arrow_drop_down_outlined),
+                                elevation: 16,
+                                style: const TextStyle(color: Colors.blueGrey),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.red,
+                                ),
+                                items: const <DropdownMenuItem<String>>[
+                                  DropdownMenuItem(
+                                    value: 'yes',
+                                    child: Text('Yes'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'no',
+                                    child: Text('No'),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  setState(() {
+                                    updaterecommendType = value.toString();
+                                    print(updaterecommendType);
+                                  });
+                                },
+                              ),
+                              Expanded(flex: 3, child: Container()),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  alignment: Alignment.topLeft,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      updateSelectImage();
+                                    },
+                                    child: const Text('Upload Image'),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: (file == null)
+                                    ? const Padding(
+                                        padding: EdgeInsets.only(top: 5),
+                                        child: Text(
+                                          'Select an Image',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      )
+                                    : Text(updatefileName),
+                              ),
+                            ],
+                          ),
+                          imgupdateUploading == false
+                              ? Container()
+                              : const SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                          Center(
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 20),
+                              child: SizedBox(
+                                width: 100,
+                                height: 40,
+                                child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                      backgroundColor: Colors.blue,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(0),
+                                        side: BorderSide(color: Colors.grey),
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      if (_editform.currentState!.validate()) {
+                                        updateProduct(
+                                            productId: int.parse(
+                                                _updateProductIdController
+                                                    .text),
+                                            productName:
+                                                _updateProductNameController
+                                                    .text,
+                                            description:
+                                                _updateDescriptionController
+                                                    .text,
+                                            categoryType:
+                                                int.parse(updatefoodType),
+                                            price: _updatepriceController.text,
+                                            recommendTyep: updaterecommendType,
+                                            image: updateImgUrl);
+                                        setState(() {
+                                          updateButton = false;
+                                        });
+                                      } else {
+                                        return null;
+                                      }
+
+                                      //
+                                    },
+                                    child: updateButton == true
+                                        ? const Text(
+                                            "Update",
+                                          )
+                                        : const CircularProgressIndicator(
+                                            backgroundColor: Colors.black38,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.white))),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
+                  Container(
                     child: Form(
                       key: _deleteform,
                       child: Column(

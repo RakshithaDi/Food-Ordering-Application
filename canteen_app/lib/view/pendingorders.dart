@@ -13,9 +13,10 @@ class PendingOrders extends StatefulWidget {
 }
 
 class _PendingOrdersState extends State<PendingOrders> {
-  bool status = true;
+  bool ButtonStatus = true;
   String orderId = '';
   String date = '';
+  String status = '';
   String time = '';
   String name = '';
   String phoneNo = '';
@@ -26,13 +27,14 @@ class _PendingOrdersState extends State<PendingOrders> {
   bool rightcontainer = true;
   bool loadDescription = false;
 
-  void getOrderDetailsViaQrScanner(String orId) async {
-    await FirebaseFirestore.instance
+  void getOrderDetailsViaQrScanner(String orId) {
+    FirebaseFirestore.instance
         .collection('orders')
         .doc(orId)
         .get()
         .then((DocumentSnapshot orderDetails) {
-      if (orderDetails.exists) {
+      if (orderDetails['Status'] == 'Pending') {
+        // orderDetails.exists
         String formatedDate;
 
         Timestamp timestamp = orderDetails['TimeStamp'];
@@ -45,11 +47,12 @@ class _PendingOrdersState extends State<PendingOrders> {
           phoneNo = orderDetails['PhoneNo'];
           email = orderDetails['Email'];
           price = orderDetails['Amount'];
+          status = orderDetails['Status'];
           date = formatDate;
           rightcontainer = false;
         });
       } else {
-        print('print Error');
+        print('Not in pending orders');
       }
     });
   }
@@ -133,6 +136,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                             email = orders['Email'];
                                             price = orders['Amount'];
                                             date = formatDate;
+                                            status = orders['Status'];
                                             rightcontainer = false;
                                           });
                                         },
@@ -217,12 +221,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                               child: Row(
                                 children: [
                                   const Expanded(
+                                    flex: 1,
                                     child: Text(
                                       'Order ID:',
                                       style: customTextStyle1,
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       orderId,
                                       style: customTextStyle1,
@@ -236,11 +242,13 @@ class _PendingOrdersState extends State<PendingOrders> {
                               child: Row(
                                 children: [
                                   const Expanded(
+                                      flex: 1,
                                       child: Text(
-                                    'Name:',
-                                    style: customTextStyle1,
-                                  )),
+                                        'Name:',
+                                        style: customTextStyle1,
+                                      )),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       name,
                                       style: customTextStyle1,
@@ -253,12 +261,35 @@ class _PendingOrdersState extends State<PendingOrders> {
                               margin: EdgeInsets.only(top: 20),
                               child: Row(
                                 children: [
-                                  const Expanded(
-                                      child: Text(
-                                    'Date',
-                                    style: customTextStyle1,
-                                  )),
                                   Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'Status',
+                                        style: customTextStyle1,
+                                      )),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      status,
+                                      style: customTextStyle1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: Row(
+                                children: [
+                                  const Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      'Date',
+                                      style: customTextStyle1,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
                                     child: Text(
                                       date,
                                       style: customTextStyle1,
@@ -272,11 +303,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                               child: Row(
                                 children: [
                                   const Expanded(
-                                      child: Text(
-                                    'Phone No:',
-                                    style: customTextStyle1,
-                                  )),
+                                    flex: 1,
+                                    child: Text(
+                                      'Phone No:',
+                                      style: customTextStyle1,
+                                    ),
+                                  ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       phoneNo,
                                       style: customTextStyle1,
@@ -290,12 +324,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                               child: Row(
                                 children: [
                                   const Expanded(
+                                    flex: 1,
                                     child: Text(
                                       'Email:',
                                       style: customTextStyle1,
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       email,
                                       style: customTextStyle1,
@@ -309,48 +345,47 @@ class _PendingOrdersState extends State<PendingOrders> {
                               child: Row(
                                 children: [
                                   const Expanded(
+                                    flex: 1,
                                     child: Text(
                                       'Item Description:',
                                       style: customTextStyle1,
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: orderId != ''
-                                        ? Card(
-                                            child: Container(
-                                              margin: EdgeInsets.all(10),
-                                              child:
-                                                  StreamBuilder<QuerySnapshot>(
-                                                stream: FirebaseFirestore
-                                                    .instance
-                                                    .collection('orders')
-                                                    .doc(orderId)
-                                                    .collection('OrderItems')
-                                                    .snapshots(),
-                                                builder: (context,
-                                                    AsyncSnapshot<QuerySnapshot>
-                                                        snapshot) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        "Something went wrong");
-                                                  }
+                                        ? Container(
+                                            child: StreamBuilder<QuerySnapshot>(
+                                              stream: FirebaseFirestore.instance
+                                                  .collection('orders')
+                                                  .doc(orderId)
+                                                  .collection('OrderItems')
+                                                  .snapshots(),
+                                              builder: (context,
+                                                  AsyncSnapshot<QuerySnapshot>
+                                                      snapshot) {
+                                                if (snapshot.hasError) {
+                                                  return const Text(
+                                                      "Something went wrong");
+                                                }
 
-                                                  if (snapshot.connectionState ==
-                                                          ConnectionState
-                                                              .waiting ||
-                                                      !snapshot.hasData) {
-                                                    return const SizedBox(
-                                                      height: 100,
-                                                      width: 100,
-                                                      child: Center(
-                                                        child:
-                                                            CircularProgressIndicator(),
-                                                      ),
-                                                    );
-                                                  }
+                                                if (snapshot.connectionState ==
+                                                        ConnectionState
+                                                            .waiting ||
+                                                    !snapshot.hasData) {
+                                                  return const SizedBox(
+                                                    height: 100,
+                                                    width: 100,
+                                                    child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    ),
+                                                  );
+                                                }
 
-                                                  if (snapshot.hasData) {
-                                                    return ListView.builder(
+                                                if (snapshot.hasData) {
+                                                  return Card(
+                                                    child: ListView.builder(
                                                       scrollDirection:
                                                           Axis.vertical,
                                                       shrinkWrap: true,
@@ -415,18 +450,18 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                           ],
                                                         );
                                                       },
-                                                    );
-                                                  }
-                                                  return const SizedBox(
-                                                    height: 100,
-                                                    width: 100,
-                                                    child: Center(
-                                                      child:
-                                                          CircularProgressIndicator(),
                                                     ),
                                                   );
-                                                },
-                                              ),
+                                                }
+                                                return const SizedBox(
+                                                  height: 100,
+                                                  width: 100,
+                                                  child: Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           )
                                         : Container(),
@@ -439,11 +474,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                               child: Row(
                                 children: [
                                   const Expanded(
-                                      child: Text(
-                                    'Total Price:',
-                                    style: customTextStyle1,
-                                  )),
+                                    flex: 1,
+                                    child: Text(
+                                      'Total Price:',
+                                      style: customTextStyle1,
+                                    ),
+                                  ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       price,
                                       style: customTextStyle1,
@@ -473,7 +511,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                       print('orderId is null');
                                     }
                                   },
-                                  child: status == true
+                                  child: ButtonStatus == true
                                       ? const Text(
                                           "Complete",
                                         )
@@ -518,7 +556,13 @@ class _PendingOrdersState extends State<PendingOrders> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Container(),
+                      child: Container(
+                        margin: EdgeInsets.only(top: 100),
+                        child: Text(
+                          'Scan Order Via QR',
+                          style: customTextStyle2,
+                        ),
+                      ),
                     ),
                     Expanded(
                       flex: 3,
@@ -556,13 +600,18 @@ class _PendingOrdersState extends State<PendingOrders> {
           color: Colors.red,
         ),
       ),
-      onPressed: () async {
-        await FirebaseFirestore.instance
+      onPressed: () {
+        FirebaseFirestore.instance
             .collection("orders")
             .doc(orderId)
             .update({"Status": 'Collected'})
             .then((value) => print("Status Updated Successfully!"))
             .catchError((error) => print("Failed: $error"));
+
+        setState(() {
+          rightcontainer = true;
+        });
+        Navigator.pop(context);
       },
     );
     Widget cancelButton = TextButton(

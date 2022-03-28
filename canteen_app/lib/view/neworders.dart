@@ -12,9 +12,10 @@ class NewOrders extends StatefulWidget {
 }
 
 class _NewOrdersState extends State<NewOrders> {
-  bool status = true;
+  bool buttonStatus = true;
   String orderId = '';
   String date = '';
+  String status = '';
   String time = '';
   String name = '';
   String phoneNo = '';
@@ -37,12 +38,7 @@ class _NewOrdersState extends State<NewOrders> {
         messageBody:
             'Hello $name! Your order $orderId is ready! Come and collect It.');
     setState(() {
-      orderId = '';
-      name = '';
-      phoneNo = '';
-      email = '';
-      price = '';
-      date = '';
+      rightcontainer = true;
     });
     Navigator.pop(context);
   }
@@ -125,6 +121,7 @@ class _NewOrdersState extends State<NewOrders> {
                                             phoneNo = orders['PhoneNo'];
                                             email = orders['Email'];
                                             price = orders['Amount'];
+                                            status = orders['Status'];
                                             date = formatDate;
                                             rightcontainer = false;
                                           });
@@ -254,6 +251,24 @@ class _NewOrdersState extends State<NewOrders> {
                                   Expanded(
                                     child: Text(
                                       date,
+                                      style: customTextStyle1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: Row(
+                                children: [
+                                  const Expanded(
+                                      child: Text(
+                                    'Status',
+                                    style: customTextStyle1,
+                                  )),
+                                  Expanded(
+                                    child: Text(
+                                      status,
                                       style: customTextStyle1,
                                     ),
                                   ),
@@ -466,7 +481,7 @@ class _NewOrdersState extends State<NewOrders> {
                                       print('orderId is null');
                                     }
                                   },
-                                  child: status == true
+                                  child: buttonStatus == true
                                       ? const Text(
                                           "Ready",
                                         )
@@ -519,8 +534,8 @@ class _NewOrdersState extends State<NewOrders> {
           color: Colors.red,
         ),
       ),
-      onPressed: () async {
-        await FirebaseFirestore.instance
+      onPressed: () {
+        FirebaseFirestore.instance
             .collection("orders")
             .doc(orderId)
             .update({"Status": 'Pending', "Ready": 'yes'})

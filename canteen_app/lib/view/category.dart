@@ -180,8 +180,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
             child: Column(
               children: [
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: ListView(
                     children: [
                       Container(
                         margin: const EdgeInsets.only(
@@ -336,8 +335,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               child: Column(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: ListView(
                       children: [
                         Container(
                           margin: const EdgeInsets.only(
@@ -488,8 +486,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                   Expanded(
                     child: Form(
                       key: _updatecategoryform,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: ListView(
                         children: [
                           Container(
                             margin: const EdgeInsets.only(
@@ -654,8 +651,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               Expanded(
                 child: Form(
                   key: _deletecategoryform,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: ListView(
                     children: [
                       Container(
                         margin: const EdgeInsets.only(
