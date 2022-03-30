@@ -64,35 +64,6 @@ class _LoginState extends State<Login> {
     }
   }
 
-  void CheckLoginCredential(String userName, String password) {
-    FirebaseFirestore.instance
-        .collection('staff')
-        .doc(userName)
-        .get()
-        .then((DocumentSnapshot staff) {
-      if (staff.exists) {
-        if (password == staff['password']) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, MyHomePage.id, (route) => false);
-          print('login successful');
-          print('$userName is sign in');
-        } else {
-          setState(() {
-            status = true;
-          });
-          print('Wrong password provided for that user.');
-          showAlertDialog('Wrong password provided for that user.', context);
-        }
-      } else {
-        setState(() {
-          status = true;
-        });
-        print('No user found for that email.');
-        showAlertDialog('No user found for that username.', context);
-      }
-    });
-  }
-
   final _formKey = GlobalKey<FormState>();
   bool value = false;
   final maxLines = 5;
@@ -139,7 +110,6 @@ class _LoginState extends State<Login> {
                               ),
                               Row(
                                 children: [
-                                  Expanded(child: Container()),
                                   Expanded(
                                     child: Container(
                                       child: ListTile(
@@ -180,7 +150,6 @@ class _LoginState extends State<Login> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(child: Container()),
                                 ],
                               ),
                             ],
@@ -294,10 +263,6 @@ class _LoginState extends State<Login> {
                                             onPressed: () async {
                                               if (_formKey.currentState!
                                                   .validate()) {
-                                                CheckLoginCredential(
-                                                    _userEmailController.text,
-                                                    _userPassworController
-                                                        .text);
                                               } else {
                                                 return null;
                                               }
