@@ -278,7 +278,7 @@ class _CartPageState extends State<CartPage> {
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(4)),
-                                            color: greenTheme),
+                                            color: Sushi),
                                       ),
                                     )
                                   ],

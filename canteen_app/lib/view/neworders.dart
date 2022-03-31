@@ -22,6 +22,7 @@ class _NewOrdersState extends State<NewOrders> {
   String email = '';
   String itemDescription = '';
   String price = '';
+  String payment = '';
   int itemsIndex = 0;
   bool rightcontainer = true;
   bool loadDescription = false;
@@ -54,129 +55,285 @@ class _NewOrdersState extends State<NewOrders> {
                 flex: 1,
                 child: Container(
                   margin: EdgeInsets.only(top: 20),
-                  child: ListView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SingleChildScrollView(
-                        primary: false,
-                        child: StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection("orders")
-                              .where('Status', isEqualTo: 'New')
-                              //  .orderBy('TimeStamp', descending: true)
-                              .snapshots(),
-                          builder:
-                              (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (snapshot.hasError) {
-                              return Text("Something went wrong");
-                            }
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Paid Orders',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          primary: false,
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection("orders")
+                                .where('Status', isEqualTo: 'New')
+                                .where('Payment', isEqualTo: 'Paid')
+                                //  .orderBy('TimeStamp', descending: true)
+                                .snapshots(),
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                return Text("Something went wrong");
+                              }
 
-                            if (snapshot.connectionState ==
-                                    ConnectionState.waiting ||
-                                !snapshot.hasData) {
-                              //  return CircularProgressIndicator();
-                            }
+                              if (snapshot.connectionState ==
+                                      ConnectionState.waiting ||
+                                  !snapshot.hasData) {
+                                //  return CircularProgressIndicator();
+                              }
 
-                            if (snapshot.hasData) {
-                              return ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (BuildContext context, index) {
-                                  QueryDocumentSnapshot orders =
-                                      snapshot.data!.docs[index];
-                                  String formatedDate;
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (BuildContext context, index) {
+                                    QueryDocumentSnapshot orders =
+                                        snapshot.data!.docs[index];
+                                    String formatedDate;
 
-                                  Timestamp timestamp = orders['TimeStamp'];
-                                  DateTime dateTime = timestamp.toDate();
-                                  String formatDate = DateFormat.yMMMd()
-                                      .add_jm()
-                                      .format(dateTime);
-                                  date = formatDate;
+                                    Timestamp timestamp = orders['TimeStamp'];
+                                    DateTime dateTime = timestamp.toDate();
+                                    String formatDate = DateFormat.yMMMd()
+                                        .add_jm()
+                                        .format(dateTime);
+                                    date = formatDate;
 
-                                  // orderId = orders['OrderId'];
-                                  // name = orders['Name'];
-                                  // phoneNo = orders['PhoneNo'];
-                                  // email = orders['Email'];
-                                  // price = orders['Amount'];
+                                    // orderId = orders['OrderId'];
+                                    // name = orders['Name'];
+                                    // phoneNo = orders['PhoneNo'];
+                                    // email = orders['Email'];
+                                    // price = orders['Amount'];
 
-                                  return Container(
-                                    height:
-                                        MediaQuery.of(context).size.height / 13,
-                                    child: Card(
-                                      child: InkWell(
-                                        onTap: () {
-                                          String formatedDate;
+                                    return Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              13,
+                                      child: Card(
+                                        child: InkWell(
+                                          onTap: () {
+                                            String formatedDate;
 
-                                          Timestamp timestamp =
-                                              orders['TimeStamp'];
-                                          DateTime dateTime =
-                                              timestamp.toDate();
-                                          String formatDate = DateFormat.yMMMd()
-                                              .add_jm()
-                                              .format(dateTime);
+                                            Timestamp timestamp =
+                                                orders['TimeStamp'];
+                                            DateTime dateTime =
+                                                timestamp.toDate();
+                                            String formatDate =
+                                                DateFormat.yMMMd()
+                                                    .add_jm()
+                                                    .format(dateTime);
 
-                                          setState(() {
-                                            orderId = orders['OrderId'];
-                                            name = orders['Name'];
-                                            phoneNo = orders['PhoneNo'];
-                                            email = orders['Email'];
-                                            price = orders['Amount'];
-                                            status = orders['Status'];
-                                            date = formatDate;
-                                            rightcontainer = false;
-                                          });
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 3,
-                                              child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(
-                                                  orders['OrderId'],
-                                                  style: customTextStyle1,
+                                            setState(() {
+                                              orderId = orders['OrderId'];
+                                              name = orders['Name'];
+                                              phoneNo = orders['PhoneNo'];
+                                              email = orders['Email'];
+                                              price = orders['Amount'];
+                                              status = orders['Status'];
+                                              date = formatDate;
+                                              rightcontainer = false;
+                                              payment = orders['Payment'];
+                                            });
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 3,
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    orders['OrderId'],
+                                                    style: customTextStyle1,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(
-                                                  orders['Name'],
-                                                  style: customTextStyle1,
+                                              Expanded(
+                                                flex: 3,
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    orders['Name'],
+                                                    style: customTextStyle1,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(
-                                                  date,
-                                                  style: customTextStyle1,
+                                              Expanded(
+                                                flex: 3,
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    date,
+                                                    style: customTextStyle1,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                );
+                              }
+                              return const SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                               );
-                            }
-                            return const SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          },
+                            },
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Unpaid Orders',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          primary: false,
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection("orders")
+                                .where('Status', isEqualTo: 'New')
+                                .where('Payment', isEqualTo: 'Unpaid')
+                                //  .orderBy('TimeStamp', descending: true)
+                                .snapshots(),
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                return Text("Something went wrong");
+                              }
+
+                              if (snapshot.connectionState ==
+                                      ConnectionState.waiting ||
+                                  !snapshot.hasData) {
+                                //  return CircularProgressIndicator();
+                              }
+
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (BuildContext context, index) {
+                                    QueryDocumentSnapshot orders =
+                                        snapshot.data!.docs[index];
+                                    String formatedDate;
+
+                                    Timestamp timestamp = orders['TimeStamp'];
+                                    DateTime dateTime = timestamp.toDate();
+                                    String formatDate = DateFormat.yMMMd()
+                                        .add_jm()
+                                        .format(dateTime);
+                                    date = formatDate;
+
+                                    // orderId = orders['OrderId'];
+                                    // name = orders['Name'];
+                                    // phoneNo = orders['PhoneNo'];
+                                    // email = orders['Email'];
+                                    // price = orders['Amount'];
+
+                                    return Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              13,
+                                      child: Card(
+                                        child: InkWell(
+                                          onTap: () {
+                                            String formatedDate;
+
+                                            Timestamp timestamp =
+                                                orders['TimeStamp'];
+                                            DateTime dateTime =
+                                                timestamp.toDate();
+                                            String formatDate =
+                                                DateFormat.yMMMd()
+                                                    .add_jm()
+                                                    .format(dateTime);
+
+                                            setState(() {
+                                              orderId = orders['OrderId'];
+                                              name = orders['Name'];
+                                              phoneNo = orders['PhoneNo'];
+                                              email = orders['Email'];
+                                              price = orders['Amount'];
+                                              status = orders['Status'];
+                                              date = formatDate;
+                                              rightcontainer = false;
+                                              payment = orders['Payment'];
+                                            });
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 3,
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    orders['OrderId'],
+                                                    style: customTextStyle1,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 3,
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    orders['Name'],
+                                                    style: customTextStyle1,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 3,
+                                                child: Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    date,
+                                                    style: customTextStyle1,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                              return const SizedBox(
+                                height: 100,
+                                width: 100,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -438,6 +595,24 @@ class _NewOrdersState extends State<NewOrders> {
                                             ),
                                           )
                                         : Container(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: Row(
+                                children: [
+                                  const Expanded(
+                                      child: Text(
+                                    'Payment:',
+                                    style: customTextStyle1,
+                                  )),
+                                  Expanded(
+                                    child: Text(
+                                      payment,
+                                      style: customTextStyle1,
+                                    ),
                                   ),
                                 ],
                               ),

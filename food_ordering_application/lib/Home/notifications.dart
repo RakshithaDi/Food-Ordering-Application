@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/orders.dart';
+import 'package:food_ordering_application/Home/penidingcollectedboth.dart';
 import 'package:intl/intl.dart';
 
 import '../cart.dart';
 import '../constant.dart';
+import 'orderdetails.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -118,7 +119,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       context,
                                       MaterialPageRoute<void>(
                                         builder: (BuildContext context) =>
-                                            OrderDetails(),
+                                            EachOrders(orders['OrderId']),
                                       ),
                                     );
                                   },
@@ -133,25 +134,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                               const EdgeInsets.only(top: 2),
                                           child: Row(
                                             children: <Widget>[
-                                              Expanded(
-                                                child: Container(
-                                                  child: Text(
-                                                    '#${orders['OrderId']}',
-                                                    maxLines: 2,
-                                                    softWrap: true,
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
+                                              Container(
                                                 child: Text(
-                                                  formatedDate,
-                                                  textAlign: TextAlign.right,
-                                                  style:
-                                                      TextStyle(fontSize: 14),
+                                                  '${orders['OrderId']}',
+                                                  maxLines: 2,
+                                                  softWrap: true,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ),
                                             ],
@@ -162,28 +153,26 @@ class _NotificationPageState extends State<NotificationPage> {
                                               const EdgeInsets.only(top: 7),
                                           child: Row(
                                             children: [
-                                              Expanded(
-                                                child: Container(
-                                                    child: orders['Ready'] ==
-                                                            'no'
-                                                        ? Text(
-                                                            'Your order is Processing!',
-                                                            softWrap: true,
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          )
-                                                        : Text(
-                                                            'Your order is Ready! Come and collect',
-                                                            softWrap: true,
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          )),
+                                              Container(
+                                                child: orders['Ready'] == 'no'
+                                                    ? Text(
+                                                        'Your order is Processing!',
+                                                        softWrap: true,
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )
+                                                    : Text(
+                                                        'Your order is Ready! Come and collect',
+                                                        softWrap: true,
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
                                               ),
                                             ],
                                           ),
@@ -191,15 +180,19 @@ class _NotificationPageState extends State<NotificationPage> {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 7),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                'Total Amount:  Rs.${orders['Amount']}',
-                                                style: TextStyle(fontSize: 14),
-                                              ),
-                                            ],
+                                          child: Text(
+                                            formatedDate,
+                                            style: TextStyle(fontSize: 14),
                                           ),
                                         ),
+                                        // Padding(
+                                        //   padding:
+                                        //       const EdgeInsets.only(top: 7),
+                                        //   child: Text(
+                                        //     'Total Amount:  Rs.${orders['Amount']}',
+                                        //     style: TextStyle(fontSize: 14),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),

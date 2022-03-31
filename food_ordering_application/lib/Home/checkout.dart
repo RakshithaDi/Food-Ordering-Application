@@ -36,6 +36,7 @@ class _CheckOutState extends State<CheckOut> {
     getUserMail();
     totalPrice = Cart.totalPrice.toString();
     getUserInfo();
+    getOrderId();
 
     itemsArr = [
       for (int i = 0; i < Cart.basketItems.length; i++)
@@ -111,7 +112,7 @@ class _CheckOutState extends State<CheckOut> {
     PayHere.startPayment(paymentObject, (paymentId) {
       print("One Time Payment Success. Payment Id: $paymentId");
       IncreaseOrderNumbers();
-      AddOrderDetails();
+      AddOrderDetails('Paid');
       AddEachItems();
       setState(() {
         Cart.EmptyCart();
@@ -146,8 +147,6 @@ class _CheckOutState extends State<CheckOut> {
 
         orderId = 'ORID' + orderNum.toString();
         print('Order ID: ' + orderId);
-
-        Pay();
       } else {
         print('print Error');
       }
@@ -163,7 +162,7 @@ class _CheckOutState extends State<CheckOut> {
         .catchError((error) => print("Failed: $error"));
   }
 
-  void AddOrderDetails() async {
+  void AddOrderDetails(String paymentStatus) async {
     await FirebaseFirestore.instance
         .collection("orders")
         .doc(orderId)
@@ -174,6 +173,7 @@ class _CheckOutState extends State<CheckOut> {
           "Amount": totalPrice,
           "PhoneNo": phoneNo,
           "Email": userEmail,
+          "Payment": paymentStatus,
           "Status": 'New',
           "Ready": 'no',
           "TimeStamp": DateTime.now(),
@@ -232,7 +232,7 @@ class _CheckOutState extends State<CheckOut> {
                 children: [
                   Container(
                     color: Colors.white,
-                    height: 500,
+                    height: MediaQuery.of(context).size.height / 1.7,
                     child: ListView(
                       children: [
                         Builder(
@@ -360,14 +360,14 @@ class _CheckOutState extends State<CheckOut> {
                         type: GooglePayButtonType.pay,
                         margin: const EdgeInsets.only(top: 15.0),
                         onPaymentResult: onGooglePayResult,
-                        loadingIndicator: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                        // loadingIndicator: const Center(
+                        //   child: CircularProgressIndicator(),
+                        // ),
                       ),
                     ),
                     FlatButton(
                       onPressed: () {
-                        getOrderId();
+                        Pay();
                       },
                       child: FittedBox(
                         child: Container(
@@ -384,10 +384,83 @@ class _CheckOutState extends State<CheckOut> {
                 ),
                 margin: EdgeInsets.only(top: 16),
               ),
+              Center(
+                child: Container(
+                  child: SizedBox(
+                    height: 40,
+                    width: 150,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Sushi,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            side: BorderSide(color: Colors.white)),
+                      ),
+                      onPressed: () async {
+                        showAlertDialog(context);
+                      },
+                      child: Text('Order'),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       );
     });
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.red,
+        ),
+      ),
+      onPressed: () {
+        IncreaseOrderNumbers();
+        AddOrderDetails('Unpaid');
+        AddEachItems();
+
+        //Navigator.pop(context);
+        setState(() {
+          Cart.EmptyCart();
+          Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
+          Cart.PaymentStates();
+        });
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(
+        "No",
+        style: TextStyle(
+          fontSize: 16.0,
+          color: Colors.black,
+        ),
+      ),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      title: Text("Confirm Order"),
+      content: Text("Are you sure you want to place this order?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 import '../constant.dart';
-import 'orders.dart';
+import 'penidingcollectedboth.dart';
 
 class EachOrders extends StatefulWidget {
   String orderId;
@@ -236,7 +236,7 @@ class _EachOrdersState extends State<EachOrders> {
                               Center(
                                   child: Container(
                                 color: kbackgroundcolor,
-                                height: 250,
+                                height: 190,
                                 child: SfBarcodeGenerator(
                                   value: orderId,
                                   symbology: QRCode(),
@@ -270,11 +270,27 @@ class _EachOrdersState extends State<EachOrders> {
                                       Container(
                                         margin: EdgeInsets.only(top: 20),
                                         child: Text(
-                                          'Status: ${orderDetails['Status']}',
+                                          'Payment Status: ${orderDetails['Payment']}',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20),
                                         ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        child: orderDetails['Status'] == 'New'
+                                            ? Text(
+                                                'Status: Pending',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              )
+                                            : Text(
+                                                'Status: ${orderDetails['Status']}',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
                                       ),
                                       orderDetails['Status'] == 'Pending'
                                           ? Container(

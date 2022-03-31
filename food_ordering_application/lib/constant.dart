@@ -49,6 +49,10 @@ final normalText = GoogleFonts.prompt(
   color: klblack,
   fontWeight: FontWeight.bold,
 );
+final normalWhiteText = GoogleFonts.prompt(
+  fontSize: 15,
+  color: Colors.white,
+);
 
 final appbarText =
     GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold);

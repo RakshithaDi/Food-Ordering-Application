@@ -1,29 +1,34 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:polls/polls.dart';
 
 import '../constant.dart';
-import '../widgets/viewvotes.dart';
-import '../widgets/voteitem.dart';
 
-class VoteFood extends StatefulWidget {
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
-  _VoteFoodState createState() => _VoteFoodState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polls',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: PollView(),
+    );
+  }
 }
 
-class _VoteFoodState extends State<VoteFood> {
+class PollView extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-    getVotingDetails();
-  }
+  _PollViewState createState() => _PollViewState();
+}
 
+class _PollViewState extends State<PollView> {
   double option1 = 1.0;
   double option2 = 0.0;
   double option3 = 1.0;
-  int item = 0;
-  int votelenth = 0;
-  List<VoteItem> VItems = [];
 
   String user = "king@mail.com";
   Map usersWhoVoted = {
@@ -33,25 +38,6 @@ class _VoteFoodState extends State<VoteFood> {
     'kenny@mail.com': 1
   };
   String creator = "eddy@mail.com";
-
-  void getVotingDetails() async {
-    FirebaseFirestore.instance
-        .collection('votes')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      votelenth = querySnapshot.size;
-      for (int i = 0; i < querySnapshot.size; i++) {}
-      querySnapshot.docs.forEach((doc) {
-        int i = 0;
-        VItems = [
-          VoteItem(name: doc["name"], value: double.parse(doc["value"])),
-        ];
-        ViewVotes.add(VItems[i]);
-        print(ViewVotes.getVoteItems[i].name);
-        i++;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +52,9 @@ class _VoteFoodState extends State<VoteFood> {
           child: Polls(
             children: [
               // This cannot be less than 2, else will throw an exception
-              for (int i = 0; i < ViewVotes.VoteItems.length; i++)
-                Polls.options(
-                    title: ViewVotes.getVoteItems[i].name,
-                    value: ViewVotes.getVoteItems[i].value),
+              Polls.options(title: 'Chicken Biryani', value: option1),
+              Polls.options(title: 'Fried Rice', value: option2),
+              Polls.options(title: 'Set Menu', value: option3),
             ],
             question: Text(
               'What would you like to eat tommorrow?',

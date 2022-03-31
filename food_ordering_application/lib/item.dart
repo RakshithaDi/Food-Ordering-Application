@@ -4,9 +4,15 @@ class Item {
   final double price;
   final String imgUrl;
   int quantity;
-  // final String description;
+  final String description;
 
-  Item({this.productId, this.name, this.price, this.imgUrl, this.quantity});
+  Item(
+      {this.productId,
+      this.name,
+      this.price,
+      this.imgUrl,
+      this.quantity,
+      this.description});
 
   String getName() {
     return name;

@@ -49,6 +49,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   google_fonts: ^2.3.1
   syncfusion_flutter_barcodes: ^19.4.56
+  polls: ^1.0.1
   dependencies:
 
 
