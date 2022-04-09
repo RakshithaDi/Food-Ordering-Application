@@ -10,6 +10,8 @@ import '../cart.dart';
 import '../constant.dart';
 import '../item.dart';
 
+String docName;
+
 class ItemDetails extends StatefulWidget {
   int productId;
   ItemDetails(this.productId);
@@ -77,176 +79,188 @@ class _ItemDetailsState extends State<ItemDetails> {
           ],
         ),
         body: Container(
-          child: Column(
+          child: Stack(
             children: [
-              Container(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('items')
-                      .where('id', isEqualTo: productId)
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Something went wrong');
-                    }
+              Column(
+                children: [
+                  Container(
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('items')
+                          .where('id', isEqualTo: productId)
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
 
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Text("Loading");
-                    }
+                        if (snapshot.connectionState ==
+                                ConnectionState.waiting ||
+                            !snapshot.hasData) {
+                          //  return CircularProgressIndicator();
+                        }
+                        if (snapshot.hasData) {
+                          return Column(
+                            children: snapshot.data.docs
+                                .map((DocumentSnapshot document) {
+                              Map<String, dynamic> data =
+                                  document.data() as Map<String, dynamic>;
+                              docName = document.id;
+                              print(docName);
+                              price = double.parse(data['price']);
+                              name = data['name'];
+                              imgUrl = data['imgUrl'];
 
-                    return Column(
-                      children:
-                          snapshot.data.docs.map((DocumentSnapshot document) {
-                        Map<String, dynamic> data =
-                            document.data() as Map<String, dynamic>;
-                        price = double.parse(data['price']);
-                        name = data['name'];
-                        imgUrl = data['imgUrl'];
-
-                        final List<Item> items = [
-                          Item(
-                              name: name,
-                              price: price,
-                              imgUrl: imgUrl,
-                              quantity: quantity),
-                        ];
-                        return Container(
-                          child: Column(
-                            children: [
-                              Card(
-                                color: Colors.white,
-                                elevation: 5,
-                                child: InkWell(
-                                  child: Container(
-                                    width: double.maxFinite,
-                                    height: MediaQuery.of(context).size.height /
-                                        3.5,
-                                    child: Container(
-                                      margin: EdgeInsets.all(5),
-                                      child: Image.network(data['imgUrl']),
-                                    ),
-                                  ),
-                                  onTap: () {},
-                                ),
-                              ),
-                              Card(
-                                child: Container(
-                                  child: Column(
-                                    children: [
-                                      ListTile(
-                                        title: Text(
-                                          data['name'],
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color: titleColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(data['description'],
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: titleColor,
-                                            )),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            left: 18, bottom: 10),
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                            'Rating:${rateConditions(data['rating'])}',
-                                            style: TextStyle(
-                                                fontSize: 19,
-                                                color: titleColor,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left: 18),
-                                        alignment: Alignment.topLeft,
-                                        child: Text('Rs.${data['price']}',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: titleColor,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(left: 18, top: 10),
-                                        child: Ratings(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height - 655,
-                                alignment: Alignment.bottomCenter,
-                                margin: EdgeInsets.only(top: 10),
-                                width: double.maxFinite,
+                              final List<Item> items = [
+                                Item(
+                                    name: name,
+                                    price: price,
+                                    imgUrl: imgUrl,
+                                    quantity: quantity),
+                              ];
+                              return Container(
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 7,
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                            child: MaterialButton(
-                                                onPressed: () {
-                                                  cart.add(items[0]);
-                                                },
-                                                color: Sushi,
-                                                textColor: Colors.white,
-                                                elevation: 0.2,
-                                                child: Text("Add to Cart")),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: IconButton(
-                                            onPressed: () {
-                                              Navigator.pushReplacementNamed(
-                                                  context, CartPage.id);
-                                            },
-                                            icon: Icon(
-                                              Icons.shopping_cart_rounded,
-                                              color: Sushi,
-                                              size: 30,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 20, right: 5),
+                                    Card(
+                                      color: Colors.white,
+                                      elevation: 5,
+                                      child: InkWell(
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              3.5,
                                           child: Container(
-                                            alignment: Alignment.center,
-                                            padding: EdgeInsets.all(4),
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.yellow),
-                                            child: Text(
-                                              Cart.count.toString(),
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.black),
-                                            ),
+                                            margin: EdgeInsets.all(5),
+                                            child:
+                                                Image.network(data['imgUrl']),
                                           ),
                                         ),
-                                      ],
+                                        onTap: () {},
+                                      ),
+                                    ),
+                                    Card(
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            ListTile(
+                                              title: Text(
+                                                data['name'],
+                                                style: TextStyle(
+                                                    fontSize: 22,
+                                                    color: titleColor,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              subtitle:
+                                                  Text(data['description'],
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: titleColor,
+                                                      )),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 18, bottom: 10),
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                  'Rating:${rateConditions(data['rating'])}',
+                                                  style: TextStyle(
+                                                      fontSize: 19,
+                                                      color: titleColor,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                            Container(
+                                              margin: EdgeInsets.only(left: 18),
+                                              alignment: Alignment.topLeft,
+                                              child: Text('Rs.${data['price']}',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: titleColor,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.topLeft,
+                                              margin: EdgeInsets.only(
+                                                  left: 18, top: 10),
+                                              child: Ratings(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
+                              );
+                            }).toList(),
+                          );
+                        }
+                        return SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: titleColor,
+                            ),
                           ),
                         );
-                      }).toList(),
-                    );
-                  },
-                ),
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 7,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: MaterialButton(
+                              onPressed: () {
+                                cart.add(items[0]);
+                              },
+                              color: Sushi,
+                              textColor: Colors.white,
+                              elevation: 0.2,
+                              child: Text("Add to Cart")),
+                        ),
+                      ),
+                      Expanded(
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, CartPage.id);
+                          },
+                          icon: Icon(
+                            Icons.shopping_cart_rounded,
+                            color: Sushi,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20, right: 5),
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.yellow),
+                          child: Text(
+                            Cart.count.toString(),
+                            style: TextStyle(fontSize: 12, color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
@@ -304,7 +318,7 @@ class _RatingsState extends State<Ratings> {
   void updateRate() async {
     FirebaseFirestore.instance
         .collection("items")
-        .doc('prod1')
+        .doc(docName)
         .update({
           "rating": rateAvg,
         })
@@ -335,7 +349,7 @@ class _RatingsState extends State<Ratings> {
             onPressed: () {
               FirebaseFirestore.instance
                   .collection('items')
-                  .doc('prod1')
+                  .doc(docName)
                   .get()
                   .then((DocumentSnapshot rate) {
                 if (rate.exists) {

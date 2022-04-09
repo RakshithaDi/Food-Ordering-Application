@@ -122,7 +122,7 @@ class _MessagesState extends State<Messages> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             BubbleSpecialThree(
-                                              sent: true,
+                                              seen: true,
                                               text: messages['adminMessage'],
                                               color: Colors.white,
                                               tail: true,

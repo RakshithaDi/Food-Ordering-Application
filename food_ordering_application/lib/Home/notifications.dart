@@ -112,9 +112,9 @@ class _NotificationPageState extends State<NotificationPage> {
                               formatedDate = formatDate;
 
                               return Card(
+                                elevation: 4,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pop(context);
                                     Navigator.push<void>(
                                       context,
                                       MaterialPageRoute<void>(
@@ -134,15 +134,46 @@ class _NotificationPageState extends State<NotificationPage> {
                                               const EdgeInsets.only(top: 2),
                                           child: Row(
                                             children: <Widget>[
-                                              Container(
+                                              Expanded(
+                                                flex: 1,
+                                                child: Card(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            3.0),
+                                                    child: Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons.border_color,
+                                                          color: Colors.white,
+                                                          size: 20,
+                                                        ),
+                                                        Text(
+                                                          '${orders['OrderId']}',
+                                                          maxLines: 2,
+                                                          softWrap: true,
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  color: Sushi,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 3,
                                                 child: Text(
-                                                  '${orders['OrderId']}',
-                                                  maxLines: 2,
-                                                  softWrap: true,
+                                                  formatedDate,
                                                   style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                      fontSize: 14,
+                                                      color: Colors.grey[600]),
+                                                  textAlign: TextAlign.right,
                                                 ),
                                               ),
                                             ],
@@ -177,14 +208,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 7),
-                                          child: Text(
-                                            formatedDate,
-                                            style: TextStyle(fontSize: 14),
-                                          ),
-                                        ),
+
                                         // Padding(
                                         //   padding:
                                         //       const EdgeInsets.only(top: 7),
