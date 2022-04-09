@@ -122,7 +122,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height: 80,
                           child: Card(
                             elevation: 2,
-                            color: Colors.green.withOpacity(0.4),
+                            color: Colors.blueGrey.withOpacity(0.4),
                             child: TextFormField(
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.9),
@@ -294,7 +294,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: titleColor,
+                            primary: Sushi,
                           ),
                           onPressed: () {
                             // Validate returns true if the form is valid, or false otherwise.
@@ -317,7 +317,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: greenTheme,
+                            primary: Sushi,
                           ),
                           onPressed: () {
                             // Validate returns true if the form is valid, or false otherwise.

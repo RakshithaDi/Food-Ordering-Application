@@ -74,3 +74,8 @@ final labelprice = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
   color: titleColor,
 );
+final helloNname = GoogleFonts.poppins(
+    fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold);
+
+final bestTaste = GoogleFonts.poppins(
+    fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold);

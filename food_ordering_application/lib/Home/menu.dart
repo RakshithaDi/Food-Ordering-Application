@@ -8,6 +8,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import '../item.dart';
 import 'Itemdetails.dart';
 import 'itemspage.dart';
+import 'messages.dart';
 import 'searchpage.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -159,7 +160,7 @@ class _MenuState extends State<Menu> {
                   return currentUser.email != null
                       ? Text(
                           'Hello ${userprofile['fname']}!',
-                          style: nameTitle,
+                          style: helloNname,
                         )
                       : Text('');
                 }
@@ -198,23 +199,35 @@ class _MenuState extends State<Menu> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 34,
-                ),
-                onPressed: () {
-                  Navigator.push<void>(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => SearchItemsPage(),
-                    ),
-                  );
-                },
+            IconButton(
+              icon: Icon(
+                Icons.message,
+                color: Colors.white,
+                size: 30,
               ),
+              onPressed: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => Messages(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+                size: 34,
+              ),
+              onPressed: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => SearchItemsPage(),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -239,7 +252,7 @@ class _MenuState extends State<Menu> {
                             ),
                             child: Text(
                               'Let\'s select the best taste for you',
-                              style: subText,
+                              style: bestTaste,
                             ),
                           ),
                         ),

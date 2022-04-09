@@ -67,78 +67,78 @@ class _AccountState extends State<Account> {
                           color: titleColor,
                         ),
                       ),
-                      // FutureBuilder<DocumentSnapshot>(
-                      //     future: FirebaseFirestore.instance
-                      //         .collection('userprofile')
-                      //         .doc(userEmail)
-                      //         .get(),
-                      //     builder: (BuildContext context,
-                      //         AsyncSnapshot<DocumentSnapshot> snapshot) {
-                      //       if (snapshot.hasError) {
-                      //         return Text("Something went wrong");
-                      //       }
-                      //
-                      //       if (snapshot.connectionState ==
-                      //               ConnectionState.waiting ||
-                      //           !snapshot.hasData) {
-                      //         // return CircularProgressIndicator();
-                      //       }
-                      //
-                      //       if (snapshot.hasData) {
-                      //         Map<String, dynamic> userData =
-                      //             snapshot.data.data() as Map<String, dynamic>;
-                      //         return Container(
-                      //           margin: EdgeInsets.only(left: 10),
-                      //           child: Column(
-                      //             crossAxisAlignment: CrossAxisAlignment.start,
-                      //             children: [
-                      //               Row(
-                      //                 children: [
-                      //                   Icon(
-                      //                     Icons.person,
-                      //                     size: 20,
-                      //                   ),
-                      //                   Text(
-                      //                       '${userData['fname']} ${userData['lname']}'),
-                      //                 ],
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 3,
-                      //               ),
-                      //               Row(
-                      //                 children: [
-                      //                   Icon(
-                      //                     Icons.email,
-                      //                     size: 20,
-                      //                   ),
-                      //                   Text('$userEmail'),
-                      //                 ],
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 3,
-                      //               ),
-                      //               Row(
-                      //                 children: [
-                      //                   Icon(
-                      //                     Icons.phone,
-                      //                     size: 20,
-                      //                   ),
-                      //                   Text('${userData['mobileno']}'),
-                      //                 ],
-                      //               ),
-                      //               SizedBox(
-                      //                 height: 3,
-                      //               ),
-                      //             ],
-                      //           ),
-                      //         );
-                      //       }
-                      //       return Container(
-                      //         child: CircularProgressIndicator(
-                      //           color: titleColor,
-                      //         ),
-                      //       );
-                      //     }),
+                      FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance
+                              .collection('userprofile')
+                              .doc(userEmail)
+                              .get(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text("Something went wrong");
+                            }
+
+                            if (snapshot.connectionState ==
+                                    ConnectionState.waiting ||
+                                !snapshot.hasData) {
+                              // return CircularProgressIndicator();
+                            }
+
+                            if (snapshot.hasData) {
+                              Map<String, dynamic> userData =
+                                  snapshot.data.data() as Map<String, dynamic>;
+                              return Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.person,
+                                          size: 20,
+                                        ),
+                                        Text(
+                                            '${userData['fname']} ${userData['lname']}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.email,
+                                          size: 20,
+                                        ),
+                                        Text('$userEmail'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.phone,
+                                          size: 20,
+                                        ),
+                                        Text('${userData['mobileno']}'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            return Container(
+                              child: CircularProgressIndicator(
+                                color: titleColor,
+                              ),
+                            );
+                          }),
                     ],
                   ),
                 ),

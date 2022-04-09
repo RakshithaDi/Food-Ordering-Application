@@ -217,31 +217,33 @@ class _LoginState extends State<Login> {
                           width: 200,
                           height: 50,
                           child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor: Sushi,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Sushi,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(3),
                               ),
-                              onPressed: () async {
-                                if (_formKey.currentState.validate()) {
-                                  _signInWithEmailAndPassword();
-                                } else {
-                                  return null;
-                                }
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                _signInWithEmailAndPassword();
+                              } else {
+                                return null;
+                              }
 
-                                //
-                              },
-                              child: status == true
-                                  ? Text(
-                                      "Login",
-                                      style: buttonText,
-                                    )
-                                  : CircularProgressIndicator(
-                                      backgroundColor: Colors.black38,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          titleColor))),
+                              //
+                            },
+                            child: status == true
+                                ? Text(
+                                    "Login",
+                                    style: buttonText,
+                                  )
+                                : CircularProgressIndicator(
+                                    backgroundColor: Colors.black38,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        titleColor),
+                                  ),
+                          ),
                         ),
                       ),
                     ],
