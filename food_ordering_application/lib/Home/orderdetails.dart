@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 import '../constant.dart';
-import 'penidingcollectedboth.dart';
 
 class EachOrders extends StatefulWidget {
   String orderId;
@@ -44,10 +43,9 @@ class _EachOrdersState extends State<EachOrders> {
         //   Navigator.pushNamed(context, OrderDetails.id);
         // });
         // Navigator.of(context).popUntil((route) => route.isCurrent);
-        Navigator.pop(context);
-        Navigator.pop(context);
+        Navigator.of(context, rootNavigator: true).pop();
         setState(() {
-          Navigator.pushReplacementNamed(context, OrderDetails.id);
+          Navigator.of(context).popUntil((route) => route.isCurrent);
         });
       },
     );

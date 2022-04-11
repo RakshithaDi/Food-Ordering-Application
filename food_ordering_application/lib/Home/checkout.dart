@@ -75,13 +75,6 @@ class _CheckOutState extends State<CheckOut> {
     });
   }
 
-  final _paymentItems = [
-    PaymentItem(
-      label: 'Total',
-      amount: '1',
-      status: PaymentItemStatus.final_price,
-    )
-  ];
   void onGooglePayResult(paymentResult) {
     debugPrint(paymentResult.toString());
   }
@@ -208,6 +201,13 @@ class _CheckOutState extends State<CheckOut> {
 
   @override
   Widget build(BuildContext context) {
+    final _paymentItems = [
+      PaymentItem(
+        label: itemQuantityArr.toString(),
+        amount: Cart.totalPrice.toString(),
+        status: PaymentItemStatus.final_price,
+      )
+    ];
     return Consumer<Cart>(builder: (context, cart, child) {
       return Scaffold(
         backgroundColor: kbackgroundcolor,

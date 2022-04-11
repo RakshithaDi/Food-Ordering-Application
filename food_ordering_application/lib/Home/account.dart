@@ -10,7 +10,6 @@ import 'package:food_ordering_application/loading_screen.dart';
 import '../main.dart';
 import 'notifications.dart';
 import 'orders.dart';
-import 'penidingcollectedboth.dart';
 
 class Account extends StatefulWidget {
   static String id = 'account';

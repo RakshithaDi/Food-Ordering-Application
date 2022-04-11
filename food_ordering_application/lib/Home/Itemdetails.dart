@@ -112,7 +112,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                               name = data['name'];
                               imgUrl = data['imgUrl'];
 
-                              final List<Item> items = [
+                              items = [
                                 Item(
                                     name: name,
                                     price: price,

@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../constant.dart';
 import 'account.dart';
 import 'orderdetails.dart';
-import 'penidingcollectedboth.dart';
 
 class PendingOrders extends StatefulWidget {
   const PendingOrders({Key key}) : super(key: key);
@@ -99,16 +98,16 @@ class _PendingOrdersState extends State<PendingOrders> {
             .then((value) => print("Status Updated Successfully!"))
             .catchError((error) => print("Failed: $error"));
 
-        Navigator.pop(context);
+        Navigator.of(context, rootNavigator: true).pop();
         setState(() {
-          Navigator.pushReplacementNamed(context, OrderDetails.id);
+          Navigator.of(context).popUntil((route) => route.isCurrent);
         });
 
         // Navigator.pop(context);
         // setState(() {
         //   Navigator.pushNamed(context, OrderDetails.id);
         // });
-        // Navigator.of(context).popUntil((route) => route.isCurrent);
+        //
       },
     );
     Widget cancelButton = TextButton(
@@ -247,53 +246,67 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                       },
                                                       child: Container(
                                                         margin:
-                                                            EdgeInsets.all(10),
+                                                            EdgeInsets.all(5),
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 2),
-                                                              child: Row(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Expanded(
-                                                                    flex: 2,
-                                                                    child:
-                                                                        Container(
-                                                                      child:
-                                                                          Text(
-                                                                        '#${orders['OrderId']}',
-                                                                        maxLines:
-                                                                            2,
-                                                                        softWrap:
-                                                                            true,
-                                                                        style: TextStyle(
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
-                                                                      ),
+                                                            Row(
+                                                              children: <
+                                                                  Widget>[
+                                                                Card(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            3.0),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .border_color,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              15,
+                                                                        ),
+                                                                        Text(
+                                                                          '${orders['OrderId']}',
+                                                                          style: TextStyle(
+                                                                              fontSize: 16,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.white),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ),
-                                                                  Container(
-                                                                    child: orders['Status'] ==
-                                                                            'New'
-                                                                        ? Text(
-                                                                            "Status : Pending",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                                                          )
-                                                                        : Text(
-                                                                            "Status : ${orders['Status']}",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                  ),
-                                                                ],
-                                                              ),
+                                                                  color: Sushi,
+                                                                ),
+                                                                // Expanded(
+                                                                //   flex: 3,
+                                                                //   child:
+                                                                //       Container(
+                                                                //     alignment:
+                                                                //         Alignment
+                                                                //             .topRight,
+                                                                //     child: orders['Status'] ==
+                                                                //             'New'
+                                                                //         ? Text(
+                                                                //             "Status : Pending",
+                                                                //             textAlign:
+                                                                //                 TextAlign.right,
+                                                                //             style:
+                                                                //                 TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                                                //           )
+                                                                //         : Text(
+                                                                //             "Status : ${orders['Status']}",
+                                                                //             style:
+                                                                //                 TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                                                //           ),
+                                                                //   ),
+                                                                // ),
+                                                              ],
                                                             ),
                                                             Row(
                                                               children: [
@@ -306,7 +319,11 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                     formatedDate,
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            14),
+                                                                            14,
+                                                                        color: Colors.grey[
+                                                                            600],
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
                                                                   ),
                                                                 ),
                                                               ],
@@ -492,7 +509,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                       },
                                                       child: Container(
                                                         margin:
-                                                            EdgeInsets.all(10),
+                                                            EdgeInsets.all(5),
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -506,37 +523,57 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                               child: Row(
                                                                 children: <
                                                                     Widget>[
-                                                                  Expanded(
-                                                                    flex: 2,
+                                                                  Card(
                                                                     child:
-                                                                        Container(
+                                                                        Padding(
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              3.0),
                                                                       child:
+                                                                          Row(
+                                                                        children: [
+                                                                          Icon(
+                                                                            Icons.border_color,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            size:
+                                                                                15,
+                                                                          ),
                                                                           Text(
-                                                                        '#${orders['OrderId']}',
-                                                                        maxLines:
-                                                                            2,
-                                                                        softWrap:
-                                                                            true,
-                                                                        style: TextStyle(
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
+                                                                            '${orders['OrderId']}',
+                                                                            maxLines:
+                                                                                2,
+                                                                            softWrap:
+                                                                                true,
+                                                                            style: TextStyle(
+                                                                                fontSize: 16,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: Colors.white),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
+                                                                    color: Colors
+                                                                        .blueAccent,
                                                                   ),
-                                                                  Container(
-                                                                    child: orders['Status'] ==
-                                                                            'New'
-                                                                        ? Text(
-                                                                            "Status : Pending",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                                                          )
-                                                                        : Text(
-                                                                            "Status : ${orders['Status']}",
-                                                                            style:
-                                                                                TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                  ),
+                                                                  // Expanded(
+                                                                  //   flex: 3,
+                                                                  //   child:
+                                                                  //       Container(
+                                                                  //     child: orders['Status'] ==
+                                                                  //             'New'
+                                                                  //         ? Text(
+                                                                  //             "Status : Pending",
+                                                                  //             textAlign: TextAlign.right,
+                                                                  //             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                                                  //           )
+                                                                  //         : Text(
+                                                                  //             "Status : ${orders['Status']}",
+                                                                  //             textAlign: TextAlign.right,
+                                                                  //             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                                                  //           ),
+                                                                  //   ),
+                                                                  // ),
                                                                 ],
                                                               ),
                                                             ),
@@ -548,15 +585,20 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                               child: Row(
                                                                 children: [
                                                                   Container(
-                                                                    margin: EdgeInsets.only(
-                                                                        top: 10,
-                                                                        bottom:
-                                                                            10),
+                                                                    margin:
+                                                                        EdgeInsets
+                                                                            .only(
+                                                                      top: 10,
+                                                                    ),
                                                                     child: Text(
                                                                       formatedDate,
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              14),
+                                                                              14,
+                                                                          color: Colors.grey[
+                                                                              600],
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
                                                                     ),
                                                                   ),
                                                                 ],

@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/cartpage.dart';
 import 'package:food_ordering_application/Home/changepassword.dart';
-import 'package:food_ordering_application/Home/penidingcollectedboth.dart';
 import 'package:food_ordering_application/Home/personalinfo.dart';
 import 'package:get/get.dart';
 import 'Authentication/login.dart';
@@ -59,7 +58,6 @@ class FoodOrderingApp extends StatelessWidget {
         OtpVerify.id: (context) => OtpVerify(0),
         Account.id: (context) => Account(),
         Home.id: (context) => Home(),
-        OrderDetails.id: (context) => OrderDetails(),
         PersonalInfo.id: (context) => PersonalInfo(),
         ChangePassword.id: (context) => ChangePassword(),
         CartPage.id: (context) => CartPage(),

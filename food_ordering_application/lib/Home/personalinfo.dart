@@ -122,10 +122,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height: 80,
                           child: Card(
                             elevation: 2,
-                            color: Colors.blueGrey.withOpacity(0.4),
+                            color: Colors.white.withOpacity(0.9),
                             child: TextFormField(
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: titleColor,
                               ),
                               textAlign: TextAlign.center,
                               enabled: edit,
@@ -141,7 +141,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                   child: Text(
                                     'First Name',
                                     style: TextStyle(
-                                      color: Colors.white.withOpacity(0.6),
+                                      color: titleColor,
                                     ),
                                   ),
                                 ),
@@ -159,10 +159,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           height: 80,
                           child: Card(
                             elevation: 2,
-                            color: Colors.green.withOpacity(0.4),
+                            color: Colors.white.withOpacity(0.9),
                             child: TextFormField(
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: titleColor,
                               ),
                               textAlign: TextAlign.center,
                               enabled: edit,
@@ -179,17 +179,17 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                   child: Text(
                                     'Last Name',
                                     style: TextStyle(
-                                      color: Colors.white.withOpacity(0.6),
+                                      color: titleColor,
                                     ),
                                   ),
                                 ),
                                 suffixIcon: edit == false
                                     ? Icon(
                                         Icons.format_list_bulleted,
-                                        color: Colors.white,
+                                        color: titleColor,
                                       )
                                     : Icon(Icons.drive_file_rename_outline,
-                                        color: Colors.white),
+                                        color: titleColor),
                               ),
                               controller: secondNameController,
                             ),
@@ -203,10 +203,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   height: 80,
                   child: Card(
                     elevation: 2,
-                    color: Colors.green.withOpacity(0.4),
+                    color: Colors.white.withOpacity(0.9),
                     child: TextFormField(
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
+                        color: titleColor,
                       ),
                       textAlign: TextAlign.center,
                       // readOnly: true,
@@ -224,18 +224,18 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           child: Text(
                             'Email',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
+                              color: titleColor,
                             ),
                           ),
                         ),
                         suffixIcon: edit == false
                             ? Icon(
                                 Icons.format_list_bulleted,
-                                color: Colors.white,
+                                color: titleColor,
                               )
                             : Icon(
                                 Icons.drive_file_rename_outline,
-                                color: Colors.white,
+                                color: titleColor,
                               ),
                       ),
                       controller: emailController,
@@ -246,10 +246,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                 height: 80,
                 child: Card(
                   elevation: 2,
-                  color: Colors.green.withOpacity(0.4),
+                  color: Colors.white.withOpacity(0.9),
                   child: TextFormField(
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.9),
+                      color: titleColor,
                     ),
                     textAlign: TextAlign.center,
                     // readOnly: true,
@@ -267,17 +267,19 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         child: Text(
                           'Phone No',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
+                            color: titleColor,
                           ),
                         ),
                       ),
                       suffixIcon: edit == false
                           ? Icon(
                               Icons.format_list_bulleted,
-                              color: Colors.white,
+                              color: titleColor,
                             )
-                          : Icon(Icons.drive_file_rename_outline,
-                              color: Colors.white),
+                          : Icon(
+                              Icons.drive_file_rename_outline,
+                              color: titleColor,
+                            ),
                     ),
                     controller: phoneNoController,
                   ),

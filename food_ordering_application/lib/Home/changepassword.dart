@@ -80,16 +80,15 @@ class _ChangePasswordState extends State<ChangePassword> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     controller: currentPassword,
-                    cursorColor: Colors.white,
-                    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                    cursorColor: greenTheme,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       filled: true,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.green.withOpacity(0.6),
+                      fillColor: Colors.white.withOpacity(0.9),
                       errorStyle: TextStyle(color: Colors.red),
                       labelText: 'Current Password',
-                      labelStyle: TextStyle(
-                          fontSize: 15, color: Colors.white.withOpacity(0.9)),
+                      labelStyle: TextStyle(fontSize: 15, color: titleColor),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(11),
                         borderSide:
@@ -99,7 +98,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         onPressed: _toggle,
                         icon: Icon(
                           Icons.remove_red_eye_rounded,
-                          color: Colors.white,
+                          color: titleColor,
                         ),
                       ),
                     ),
@@ -122,16 +121,15 @@ class _ChangePasswordState extends State<ChangePassword> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     controller: newPassword,
-                    cursorColor: Colors.white,
-                    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                    cursorColor: greenTheme,
+                    style: TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       filled: true,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      fillColor: Colors.green.withOpacity(0.6),
+                      fillColor: Colors.white.withOpacity(0.9),
                       errorStyle: TextStyle(color: Colors.red),
                       labelText: 'Enter New Password',
-                      labelStyle: TextStyle(
-                          fontSize: 15, color: Colors.white.withOpacity(0.9)),
+                      labelStyle: TextStyle(fontSize: 15, color: titleColor),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(11),
                         borderSide:
@@ -141,7 +139,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         onPressed: _toggle,
                         icon: Icon(
                           Icons.remove_red_eye_rounded,
-                          color: Colors.white,
+                          color: titleColor,
                         ),
                       ),
                     ),
@@ -165,7 +163,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green.withOpacity(0.9),
+                      primary: Sushi,
                     ),
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.

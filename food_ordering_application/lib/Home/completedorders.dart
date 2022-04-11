@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../constant.dart';
 import 'account.dart';
 import 'orderdetails.dart';
-import 'penidingcollectedboth.dart';
 
 class completedOrders extends StatefulWidget {
   const completedOrders({Key key}) : super(key: key);
