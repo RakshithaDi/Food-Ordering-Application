@@ -1,3 +1,4 @@
+import 'package:canteen_app/constant.dart';
 import 'package:canteen_app/view/neworders.dart';
 import 'package:canteen_app/view/pendingorders.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _OrdersViewState extends State<OrdersView> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.lightBlueAccent,
+          backgroundColor: lightGreen,
           automaticallyImplyLeading: false,
           //title: const Text('Orders'),
           bottom: const TabBar(

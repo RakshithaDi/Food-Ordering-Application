@@ -1,5 +1,6 @@
 import 'package:canteen_app/constant.dart';
 import 'package:canteen_app/model/auth.dart';
+import 'package:canteen_app/view/advertisements.dart';
 import 'package:canteen_app/view/complaints.dart';
 import 'package:canteen_app/view/products.dart';
 import 'package:canteen_app/view/createaccounts.dart';
@@ -111,18 +112,26 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SideMenuItem(
                 priority: 5,
+                title: 'Advertisements',
+                onTap: () {
+                  page.jumpToPage(5);
+                },
+                icon: Icon(Icons.event_note_sharp),
+              ),
+              SideMenuItem(
+                priority: 6,
                 title: 'Sign Out',
                 onTap: () async {
-                  page.jumpToPage(5);
+                  page.jumpToPage(6);
                   showAlertDialog(context);
                 },
                 icon: Icon(Icons.exit_to_app),
               ),
               SideMenuItem(
-                priority: 6,
+                priority: 7,
                 title: 'Dashboard',
                 onTap: () {
-                  page.jumpToPage(6);
+                  page.jumpToPage(7);
                 },
                 icon: Icon(Icons.home),
                 badgeContent: Text(
@@ -141,6 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 Products(),
                 OrdersView(),
                 Complaints(),
+                Advertisements(),
+                Container(),
+                Container(),
               ],
             ),
           ),
