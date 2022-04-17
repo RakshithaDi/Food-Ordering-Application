@@ -1,3 +1,4 @@
+import 'package:canteen_app/constant.dart';
 import 'package:canteen_app/model/auth.dart';
 import 'package:canteen_app/view/complaints.dart';
 import 'package:canteen_app/view/products.dart';
@@ -15,6 +16,9 @@ class MyHomePage extends StatefulWidget {
   static String id = 'home';
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
+  String userType = '';
+  MyHomePage(this.userType);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -26,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Canteen Management System'),
         centerTitle: true,
+        backgroundColor: lightGreen,
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -34,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
             controller: page,
             style: SideMenuStyle(
               displayMode: SideMenuDisplayMode.auto,
-              hoverColor: Colors.blue[100],
-              selectedColor: Colors.lightBlue,
+              hoverColor: Colors.green[100],
+              selectedColor: lightGreen,
               selectedTitleTextStyle: TextStyle(color: Colors.white),
               selectedIconColor: Colors.white,
               // backgroundColor: Colors.amber
@@ -48,9 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     maxHeight: 150,
                     maxWidth: 150,
                   ),
-                  // child: Image.asset(
-                  //   '',
-                  // ),
                 ),
                 Divider(
                   indent: 8.0,

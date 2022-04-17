@@ -44,9 +44,11 @@ class _LoginState extends State<Login> {
       Useremail = _userPassworController.text;
 
       print('Sign in Succefully {$Useremail}');
-      //  Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-      Navigator.pushNamedAndRemoveUntil(
-          context, MyHomePage.id, (route) => false);
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => MyHomePage('Admin')),
+          (route) => false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         setState(() {
@@ -72,8 +74,10 @@ class _LoginState extends State<Login> {
         .then((DocumentSnapshot staff) {
       if (staff.exists) {
         if (password == staff['password']) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, MyHomePage.id, (route) => false);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => MyHomePage('Staff')),
+              (route) => false);
           print('login successful');
           print('$userName is sign in');
         } else {

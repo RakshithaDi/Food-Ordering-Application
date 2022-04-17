@@ -5,6 +5,7 @@ import 'package:canteen_app/view/reset.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'firebase_options.dart';
 import 'model/auth.dart';
@@ -30,26 +31,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Canteen Management Application',
-        // theme: ThemeData(
-        //   textTheme: GoogleFonts.latoTextTheme(
-        //     Theme.of(context).textTheme,
-        //   ),
-        // ),
-        //  home: Login(),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => Login(),
-          Login.id: (context) => Login(),
-          MyHomePage.id: (context) => MyHomePage(),
-          ResetPassword.id: (context) => ResetPassword(),
-          CreateAccounts.id: (context) => CreateAccounts(),
-          // Emergency.id: (context) => Emergency(),
-          // Complaints.id: (context) => Complaints(),
-          // InitializeTrip.id: (context) => InitializeTrip(),
-          // Partial.id: (context) => Partial(),
-          // AddBusOwner.id: (context) => AddBusOwner(),
-        });
+      debugShowCheckedModeBanner: false,
+      title: 'Canteen Management Application',
+      theme: ThemeData(
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
+      home: MyHomePage(''),
+      //initialRoute: '/',
+      // routes: {
+      //   '/': (context) => Login(),
+      //   Login.id: (context) => Login(),
+      //   MyHomePage.id: (context) => MyHomePage(''),
+      //   ResetPassword.id: (context) => ResetPassword(),
+      //   CreateAccounts.id: (context) => CreateAccounts(),
+      //   // Emergency.id: (context) => Emergency(),
+      //   // Complaints.id: (context) => Complaints(),
+      //   // InitializeTrip.id: (context) => InitializeTrip(),
+      //   // Partial.id: (context) => Partial(),
+      //   // AddBusOwner.id: (context) => AddBusOwner(),
+      // }
+    );
   }
 }
