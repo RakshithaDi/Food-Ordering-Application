@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/search.dart';
 import 'package:provider/provider.dart';
 import 'package:search_page/search_page.dart';
 import '../cart.dart';
 import '../constant.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import '../item.dart';
 import 'Itemdetails.dart';
 import 'itemspage.dart';
 import 'messages.dart';
-import 'searchpage.dart';
 import 'notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_ordering_application/global.dart' as global;
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Menu extends StatefulWidget {
@@ -46,9 +44,14 @@ class _MenuState extends State<Menu> {
     });
     if (currentUser != null) {
       print(currentUser.email);
+      global.email = currentUser.email;
+      print(global.email);
     }
     getNotificationCount();
-    getAdsLinks();
+    setState(() {
+      getAdsLinks();
+    });
+
     getAllItems();
     items.removeRange(0, items.length);
   }

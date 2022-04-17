@@ -47,6 +47,7 @@ dependencies:
   mobile_scanner: ^1.0.0
   google_fonts: ^2.3.1
   carousel_slider: ^4.0.0
+  chat_bubbles: ^1.2.0
 
 dev_dependencies:
   flutter_test:

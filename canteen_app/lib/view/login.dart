@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../constant.dart';
-import 'reset.dart';
 import 'home.dart';
 
 class Login extends StatefulWidget {

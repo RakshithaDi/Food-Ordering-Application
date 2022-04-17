@@ -1,7 +1,7 @@
 import 'package:canteen_app/view/createaccounts.dart';
 import 'package:canteen_app/view/home.dart';
 import 'package:canteen_app/view/login.dart';
-import 'package:canteen_app/view/reset.dart';
+import 'package:canteen_app/view/messages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

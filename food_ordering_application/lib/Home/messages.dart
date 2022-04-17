@@ -2,7 +2,7 @@ import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:food_ordering_application/global.dart' as global;
 import '../constant.dart';
 
 class Messages extends StatefulWidget {
@@ -18,7 +18,15 @@ class _MessagesState extends State<Messages> {
   void addMessage() {
     FirebaseFirestore.instance
         .collection("messages")
-        .doc('rakshitha1@gmail.com')
+        .doc(global.email)
+        .set({
+          'username': '',
+        })
+        .then((value) => print("Message added"))
+        .catchError((error) => print("Failed to add message: $error"));
+    FirebaseFirestore.instance
+        .collection("messages")
+        .doc(global.email)
         .collection('chats')
         .add({
           'userMessage': messageController.text,
@@ -53,7 +61,7 @@ class _MessagesState extends State<Messages> {
                   StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("messages")
-                        .doc('rakshitha1@gmail.com')
+                        .doc(global.email)
                         .collection('chats')
                         .orderBy('timeStamp', descending: false)
                         .snapshots(),
