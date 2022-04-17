@@ -48,9 +48,7 @@ class _MenuState extends State<Menu> {
       print(global.email);
     }
     getNotificationCount();
-    setState(() {
-      getAdsLinks();
-    });
+    getAdsLinks();
 
     getAllItems();
     items.removeRange(0, items.length);
@@ -65,6 +63,9 @@ class _MenuState extends State<Menu> {
       querySnapshot.docs.forEach((doc) {
         imgList.add(doc["imgUrl"]);
       });
+    });
+    setState(() {
+      addAdsToSlider();
     });
   }
 
@@ -102,15 +103,16 @@ class _MenuState extends State<Menu> {
             imgUrl: doc["imgUrl"],
             quantity: 1));
       });
-      print(items[9].name);
+      //  print(items[9].name);
     });
   }
 
   final CarouselController _controller = CarouselController();
   int _current = 0;
-  @override
-  Widget build(BuildContext context) {
-    final List<Widget> imageSliders = imgList
+  List<Widget> imageSliders = [];
+
+  void addAdsToSlider() {
+    imageSliders = imgList
         .map((item) => Container(
               child: Container(
                 margin: EdgeInsets.all(5.0),
@@ -143,7 +145,10 @@ class _MenuState extends State<Menu> {
               ),
             ))
         .toList();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.height.toString());
     return Consumer<Cart>(builder: (context, cart, child) {
       // FirebaseFirestore.instance
