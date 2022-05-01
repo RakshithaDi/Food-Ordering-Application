@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Authentication/login.dart';
+import 'package:food_ordering_application/Home/login.dart';
 import 'package:food_ordering_application/Home/changepassword.dart';
 import 'package:food_ordering_application/Home/personalinfo.dart';
 import 'package:food_ordering_application/constant.dart';
@@ -56,88 +56,104 @@ class _AccountState extends State<Account> {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Container(
+                  height: MediaQuery.of(context).size.height / 8,
                   margin: EdgeInsets.all(20),
                   child: Row(
                     children: [
-                      Container(
-                        child: Icon(
-                          Icons.account_circle,
-                          size: 110,
-                          color: titleColor,
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 110,
+                            color: titleColor,
+                          ),
                         ),
                       ),
-                      FutureBuilder<DocumentSnapshot>(
-                          future: FirebaseFirestore.instance
-                              .collection('userprofile')
-                              .doc(userEmail)
-                              .get(),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<DocumentSnapshot> snapshot) {
-                            if (snapshot.hasError) {
-                              return Text("Something went wrong");
-                            }
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          child: FutureBuilder<DocumentSnapshot>(
+                              future: FirebaseFirestore.instance
+                                  .collection('userprofile')
+                                  .doc(userEmail)
+                                  .get(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text("Something went wrong");
+                                }
 
-                            if (snapshot.connectionState ==
-                                    ConnectionState.waiting ||
-                                !snapshot.hasData) {
-                              // return CircularProgressIndicator();
-                            }
+                                if (snapshot.connectionState ==
+                                        ConnectionState.waiting ||
+                                    !snapshot.hasData) {
+                                  // return CircularProgressIndicator();
+                                }
 
-                            if (snapshot.hasData) {
-                              Map<String, dynamic> userData =
-                                  snapshot.data.data() as Map<String, dynamic>;
-                              return Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
+                                if (snapshot.hasData) {
+                                  Map<String, dynamic> userData = snapshot.data
+                                      .data() as Map<String, dynamic>;
+                                  return Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Icon(
-                                          Icons.person,
-                                          size: 20,
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.person,
+                                              size: 20,
+                                            ),
+                                            Text(
+                                                '${userData['fname']} ${userData['lname']}'),
+                                          ],
                                         ),
-                                        Text(
-                                            '${userData['fname']} ${userData['lname']}'),
+                                        SizedBox(
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.email,
+                                              size: 20,
+                                            ),
+                                            Text('$userEmail'),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 3,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.phone,
+                                              size: 20,
+                                            ),
+                                            Text('${userData['mobileno']}'),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 3,
+                                        ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 3,
+                                  );
+                                }
+                                return SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: titleColor,
                                     ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.email,
-                                          size: 20,
-                                        ),
-                                        Text('$userEmail'),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.phone,
-                                          size: 20,
-                                        ),
-                                        Text('${userData['mobileno']}'),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-                            return Container(
-                              child: CircularProgressIndicator(
-                                color: titleColor,
-                              ),
-                            );
-                          }),
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -142,12 +142,12 @@ class _CartPageState extends State<CartPage> {
                                                     ),
                                                   ),
                                                   SizedBox(height: 6),
-                                                  Text(
-                                                    "M",
-                                                    style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14),
-                                                  ),
+                                                  // Text(
+                                                  //   "M",
+                                                  //   style: TextStyle(
+                                                  //       color: Colors.grey,
+                                                  //       fontSize: 14),
+                                                  // ),
                                                   Container(
                                                     child: Row(
                                                       mainAxisAlignment:

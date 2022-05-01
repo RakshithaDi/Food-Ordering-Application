@@ -175,18 +175,18 @@ class _SearchItemsPage extends State<SearchItemsPage> {
                                               ],
                                             ),
                                           ),
-                                          Container(
-                                            margin: EdgeInsets.only(top: 10),
-                                            width: 230,
-                                            child: Container(
-                                              child: Text(
-                                                "M",
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 14),
-                                              ),
-                                            ),
-                                          ),
+                                          // Container(
+                                          //   margin: EdgeInsets.only(top: 10),
+                                          //   width: 230,
+                                          //   child: Container(
+                                          //     child: Text(
+                                          //       "M",
+                                          //       style: TextStyle(
+                                          //           color: Colors.grey,
+                                          //           fontSize: 14),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                           Container(
                                             width: 230,
                                             child: Row(

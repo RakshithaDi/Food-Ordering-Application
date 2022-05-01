@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Authentication/otp_setup.dart';
-import 'package:food_ordering_application/Authentication/signup.dart';
+import 'package:food_ordering_application/Home/resetpassword.dart';
+import 'package:food_ordering_application/Home/signup.dart';
 import 'package:food_ordering_application/Home/home.dart';
 import 'package:food_ordering_application/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-import 'otp_verify.dart';
+import 'otp_setup.dart';
 
 class Login extends StatefulWidget {
   static String id = 'loginScreen';
@@ -62,6 +63,25 @@ class _LoginState extends State<Login> {
         showAlertDialog('Wrong password provided for that user.', context);
       }
     }
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    //Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -203,7 +223,15 @@ class _LoginState extends State<Login> {
                         height: 40,
                         child: SizedBox(
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      ResetPassword(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'Forgot Password?',
                               style: fstlyemontserratAlternatesText,
@@ -266,7 +294,9 @@ class _LoginState extends State<Login> {
                           width: 300,
                           height: 50,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          signInWithGoogle();
+                        },
                       ),
                     ),
                     // Container(

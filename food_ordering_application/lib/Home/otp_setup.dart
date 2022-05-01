@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_ordering_application/Authentication/otp_verify.dart';
-import 'package:food_ordering_application/Authentication/signup.dart';
+import 'package:food_ordering_application/Home/signup.dart';
 import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/registeruser.dart';
 import '../main.dart';
@@ -429,41 +428,39 @@ class _OtpSetupState extends State<OtpSetup> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'OTP Verification',
-            style: appbarText,
-          ),
-          backgroundColor: Sushi,
-          leading: InkWell(
-            onTap: () {
-              setState(() {
-                showLoading = false;
-                currentState = MobileVerificationState.SHOW_MOBILE_FORM_STATE;
-              });
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black54,
-            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'OTP Verification',
+          style: appbarText,
+        ),
+        backgroundColor: Sushi,
+        leading: InkWell(
+          onTap: () {
+            setState(() {
+              showLoading = false;
+              currentState = MobileVerificationState.SHOW_MOBILE_FORM_STATE;
+            });
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black54,
           ),
         ),
-        backgroundColor: kbackgroundcolor,
-        body: Container(
-          child: showLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: titleColor,
-                  ),
-                )
-              : currentState == MobileVerificationState.SHOW_MOBILE_FORM_STATE
-                  ? getMobileFormWidget(context)
-                  : getOtpFormWidget(context),
-        ),
+      ),
+      backgroundColor: kbackgroundcolor,
+      body: Container(
+        child: showLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: titleColor,
+                ),
+              )
+            : currentState == MobileVerificationState.SHOW_MOBILE_FORM_STATE
+                ? getMobileFormWidget(context)
+                : getOtpFormWidget(context),
       ),
     );
   }

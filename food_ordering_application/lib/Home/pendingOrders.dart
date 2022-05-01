@@ -250,10 +250,13 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                             children: <Widget>[
                                                               Card(
                                                                 child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          3.0),
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 2,
+                                                                      right: 10,
+                                                                      top: 2,
+                                                                      bottom:
+                                                                          2),
                                                                   child: Row(
                                                                     children: [
                                                                       Icon(
@@ -262,13 +265,13 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                         color: Colors
                                                                             .white,
                                                                         size:
-                                                                            15,
+                                                                            14,
                                                                       ),
                                                                       Text(
                                                                         '${orders['OrderId']}',
                                                                         style: TextStyle(
                                                                             fontSize:
-                                                                                16,
+                                                                                14,
                                                                             fontWeight:
                                                                                 FontWeight.bold,
                                                                             color: Colors.white),
@@ -308,7 +311,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                               Container(
                                                                 margin: EdgeInsets
                                                                     .only(
-                                                                        top: 5,
+                                                                        top: 7,
                                                                         left:
                                                                             5),
                                                                 child: Text(
@@ -330,7 +333,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
-                                                                    top: 5,
+                                                                    top: 7,
                                                                     left: 5,
                                                                     bottom: 7),
                                                             child: Row(
@@ -338,10 +341,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                 Expanded(
                                                                   flex: 2,
                                                                   child: Text(
-                                                                    'Total Amount:  Rs.${orders['Amount']}',
+                                                                    'Total amount Rs.${orders['Amount']}',
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            16),
+                                                                            14,
+                                                                        color: Colors.grey[
+                                                                            600],
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
                                                                   ),
                                                                 ),
                                                                 // Expanded(
@@ -455,7 +462,8 @@ class _PendingOrdersState extends State<PendingOrders> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.only(top: 5),
+                                        margin: EdgeInsets.only(
+                                            top: 5, left: 3, right: 3),
                                         height: paidOrderslength == 0
                                             ? MediaQuery.of(context)
                                                     .size
@@ -519,9 +527,14 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                 Card(
                                                                   child:
                                                                       Padding(
-                                                                    padding:
-                                                                        const EdgeInsets.all(
-                                                                            3.0),
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        left: 2,
+                                                                        right:
+                                                                            10,
+                                                                        top: 2,
+                                                                        bottom:
+                                                                            2),
                                                                     child: Row(
                                                                       children: [
                                                                         Icon(
@@ -530,16 +543,12 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                           color:
                                                                               Colors.white,
                                                                           size:
-                                                                              15,
+                                                                              14,
                                                                         ),
                                                                         Text(
                                                                           '${orders['OrderId']}',
-                                                                          maxLines:
-                                                                              2,
-                                                                          softWrap:
-                                                                              true,
                                                                           style: TextStyle(
-                                                                              fontSize: 16,
+                                                                              fontSize: 14,
                                                                               fontWeight: FontWeight.bold,
                                                                               color: Colors.white),
                                                                         ),
@@ -577,7 +586,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                     EdgeInsets
                                                                         .only(
                                                                   left: 5,
-                                                                  top: 5,
+                                                                  top: 7,
                                                                 ),
                                                                 child: Text(
                                                                   formatedDate,
@@ -605,14 +614,18 @@ class _PendingOrdersState extends State<PendingOrders> {
                                                                           left:
                                                                               5,
                                                                           top:
-                                                                              5,
+                                                                              7,
                                                                           bottom:
                                                                               5),
                                                                   child: Text(
-                                                                    'Total Amount:  Rs.${orders['Amount']}',
+                                                                    'Rs.${orders['Amount']}',
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            16),
+                                                                            14,
+                                                                        color: Colors.grey[
+                                                                            600],
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
                                                                   ),
                                                                 ),
                                                               ),

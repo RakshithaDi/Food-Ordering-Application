@@ -8,10 +8,11 @@ import 'package:food_ordering_application/Home/cartpage.dart';
 import 'package:food_ordering_application/Home/changepassword.dart';
 import 'package:food_ordering_application/Home/personalinfo.dart';
 import 'package:get/get.dart';
-import 'Authentication/login.dart';
-import 'Authentication/otp_setup.dart';
-import 'Authentication/otp_verify.dart';
-import 'Authentication/signup.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'Home/login.dart';
+import 'Home/otp_setup.dart';
+import 'Home/otp_verify.dart';
+import 'Home/signup.dart';
 import 'Home/account.dart';
 import 'Home/orders.dart';
 import 'cart.dart';
@@ -50,6 +51,11 @@ class FoodOrderingApp extends StatelessWidget {
     // });
     return GetMaterialApp(
       // initialRoute: LoadingScreen.id,
+      theme: ThemeData(
+        textTheme: GoogleFonts.balsamiqSansTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
       routes: {
         LoadingScreen.id: (context) => LoadingScreen(),
         Login.id: (context) => Login(),

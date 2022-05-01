@@ -79,3 +79,5 @@ final helloNname = GoogleFonts.poppins(
 
 final bestTaste = GoogleFonts.poppins(
     fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold);
+final timeText = GoogleFonts.poppins(
+    fontSize: 14, color: Colors.grey[600], fontWeight: FontWeight.bold);

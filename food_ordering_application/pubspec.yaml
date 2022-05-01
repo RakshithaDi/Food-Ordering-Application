@@ -51,6 +51,7 @@ dependencies:
   syncfusion_flutter_barcodes: ^19.4.56
   polls: ^1.0.1
   chat_bubbles: ^1.2.0
+  google_sign_in: ^4.5.1
   dependencies:
 
 

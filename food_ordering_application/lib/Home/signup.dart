@@ -4,10 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:food_ordering_application/Authentication/otp_setup.dart';
 import 'package:food_ordering_application/constant.dart';
 
-import '../Home/home.dart';
+import 'home.dart';
 import '../registeruser.dart';
 import 'login.dart';
 

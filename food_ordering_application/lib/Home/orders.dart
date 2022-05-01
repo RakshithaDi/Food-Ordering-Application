@@ -15,30 +15,28 @@ class OrdersHome extends StatefulWidget {
 class _OrdersHomeState extends State<OrdersHome> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Sushi,
-            bottom: const TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.downloading_sharp),
-                  text: 'Pending Orders',
-                ),
-                Tab(
-                  icon: Icon(Icons.bookmark_border),
-                  text: 'Completed Orders',
-                ),
-              ],
-            ),
-            centerTitle: true,
-            title: const Text('Orders'),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Sushi,
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.downloading_sharp),
+                text: 'Pending Orders',
+              ),
+              Tab(
+                icon: Icon(Icons.bookmark_border),
+                text: 'Completed Orders',
+              ),
+            ],
           ),
-          body: const TabBarView(
-            children: [PendingOrders(), completedOrders()],
-          ),
+          centerTitle: true,
+          title: const Text('Orders'),
+        ),
+        body: const TabBarView(
+          children: [PendingOrders(), completedOrders()],
         ),
       ),
     );
