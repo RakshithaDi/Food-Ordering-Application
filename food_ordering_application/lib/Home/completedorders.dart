@@ -287,20 +287,16 @@ class _completedOrdersState extends State<completedOrders> {
                           );
                         }
 
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  color: titleColor,
-                                ),
+                        return Center(
+                          child: SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: titleColor,
                               ),
                             ),
-                          ],
+                          ),
                         );
                       },
                     ),

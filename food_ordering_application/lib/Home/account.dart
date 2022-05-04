@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_ordering_application/Home/login.dart';
 import 'package:food_ordering_application/Home/changepassword.dart';
 import 'package:food_ordering_application/Home/personalinfo.dart';
+import 'package:food_ordering_application/Home/voteforfood.dart';
 import 'package:food_ordering_application/constant.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
@@ -293,7 +294,14 @@ class _AccountState extends State<Account> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push<void>(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => VoteFood(),
+                        ),
+                      );
+                    },
                     child: Text(
                       'Invite a Friend',
                       style: TextStyle(
