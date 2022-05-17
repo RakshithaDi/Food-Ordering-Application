@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 class EachOrders extends StatefulWidget {
   String orderId;
@@ -150,7 +150,7 @@ class _EachOrdersState extends State<EachOrders> {
                             children: [
                               Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 3.5,
+                                    MediaQuery.of(context).size.height / 3.6,
                                 child: ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,

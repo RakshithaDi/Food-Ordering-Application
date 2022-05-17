@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:polls/polls.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import '../widgets/viewvotes.dart';
 import '../widgets/voteitem.dart';
 import 'package:food_ordering_application/global.dart' as global;

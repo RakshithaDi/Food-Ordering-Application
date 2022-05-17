@@ -5,6 +5,7 @@ import 'package:canteen_app/view/complaints.dart';
 import 'package:canteen_app/view/messages.dart';
 import 'package:canteen_app/view/products.dart';
 import 'package:canteen_app/view/createaccounts.dart';
+import 'package:canteen_app/view/votes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
@@ -25,6 +26,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   PageController page = PageController();
+  int i = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.userType == 'Admin') {
+      i = 0;
+    } else {
+      i = 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,15 +82,25 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             items: [
-              SideMenuItem(
-                priority: 0,
-                title: 'Users',
-                onTap: () {
-                  page.jumpToPage(0);
-                  CreateAccounts();
-                },
-                icon: Icon(Icons.supervisor_account),
-              ),
+              widget.userType != 'Staff'
+                  ? SideMenuItem(
+                      priority: 0,
+                      title: 'Users',
+                      onTap: () {
+                        page.jumpToPage(0);
+                        CreateAccounts();
+                      },
+                      icon: Icon(Icons.supervisor_account),
+                    )
+                  : SideMenuItem(
+                      priority: i,
+                      title: 'Dashboard',
+                      onTap: () {
+                        // page.jumpToPage(0);
+                        //  CreateAccounts();
+                      },
+                      icon: Icon(Icons.home),
+                    ),
               SideMenuItem(
                 priority: 1,
                 title: 'Categories',
@@ -126,21 +148,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   page.jumpToPage(6);
                 },
                 icon: Icon(Icons.message),
+                badgeContent: Text(
+                  '',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SideMenuItem(
                 priority: 7,
+                title: 'Votes',
+                onTap: () {
+                  page.jumpToPage(7);
+                },
+                icon: Icon(Icons.message),
+                badgeContent: Text(
+                  '',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              SideMenuItem(
+                priority: 8,
                 title: 'Sign Out',
                 onTap: () async {
-                  page.jumpToPage(7);
+                  page.jumpToPage(8);
                   showAlertDialog(context);
                 },
                 icon: Icon(Icons.exit_to_app),
               ),
               SideMenuItem(
-                priority: 8,
+                priority: 9,
                 title: 'Dashboard',
                 onTap: () {
-                  page.jumpToPage(8);
+                  page.jumpToPage(9);
                 },
                 icon: Icon(Icons.home),
                 badgeContent: Text(
@@ -154,13 +192,16 @@ class _MyHomePageState extends State<MyHomePage> {
             child: PageView(
               controller: page,
               children: [
-                CreateAccounts(),
+                widget.userType != 'Staff'
+                    ? CreateAccounts()
+                    : CategoryDetails(),
                 CategoryDetails(),
                 Products(),
                 OrdersView(),
                 Complaints(),
                 Advertisements(),
                 Messages(),
+                Votes(),
                 Container(),
                 Container(),
               ],

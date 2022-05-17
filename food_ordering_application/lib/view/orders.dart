@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/pendingOrders.dart';
+import 'package:food_ordering_application/view/pendingOrders.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import 'completedorders.dart';
 
 class OrdersHome extends StatefulWidget {

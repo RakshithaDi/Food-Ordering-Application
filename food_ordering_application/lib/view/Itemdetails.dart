@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/cartpage.dart';
-import 'package:food_ordering_application/Home/searchpage.dart';
+import 'package:food_ordering_application/view/cartpage.dart';
+import 'package:food_ordering_application/view/searchpage.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../cart.dart';
-import '../constant.dart';
-import '../item.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
+import 'package:food_ordering_application/model/item.dart';
 
 String docName;
 

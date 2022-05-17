@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/searchpage.dart';
+import 'package:food_ordering_application/view/searchpage.dart';
 import 'package:provider/provider.dart';
-import '../cart.dart';
-import '../constant.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
+import 'package:food_ordering_application/model/cart.dart';
 import 'checkout.dart';
 
 class CartPage extends StatefulWidget {

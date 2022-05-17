@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import 'account.dart';
 import 'orderdetails.dart';
 

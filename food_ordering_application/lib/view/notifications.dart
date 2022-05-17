@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../cart.dart';
-import '../constant.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import 'orderdetails.dart';
 
 class NotificationPage extends StatefulWidget {

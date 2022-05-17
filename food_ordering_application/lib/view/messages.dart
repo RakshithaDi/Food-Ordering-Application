@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:food_ordering_application/global.dart' as global;
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 class Messages extends StatefulWidget {
   const Messages({Key key}) : super(key: key);

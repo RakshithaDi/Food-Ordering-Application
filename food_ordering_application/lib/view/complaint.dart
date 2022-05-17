@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:food_ordering_application/constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 import 'home.dart';
 

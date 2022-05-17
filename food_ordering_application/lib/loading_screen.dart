@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/login.dart';
-import 'package:food_ordering_application/constant.dart';
+import 'package:food_ordering_application/view/login.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import 'dart:async';
 
 class LoadingScreen extends StatefulWidget {

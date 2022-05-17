@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/resetpassword.dart';
-import 'package:food_ordering_application/Home/signup.dart';
-import 'package:food_ordering_application/Home/home.dart';
-import 'package:food_ordering_application/constant.dart';
+import 'package:food_ordering_application/view/resetpassword.dart';
+import 'package:food_ordering_application/view/signup.dart';
+import 'package:food_ordering_application/view/home.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

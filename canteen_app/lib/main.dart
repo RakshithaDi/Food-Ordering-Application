@@ -38,20 +38,14 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: MyHomePage(''),
-      //initialRoute: '/',
+      home: MyHomePage('Admin'),
+      // initialRoute: '/',
       // routes: {
       //   '/': (context) => Login(),
       //   Login.id: (context) => Login(),
       //   MyHomePage.id: (context) => MyHomePage(''),
-      //   ResetPassword.id: (context) => ResetPassword(),
       //   CreateAccounts.id: (context) => CreateAccounts(),
-      //   // Emergency.id: (context) => Emergency(),
-      //   // Complaints.id: (context) => Complaints(),
-      //   // InitializeTrip.id: (context) => InitializeTrip(),
-      //   // Partial.id: (context) => Partial(),
-      //   // AddBusOwner.id: (context) => AddBusOwner(),
-      // }
+      //}
     );
   }
 }

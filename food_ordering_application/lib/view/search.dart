@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_page/search_page.dart';
 
-import '../cart.dart';
-import '../constant.dart';
-import '../item.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
+import 'package:food_ordering_application/model/item.dart';
 import 'Itemdetails.dart';
 
 class SearchItems extends StatefulWidget {

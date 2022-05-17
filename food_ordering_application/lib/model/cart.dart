@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-import 'item.dart';
+import 'package:food_ordering_application/model/item.dart';
 
 class Cart extends ChangeNotifier {
   static List<Item> _items = [];

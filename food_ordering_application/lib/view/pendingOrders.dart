@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 import 'account.dart';
 import 'orderdetails.dart';
 
@@ -472,7 +472,7 @@ class _PendingOrdersState extends State<PendingOrders> {
                                             : MediaQuery.of(context)
                                                     .size
                                                     .height /
-                                                2.6,
+                                                2.8,
                                         child: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,

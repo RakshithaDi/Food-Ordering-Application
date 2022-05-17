@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 class ChangePassword extends StatefulWidget {
   static String id = 'changepassword';

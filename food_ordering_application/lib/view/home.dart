@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/account.dart';
-import 'package:food_ordering_application/Home/cartpage.dart';
-import 'package:food_ordering_application/Home/complaint.dart';
-import 'package:food_ordering_application/Home/menu.dart';
-import 'package:food_ordering_application/Home/search.dart';
+import 'package:food_ordering_application/view/account.dart';
+import 'package:food_ordering_application/view/cartpage.dart';
+import 'package:food_ordering_application/view/complaint.dart';
+import 'package:food_ordering_application/view/menu.dart';
+import 'package:food_ordering_application/view/search.dart';
+import 'package:food_ordering_application/view/voteforfood.dart';
 import 'package:provider/provider.dart';
-import '../cart.dart';
-import '../constant.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 class Home extends StatefulWidget {
   static String id = 'home';
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 4, vsync: this, initialIndex: 0);
+    controller = TabController(length: 5, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -39,6 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               Menu(),
+              VoteFood(),
               CartPage(),
               Complaints(),
               Account(),
@@ -56,8 +58,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   color: Colors.white,
                 ),
               ),
+              Tab(
+                icon: Icon(
+                  Icons.fastfood_outlined,
+                  color: Colors.white,
+                ),
+              ),
               Container(
-                margin: EdgeInsets.only(left: 20),
+                margin: EdgeInsets.only(left: 5),
                 height: 40,
                 child: Row(
                   children: [

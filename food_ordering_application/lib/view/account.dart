@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/login.dart';
-import 'package:food_ordering_application/Home/changepassword.dart';
-import 'package:food_ordering_application/Home/personalinfo.dart';
-import 'package:food_ordering_application/Home/voteforfood.dart';
-import 'package:food_ordering_application/constant.dart';
+import 'package:food_ordering_application/view/login.dart';
+import 'package:food_ordering_application/view/changepassword.dart';
+import 'package:food_ordering_application/view/personalinfo.dart';
+import 'package:food_ordering_application/view/voteforfood.dart';
+import 'package:food_ordering_application/model//constant.dart';
+import 'package:food_ordering_application/view/login.dart';
+import 'package:food_ordering_application/view/changepassword.dart';
+import 'package:food_ordering_application/view/personalinfo.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
 import '../main.dart';

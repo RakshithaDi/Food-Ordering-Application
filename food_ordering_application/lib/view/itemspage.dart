@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../cart.dart';
-import '../constant.dart';
-import '../item.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
+import 'package:food_ordering_application/model/item.dart';
 import 'package:provider/provider.dart';
 
 import 'Itemdetails.dart';

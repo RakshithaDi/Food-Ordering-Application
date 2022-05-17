@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_ordering_application/Home/signup.dart';
-import 'package:food_ordering_application/constant.dart';
-import 'package:food_ordering_application/registeruser.dart';
+import 'package:food_ordering_application/view/signup.dart';
+import 'package:food_ordering_application/model/constant.dart';
+import 'package:food_ordering_application/model/registeruser.dart';
 import '../main.dart';
 
 enum MobileVerificationState {

@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/itemspage.dart';
+import 'package:food_ordering_application/view/itemspage.dart';
 import 'package:provider/provider.dart';
 import 'package:search_page/search_page.dart';
 
-import '../cart.dart';
-import '../constant.dart';
-import '../item.dart';
+import '../model/cart.dart';
+import 'package:food_ordering_application/model/constant.dart';
+import 'package:food_ordering_application/model/item.dart';
 import 'Itemdetails.dart';
 import 'cartpage.dart';
 

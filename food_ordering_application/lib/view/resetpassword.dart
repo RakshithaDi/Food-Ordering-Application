@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key key}) : super(key: key);

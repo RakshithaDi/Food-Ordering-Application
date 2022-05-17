@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_ordering_application/Home/home.dart';
+import 'package:food_ordering_application/view/home.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
-import '../constant.dart';
+import 'package:food_ordering_application/model/constant.dart';
 
 class OtpVerify extends StatefulWidget {
   static String id = 'otp_verify';
