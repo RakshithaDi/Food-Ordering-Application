@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_application/view/home.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-
 import 'package:food_ordering_application/model/constant.dart';
 
 class OtpVerify extends StatefulWidget {

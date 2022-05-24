@@ -359,10 +359,30 @@ class _CheckOutState extends State<CheckOut> {
                         style: GooglePayButtonStyle.black,
                         type: GooglePayButtonType.pay,
                         margin: const EdgeInsets.only(top: 15.0),
-                        onPaymentResult: onGooglePayResult,
-                        // loadingIndicator: const Center(
-                        //   child: CircularProgressIndicator(),
-                        // ),
+                        onPaymentResult: (data) {
+                          print(data);
+                          IncreaseOrderNumbers();
+                          AddOrderDetails('Paid');
+                          AddEachItems();
+                          setState(() {
+                            Cart.EmptyCart();
+                          });
+                          //Navigator.pop(context);
+                          setState(() {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, Home.id, (route) => false);
+                            // Navigator.push<void>(
+                            //   context,
+                            //   MaterialPageRoute<void>(
+                            //     builder: (BuildContext context) => Home(),
+                            //   ),
+                            // );
+                            Cart.PaymentStates();
+                          });
+                        },
+                        loadingIndicator: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                     ),
                     FlatButton(

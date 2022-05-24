@@ -120,7 +120,7 @@ class _VotesState extends State<Votes> {
                             margin: const EdgeInsets.only(
                                 top: 20, left: 10, bottom: 20),
                             child: const Text(
-                              'Users',
+                              'Items',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 16,

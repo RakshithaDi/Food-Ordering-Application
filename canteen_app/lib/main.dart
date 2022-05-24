@@ -31,21 +31,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Canteen Management Application',
-      theme: ThemeData(
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context).textTheme,
+        debugShowCheckedModeBanner: false,
+        title: 'Canteen Management Application',
+        theme: ThemeData(
+          textTheme: GoogleFonts.latoTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
-      ),
-      home: MyHomePage('Admin'),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => Login(),
-      //   Login.id: (context) => Login(),
-      //   MyHomePage.id: (context) => MyHomePage(''),
-      //   CreateAccounts.id: (context) => CreateAccounts(),
-      //}
-    );
+        //  home: MyHomePage('Admin'),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Login(),
+          Login.id: (context) => Login(),
+          MyHomePage.id: (context) => MyHomePage(''),
+          CreateAccounts.id: (context) => CreateAccounts(),
+        });
   }
 }
