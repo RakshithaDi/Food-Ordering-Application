@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../model/cart.dart';
 import 'package:food_ordering_application/model/constant.dart';
 import 'package:pay/pay.dart';
 import 'package:payhere_mobilesdk_flutter/payhere_mobilesdk_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'home.dart';
 
@@ -28,11 +30,14 @@ class _CheckOutState extends State<CheckOut> {
   String orderId;
   List<String> itemsArr = [];
   List<String> itemQuantityArr = [];
-
+  Razorpay _razorpay;
   @override
   void initState() {
     super.initState();
-
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     getUserMail();
     totalPrice = Cart.totalPrice.toString();
     getUserInfo();
@@ -48,6 +53,74 @@ class _CheckOutState extends State<CheckOut> {
         " ${Cart.basketItems[i].name} * ${Cart.basketItems[i].quantity}"
     ];
     print(itemQuantityArr);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Fluttertoast.showToast(
+    //  msg: "SUCCESS:" + response.paymentId, toastLength: Toast.LENGTH_SHORT);
+    IncreaseOrderNumbers();
+    AddOrderDetails('Paid');
+    AddEachItems();
+    setState(() {
+      Cart.EmptyCart();
+    });
+    //Navigator.pop(context);
+    setState(() {
+      Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
+      // Navigator.push<void>(
+      //   context,
+      //   MaterialPageRoute<void>(
+      //     builder: (BuildContext context) => Home(),
+      //   ),
+      // );
+      Cart.PaymentStates();
+    });
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "Payment Failed:" +
+            response.code.toString() +
+            "-" +
+            response.message,
+        toastLength: Toast.LENGTH_SHORT);
+    print(response.code.toString());
+    print(response.message);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET:" + response.walletName,
+        toastLength: Toast.LENGTH_SHORT);
+  }
+
+  void openCheckout() async {
+    double lastprice = double.parse(totalPrice) * 100;
+    var options = {
+      'key': 'rzp_test_1G3GSxR1F87q2o',
+      'amount': lastprice.toString(),
+      "currency": "LKR",
+      //"orderid": orderId,
+      "international": true,
+      "method": "card",
+      "email": userEmail,
+      "contact": phoneNo,
+      'name': '$fname $lname',
+      'description': itemsArr,
+      // 'send_sms_hash': true,
+      'prefill': {'contact': phoneNo, 'email': userEmail},
+    };
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint('Error: e');
+    }
   }
 
   void getUserMail() async {
@@ -232,7 +305,7 @@ class _CheckOutState extends State<CheckOut> {
                 children: [
                   Container(
                     color: Colors.white,
-                    height: MediaQuery.of(context).size.height / 1.7,
+                    height: MediaQuery.of(context).size.height / 1.8,
                     child: ListView(
                       children: [
                         Builder(
@@ -382,6 +455,21 @@ class _CheckOutState extends State<CheckOut> {
                         },
                         loadingIndicator: const Center(
                           child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        openCheckout();
+                      },
+                      child: FittedBox(
+                        child: Container(
+                          width: 150,
+                          height: 35,
+                          child: Image(
+                            image: AssetImage('images/razorpay.jpg'),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),

@@ -430,7 +430,8 @@ class _CompleteOrdersState extends State<CompleteOrders> {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(top: 20),
+                                        margin: EdgeInsets.only(
+                                            top: 20, bottom: 10),
                                         child: Row(
                                           children: [
                                             const Expanded(

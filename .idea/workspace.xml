@@ -13,7 +13,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eb83cec-6595-4ebb-b920-f2fddcd3d032" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/products.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/canteen_app/images/newLogofoodx.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/canteen_app/lib/controller/item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/completeorders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/completeorders.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/lib/view/votes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/lib/view/votes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteen_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/canteen_app/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/loading_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/view/Itemdetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/view/Itemdetails.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/view/account.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/view/account.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/view/checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/view/checkout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/view/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/view/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/lib/view/signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/lib/view/signup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/food_ordering_application/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

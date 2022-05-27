@@ -2,7 +2,7 @@
     package="com.example.food_ordering_application"
     xmlns:tools="http://schemas.android.com/tools">
    <application
-        android:label="food_ordering_application"
+        android:label="FOODX"
         android:icon="@mipmap/ic_launcher"
         tools:replace="android:label">
         <activity

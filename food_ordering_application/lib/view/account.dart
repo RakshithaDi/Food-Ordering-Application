@@ -12,6 +12,7 @@ import 'package:food_ordering_application/view/personalinfo.dart';
 import 'package:food_ordering_application/loading_screen.dart';
 
 import '../main.dart';
+import 'complaint.dart';
 import 'notifications.dart';
 import 'orders.dart';
 
@@ -182,12 +183,22 @@ class _AccountState extends State<Account> {
                           ),
                         );
                       },
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 45,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Personal Information'),
+                          padding: EdgeInsets.only(top: 0, left: 20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  flex: 3, child: Text('Personal Information')),
+                              Expanded(
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -207,12 +218,21 @@ class _AccountState extends State<Account> {
                           ),
                         );
                       },
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 45,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Your Orders'),
+                          padding: EdgeInsets.only(top: 0, left: 20),
+                          child: Row(
+                            children: [
+                              Expanded(flex: 3, child: Text('Your Orders')),
+                              Expanded(
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -232,12 +252,21 @@ class _AccountState extends State<Account> {
                           ),
                         );
                       },
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 45,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Change password'),
+                          padding: EdgeInsets.only(top: 0, left: 20),
+                          child: Row(
+                            children: [
+                              Expanded(flex: 3, child: Text('Change Password')),
+                              Expanded(
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -258,12 +287,21 @@ class _AccountState extends State<Account> {
                           ),
                         );
                       },
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 45,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Notifications'),
+                          padding: EdgeInsets.only(top: 0, left: 20),
+                          child: Row(
+                            children: [
+                              Expanded(flex: 3, child: Text('Notifications')),
+                              Expanded(
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -278,12 +316,24 @@ class _AccountState extends State<Account> {
                       onTap: () {
                         debugPrint('Card tapped.');
                       },
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: double.infinity,
                         height: 45,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 15, left: 20),
-                          child: Text('Help'),
+                          padding: EdgeInsets.only(top: 0, left: 20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Text('Help'),
+                              ),
+                              Expanded(
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -301,12 +351,12 @@ class _AccountState extends State<Account> {
                       Navigator.push<void>(
                         context,
                         MaterialPageRoute<void>(
-                          builder: (BuildContext context) => VoteFood(),
+                          builder: (BuildContext context) => Complaints(),
                         ),
                       );
                     },
                     child: Text(
-                      'Invite a Friend',
+                      'Reprot a Complaint',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 13,
@@ -314,10 +364,18 @@ class _AccountState extends State<Account> {
                       ),
                     ),
                   ),
+
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push<void>(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => VoteFood(),
+                        ),
+                      );
+                    },
                     child: Text(
-                      'Reprot a Complaint',
+                      'Vote for Food     ',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 13,

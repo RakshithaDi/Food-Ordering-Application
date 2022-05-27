@@ -55,7 +55,7 @@ class _ItemDetailsState extends State<ItemDetails> {
         backgroundColor: kbackgroundcolor,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Cart'),
+          title: Text('Item'),
           backgroundColor: Sushi,
           actions: [
             Padding(

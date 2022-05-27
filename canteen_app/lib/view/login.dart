@@ -112,18 +112,28 @@ class _LoginState extends State<Login> {
               child: Card(
                 elevation: 6,
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
+                  height: MediaQuery.of(context).size.height / 1.3,
                   child: ListView(
                     children: <Widget>[
-                      Container(
-                        height: MediaQuery.of(context).size.height / 6,
-                        color: lightGreen,
-                        child: Center(
-                          child: Text(
-                            'Canteen Management System',
-                            style: nameTitle,
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6,
+                            color: lightGreen,
+                            child: Center(
+                              child: Text(
+                                'Canteen Management System',
+                                style: nameTitle,
+                              ),
+                            ),
                           ),
-                        ),
+                          Image(
+                            color: klblack,
+                            image: AssetImage('images/newLogofoodx.png'),
+                            height: 150.0,
+                            width: 300.0,
+                          ),
+                        ],
                       ),
                       Container(
                         child: Container(

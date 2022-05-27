@@ -8,6 +8,7 @@ import 'package:food_ordering_application/model/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'basicdetails.dart';
 import 'otp_setup.dart';
 
 class Login extends StatefulWidget {
@@ -80,8 +81,14 @@ class _LoginState extends State<Login> {
     );
 
     // Once signed in, return the UserCredential
-    //Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+
+    await FirebaseAuth.instance.signInWithCredential(credential);
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => BasiInfo(),
+      ),
+    );
   }
 
   final _formKey = GlobalKey<FormState>();
