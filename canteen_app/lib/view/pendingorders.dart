@@ -34,28 +34,28 @@ class _PendingOrdersState extends State<PendingOrders> {
         .doc(orId)
         .get()
         .then((DocumentSnapshot orderDetails) {
-      if (orderDetails['Status'] == 'Pending') {
-        // orderDetails.exists
-        String formatedDate;
+      // if (orderDetails['Status'] == 'Pending') {
+      // orderDetails.exists
+      String formatedDate;
 
-        Timestamp timestamp = orderDetails['TimeStamp'];
-        DateTime dateTime = timestamp.toDate();
-        String formatDate = DateFormat.yMMMd().add_jm().format(dateTime);
+      Timestamp timestamp = orderDetails['TimeStamp'];
+      DateTime dateTime = timestamp.toDate();
+      String formatDate = DateFormat.yMMMd().add_jm().format(dateTime);
 
-        setState(() {
-          orderId = orderDetails['OrderId'];
-          name = orderDetails['Name'];
-          phoneNo = orderDetails['PhoneNo'];
-          email = orderDetails['Email'];
-          price = orderDetails['Amount'];
-          status = orderDetails['Status'];
-          payment = orderDetails['Payment'];
-          date = formatDate;
-          rightcontainer = false;
-        });
-      } else {
-        print('Not in pending orders');
-      }
+      setState(() {
+        orderId = orderDetails['OrderId'];
+        name = orderDetails['Name'];
+        phoneNo = orderDetails['PhoneNo'];
+        email = orderDetails['Email'];
+        price = orderDetails['Amount'];
+        status = orderDetails['Status'];
+        payment = orderDetails['Payment'];
+        date = formatDate;
+        rightcontainer = false;
+      });
+      //  } else {
+      //   print('Not in pending orders');
+      //  }
     });
   }
 

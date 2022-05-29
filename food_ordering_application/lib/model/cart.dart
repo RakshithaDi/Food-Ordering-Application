@@ -73,8 +73,13 @@ class Cart extends ChangeNotifier {
     return _items;
   }
 
+  static void googlePayStatus() {
+    Get.snackbar("PAYMENT SUCCESS!", "Thank You!",
+        snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
+  }
+
   static void PaymentStates() {
-    Get.snackbar("Order Completed Successfully!", "Thank You!",
+    Get.snackbar("Order Placed Successfully!", "Thank You!",
         snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
   }
 }

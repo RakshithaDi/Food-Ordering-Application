@@ -80,7 +80,7 @@ class _NewOrdersState extends State<NewOrders> {
                                   .collection("orders")
                                   .where('Status', isEqualTo: 'New')
                                   .where('Payment', isEqualTo: 'Paid')
-                                  //  .orderBy('TimeStamp', descending: true)
+                                  // .orderBy('TimeStamp', descending: true)
                                   .snapshots(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {

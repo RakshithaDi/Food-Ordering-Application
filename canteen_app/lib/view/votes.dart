@@ -1,12 +1,12 @@
 import 'dart:typed_data';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 import '../constant.dart';
-import '../controller/item.dart';
+import '../model/item.dart';
 
 class Votes extends StatefulWidget {
   const Votes({Key? key}) : super(key: key);
@@ -22,7 +22,8 @@ class _VotesState extends State<Votes> {
     fetchdate();
   }
 
-  List<String> _items = [];
+  late List<Item> data = [];
+
   final form = GlobalKey<FormState>();
   bool addButton = true;
   final TextEditingController _itemNameController = TextEditingController();
@@ -44,10 +45,37 @@ class _VotesState extends State<Votes> {
       querySnapshot.docs.forEach((doc) {
         print(doc["name"]);
         print(doc["votecount"]);
-        _items = ['fsf', 'fsf', 'fsfs'];
+        // data = [
+        //   for (int i = 0; i < querySnapshot.size; i++)
+        //     Item(
+        //       name: doc["name"],
+        //       voteCount: doc["votecount"],
+        //       barColor: charts.ColorUtil.fromDartColor(Colors.green),
+        //     ),
+        // ];
+        setState(() {
+          data.add(
+            Item(
+              name: doc["name"],
+              voteCount: doc["votecount"],
+              barColor: charts.ColorUtil.fromDartColor(Colors.green),
+            ),
+          );
+        });
       });
     });
+    print(data.length);
+    print(data[0].name);
   }
+
+  // data = [
+  //    for (int i = 0; i < 7; i++)
+  //      Item(
+  //        name: 'rere',
+  //        voteCount: 500,
+  //        barColor: charts.ColorUtil.fromDartColor(Colors.green),
+  //      ),
+  //  ];
 
   void addItem() async {
     await items
@@ -67,10 +95,17 @@ class _VotesState extends State<Votes> {
     });
   }
 
-  int touchedIndex = -1;
   @override
   Widget build(BuildContext context) {
-    print(_items);
+    List<charts.Series<Item, String>> series = [
+      charts.Series(
+          id: "developers",
+          data: data,
+          domainFn: (Item series, _) => series.name,
+          measureFn: (Item series, _) => series.voteCount,
+          colorFn: (Item series, _) => series.barColor)
+    ];
+
     return Scaffold(
       body: SafeArea(
         child: Row(
@@ -173,7 +208,7 @@ class _VotesState extends State<Votes> {
                             margin: const EdgeInsets.only(
                                 top: 20, left: 10, bottom: 20),
                             child: const Text(
-                              'Items to vote',
+                              'Food Items',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 16,
@@ -276,111 +311,12 @@ class _VotesState extends State<Votes> {
               ),
             ),
             Expanded(
-              child: AspectRatio(
-                aspectRatio: 1.3,
-                child: Card(
-                  color: Colors.white,
-                  child: Row(
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      Expanded(
-                        child: AspectRatio(
-                            aspectRatio: 1,
-                            child: PieChart(
-                              PieChartData(
-                                  pieTouchData: PieTouchData(touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {
-                                    setState(() {
-                                      if (!event.isInterestedForInteractions ||
-                                          pieTouchResponse == null ||
-                                          pieTouchResponse.touchedSection ==
-                                              null) {
-                                        touchedIndex = -1;
-                                        return;
-                                      }
-                                      touchedIndex = pieTouchResponse
-                                          .touchedSection!.touchedSectionIndex;
-                                    });
-                                  }),
-                                  borderData: FlBorderData(
-                                    show: false,
-                                  ),
-                                  sectionsSpace: 0,
-                                  centerSpaceRadius: 40,
-                                  sections: showingSections()),
-                            )),
-                      ),
-                      const SizedBox(
-                        width: 28,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              child: charts.BarChart(series, animate: true),
             ),
           ],
         ),
       ),
     );
-  }
-
-  List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 25.0 : 16.0;
-      final radius = isTouched ? 60.0 : 50.0;
-
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color(0xff0293ee),
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: const Color(0xfff8b250),
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: const Color(0xff845bef),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: const Color(0xff13d38e),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          );
-        default:
-          throw Error();
-      }
-    });
   }
 
   showAlertDialog(BuildContext context, message) {

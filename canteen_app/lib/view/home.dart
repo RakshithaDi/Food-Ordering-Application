@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () {
                   page.jumpToPage(7);
                 },
-                icon: Icon(Icons.message),
+                icon: Icon(Icons.analytics),
                 badgeContent: Text(
                   '',
                   style: TextStyle(color: Colors.white),
@@ -173,18 +173,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   showAlertDialog(context);
                 },
                 icon: Icon(Icons.exit_to_app),
-              ),
-              SideMenuItem(
-                priority: 9,
-                title: 'Dashboard',
-                onTap: () {
-                  page.jumpToPage(9);
-                },
-                icon: Icon(Icons.home),
-                badgeContent: Text(
-                  '3',
-                  style: TextStyle(color: Colors.white),
-                ),
               ),
             ],
           ),

@@ -14,11 +14,13 @@ class BasiInfo extends StatefulWidget {
 
 class _BasiInfoState extends State<BasiInfo> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _fnameController = TextEditingController();
-  final TextEditingController _lnameController = TextEditingController();
+  // final TextEditingController _fnameController = TextEditingController();
+  // final TextEditingController _lnameController = TextEditingController();
   final TextEditingController _userMobileController = TextEditingController();
   String userEmail;
   bool states = true;
+  String firstName;
+  String lastName;
 
   @override
   void initState() {
@@ -29,14 +31,21 @@ class _BasiInfoState extends State<BasiInfo> {
     if (auth.currentUser != null) {
       userEmail = auth.currentUser.email;
       print(auth.currentUser.email);
+      print(auth.currentUser.displayName);
+      String fullname = auth.currentUser.displayName;
+      var names = fullname.split(' ');
+      firstName = names[0];
+      lastName = names[1];
+      print(firstName);
+      print(lastName);
       print(userEmail);
     }
   }
 
   void AddUser() async {
     try {
-      RegisterUser adduser = RegisterUser(_fnameController.text,
-          _lnameController.text, userEmail, _userMobileController.text);
+      RegisterUser adduser = RegisterUser(
+          firstName, lastName, userEmail, _userMobileController.text);
       adduser.addUser();
       Navigator.pushNamedAndRemoveUntil(context, Home.id, (route) => false);
     } catch (e) {
@@ -59,79 +68,11 @@ class _BasiInfoState extends State<BasiInfo> {
         child: Column(
           children: [
             Container(
+              margin: EdgeInsets.only(top: 30),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                margin: EdgeInsets.only(top: 10),
-                                child: TextFormField(
-                                  cursorColor: Colors.green,
-                                  controller: _fnameController,
-                                  decoration: InputDecoration(
-                                    errorStyle: TextStyle(
-                                      color: titleColor,
-                                    ),
-                                    border: InputBorder.none,
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    labelText: 'First Name',
-                                    labelStyle: fstlyepromptTextFields,
-                                  ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter the First Name';
-                                    } else if (RegExp(
-                                            r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                                        .hasMatch(value)) {
-                                      return 'Enter a Valid Name';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                margin: EdgeInsets.only(top: 10),
-                                child: TextFormField(
-                                  controller: _lnameController,
-                                  decoration: InputDecoration(
-                                    errorStyle: TextStyle(
-                                      color: titleColor,
-                                    ),
-                                    border: InputBorder.none,
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    labelText: 'Last Name',
-                                    labelStyle: fstlyepromptTextFields,
-                                  ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter the second Name';
-                                    } else if (RegExp(
-                                            r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
-                                        .hasMatch(value)) {
-                                      return 'Enter a Valid Name';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     Container(
                       child: Row(
                         children: [

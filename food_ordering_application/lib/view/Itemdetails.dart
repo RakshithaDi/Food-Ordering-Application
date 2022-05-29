@@ -146,20 +146,27 @@ class _ItemDetailsState extends State<ItemDetails> {
                                         child: Column(
                                           children: [
                                             ListTile(
-                                              title: Text(
-                                                data['name'],
-                                                style: TextStyle(
-                                                    fontSize: 22,
-                                                    color: titleColor,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                              title: Container(
+                                                margin:
+                                                    EdgeInsets.only(top: 10),
+                                                child: Text(
+                                                  data['name'],
+                                                  style: TextStyle(
+                                                      fontSize: 22,
+                                                      color: titleColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
-                                              subtitle:
-                                                  Text(data['description'],
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: titleColor,
-                                                      )),
+                                              subtitle: Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 10, bottom: 10),
+                                                child: Text(data['description'],
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: titleColor,
+                                                    )),
+                                              ),
                                             ),
                                             Container(
                                               margin: EdgeInsets.only(
@@ -176,7 +183,8 @@ class _ItemDetailsState extends State<ItemDetails> {
                                             Container(
                                               margin: EdgeInsets.only(left: 18),
                                               alignment: Alignment.topLeft,
-                                              child: Text('Rs.${data['price']}',
+                                              child: Text(
+                                                  'Rs.${data['price']}.00',
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       color: titleColor,

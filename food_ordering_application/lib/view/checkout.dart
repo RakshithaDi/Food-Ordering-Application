@@ -450,7 +450,7 @@ class _CheckOutState extends State<CheckOut> {
                             //     builder: (BuildContext context) => Home(),
                             //   ),
                             // );
-                            Cart.PaymentStates();
+                            Cart.googlePayStatus();
                           });
                         },
                         loadingIndicator: const Center(

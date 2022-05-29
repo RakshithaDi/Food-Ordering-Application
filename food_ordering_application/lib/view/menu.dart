@@ -716,7 +716,7 @@ class _MenuState extends State<Menu> {
                                                               top: 0, left: 20),
                                                       child: Center(
                                                         child: Text(
-                                                          'Rs. ${recommend['price']}',
+                                                          'Rs. ${recommend['price']}.00',
                                                           style: labelprice,
                                                         ),
                                                       ),
