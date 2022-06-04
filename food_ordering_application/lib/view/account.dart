@@ -13,6 +13,7 @@ import 'package:food_ordering_application/loading_screen.dart';
 
 import '../main.dart';
 import 'complaint.dart';
+import 'help.dart';
 import 'notifications.dart';
 import 'orders.dart';
 
@@ -314,7 +315,12 @@ class _AccountState extends State<Account> {
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(10),
                       onTap: () {
-                        debugPrint('Card tapped.');
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => Help(),
+                          ),
+                        );
                       },
                       child: SizedBox(
                         width: double.infinity,
