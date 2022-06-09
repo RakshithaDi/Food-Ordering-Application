@@ -10,7 +10,7 @@
         "type": "PAYMENT_GATEWAY",
         "parameters": {
           "gateway": "allpayments",
-          "gatewayMerchantId": "BCR2DN4TZDAL3BDB"
+          "gatewayMerchantId": ""
         }
       },
       "parameters": {
@@ -24,7 +24,7 @@
       }
     }],
     "merchantInfo": {
-      "merchantId": "BCR2DN4TZDAL3BDB",
+      "merchantId": "",
       "merchantName": "FoodX"
     },
     "transactionInfo": {
