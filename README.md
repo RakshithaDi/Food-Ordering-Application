@@ -1,2 +1,2 @@
 # Food-Ordering-Application
-food ordering application for university students
+QR Technology Based Food Ordering Application for university students
