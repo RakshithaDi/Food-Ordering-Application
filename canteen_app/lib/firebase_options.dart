@@ -41,7 +41,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDeJbsB0vqTrYTCMkYAGdYx_cqs74ZfoS0',
+    apiKey: '',
     appId: '1:637303204035:web:b6fbc5963fe976c18bda76',
     messagingSenderId: '637303204035',
     projectId: 'foodx-85190',
