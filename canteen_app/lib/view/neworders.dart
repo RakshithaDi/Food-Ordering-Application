@@ -33,9 +33,9 @@ class _NewOrdersState extends State<NewOrders> {
 
   void sendSms(String phoneNo, String ordId, String name) async {
     twilioFlutter = TwilioFlutter(
-        accountSid: 'AC0af284e07dd78c2b827ec036ba464315',
-        authToken: '388f87fc7fc687da4f6cd9653ba7ab7b',
-        twilioNumber: '+19289853180');
+        accountSid: '',
+        authToken: '',
+        twilioNumber: '');
     twilioFlutter.sendSMS(
         toNumber: '+94${phoneNo.substring(1)}',
         messageBody:
