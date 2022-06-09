@@ -103,7 +103,7 @@ class _CheckOutState extends State<CheckOut> {
   void openCheckout() async {
     double lastprice = double.parse(totalPrice) * 100;
     var options = {
-      'key': 'rzp_test_1G3GSxR1F87q2o',
+      'key': 'your api key',
       'amount': lastprice.toString(),
       "currency": "LKR",
       //"orderid": orderId,
@@ -155,7 +155,7 @@ class _CheckOutState extends State<CheckOut> {
   void Pay() {
     Map paymentObject = {
       "sandbox": true, // true if using Sandbox Merchant ID
-      "merchant_id": "1219901", // Replace your Merchant ID
+      "merchant_id": "your merchnant id", // Replace your Merchant ID
       "notify_url": "http://sample.com/notify",
       "order_id": orderId,
       "items": itemsArr,
