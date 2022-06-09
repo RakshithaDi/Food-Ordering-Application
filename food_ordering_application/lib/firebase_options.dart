@@ -41,20 +41,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDeJbsB0vqTrYTCMkYAGdYx_cqs74ZfoS0',
-    appId: '1:637303204035:web:b6fbc5963fe976c18bda76',
-    messagingSenderId: '637303204035',
-    projectId: 'foodx-85190',
-    authDomain: 'foodx-85190.firebaseapp.com',
-    storageBucket: 'foodx-85190.appspot.com',
-    measurementId: 'G-Q2D4MXC7VB',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    authDomain: '',
+    storageBucket: '',
+    measurementId: '',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA26Zpj0lCnpzK_vxMt_gE5kOJKkw_ym3s',
-    appId: '1:637303204035:android:4c90e1be5e03f5f38bda76',
-    messagingSenderId: '637303204035',
-    projectId: 'foodx-85190',
-    storageBucket: 'foodx-85190.appspot.com',
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
   );
 }
